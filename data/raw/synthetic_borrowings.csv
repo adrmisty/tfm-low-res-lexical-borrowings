@@ -1,976 +1,999 @@
-term,lemma,lang,type
-click,click,ast,code_switching_sg
-clickes,click,ast,plural_es
-cliquiar,click,ast,morph_infinitive_iar
-cliquear,click,ast,morph_infinitive_ear
-cliquiáu,click,ast,morph_participle_i_base
-cliquiau,click,ast,morph_participle_i_base
-cliquiao,click,ast,morph_participle_i_base
-cliquiua,click,ast,morph_participle_i_base
-cliquiada,click,ast,morph_participle_i_base
-cliquia,click,ast,morph_participle_i_base
-cliqueáu,click,ast,morph_participle_e_base
-cliqueau,click,ast,morph_participle_e_base
-cliqueao,click,ast,morph_participle_e_base
-clickéu,click,ast,morph_participle_e_base
-cliqueada,click,ast,morph_participle_e_base
-cliqueá,click,ast,morph_participle_e_base
-post,post,ast,code_switching_sg
-postes,post,ast,plural_es
-postiar,post,ast,morph_infinitive_iar
-postear,post,ast,morph_infinitive_ear
-postiáu,post,ast,morph_participle_i_base
-postiau,post,ast,morph_participle_i_base
-postiao,post,ast,morph_participle_i_base
-postiua,post,ast,morph_participle_i_base
-postiada,post,ast,morph_participle_i_base
-postia,post,ast,morph_participle_i_base
-posteáu,post,ast,morph_participle_e_base
-posteau,post,ast,morph_participle_e_base
-posteao,post,ast,morph_participle_e_base
-postéu,post,ast,morph_participle_e_base
-posteada,post,ast,morph_participle_e_base
-posteá,post,ast,morph_participle_e_base
-chat,chat,ast,code_switching_sg
-chates,chat,ast,plural_es
-chatiar,chat,ast,morph_infinitive_iar
-chatear,chat,ast,morph_infinitive_ear
-chatiáu,chat,ast,morph_participle_i_base
-chatiau,chat,ast,morph_participle_i_base
-chatiao,chat,ast,morph_participle_i_base
-chatiua,chat,ast,morph_participle_i_base
-chatiada,chat,ast,morph_participle_i_base
-chatia,chat,ast,morph_participle_i_base
-chateáu,chat,ast,morph_participle_e_base
-chateau,chat,ast,morph_participle_e_base
-chateao,chat,ast,morph_participle_e_base
-chatéu,chat,ast,morph_participle_e_base
-chateada,chat,ast,morph_participle_e_base
-chateá,chat,ast,morph_participle_e_base
-link,link,ast,code_switching_sg
-linkes,link,ast,plural_es
-linquiar,link,ast,morph_infinitive_iar
-linquear,link,ast,morph_infinitive_ear
-linquiáu,link,ast,morph_participle_i_base
-linquiau,link,ast,morph_participle_i_base
-linquiao,link,ast,morph_participle_i_base
-linquiua,link,ast,morph_participle_i_base
-linquiada,link,ast,morph_participle_i_base
-linquia,link,ast,morph_participle_i_base
-linqueáu,link,ast,morph_participle_e_base
-linqueau,link,ast,morph_participle_e_base
-linqueao,link,ast,morph_participle_e_base
-linkéu,link,ast,morph_participle_e_base
-linqueada,link,ast,morph_participle_e_base
-linqueá,link,ast,morph_participle_e_base
-tag,tag,ast,code_switching_sg
-tages,tag,ast,plural_es
-taguiar,tag,ast,morph_infinitive_iar
-taguear,tag,ast,morph_infinitive_ear
-taguiáu,tag,ast,morph_participle_i_base
-taguiau,tag,ast,morph_participle_i_base
-taguiao,tag,ast,morph_participle_i_base
-taguiua,tag,ast,morph_participle_i_base
-taguiada,tag,ast,morph_participle_i_base
-taguia,tag,ast,morph_participle_i_base
-tagueáu,tag,ast,morph_participle_e_base
-tagueau,tag,ast,morph_participle_e_base
-tagueao,tag,ast,morph_participle_e_base
-tagéu,tag,ast,morph_participle_e_base
-tagueada,tag,ast,morph_participle_e_base
-tagueá,tag,ast,morph_participle_e_base
-tuit,tweet,ast,code_switching_sg
-tuites,tweet,ast,plural_es
-tuitiar,tweet,ast,morph_infinitive_iar
-tuitear,tweet,ast,morph_infinitive_ear
-tuitiáu,tweet,ast,morph_participle_i_base
-tuitiau,tweet,ast,morph_participle_i_base
-tuitiao,tweet,ast,morph_participle_i_base
-tuitiua,tweet,ast,morph_participle_i_base
-tuitiada,tweet,ast,morph_participle_i_base
-tuitia,tweet,ast,morph_participle_i_base
-tuiteáu,tweet,ast,morph_participle_e_base
-tuiteau,tweet,ast,morph_participle_e_base
-tuiteao,tweet,ast,morph_participle_e_base
-tuitéu,tweet,ast,morph_participle_e_base
-tuiteada,tweet,ast,morph_participle_e_base
-tuiteá,tweet,ast,morph_participle_e_base
-escan,scan,ast,code_switching_sg
-escanes,scan,ast,plural_es
-escaniar,scan,ast,morph_infinitive_iar
-escanear,scan,ast,morph_infinitive_ear
-escaniáu,scan,ast,morph_participle_i_base
-escaniau,scan,ast,morph_participle_i_base
-escaniao,scan,ast,morph_participle_i_base
-escaniua,scan,ast,morph_participle_i_base
-escaniada,scan,ast,morph_participle_i_base
-escania,scan,ast,morph_participle_i_base
-escaneáu,scan,ast,morph_participle_e_base
-escaneau,scan,ast,morph_participle_e_base
-escaneao,scan,ast,morph_participle_e_base
-escanéu,scan,ast,morph_participle_e_base
-escaneada,scan,ast,morph_participle_e_base
-escaneá,scan,ast,morph_participle_e_base
-format,format,ast,code_switching_sg
-formates,format,ast,plural_es
-formatiar,format,ast,morph_infinitive_iar
-formatear,format,ast,morph_infinitive_ear
-formatiáu,format,ast,morph_participle_i_base
-formatiau,format,ast,morph_participle_i_base
-formatiao,format,ast,morph_participle_i_base
-formatiua,format,ast,morph_participle_i_base
-formatiada,format,ast,morph_participle_i_base
-formatia,format,ast,morph_participle_i_base
-formateáu,format,ast,morph_participle_e_base
-formateau,format,ast,morph_participle_e_base
-formateao,format,ast,morph_participle_e_base
-formatéu,format,ast,morph_participle_e_base
-formateada,format,ast,morph_participle_e_base
-formateá,format,ast,morph_participle_e_base
-hack,hack,ast,code_switching_sg
-hackes,hack,ast,plural_es
-haquiar,hack,ast,morph_infinitive_iar
-haquear,hack,ast,morph_infinitive_ear
-haquiáu,hack,ast,morph_participle_i_base
-haquiau,hack,ast,morph_participle_i_base
-haquiao,hack,ast,morph_participle_i_base
-haquiua,hack,ast,morph_participle_i_base
-haquiada,hack,ast,morph_participle_i_base
-haquia,hack,ast,morph_participle_i_base
-haqueáu,hack,ast,morph_participle_e_base
-haqueau,hack,ast,morph_participle_e_base
-haqueao,hack,ast,morph_participle_e_base
-hackéu,hack,ast,morph_participle_e_base
-haqueada,hack,ast,morph_participle_e_base
-haqueá,hack,ast,morph_participle_e_base
-ban,ban,ast,code_switching_sg
-banes,ban,ast,plural_es
-baniar,ban,ast,morph_infinitive_iar
-banear,ban,ast,morph_infinitive_ear
-baniáu,ban,ast,morph_participle_i_base
-baniau,ban,ast,morph_participle_i_base
-baniao,ban,ast,morph_participle_i_base
-baniua,ban,ast,morph_participle_i_base
-baniada,ban,ast,morph_participle_i_base
-bania,ban,ast,morph_participle_i_base
-baneáu,ban,ast,morph_participle_e_base
-baneau,ban,ast,morph_participle_e_base
-baneao,ban,ast,morph_participle_e_base
-banéu,ban,ast,morph_participle_e_base
-baneada,ban,ast,morph_participle_e_base
-baneá,ban,ast,morph_participle_e_base
-log,log,ast,code_switching_sg
-loges,log,ast,plural_es
-loguiar,log,ast,morph_infinitive_iar
-loguear,log,ast,morph_infinitive_ear
-loguiáu,log,ast,morph_participle_i_base
-loguiau,log,ast,morph_participle_i_base
-loguiao,log,ast,morph_participle_i_base
-loguiua,log,ast,morph_participle_i_base
-loguiada,log,ast,morph_participle_i_base
-loguia,log,ast,morph_participle_i_base
-logueáu,log,ast,morph_participle_e_base
-logueau,log,ast,morph_participle_e_base
-logueao,log,ast,morph_participle_e_base
-logéu,log,ast,morph_participle_e_base
-logueada,log,ast,morph_participle_e_base
-logueá,log,ast,morph_participle_e_base
-reset,reset,ast,code_switching_sg
-resetes,reset,ast,plural_es
-resetiar,reset,ast,morph_infinitive_iar
-resetear,reset,ast,morph_infinitive_ear
-resetiáu,reset,ast,morph_participle_i_base
-resetiau,reset,ast,morph_participle_i_base
-resetiao,reset,ast,morph_participle_i_base
-resetiua,reset,ast,morph_participle_i_base
-resetiada,reset,ast,morph_participle_i_base
-resetia,reset,ast,morph_participle_i_base
-reseteáu,reset,ast,morph_participle_e_base
-reseteau,reset,ast,morph_participle_e_base
-reseteao,reset,ast,morph_participle_e_base
-resetéu,reset,ast,morph_participle_e_base
-reseteada,reset,ast,morph_participle_e_base
-reseteá,reset,ast,morph_participle_e_base
-download,download,ast,code_switching_sg
-downloades,download,ast,plural_es
-downloadiar,download,ast,morph_infinitive_iar
-downloadear,download,ast,morph_infinitive_ear
-downloadiáu,download,ast,morph_participle_i_base
-downloadiau,download,ast,morph_participle_i_base
-downloadiao,download,ast,morph_participle_i_base
-downloadiua,download,ast,morph_participle_i_base
-downloadiada,download,ast,morph_participle_i_base
-downloadia,download,ast,morph_participle_i_base
-downloadeáu,download,ast,morph_participle_e_base
-downloadeau,download,ast,morph_participle_e_base
-downloadeao,download,ast,morph_participle_e_base
-downloadéu,download,ast,morph_participle_e_base
-downloadeada,download,ast,morph_participle_e_base
-downloadeá,download,ast,morph_participle_e_base
-estream,stream,ast,code_switching_sg
-estreames,stream,ast,plural_es
-estreamiar,stream,ast,morph_infinitive_iar
-estreamear,stream,ast,morph_infinitive_ear
-estreamiáu,stream,ast,morph_participle_i_base
-estreamiau,stream,ast,morph_participle_i_base
-estreamiao,stream,ast,morph_participle_i_base
-estreamiua,stream,ast,morph_participle_i_base
-estreamiada,stream,ast,morph_participle_i_base
-estreamia,stream,ast,morph_participle_i_base
-estreameáu,stream,ast,morph_participle_e_base
-estreameau,stream,ast,morph_participle_e_base
-estreameao,stream,ast,morph_participle_e_base
-estreaméu,stream,ast,morph_participle_e_base
-estreameada,stream,ast,morph_participle_e_base
-estreameá,stream,ast,morph_participle_e_base
-like,like,ast,code_switching_sg
-likes,like,ast,plural_s
-liquiar,like,ast,morph_infinitive_iar
-liquear,like,ast,morph_infinitive_ear
-liquiáu,like,ast,morph_participle_i_base
-liquiau,like,ast,morph_participle_i_base
-liquiao,like,ast,morph_participle_i_base
-liquiua,like,ast,morph_participle_i_base
-liquiada,like,ast,morph_participle_i_base
-liquia,like,ast,morph_participle_i_base
-liqueáu,like,ast,morph_participle_e_base
-liqueau,like,ast,morph_participle_e_base
-liqueao,like,ast,morph_participle_e_base
-likéu,like,ast,morph_participle_e_base
-liqueada,like,ast,morph_participle_e_base
-liqueá,like,ast,morph_participle_e_base
-escroll,scroll,ast,code_switching_sg
-escrolles,scroll,ast,plural_es
-escrolliar,scroll,ast,morph_infinitive_iar
-escrollear,scroll,ast,morph_infinitive_ear
-escrolliáu,scroll,ast,morph_participle_i_base
-escrolliau,scroll,ast,morph_participle_i_base
-escrolliao,scroll,ast,morph_participle_i_base
-escrolliua,scroll,ast,morph_participle_i_base
-escrolliada,scroll,ast,morph_participle_i_base
-escrollia,scroll,ast,morph_participle_i_base
-escrolleáu,scroll,ast,morph_participle_e_base
-escrolleau,scroll,ast,morph_participle_e_base
-escrolleao,scroll,ast,morph_participle_e_base
-escrolléu,scroll,ast,morph_participle_e_base
-escrolleada,scroll,ast,morph_participle_e_base
-escrolleá,scroll,ast,morph_participle_e_base
-update,update,ast,code_switching_sg
-updates,update,ast,plural_s
-updatiar,update,ast,morph_infinitive_iar
-updatear,update,ast,morph_infinitive_ear
-updatiáu,update,ast,morph_participle_i_base
-updatiau,update,ast,morph_participle_i_base
-updatiao,update,ast,morph_participle_i_base
-updatiua,update,ast,morph_participle_i_base
-updatiada,update,ast,morph_participle_i_base
-updatia,update,ast,morph_participle_i_base
-updateáu,update,ast,morph_participle_e_base
-updateau,update,ast,morph_participle_e_base
-updateao,update,ast,morph_participle_e_base
-updatéu,update,ast,morph_participle_e_base
-updateada,update,ast,morph_participle_e_base
-updateá,update,ast,morph_participle_e_base
-forward,forward,ast,code_switching_sg
-forwardes,forward,ast,plural_es
-forwardiar,forward,ast,morph_infinitive_iar
-forwardear,forward,ast,morph_infinitive_ear
-forwardiáu,forward,ast,morph_participle_i_base
-forwardiau,forward,ast,morph_participle_i_base
-forwardiao,forward,ast,morph_participle_i_base
-forwardiua,forward,ast,morph_participle_i_base
-forwardiada,forward,ast,morph_participle_i_base
-forwardia,forward,ast,morph_participle_i_base
-forwardeáu,forward,ast,morph_participle_e_base
-forwardeau,forward,ast,morph_participle_e_base
-forwardeao,forward,ast,morph_participle_e_base
-forwardéu,forward,ast,morph_participle_e_base
-forwardeada,forward,ast,morph_participle_e_base
-forwardeá,forward,ast,morph_participle_e_base
-espam,spam,ast,code_switching_sg
-espames,spam,ast,plural_es
-espamiar,spam,ast,morph_infinitive_iar
-espamear,spam,ast,morph_infinitive_ear
-espamiáu,spam,ast,morph_participle_i_base
-espamiau,spam,ast,morph_participle_i_base
-espamiao,spam,ast,morph_participle_i_base
-espamiua,spam,ast,morph_participle_i_base
-espamiada,spam,ast,morph_participle_i_base
-espamia,spam,ast,morph_participle_i_base
-espameáu,spam,ast,morph_participle_e_base
-espameau,spam,ast,morph_participle_e_base
-espameao,spam,ast,morph_participle_e_base
-espaméu,spam,ast,morph_participle_e_base
-espameada,spam,ast,morph_participle_e_base
-espameá,spam,ast,morph_participle_e_base
-check,check,ast,code_switching_sg
-checkes,check,ast,plural_es
-chequiar,check,ast,morph_infinitive_iar
-chequear,check,ast,morph_infinitive_ear
-chequiáu,check,ast,morph_participle_i_base
-chequiau,check,ast,morph_participle_i_base
-chequiao,check,ast,morph_participle_i_base
-chequiua,check,ast,morph_participle_i_base
-chequiada,check,ast,morph_participle_i_base
-chequia,check,ast,morph_participle_i_base
-chequeáu,check,ast,morph_participle_e_base
-chequeau,check,ast,morph_participle_e_base
-chequeao,check,ast,morph_participle_e_base
-checkéu,check,ast,morph_participle_e_base
-chequeada,check,ast,morph_participle_e_base
-chequeá,check,ast,morph_participle_e_base
-espoiler,spoiler,ast,code_switching_sg
-espoileres,spoiler,ast,plural_es
-espoileriar,spoiler,ast,morph_infinitive_iar
-espoilerear,spoiler,ast,morph_infinitive_ear
-espoileriáu,spoiler,ast,morph_participle_i_base
-espoileriau,spoiler,ast,morph_participle_i_base
-espoileriao,spoiler,ast,morph_participle_i_base
-espoileriua,spoiler,ast,morph_participle_i_base
-espoileriada,spoiler,ast,morph_participle_i_base
-espoileria,spoiler,ast,morph_participle_i_base
-espoilereáu,spoiler,ast,morph_participle_e_base
-espoilereau,spoiler,ast,morph_participle_e_base
-espoilereao,spoiler,ast,morph_participle_e_base
-espoileréu,spoiler,ast,morph_participle_e_base
-espoilereada,spoiler,ast,morph_participle_e_base
-espoilereá,spoiler,ast,morph_participle_e_base
-pixel,pixel,ast,code_switching_sg
-pixeles,pixel,ast,plural_es
-pixeliar,pixel,ast,morph_infinitive_iar
-pixelear,pixel,ast,morph_infinitive_ear
-pixeliáu,pixel,ast,morph_participle_i_base
-pixeliau,pixel,ast,morph_participle_i_base
-pixeliao,pixel,ast,morph_participle_i_base
-pixeliua,pixel,ast,morph_participle_i_base
-pixeliada,pixel,ast,morph_participle_i_base
-pixelia,pixel,ast,morph_participle_i_base
-pixeleáu,pixel,ast,morph_participle_e_base
-pixeleau,pixel,ast,morph_participle_e_base
-pixeleao,pixel,ast,morph_participle_e_base
-pixeléu,pixel,ast,morph_participle_e_base
-pixeleada,pixel,ast,morph_participle_e_base
-pixeleá,pixel,ast,morph_participle_e_base
-troll,troll,ast,code_switching_sg
-trolles,troll,ast,plural_es
-trolliar,troll,ast,morph_infinitive_iar
-trollear,troll,ast,morph_infinitive_ear
-trolliáu,troll,ast,morph_participle_i_base
-trolliau,troll,ast,morph_participle_i_base
-trolliao,troll,ast,morph_participle_i_base
-trolliua,troll,ast,morph_participle_i_base
-trolliada,troll,ast,morph_participle_i_base
-trollia,troll,ast,morph_participle_i_base
-trolleáu,troll,ast,morph_participle_e_base
-trolleau,troll,ast,morph_participle_e_base
-trolleao,troll,ast,morph_participle_e_base
-trolléu,troll,ast,morph_participle_e_base
-trolleada,troll,ast,morph_participle_e_base
-trolleá,troll,ast,morph_participle_e_base
-bug,bug,ast,code_switching_sg
-buges,bug,ast,plural_es
-server,server,ast,code_switching_sg
-serveres,server,ast,plural_es
-cloud,cloud,ast,code_switching_sg
-cloudes,cloud,ast,plural_es
-software,software,ast,code_switching_sg
-softwares,software,ast,plural_s
-hardware,hardware,ast,code_switching_sg
-hardwares,hardware,ast,plural_s
-online,online,ast,code_switching_sg
-onlines,online,ast,plural_s
-interface,interface,ast,code_switching_sg
-interfaces,interface,ast,plural_s
-user,user,ast,code_switching_sg
-useres,user,ast,plural_es
-bot,bot,ast,code_switching_sg
-botes,bot,ast,plural_es
-app,app,ast,code_switching_sg
-appes,app,ast,plural_es
-click,click,eu,code_switching_raw
-klik,click,eu,phonetic_adaptation_base
-klika,click,eu,phonetic_adaptation_base_a
-klikak,click,eu,morph_plural_ak
-klikatu,click,eu,morph_participle_batua
-klikau,click,eu,morph_participle_bizkaia_u
-klikeu,click,eu,morph_participle_bizkaia_eu
-klikatzen,click,eu,morph_habitual
-klikatuta,click,eu,morph_resultative_batua
-klikatatu,click,eu,morph_resultative_variant
-post,post,eu,code_switching_raw
-posta,post,eu,phonetic_adaptation_base_a
-postak,post,eu,morph_plural_ak
-postatu,post,eu,morph_participle_batua
-postau,post,eu,morph_participle_bizkaia_u
-posteu,post,eu,morph_participle_bizkaia_eu
-postatzen,post,eu,morph_habitual
-postatuta,post,eu,morph_resultative_batua
-postatatu,post,eu,morph_resultative_variant
-chat,chat,eu,code_switching_raw
-txat,chat,eu,phonetic_adaptation_base
-txata,chat,eu,phonetic_adaptation_base_a
-txatak,chat,eu,morph_plural_ak
-txatatu,chat,eu,morph_participle_batua
-txatau,chat,eu,morph_participle_bizkaia_u
-txateu,chat,eu,morph_participle_bizkaia_eu
-txatatzen,chat,eu,morph_habitual
-txatatuta,chat,eu,morph_resultative_batua
-txatatatu,chat,eu,morph_resultative_variant
-link,link,eu,code_switching_raw
-linka,link,eu,phonetic_adaptation_base_a
-linkak,link,eu,morph_plural_ak
-linkatu,link,eu,morph_participle_batua
-linkau,link,eu,morph_participle_bizkaia_u
-linkeu,link,eu,morph_participle_bizkaia_eu
-linkatzen,link,eu,morph_habitual
-linkatuta,link,eu,morph_resultative_batua
-linkatatu,link,eu,morph_resultative_variant
-tag,tag,eu,code_switching_raw
-taga,tag,eu,phonetic_adaptation_base_a
-tagak,tag,eu,morph_plural_ak
-tagatu,tag,eu,morph_participle_batua
-tagau,tag,eu,morph_participle_bizkaia_u
-tageu,tag,eu,morph_participle_bizkaia_eu
-tagatzen,tag,eu,morph_habitual
-tagatuta,tag,eu,morph_resultative_batua
-tagatatu,tag,eu,morph_resultative_variant
-tweet,tweet,eu,code_switching_raw
-tuit,tweet,eu,phonetic_adaptation_base
-tuita,tweet,eu,phonetic_adaptation_base_a
-tuitak,tweet,eu,morph_plural_ak
-tuitatu,tweet,eu,morph_participle_batua
-tuitau,tweet,eu,morph_participle_bizkaia_u
-tuiteu,tweet,eu,morph_participle_bizkaia_eu
-tuitatzen,tweet,eu,morph_habitual
-tuitatuta,tweet,eu,morph_resultative_batua
-tuitatatu,tweet,eu,morph_resultative_variant
-scan,scan,eu,code_switching_raw
-eskan,scan,eu,phonetic_adaptation_base
-eskana,scan,eu,phonetic_adaptation_base_a
-eskanak,scan,eu,morph_plural_ak
-eskanatu,scan,eu,morph_participle_batua
-eskanau,scan,eu,morph_participle_bizkaia_u
-eskaneu,scan,eu,morph_participle_bizkaia_eu
-eskanatzen,scan,eu,morph_habitual
-eskanatuta,scan,eu,morph_resultative_batua
-eskanatatu,scan,eu,morph_resultative_variant
-format,format,eu,code_switching_raw
-formata,format,eu,phonetic_adaptation_base_a
-formatak,format,eu,morph_plural_ak
-formatatu,format,eu,morph_participle_batua
-formatau,format,eu,morph_participle_bizkaia_u
-formateu,format,eu,morph_participle_bizkaia_eu
-formatatzen,format,eu,morph_habitual
-formatatuta,format,eu,morph_resultative_batua
-formatatatu,format,eu,morph_resultative_variant
-hack,hack,eu,code_switching_raw
-hak,hack,eu,phonetic_adaptation_base
-haka,hack,eu,phonetic_adaptation_base_a
-hakak,hack,eu,morph_plural_ak
-hakatu,hack,eu,morph_participle_batua
-hakau,hack,eu,morph_participle_bizkaia_u
-hakeu,hack,eu,morph_participle_bizkaia_eu
-hakatzen,hack,eu,morph_habitual
-hakatuta,hack,eu,morph_resultative_batua
-hakatatu,hack,eu,morph_resultative_variant
-ban,ban,eu,code_switching_raw
-bana,ban,eu,phonetic_adaptation_base_a
-banak,ban,eu,morph_plural_ak
-banatu,ban,eu,morph_participle_batua
-banau,ban,eu,morph_participle_bizkaia_u
-baneu,ban,eu,morph_participle_bizkaia_eu
-banatzen,ban,eu,morph_habitual
-banatuta,ban,eu,morph_resultative_batua
-banatatu,ban,eu,morph_resultative_variant
-log,log,eu,code_switching_raw
-loga,log,eu,phonetic_adaptation_base_a
-logak,log,eu,morph_plural_ak
-logatu,log,eu,morph_participle_batua
-logau,log,eu,morph_participle_bizkaia_u
-logeu,log,eu,morph_participle_bizkaia_eu
-logatzen,log,eu,morph_habitual
-logatuta,log,eu,morph_resultative_batua
-logatatu,log,eu,morph_resultative_variant
-reset,reset,eu,code_switching_raw
-reseta,reset,eu,phonetic_adaptation_base_a
-resetak,reset,eu,morph_plural_ak
-resetatu,reset,eu,morph_participle_batua
-resetau,reset,eu,morph_participle_bizkaia_u
-reseteu,reset,eu,morph_participle_bizkaia_eu
-resetatzen,reset,eu,morph_habitual
-resetatuta,reset,eu,morph_resultative_batua
-resetatatu,reset,eu,morph_resultative_variant
-download,download,eu,code_switching_raw
-downloada,download,eu,phonetic_adaptation_base_a
-downloadak,download,eu,morph_plural_ak
-downloadatu,download,eu,morph_participle_batua
-downloadau,download,eu,morph_participle_bizkaia_u
-downloadeu,download,eu,morph_participle_bizkaia_eu
-downloadatzen,download,eu,morph_habitual
-downloadatuta,download,eu,morph_resultative_batua
-downloadatatu,download,eu,morph_resultative_variant
-stream,stream,eu,code_switching_raw
-estream,stream,eu,phonetic_adaptation_base
-estreama,stream,eu,phonetic_adaptation_base_a
-estreamak,stream,eu,morph_plural_ak
-estreamatu,stream,eu,morph_participle_batua
-estreamau,stream,eu,morph_participle_bizkaia_u
-estreameu,stream,eu,morph_participle_bizkaia_eu
-estreamatzen,stream,eu,morph_habitual
-estreamatuta,stream,eu,morph_resultative_batua
-estreamatatu,stream,eu,morph_resultative_variant
-like,like,eu,code_switching_raw
-likea,like,eu,phonetic_adaptation_base_a
-likeak,like,eu,morph_plural_ak
-likatu,like,eu,morph_participle_batua
-likau,like,eu,morph_participle_bizkaia_u
-likeu,like,eu,morph_participle_bizkaia_eu
-likatzen,like,eu,morph_habitual
-likatuta,like,eu,morph_resultative_batua
-likatatu,like,eu,morph_resultative_variant
-scroll,scroll,eu,code_switching_raw
-eskroll,scroll,eu,phonetic_adaptation_base
-eskrolla,scroll,eu,phonetic_adaptation_base_a
-eskrollak,scroll,eu,morph_plural_ak
-eskrollatu,scroll,eu,morph_participle_batua
-eskrollau,scroll,eu,morph_participle_bizkaia_u
-eskrolleu,scroll,eu,morph_participle_bizkaia_eu
-eskrollatzen,scroll,eu,morph_habitual
-eskrollatuta,scroll,eu,morph_resultative_batua
-eskrollatatu,scroll,eu,morph_resultative_variant
-update,update,eu,code_switching_raw
-updatea,update,eu,phonetic_adaptation_base_a
-updateak,update,eu,morph_plural_ak
-updatatu,update,eu,morph_participle_batua
-updatau,update,eu,morph_participle_bizkaia_u
-updateu,update,eu,morph_participle_bizkaia_eu
-updatatzen,update,eu,morph_habitual
-updatatuta,update,eu,morph_resultative_batua
-updatatatu,update,eu,morph_resultative_variant
-forward,forward,eu,code_switching_raw
-forwarda,forward,eu,phonetic_adaptation_base_a
-forwardak,forward,eu,morph_plural_ak
-forwardatu,forward,eu,morph_participle_batua
-forwardau,forward,eu,morph_participle_bizkaia_u
-forwardeu,forward,eu,morph_participle_bizkaia_eu
-forwardatzen,forward,eu,morph_habitual
-forwardatuta,forward,eu,morph_resultative_batua
-forwardatatu,forward,eu,morph_resultative_variant
-spam,spam,eu,code_switching_raw
-espam,spam,eu,phonetic_adaptation_base
-espama,spam,eu,phonetic_adaptation_base_a
-espamak,spam,eu,morph_plural_ak
-espamatu,spam,eu,morph_participle_batua
-espamau,spam,eu,morph_participle_bizkaia_u
-espameu,spam,eu,morph_participle_bizkaia_eu
-espamatzen,spam,eu,morph_habitual
-espamatuta,spam,eu,morph_resultative_batua
-espamatatu,spam,eu,morph_resultative_variant
-check,check,eu,code_switching_raw
-txek,check,eu,phonetic_adaptation_base
-txeka,check,eu,phonetic_adaptation_base_a
-txekak,check,eu,morph_plural_ak
-txekatu,check,eu,morph_participle_batua
-txekau,check,eu,morph_participle_bizkaia_u
-txekeu,check,eu,morph_participle_bizkaia_eu
-txekatzen,check,eu,morph_habitual
-txekatuta,check,eu,morph_resultative_batua
-txekatatu,check,eu,morph_resultative_variant
-spoiler,spoiler,eu,code_switching_raw
-espoiler,spoiler,eu,phonetic_adaptation_base
-espoilera,spoiler,eu,phonetic_adaptation_base_a
-espoilerak,spoiler,eu,morph_plural_ak
-espoileratu,spoiler,eu,morph_participle_batua
-espoilerau,spoiler,eu,morph_participle_bizkaia_u
-espoilereu,spoiler,eu,morph_participle_bizkaia_eu
-espoileratzen,spoiler,eu,morph_habitual
-espoileratuta,spoiler,eu,morph_resultative_batua
-espoileratatu,spoiler,eu,morph_resultative_variant
-pixel,pixel,eu,code_switching_raw
-pixela,pixel,eu,phonetic_adaptation_base_a
-pixelak,pixel,eu,morph_plural_ak
-pixelatu,pixel,eu,morph_participle_batua
-pixelau,pixel,eu,morph_participle_bizkaia_u
-pixeleu,pixel,eu,morph_participle_bizkaia_eu
-pixelatzen,pixel,eu,morph_habitual
-pixelatuta,pixel,eu,morph_resultative_batua
-pixelatatu,pixel,eu,morph_resultative_variant
-troll,troll,eu,code_switching_raw
-trolla,troll,eu,phonetic_adaptation_base_a
-trollak,troll,eu,morph_plural_ak
-trollatu,troll,eu,morph_participle_batua
-trollau,troll,eu,morph_participle_bizkaia_u
-trolleu,troll,eu,morph_participle_bizkaia_eu
-trollatzen,troll,eu,morph_habitual
-trollatuta,troll,eu,morph_resultative_batua
-trollatatu,troll,eu,morph_resultative_variant
-bug,bug,eu,code_switching_raw
-buga,bug,eu,phonetic_adaptation_base_a
-bugak,bug,eu,morph_plural_ak
-server,server,eu,code_switching_raw
-servera,server,eu,phonetic_adaptation_base_a
-serverak,server,eu,morph_plural_ak
-cloud,cloud,eu,code_switching_raw
-kloud,cloud,eu,phonetic_adaptation_base
-klouda,cloud,eu,phonetic_adaptation_base_a
-kloudak,cloud,eu,morph_plural_ak
-software,software,eu,code_switching_raw
-softwarea,software,eu,phonetic_adaptation_base_a
-softwareak,software,eu,morph_plural_ak
-hardware,hardware,eu,code_switching_raw
-hardwarea,hardware,eu,phonetic_adaptation_base_a
-hardwareak,hardware,eu,morph_plural_ak
-online,online,eu,code_switching_raw
-onlinea,online,eu,phonetic_adaptation_base_a
-onlineak,online,eu,morph_plural_ak
-interface,interface,eu,code_switching_raw
-interfake,interface,eu,phonetic_adaptation_base
-interfakea,interface,eu,phonetic_adaptation_base_a
-interfakeak,interface,eu,morph_plural_ak
-user,user,eu,code_switching_raw
-usera,user,eu,phonetic_adaptation_base_a
-userak,user,eu,morph_plural_ak
-bot,bot,eu,code_switching_raw
-bota,bot,eu,phonetic_adaptation_base_a
-botak,bot,eu,morph_plural_ak
-app,app,eu,code_switching_raw
-appa,app,eu,phonetic_adaptation_base_a
-appak,app,eu,morph_plural_ak
-click,click,el,code_switching_latin
-clicks,click,el,code_switching_latin_plural
-κλικ,click,el,transliteration_noun
-κλικς,click,el,transliteration_noun_plural_s
-κλικάρω,click,el,morph_verb_aro_present
-κλικάρει,click,el,morph_verb_aro_3sg
-κλικάρεις,click,el,morph_verb_aro_2sg
-κλικάρουν,click,el,morph_verb_aro_3pl
-κλικαρα,click,el,morph_verb_ara_past
-κλικαρισμένος,click,el,morph_participle_menos_masc
-κλικαρισμένη,click,el,morph_participle_menos_fem
-κλικαρισμένο,click,el,morph_participle_menos_neut
-κλικάρισμα,click,el,morph_noun_arisma
-post,post,el,code_switching_latin
-posts,post,el,code_switching_latin_plural
-ποστ,post,el,transliteration_noun
-ποστς,post,el,transliteration_noun_plural_s
-ποστάρω,post,el,morph_verb_aro_present
-ποστάρει,post,el,morph_verb_aro_3sg
-ποστάρεις,post,el,morph_verb_aro_2sg
-ποστάρουν,post,el,morph_verb_aro_3pl
-ποσταρα,post,el,morph_verb_ara_past
-ποσταρισμένος,post,el,morph_participle_menos_masc
-ποσταρισμένη,post,el,morph_participle_menos_fem
-ποσταρισμένο,post,el,morph_participle_menos_neut
-ποστάρισμα,post,el,morph_noun_arisma
-chat,chat,el,code_switching_latin
-chats,chat,el,code_switching_latin_plural
-τσατ,chat,el,transliteration_noun
-τσατς,chat,el,transliteration_noun_plural_s
-τσατάρω,chat,el,morph_verb_aro_present
-τσατάρει,chat,el,morph_verb_aro_3sg
-τσατάρεις,chat,el,morph_verb_aro_2sg
-τσατάρουν,chat,el,morph_verb_aro_3pl
-τσαταρα,chat,el,morph_verb_ara_past
-τσαταρισμένος,chat,el,morph_participle_menos_masc
-τσαταρισμένη,chat,el,morph_participle_menos_fem
-τσαταρισμένο,chat,el,morph_participle_menos_neut
-τσατάρισμα,chat,el,morph_noun_arisma
-link,link,el,code_switching_latin
-links,link,el,code_switching_latin_plural
-λινκ,link,el,transliteration_noun
-λινκς,link,el,transliteration_noun_plural_s
-λινκάρω,link,el,morph_verb_aro_present
-λινκάρει,link,el,morph_verb_aro_3sg
-λινκάρεις,link,el,morph_verb_aro_2sg
-λινκάρουν,link,el,morph_verb_aro_3pl
-λινκαρα,link,el,morph_verb_ara_past
-λινκαρισμένος,link,el,morph_participle_menos_masc
-λινκαρισμένη,link,el,morph_participle_menos_fem
-λινκαρισμένο,link,el,morph_participle_menos_neut
-λινκάρισμα,link,el,morph_noun_arisma
-tag,tag,el,code_switching_latin
-tags,tag,el,code_switching_latin_plural
-ταγκ,tag,el,transliteration_noun
-ταγκς,tag,el,transliteration_noun_plural_s
-ταγκάρω,tag,el,morph_verb_aro_present
-ταγκάρει,tag,el,morph_verb_aro_3sg
-ταγκάρεις,tag,el,morph_verb_aro_2sg
-ταγκάρουν,tag,el,morph_verb_aro_3pl
-ταγκαρα,tag,el,morph_verb_ara_past
-ταγκαρισμένος,tag,el,morph_participle_menos_masc
-ταγκαρισμένη,tag,el,morph_participle_menos_fem
-ταγκαρισμένο,tag,el,morph_participle_menos_neut
-ταγκάρισμα,tag,el,morph_noun_arisma
-tweet,tweet,el,code_switching_latin
-tweets,tweet,el,code_switching_latin_plural
-τουίτ,tweet,el,transliteration_noun
-τουίτς,tweet,el,transliteration_noun_plural_s
-τουιτάρω,tweet,el,morph_verb_aro_present
-τουιτάρει,tweet,el,morph_verb_aro_3sg
-τουιτάρεις,tweet,el,morph_verb_aro_2sg
-τουιτάρουν,tweet,el,morph_verb_aro_3pl
-τουιταρα,tweet,el,morph_verb_ara_past
-τουιταρισμένος,tweet,el,morph_participle_menos_masc
-τουιταρισμένη,tweet,el,morph_participle_menos_fem
-τουιταρισμένο,tweet,el,morph_participle_menos_neut
-τουιτάρισμα,tweet,el,morph_noun_arisma
-scan,scan,el,code_switching_latin
-scans,scan,el,code_switching_latin_plural
-σκαν,scan,el,transliteration_noun
-σκανς,scan,el,transliteration_noun_plural_s
-σκανάρω,scan,el,morph_verb_aro_present
-σκανάρει,scan,el,morph_verb_aro_3sg
-σκανάρεις,scan,el,morph_verb_aro_2sg
-σκανάρουν,scan,el,morph_verb_aro_3pl
-σκαναρα,scan,el,morph_verb_ara_past
-σκαναρισμένος,scan,el,morph_participle_menos_masc
-σκαναρισμένη,scan,el,morph_participle_menos_fem
-σκαναρισμένο,scan,el,morph_participle_menos_neut
-σκανάρισμα,scan,el,morph_noun_arisma
-format,format,el,code_switching_latin
-formats,format,el,code_switching_latin_plural
-φορμάτ,format,el,transliteration_noun
-φορμάτς,format,el,transliteration_noun_plural_s
-φορματάρω,format,el,morph_verb_aro_present
-φορματάρει,format,el,morph_verb_aro_3sg
-φορματάρεις,format,el,morph_verb_aro_2sg
-φορματάρουν,format,el,morph_verb_aro_3pl
-φορματαρα,format,el,morph_verb_ara_past
-φορματαρισμένος,format,el,morph_participle_menos_masc
-φορματαρισμένη,format,el,morph_participle_menos_fem
-φορματαρισμένο,format,el,morph_participle_menos_neut
-φορματάρισμα,format,el,morph_noun_arisma
-hack,hack,el,code_switching_latin
-hacks,hack,el,code_switching_latin_plural
-χακ,hack,el,transliteration_noun
-χακς,hack,el,transliteration_noun_plural_s
-χακάρω,hack,el,morph_verb_aro_present
-χακάρει,hack,el,morph_verb_aro_3sg
-χακάρεις,hack,el,morph_verb_aro_2sg
-χακάρουν,hack,el,morph_verb_aro_3pl
-χακαρα,hack,el,morph_verb_ara_past
-χακαρισμένος,hack,el,morph_participle_menos_masc
-χακαρισμένη,hack,el,morph_participle_menos_fem
-χακαρισμένο,hack,el,morph_participle_menos_neut
-χακάρισμα,hack,el,morph_noun_arisma
-ban,ban,el,code_switching_latin
-bans,ban,el,code_switching_latin_plural
-μπαν,ban,el,transliteration_noun
-μπανς,ban,el,transliteration_noun_plural_s
-μπανάρω,ban,el,morph_verb_aro_present
-μπανάρει,ban,el,morph_verb_aro_3sg
-μπανάρεις,ban,el,morph_verb_aro_2sg
-μπανάρουν,ban,el,morph_verb_aro_3pl
-μπαναρα,ban,el,morph_verb_ara_past
-μπαναρισμένος,ban,el,morph_participle_menos_masc
-μπαναρισμένη,ban,el,morph_participle_menos_fem
-μπαναρισμένο,ban,el,morph_participle_menos_neut
-μπανάρισμα,ban,el,morph_noun_arisma
-log,log,el,code_switching_latin
-logs,log,el,code_switching_latin_plural
-λογκ,log,el,transliteration_noun
-λογκς,log,el,transliteration_noun_plural_s
-λογκάρω,log,el,morph_verb_aro_present
-λογκάρει,log,el,morph_verb_aro_3sg
-λογκάρεις,log,el,morph_verb_aro_2sg
-λογκάρουν,log,el,morph_verb_aro_3pl
-λογκαρα,log,el,morph_verb_ara_past
-λογκαρισμένος,log,el,morph_participle_menos_masc
-λογκαρισμένη,log,el,morph_participle_menos_fem
-λογκαρισμένο,log,el,morph_participle_menos_neut
-λογκάρισμα,log,el,morph_noun_arisma
-reset,reset,el,code_switching_latin
-resets,reset,el,code_switching_latin_plural
-ρισέτ,reset,el,transliteration_noun
-ρισέτς,reset,el,transliteration_noun_plural_s
-ρισετάρω,reset,el,morph_verb_aro_present
-ρισετάρει,reset,el,morph_verb_aro_3sg
-ρισετάρεις,reset,el,morph_verb_aro_2sg
-ρισετάρουν,reset,el,morph_verb_aro_3pl
-ρισεταρα,reset,el,morph_verb_ara_past
-ρισεταρισμένος,reset,el,morph_participle_menos_masc
-ρισεταρισμένη,reset,el,morph_participle_menos_fem
-ρισεταρισμένο,reset,el,morph_participle_menos_neut
-ρισετάρισμα,reset,el,morph_noun_arisma
-download,download,el,code_switching_latin
-downloads,download,el,code_switching_latin_plural
-νταουνλόουντ,download,el,transliteration_noun
-νταουνλόουντς,download,el,transliteration_noun_plural_s
-νταουνλοουντάρω,download,el,morph_verb_aro_present
-νταουνλοουντάρει,download,el,morph_verb_aro_3sg
-νταουνλοουντάρεις,download,el,morph_verb_aro_2sg
-νταουνλοουντάρουν,download,el,morph_verb_aro_3pl
-νταουνλοουνταρα,download,el,morph_verb_ara_past
-νταουνλοουνταρισμένος,download,el,morph_participle_menos_masc
-νταουνλοουνταρισμένη,download,el,morph_participle_menos_fem
-νταουνλοουνταρισμένο,download,el,morph_participle_menos_neut
-νταουνλοουντάρισμα,download,el,morph_noun_arisma
-stream,stream,el,code_switching_latin
-streams,stream,el,code_switching_latin_plural
-στριμ,stream,el,transliteration_noun
-στριμς,stream,el,transliteration_noun_plural_s
-στριμάρω,stream,el,morph_verb_aro_present
-στριμάρει,stream,el,morph_verb_aro_3sg
-στριμάρεις,stream,el,morph_verb_aro_2sg
-στριμάρουν,stream,el,morph_verb_aro_3pl
-στριμαρα,stream,el,morph_verb_ara_past
-στριμαρισμένος,stream,el,morph_participle_menos_masc
-στριμαρισμένη,stream,el,morph_participle_menos_fem
-στριμαρισμένο,stream,el,morph_participle_menos_neut
-στριμάρισμα,stream,el,morph_noun_arisma
-like,like,el,code_switching_latin
-likes,like,el,code_switching_latin_plural
-λάικ,like,el,transliteration_noun
-λάικς,like,el,transliteration_noun_plural_s
-λαικάρω,like,el,morph_verb_aro_present
-λαικάρει,like,el,morph_verb_aro_3sg
-λαικάρεις,like,el,morph_verb_aro_2sg
-λαικάρουν,like,el,morph_verb_aro_3pl
-λαικαρα,like,el,morph_verb_ara_past
-λαικαρισμένος,like,el,morph_participle_menos_masc
-λαικαρισμένη,like,el,morph_participle_menos_fem
-λαικαρισμένο,like,el,morph_participle_menos_neut
-λαικάρισμα,like,el,morph_noun_arisma
-scroll,scroll,el,code_switching_latin
-scrolls,scroll,el,code_switching_latin_plural
-σκρολ,scroll,el,transliteration_noun
-σκρολς,scroll,el,transliteration_noun_plural_s
-σκρολάρω,scroll,el,morph_verb_aro_present
-σκρολάρει,scroll,el,morph_verb_aro_3sg
-σκρολάρεις,scroll,el,morph_verb_aro_2sg
-σκρολάρουν,scroll,el,morph_verb_aro_3pl
-σκρολαρα,scroll,el,morph_verb_ara_past
-σκρολαρισμένος,scroll,el,morph_participle_menos_masc
-σκρολαρισμένη,scroll,el,morph_participle_menos_fem
-σκρολαρισμένο,scroll,el,morph_participle_menos_neut
-σκρολάρισμα,scroll,el,morph_noun_arisma
-update,update,el,code_switching_latin
-updates,update,el,code_switching_latin_plural
-απντέιτ,update,el,transliteration_noun
-απντέιτς,update,el,transliteration_noun_plural_s
-απντειτάρω,update,el,morph_verb_aro_present
-απντειτάρει,update,el,morph_verb_aro_3sg
-απντειτάρεις,update,el,morph_verb_aro_2sg
-απντειτάρουν,update,el,morph_verb_aro_3pl
-απντειταρα,update,el,morph_verb_ara_past
-απντειταρισμένος,update,el,morph_participle_menos_masc
-απντειταρισμένη,update,el,morph_participle_menos_fem
-απντειταρισμένο,update,el,morph_participle_menos_neut
-απντειτάρισμα,update,el,morph_noun_arisma
-forward,forward,el,code_switching_latin
-forwards,forward,el,code_switching_latin_plural
-φόργουορντ,forward,el,transliteration_noun
-φόργουορντς,forward,el,transliteration_noun_plural_s
-φοργουορντάρω,forward,el,morph_verb_aro_present
-φοργουορντάρει,forward,el,morph_verb_aro_3sg
-φοργουορντάρεις,forward,el,morph_verb_aro_2sg
-φοργουορντάρουν,forward,el,morph_verb_aro_3pl
-φοργουορνταρα,forward,el,morph_verb_ara_past
-φοργουορνταρισμένος,forward,el,morph_participle_menos_masc
-φοργουορνταρισμένη,forward,el,morph_participle_menos_fem
-φοργουορνταρισμένο,forward,el,morph_participle_menos_neut
-φοργουορντάρισμα,forward,el,morph_noun_arisma
-spam,spam,el,code_switching_latin
-spams,spam,el,code_switching_latin_plural
-σπαμ,spam,el,transliteration_noun
-σπαμς,spam,el,transliteration_noun_plural_s
-σπαμάρω,spam,el,morph_verb_aro_present
-σπαμάρει,spam,el,morph_verb_aro_3sg
-σπαμάρεις,spam,el,morph_verb_aro_2sg
-σπαμάρουν,spam,el,morph_verb_aro_3pl
-σπαμαρα,spam,el,morph_verb_ara_past
-σπαμαρισμένος,spam,el,morph_participle_menos_masc
-σπαμαρισμένη,spam,el,morph_participle_menos_fem
-σπαμαρισμένο,spam,el,morph_participle_menos_neut
-σπαμάρισμα,spam,el,morph_noun_arisma
-check,check,el,code_switching_latin
-checks,check,el,code_switching_latin_plural
-τσεκ,check,el,transliteration_noun
-τσεκς,check,el,transliteration_noun_plural_s
-τσεκάρω,check,el,morph_verb_aro_present
-τσεκάρει,check,el,morph_verb_aro_3sg
-τσεκάρεις,check,el,morph_verb_aro_2sg
-τσεκάρουν,check,el,morph_verb_aro_3pl
-τσεκαρα,check,el,morph_verb_ara_past
-τσεκαρισμένος,check,el,morph_participle_menos_masc
-τσεκαρισμένη,check,el,morph_participle_menos_fem
-τσεκαρισμένο,check,el,morph_participle_menos_neut
-τσεκάρισμα,check,el,morph_noun_arisma
-spoiler,spoiler,el,code_switching_latin
-spoilers,spoiler,el,code_switching_latin_plural
-σπόιλερ,spoiler,el,transliteration_noun
-σπόιλερς,spoiler,el,transliteration_noun_plural_s
-σποιλεράρω,spoiler,el,morph_verb_aro_present
-σποιλεράρει,spoiler,el,morph_verb_aro_3sg
-σποιλεράρεις,spoiler,el,morph_verb_aro_2sg
-σποιλεράρουν,spoiler,el,morph_verb_aro_3pl
-σποιλεραρα,spoiler,el,morph_verb_ara_past
-σποιλεραρισμένος,spoiler,el,morph_participle_menos_masc
-σποιλεραρισμένη,spoiler,el,morph_participle_menos_fem
-σποιλεραρισμένο,spoiler,el,morph_participle_menos_neut
-σποιλεράρισμα,spoiler,el,morph_noun_arisma
-pixel,pixel,el,code_switching_latin
-pixels,pixel,el,code_switching_latin_plural
-πίξελ,pixel,el,transliteration_noun
-πίξελς,pixel,el,transliteration_noun_plural_s
-πιξελάρω,pixel,el,morph_verb_aro_present
-πιξελάρει,pixel,el,morph_verb_aro_3sg
-πιξελάρεις,pixel,el,morph_verb_aro_2sg
-πιξελάρουν,pixel,el,morph_verb_aro_3pl
-πιξελαρα,pixel,el,morph_verb_ara_past
-πιξελαρισμένος,pixel,el,morph_participle_menos_masc
-πιξελαρισμένη,pixel,el,morph_participle_menos_fem
-πιξελαρισμένο,pixel,el,morph_participle_menos_neut
-πιξελάρισμα,pixel,el,morph_noun_arisma
-troll,troll,el,code_switching_latin
-trolls,troll,el,code_switching_latin_plural
-τρολ,troll,el,transliteration_noun
-τρολς,troll,el,transliteration_noun_plural_s
-τρολάρω,troll,el,morph_verb_aro_present
-τρολάρει,troll,el,morph_verb_aro_3sg
-τρολάρεις,troll,el,morph_verb_aro_2sg
-τρολάρουν,troll,el,morph_verb_aro_3pl
-τρολαρα,troll,el,morph_verb_ara_past
-τρολαρισμένος,troll,el,morph_participle_menos_masc
-τρολαρισμένη,troll,el,morph_participle_menos_fem
-τρολαρισμένο,troll,el,morph_participle_menos_neut
-τρολάρισμα,troll,el,morph_noun_arisma
-bug,bug,el,code_switching_latin
-bugs,bug,el,code_switching_latin_plural
-μπαγκ,bug,el,transliteration_noun
-μπαγκς,bug,el,transliteration_noun_plural_s
-server,server,el,code_switching_latin
-servers,server,el,code_switching_latin_plural
-σέρβερ,server,el,transliteration_noun
-σέρβερς,server,el,transliteration_noun_plural_s
-cloud,cloud,el,code_switching_latin
-clouds,cloud,el,code_switching_latin_plural
-κλάουντ,cloud,el,transliteration_noun
-κλάουντς,cloud,el,transliteration_noun_plural_s
-software,software,el,code_switching_latin
-softwares,software,el,code_switching_latin_plural
-σόφτγουερ,software,el,transliteration_noun
-σόφτγουερς,software,el,transliteration_noun_plural_s
-hardware,hardware,el,code_switching_latin
-hardwares,hardware,el,code_switching_latin_plural
-χάρντγουερ,hardware,el,transliteration_noun
-χάρντγουερς,hardware,el,transliteration_noun_plural_s
-online,online,el,code_switching_latin
-onlines,online,el,code_switching_latin_plural
-ονλάιν,online,el,transliteration_noun
-ονλάινς,online,el,transliteration_noun_plural_s
-interface,interface,el,code_switching_latin
-interfaces,interface,el,code_switching_latin_plural
-ιντερφέις,interface,el,transliteration_noun
-user,user,el,code_switching_latin
-users,user,el,code_switching_latin_plural
-γιούζερ,user,el,transliteration_noun
-γιούζερς,user,el,transliteration_noun_plural_s
-bot,bot,el,code_switching_latin
-bots,bot,el,code_switching_latin_plural
-μποτ,bot,el,transliteration_noun
-μποτς,bot,el,transliteration_noun_plural_s
-app,app,el,code_switching_latin
-apps,app,el,code_switching_latin_plural
-απ,app,el,transliteration_noun
-απς,app,el,transliteration_noun_plural_s
+term,lemma,lang,type,pos
+click,click,ast,noun_raw,NOUN
+clickes,click,ast,noun_plural_native,NOUN
+clicks,click,ast,noun_plural_english,NOUN
+facer click,click,ast,verb_light_construction,VERB
+facer un click,click,ast,verb_light_construction,VERB
+fizo click,click,ast,verb_light_construction,VERB
+fizo un click,click,ast,verb_light_construction,VERB
+fai click,click,ast,verb_light_construction,VERB
+fai un click,click,ast,verb_light_construction,VERB
+facemos click,click,ast,verb_light_construction,VERB
+facemos un click,click,ast,verb_light_construction,VERB
+faen click,click,ast,verb_light_construction,VERB
+faen un click,click,ast,verb_light_construction,VERB
+faciendo click,click,ast,verb_light_construction,VERB
+faciendo un click,click,ast,verb_light_construction,VERB
+fechu click,click,ast,verb_light_construction,VERB
+fechu un click,click,ast,verb_light_construction,VERB
+cliquiar,click,ast,verb_morph_prescriptive,VERB
+cliquiáu,click,ast,verb_participle_prescriptive,VERB
+clickiar,click,ast,verb_morph_descriptive,VERB
+clickiáu,click,ast,verb_participle_descriptive,VERB
+post,post,ast,noun_raw,NOUN
+postes,post,ast,noun_plural_native,NOUN
+posts,post,ast,noun_plural_english,NOUN
+facer post,post,ast,verb_light_construction,VERB
+facer un post,post,ast,verb_light_construction,VERB
+fizo post,post,ast,verb_light_construction,VERB
+fizo un post,post,ast,verb_light_construction,VERB
+fai post,post,ast,verb_light_construction,VERB
+fai un post,post,ast,verb_light_construction,VERB
+facemos post,post,ast,verb_light_construction,VERB
+facemos un post,post,ast,verb_light_construction,VERB
+faen post,post,ast,verb_light_construction,VERB
+faen un post,post,ast,verb_light_construction,VERB
+faciendo post,post,ast,verb_light_construction,VERB
+faciendo un post,post,ast,verb_light_construction,VERB
+fechu post,post,ast,verb_light_construction,VERB
+fechu un post,post,ast,verb_light_construction,VERB
+postiar,post,ast,verb_morph_prescriptive,VERB
+postiáu,post,ast,verb_participle_prescriptive,VERB
+chat,chat,ast,noun_raw,NOUN
+chates,chat,ast,noun_plural_native,NOUN
+chats,chat,ast,noun_plural_english,NOUN
+facer chat,chat,ast,verb_light_construction,VERB
+facer un chat,chat,ast,verb_light_construction,VERB
+fizo chat,chat,ast,verb_light_construction,VERB
+fizo un chat,chat,ast,verb_light_construction,VERB
+fai chat,chat,ast,verb_light_construction,VERB
+fai un chat,chat,ast,verb_light_construction,VERB
+facemos chat,chat,ast,verb_light_construction,VERB
+facemos un chat,chat,ast,verb_light_construction,VERB
+faen chat,chat,ast,verb_light_construction,VERB
+faen un chat,chat,ast,verb_light_construction,VERB
+faciendo chat,chat,ast,verb_light_construction,VERB
+faciendo un chat,chat,ast,verb_light_construction,VERB
+fechu chat,chat,ast,verb_light_construction,VERB
+fechu un chat,chat,ast,verb_light_construction,VERB
+chatiar,chat,ast,verb_morph_prescriptive,VERB
+chatiáu,chat,ast,verb_participle_prescriptive,VERB
+link,link,ast,noun_raw,NOUN
+linkes,link,ast,noun_plural_native,NOUN
+links,link,ast,noun_plural_english,NOUN
+facer link,link,ast,verb_light_construction,VERB
+facer un link,link,ast,verb_light_construction,VERB
+fizo link,link,ast,verb_light_construction,VERB
+fizo un link,link,ast,verb_light_construction,VERB
+fai link,link,ast,verb_light_construction,VERB
+fai un link,link,ast,verb_light_construction,VERB
+facemos link,link,ast,verb_light_construction,VERB
+facemos un link,link,ast,verb_light_construction,VERB
+faen link,link,ast,verb_light_construction,VERB
+faen un link,link,ast,verb_light_construction,VERB
+faciendo link,link,ast,verb_light_construction,VERB
+faciendo un link,link,ast,verb_light_construction,VERB
+fechu link,link,ast,verb_light_construction,VERB
+fechu un link,link,ast,verb_light_construction,VERB
+linquiar,link,ast,verb_morph_prescriptive,VERB
+linquiáu,link,ast,verb_participle_prescriptive,VERB
+linkiar,link,ast,verb_morph_descriptive,VERB
+linkiáu,link,ast,verb_participle_descriptive,VERB
+tag,tag,ast,noun_raw,NOUN
+tages,tag,ast,noun_plural_native,NOUN
+tags,tag,ast,noun_plural_english,NOUN
+facer tag,tag,ast,verb_light_construction,VERB
+facer un tag,tag,ast,verb_light_construction,VERB
+fizo tag,tag,ast,verb_light_construction,VERB
+fizo un tag,tag,ast,verb_light_construction,VERB
+fai tag,tag,ast,verb_light_construction,VERB
+fai un tag,tag,ast,verb_light_construction,VERB
+facemos tag,tag,ast,verb_light_construction,VERB
+facemos un tag,tag,ast,verb_light_construction,VERB
+faen tag,tag,ast,verb_light_construction,VERB
+faen un tag,tag,ast,verb_light_construction,VERB
+faciendo tag,tag,ast,verb_light_construction,VERB
+faciendo un tag,tag,ast,verb_light_construction,VERB
+fechu tag,tag,ast,verb_light_construction,VERB
+fechu un tag,tag,ast,verb_light_construction,VERB
+taguiar,tag,ast,verb_morph_prescriptive,VERB
+taguiáu,tag,ast,verb_participle_prescriptive,VERB
+tagiar,tag,ast,verb_morph_descriptive,VERB
+tagiáu,tag,ast,verb_participle_descriptive,VERB
+tuit,tweet,ast,noun_raw,NOUN
+tuites,tweet,ast,noun_plural_native,NOUN
+tuits,tweet,ast,noun_plural_english,NOUN
+facer tuit,tweet,ast,verb_light_construction,VERB
+facer un tuit,tweet,ast,verb_light_construction,VERB
+fizo tuit,tweet,ast,verb_light_construction,VERB
+fizo un tuit,tweet,ast,verb_light_construction,VERB
+fai tuit,tweet,ast,verb_light_construction,VERB
+fai un tuit,tweet,ast,verb_light_construction,VERB
+facemos tuit,tweet,ast,verb_light_construction,VERB
+facemos un tuit,tweet,ast,verb_light_construction,VERB
+faen tuit,tweet,ast,verb_light_construction,VERB
+faen un tuit,tweet,ast,verb_light_construction,VERB
+faciendo tuit,tweet,ast,verb_light_construction,VERB
+faciendo un tuit,tweet,ast,verb_light_construction,VERB
+fechu tuit,tweet,ast,verb_light_construction,VERB
+fechu un tuit,tweet,ast,verb_light_construction,VERB
+tuitiar,tweet,ast,verb_morph_prescriptive,VERB
+tuitiáu,tweet,ast,verb_participle_prescriptive,VERB
+escan,scan,ast,noun_raw,NOUN
+escanes,scan,ast,noun_plural_native,NOUN
+escans,scan,ast,noun_plural_english,NOUN
+facer escan,scan,ast,verb_light_construction,VERB
+facer un escan,scan,ast,verb_light_construction,VERB
+fizo escan,scan,ast,verb_light_construction,VERB
+fizo un escan,scan,ast,verb_light_construction,VERB
+fai escan,scan,ast,verb_light_construction,VERB
+fai un escan,scan,ast,verb_light_construction,VERB
+facemos escan,scan,ast,verb_light_construction,VERB
+facemos un escan,scan,ast,verb_light_construction,VERB
+faen escan,scan,ast,verb_light_construction,VERB
+faen un escan,scan,ast,verb_light_construction,VERB
+faciendo escan,scan,ast,verb_light_construction,VERB
+faciendo un escan,scan,ast,verb_light_construction,VERB
+fechu escan,scan,ast,verb_light_construction,VERB
+fechu un escan,scan,ast,verb_light_construction,VERB
+escaniar,scan,ast,verb_morph_prescriptive,VERB
+escaniáu,scan,ast,verb_participle_prescriptive,VERB
+format,format,ast,noun_raw,NOUN
+formates,format,ast,noun_plural_native,NOUN
+formats,format,ast,noun_plural_english,NOUN
+facer format,format,ast,verb_light_construction,VERB
+facer un format,format,ast,verb_light_construction,VERB
+fizo format,format,ast,verb_light_construction,VERB
+fizo un format,format,ast,verb_light_construction,VERB
+fai format,format,ast,verb_light_construction,VERB
+fai un format,format,ast,verb_light_construction,VERB
+facemos format,format,ast,verb_light_construction,VERB
+facemos un format,format,ast,verb_light_construction,VERB
+faen format,format,ast,verb_light_construction,VERB
+faen un format,format,ast,verb_light_construction,VERB
+faciendo format,format,ast,verb_light_construction,VERB
+faciendo un format,format,ast,verb_light_construction,VERB
+fechu format,format,ast,verb_light_construction,VERB
+fechu un format,format,ast,verb_light_construction,VERB
+formatiar,format,ast,verb_morph_prescriptive,VERB
+formatiáu,format,ast,verb_participle_prescriptive,VERB
+hack,hack,ast,noun_raw,NOUN
+hackes,hack,ast,noun_plural_native,NOUN
+hacks,hack,ast,noun_plural_english,NOUN
+facer hack,hack,ast,verb_light_construction,VERB
+facer un hack,hack,ast,verb_light_construction,VERB
+fizo hack,hack,ast,verb_light_construction,VERB
+fizo un hack,hack,ast,verb_light_construction,VERB
+fai hack,hack,ast,verb_light_construction,VERB
+fai un hack,hack,ast,verb_light_construction,VERB
+facemos hack,hack,ast,verb_light_construction,VERB
+facemos un hack,hack,ast,verb_light_construction,VERB
+faen hack,hack,ast,verb_light_construction,VERB
+faen un hack,hack,ast,verb_light_construction,VERB
+faciendo hack,hack,ast,verb_light_construction,VERB
+faciendo un hack,hack,ast,verb_light_construction,VERB
+fechu hack,hack,ast,verb_light_construction,VERB
+fechu un hack,hack,ast,verb_light_construction,VERB
+haquiar,hack,ast,verb_morph_prescriptive,VERB
+haquiáu,hack,ast,verb_participle_prescriptive,VERB
+hackiar,hack,ast,verb_morph_descriptive,VERB
+hackiáu,hack,ast,verb_participle_descriptive,VERB
+ban,ban,ast,noun_raw,NOUN
+banes,ban,ast,noun_plural_native,NOUN
+bans,ban,ast,noun_plural_english,NOUN
+facer ban,ban,ast,verb_light_construction,VERB
+facer un ban,ban,ast,verb_light_construction,VERB
+fizo ban,ban,ast,verb_light_construction,VERB
+fizo un ban,ban,ast,verb_light_construction,VERB
+fai ban,ban,ast,verb_light_construction,VERB
+fai un ban,ban,ast,verb_light_construction,VERB
+facemos ban,ban,ast,verb_light_construction,VERB
+facemos un ban,ban,ast,verb_light_construction,VERB
+faen ban,ban,ast,verb_light_construction,VERB
+faen un ban,ban,ast,verb_light_construction,VERB
+faciendo ban,ban,ast,verb_light_construction,VERB
+faciendo un ban,ban,ast,verb_light_construction,VERB
+fechu ban,ban,ast,verb_light_construction,VERB
+fechu un ban,ban,ast,verb_light_construction,VERB
+baniar,ban,ast,verb_morph_prescriptive,VERB
+baniáu,ban,ast,verb_participle_prescriptive,VERB
+log,log,ast,noun_raw,NOUN
+loges,log,ast,noun_plural_native,NOUN
+logs,log,ast,noun_plural_english,NOUN
+facer log,log,ast,verb_light_construction,VERB
+facer un log,log,ast,verb_light_construction,VERB
+fizo log,log,ast,verb_light_construction,VERB
+fizo un log,log,ast,verb_light_construction,VERB
+fai log,log,ast,verb_light_construction,VERB
+fai un log,log,ast,verb_light_construction,VERB
+facemos log,log,ast,verb_light_construction,VERB
+facemos un log,log,ast,verb_light_construction,VERB
+faen log,log,ast,verb_light_construction,VERB
+faen un log,log,ast,verb_light_construction,VERB
+faciendo log,log,ast,verb_light_construction,VERB
+faciendo un log,log,ast,verb_light_construction,VERB
+fechu log,log,ast,verb_light_construction,VERB
+fechu un log,log,ast,verb_light_construction,VERB
+loguiar,log,ast,verb_morph_prescriptive,VERB
+loguiáu,log,ast,verb_participle_prescriptive,VERB
+logiar,log,ast,verb_morph_descriptive,VERB
+logiáu,log,ast,verb_participle_descriptive,VERB
+reset,reset,ast,noun_raw,NOUN
+resetes,reset,ast,noun_plural_native,NOUN
+resets,reset,ast,noun_plural_english,NOUN
+facer reset,reset,ast,verb_light_construction,VERB
+facer un reset,reset,ast,verb_light_construction,VERB
+fizo reset,reset,ast,verb_light_construction,VERB
+fizo un reset,reset,ast,verb_light_construction,VERB
+fai reset,reset,ast,verb_light_construction,VERB
+fai un reset,reset,ast,verb_light_construction,VERB
+facemos reset,reset,ast,verb_light_construction,VERB
+facemos un reset,reset,ast,verb_light_construction,VERB
+faen reset,reset,ast,verb_light_construction,VERB
+faen un reset,reset,ast,verb_light_construction,VERB
+faciendo reset,reset,ast,verb_light_construction,VERB
+faciendo un reset,reset,ast,verb_light_construction,VERB
+fechu reset,reset,ast,verb_light_construction,VERB
+fechu un reset,reset,ast,verb_light_construction,VERB
+resetiar,reset,ast,verb_morph_prescriptive,VERB
+resetiáu,reset,ast,verb_participle_prescriptive,VERB
+download,download,ast,noun_raw,NOUN
+downloades,download,ast,noun_plural_native,NOUN
+downloads,download,ast,noun_plural_english,NOUN
+facer download,download,ast,verb_light_construction,VERB
+facer un download,download,ast,verb_light_construction,VERB
+fizo download,download,ast,verb_light_construction,VERB
+fizo un download,download,ast,verb_light_construction,VERB
+fai download,download,ast,verb_light_construction,VERB
+fai un download,download,ast,verb_light_construction,VERB
+facemos download,download,ast,verb_light_construction,VERB
+facemos un download,download,ast,verb_light_construction,VERB
+faen download,download,ast,verb_light_construction,VERB
+faen un download,download,ast,verb_light_construction,VERB
+faciendo download,download,ast,verb_light_construction,VERB
+faciendo un download,download,ast,verb_light_construction,VERB
+fechu download,download,ast,verb_light_construction,VERB
+fechu un download,download,ast,verb_light_construction,VERB
+downloadiar,download,ast,verb_morph_prescriptive,VERB
+downloadiáu,download,ast,verb_participle_prescriptive,VERB
+estream,stream,ast,noun_raw,NOUN
+estreames,stream,ast,noun_plural_native,NOUN
+estreams,stream,ast,noun_plural_english,NOUN
+facer estream,stream,ast,verb_light_construction,VERB
+facer un estream,stream,ast,verb_light_construction,VERB
+fizo estream,stream,ast,verb_light_construction,VERB
+fizo un estream,stream,ast,verb_light_construction,VERB
+fai estream,stream,ast,verb_light_construction,VERB
+fai un estream,stream,ast,verb_light_construction,VERB
+facemos estream,stream,ast,verb_light_construction,VERB
+facemos un estream,stream,ast,verb_light_construction,VERB
+faen estream,stream,ast,verb_light_construction,VERB
+faen un estream,stream,ast,verb_light_construction,VERB
+faciendo estream,stream,ast,verb_light_construction,VERB
+faciendo un estream,stream,ast,verb_light_construction,VERB
+fechu estream,stream,ast,verb_light_construction,VERB
+fechu un estream,stream,ast,verb_light_construction,VERB
+estreamiar,stream,ast,verb_morph_prescriptive,VERB
+estreamiáu,stream,ast,verb_participle_prescriptive,VERB
+like,like,ast,noun_raw,NOUN
+likes,like,ast,noun_plural_native,NOUN
+facer like,like,ast,verb_light_construction,VERB
+facer un like,like,ast,verb_light_construction,VERB
+fizo like,like,ast,verb_light_construction,VERB
+fizo un like,like,ast,verb_light_construction,VERB
+fai like,like,ast,verb_light_construction,VERB
+fai un like,like,ast,verb_light_construction,VERB
+facemos like,like,ast,verb_light_construction,VERB
+facemos un like,like,ast,verb_light_construction,VERB
+faen like,like,ast,verb_light_construction,VERB
+faen un like,like,ast,verb_light_construction,VERB
+faciendo like,like,ast,verb_light_construction,VERB
+faciendo un like,like,ast,verb_light_construction,VERB
+fechu like,like,ast,verb_light_construction,VERB
+fechu un like,like,ast,verb_light_construction,VERB
+liquiar,like,ast,verb_morph_prescriptive,VERB
+liquiáu,like,ast,verb_participle_prescriptive,VERB
+likiar,like,ast,verb_morph_descriptive,VERB
+likiáu,like,ast,verb_participle_descriptive,VERB
+escroll,scroll,ast,noun_raw,NOUN
+escrolles,scroll,ast,noun_plural_native,NOUN
+escrolls,scroll,ast,noun_plural_english,NOUN
+facer escroll,scroll,ast,verb_light_construction,VERB
+facer un escroll,scroll,ast,verb_light_construction,VERB
+fizo escroll,scroll,ast,verb_light_construction,VERB
+fizo un escroll,scroll,ast,verb_light_construction,VERB
+fai escroll,scroll,ast,verb_light_construction,VERB
+fai un escroll,scroll,ast,verb_light_construction,VERB
+facemos escroll,scroll,ast,verb_light_construction,VERB
+facemos un escroll,scroll,ast,verb_light_construction,VERB
+faen escroll,scroll,ast,verb_light_construction,VERB
+faen un escroll,scroll,ast,verb_light_construction,VERB
+faciendo escroll,scroll,ast,verb_light_construction,VERB
+faciendo un escroll,scroll,ast,verb_light_construction,VERB
+fechu escroll,scroll,ast,verb_light_construction,VERB
+fechu un escroll,scroll,ast,verb_light_construction,VERB
+escrolliar,scroll,ast,verb_morph_prescriptive,VERB
+escrolliáu,scroll,ast,verb_participle_prescriptive,VERB
+update,update,ast,noun_raw,NOUN
+updates,update,ast,noun_plural_native,NOUN
+facer update,update,ast,verb_light_construction,VERB
+facer un update,update,ast,verb_light_construction,VERB
+fizo update,update,ast,verb_light_construction,VERB
+fizo un update,update,ast,verb_light_construction,VERB
+fai update,update,ast,verb_light_construction,VERB
+fai un update,update,ast,verb_light_construction,VERB
+facemos update,update,ast,verb_light_construction,VERB
+facemos un update,update,ast,verb_light_construction,VERB
+faen update,update,ast,verb_light_construction,VERB
+faen un update,update,ast,verb_light_construction,VERB
+faciendo update,update,ast,verb_light_construction,VERB
+faciendo un update,update,ast,verb_light_construction,VERB
+fechu update,update,ast,verb_light_construction,VERB
+fechu un update,update,ast,verb_light_construction,VERB
+updatiar,update,ast,verb_morph_prescriptive,VERB
+updatiáu,update,ast,verb_participle_prescriptive,VERB
+forward,forward,ast,noun_raw,NOUN
+forwardes,forward,ast,noun_plural_native,NOUN
+forwards,forward,ast,noun_plural_english,NOUN
+facer forward,forward,ast,verb_light_construction,VERB
+facer un forward,forward,ast,verb_light_construction,VERB
+fizo forward,forward,ast,verb_light_construction,VERB
+fizo un forward,forward,ast,verb_light_construction,VERB
+fai forward,forward,ast,verb_light_construction,VERB
+fai un forward,forward,ast,verb_light_construction,VERB
+facemos forward,forward,ast,verb_light_construction,VERB
+facemos un forward,forward,ast,verb_light_construction,VERB
+faen forward,forward,ast,verb_light_construction,VERB
+faen un forward,forward,ast,verb_light_construction,VERB
+faciendo forward,forward,ast,verb_light_construction,VERB
+faciendo un forward,forward,ast,verb_light_construction,VERB
+fechu forward,forward,ast,verb_light_construction,VERB
+fechu un forward,forward,ast,verb_light_construction,VERB
+forwardiar,forward,ast,verb_morph_prescriptive,VERB
+forwardiáu,forward,ast,verb_participle_prescriptive,VERB
+espam,spam,ast,noun_raw,NOUN
+espames,spam,ast,noun_plural_native,NOUN
+espams,spam,ast,noun_plural_english,NOUN
+facer espam,spam,ast,verb_light_construction,VERB
+facer un espam,spam,ast,verb_light_construction,VERB
+fizo espam,spam,ast,verb_light_construction,VERB
+fizo un espam,spam,ast,verb_light_construction,VERB
+fai espam,spam,ast,verb_light_construction,VERB
+fai un espam,spam,ast,verb_light_construction,VERB
+facemos espam,spam,ast,verb_light_construction,VERB
+facemos un espam,spam,ast,verb_light_construction,VERB
+faen espam,spam,ast,verb_light_construction,VERB
+faen un espam,spam,ast,verb_light_construction,VERB
+faciendo espam,spam,ast,verb_light_construction,VERB
+faciendo un espam,spam,ast,verb_light_construction,VERB
+fechu espam,spam,ast,verb_light_construction,VERB
+fechu un espam,spam,ast,verb_light_construction,VERB
+espamiar,spam,ast,verb_morph_prescriptive,VERB
+espamiáu,spam,ast,verb_participle_prescriptive,VERB
+check,check,ast,noun_raw,NOUN
+checkes,check,ast,noun_plural_native,NOUN
+checks,check,ast,noun_plural_english,NOUN
+facer check,check,ast,verb_light_construction,VERB
+facer un check,check,ast,verb_light_construction,VERB
+fizo check,check,ast,verb_light_construction,VERB
+fizo un check,check,ast,verb_light_construction,VERB
+fai check,check,ast,verb_light_construction,VERB
+fai un check,check,ast,verb_light_construction,VERB
+facemos check,check,ast,verb_light_construction,VERB
+facemos un check,check,ast,verb_light_construction,VERB
+faen check,check,ast,verb_light_construction,VERB
+faen un check,check,ast,verb_light_construction,VERB
+faciendo check,check,ast,verb_light_construction,VERB
+faciendo un check,check,ast,verb_light_construction,VERB
+fechu check,check,ast,verb_light_construction,VERB
+fechu un check,check,ast,verb_light_construction,VERB
+chequiar,check,ast,verb_morph_prescriptive,VERB
+chequiáu,check,ast,verb_participle_prescriptive,VERB
+checkiar,check,ast,verb_morph_descriptive,VERB
+checkiáu,check,ast,verb_participle_descriptive,VERB
+espoiler,spoiler,ast,noun_raw,NOUN
+espoileres,spoiler,ast,noun_plural_native,NOUN
+espoilers,spoiler,ast,noun_plural_english,NOUN
+facer espoiler,spoiler,ast,verb_light_construction,VERB
+facer un espoiler,spoiler,ast,verb_light_construction,VERB
+fizo espoiler,spoiler,ast,verb_light_construction,VERB
+fizo un espoiler,spoiler,ast,verb_light_construction,VERB
+fai espoiler,spoiler,ast,verb_light_construction,VERB
+fai un espoiler,spoiler,ast,verb_light_construction,VERB
+facemos espoiler,spoiler,ast,verb_light_construction,VERB
+facemos un espoiler,spoiler,ast,verb_light_construction,VERB
+faen espoiler,spoiler,ast,verb_light_construction,VERB
+faen un espoiler,spoiler,ast,verb_light_construction,VERB
+faciendo espoiler,spoiler,ast,verb_light_construction,VERB
+faciendo un espoiler,spoiler,ast,verb_light_construction,VERB
+fechu espoiler,spoiler,ast,verb_light_construction,VERB
+fechu un espoiler,spoiler,ast,verb_light_construction,VERB
+espoileriar,spoiler,ast,verb_morph_prescriptive,VERB
+espoileriáu,spoiler,ast,verb_participle_prescriptive,VERB
+troll,troll,ast,noun_raw,NOUN
+trolles,troll,ast,noun_plural_native,NOUN
+trolls,troll,ast,noun_plural_english,NOUN
+facer troll,troll,ast,verb_light_construction,VERB
+facer un troll,troll,ast,verb_light_construction,VERB
+fizo troll,troll,ast,verb_light_construction,VERB
+fizo un troll,troll,ast,verb_light_construction,VERB
+fai troll,troll,ast,verb_light_construction,VERB
+fai un troll,troll,ast,verb_light_construction,VERB
+facemos troll,troll,ast,verb_light_construction,VERB
+facemos un troll,troll,ast,verb_light_construction,VERB
+faen troll,troll,ast,verb_light_construction,VERB
+faen un troll,troll,ast,verb_light_construction,VERB
+faciendo troll,troll,ast,verb_light_construction,VERB
+faciendo un troll,troll,ast,verb_light_construction,VERB
+fechu troll,troll,ast,verb_light_construction,VERB
+fechu un troll,troll,ast,verb_light_construction,VERB
+trolliar,troll,ast,verb_morph_prescriptive,VERB
+trolliáu,troll,ast,verb_participle_prescriptive,VERB
+bug,bug,ast,noun_raw,NOUN
+buges,bug,ast,noun_plural_native,NOUN
+bugs,bug,ast,noun_plural_english,NOUN
+server,server,ast,noun_raw,NOUN
+serveres,server,ast,noun_plural_native,NOUN
+servers,server,ast,noun_plural_english,NOUN
+cloud,cloud,ast,noun_raw,NOUN
+cloudes,cloud,ast,noun_plural_native,NOUN
+clouds,cloud,ast,noun_plural_english,NOUN
+software,software,ast,noun_raw,NOUN
+softwares,software,ast,noun_plural_native,NOUN
+hardware,hardware,ast,noun_raw,NOUN
+hardwares,hardware,ast,noun_plural_native,NOUN
+online,online,ast,noun_raw,NOUN
+onlines,online,ast,noun_plural_native,NOUN
+interface,interface,ast,noun_raw,NOUN
+interfaces,interface,ast,noun_plural_native,NOUN
+user,user,ast,noun_raw,NOUN
+useres,user,ast,noun_plural_native,NOUN
+users,user,ast,noun_plural_english,NOUN
+bot,bot,ast,noun_raw,NOUN
+botes,bot,ast,noun_plural_native,NOUN
+bots,bot,ast,noun_plural_english,NOUN
+app,app,ast,noun_raw,NOUN
+appes,app,ast,noun_plural_native,NOUN
+apps,app,ast,noun_plural_english,NOUN
+pixel,pixel,ast,noun_raw,NOUN
+pixeles,pixel,ast,noun_plural_native,NOUN
+pixels,pixel,ast,noun_plural_english,NOUN
+click,click,eu,noun_raw,NOUN
+klika,click,eu,noun_integrated_sg,NOUN
+klikak,click,eu,noun_integrated_pl,NOUN
+klik egin,click,eu,verb_light_construction,VERB
+klik egiten,click,eu,verb_light_construction,VERB
+klik egingo,click,eu,verb_light_construction,VERB
+klik egin du,click,eu,verb_light_construction,VERB
+klik egin zen,click,eu,verb_light_construction,VERB
+klikatu,click,eu,verb_morph_integrated,VERB
+klikatzen,click,eu,verb_habitual,VERB
+post,post,eu,noun_raw,NOUN
+posta,post,eu,noun_integrated_sg,NOUN
+postak,post,eu,noun_integrated_pl,NOUN
+post egin,post,eu,verb_light_construction,VERB
+post egiten,post,eu,verb_light_construction,VERB
+post egingo,post,eu,verb_light_construction,VERB
+post egin du,post,eu,verb_light_construction,VERB
+post egin zen,post,eu,verb_light_construction,VERB
+postatu,post,eu,verb_morph_integrated,VERB
+postatzen,post,eu,verb_habitual,VERB
+chat,chat,eu,noun_raw,NOUN
+txata,chat,eu,noun_integrated_sg,NOUN
+txatak,chat,eu,noun_integrated_pl,NOUN
+txat egin,chat,eu,verb_light_construction,VERB
+txat egiten,chat,eu,verb_light_construction,VERB
+txat egingo,chat,eu,verb_light_construction,VERB
+txat egin du,chat,eu,verb_light_construction,VERB
+txat egin zen,chat,eu,verb_light_construction,VERB
+txatatu,chat,eu,verb_morph_integrated,VERB
+txatatzen,chat,eu,verb_habitual,VERB
+link,link,eu,noun_raw,NOUN
+linka,link,eu,noun_integrated_sg,NOUN
+linkak,link,eu,noun_integrated_pl,NOUN
+link egin,link,eu,verb_light_construction,VERB
+link egiten,link,eu,verb_light_construction,VERB
+link egingo,link,eu,verb_light_construction,VERB
+link egin du,link,eu,verb_light_construction,VERB
+link egin zen,link,eu,verb_light_construction,VERB
+linkatu,link,eu,verb_morph_integrated,VERB
+linkatzen,link,eu,verb_habitual,VERB
+tag,tag,eu,noun_raw,NOUN
+taga,tag,eu,noun_integrated_sg,NOUN
+tagak,tag,eu,noun_integrated_pl,NOUN
+tag egin,tag,eu,verb_light_construction,VERB
+tag egiten,tag,eu,verb_light_construction,VERB
+tag egingo,tag,eu,verb_light_construction,VERB
+tag egin du,tag,eu,verb_light_construction,VERB
+tag egin zen,tag,eu,verb_light_construction,VERB
+tagatu,tag,eu,verb_morph_integrated,VERB
+tagatzen,tag,eu,verb_habitual,VERB
+tweet,tweet,eu,noun_raw,NOUN
+tuita,tweet,eu,noun_integrated_sg,NOUN
+tuitak,tweet,eu,noun_integrated_pl,NOUN
+tuit egin,tweet,eu,verb_light_construction,VERB
+tuit egiten,tweet,eu,verb_light_construction,VERB
+tuit egingo,tweet,eu,verb_light_construction,VERB
+tuit egin du,tweet,eu,verb_light_construction,VERB
+tuit egin zen,tweet,eu,verb_light_construction,VERB
+tuitatu,tweet,eu,verb_morph_integrated,VERB
+tuitatzen,tweet,eu,verb_habitual,VERB
+scan,scan,eu,noun_raw,NOUN
+eskana,scan,eu,noun_integrated_sg,NOUN
+eskanak,scan,eu,noun_integrated_pl,NOUN
+eskan egin,scan,eu,verb_light_construction,VERB
+eskan egiten,scan,eu,verb_light_construction,VERB
+eskan egingo,scan,eu,verb_light_construction,VERB
+eskan egin du,scan,eu,verb_light_construction,VERB
+eskan egin zen,scan,eu,verb_light_construction,VERB
+eskanatu,scan,eu,verb_morph_integrated,VERB
+eskanatzen,scan,eu,verb_habitual,VERB
+format,format,eu,noun_raw,NOUN
+formata,format,eu,noun_integrated_sg,NOUN
+formatak,format,eu,noun_integrated_pl,NOUN
+format egin,format,eu,verb_light_construction,VERB
+format egiten,format,eu,verb_light_construction,VERB
+format egingo,format,eu,verb_light_construction,VERB
+format egin du,format,eu,verb_light_construction,VERB
+format egin zen,format,eu,verb_light_construction,VERB
+formatatu,format,eu,verb_morph_integrated,VERB
+formatatzen,format,eu,verb_habitual,VERB
+hack,hack,eu,noun_raw,NOUN
+haka,hack,eu,noun_integrated_sg,NOUN
+hakak,hack,eu,noun_integrated_pl,NOUN
+hak egin,hack,eu,verb_light_construction,VERB
+hak egiten,hack,eu,verb_light_construction,VERB
+hak egingo,hack,eu,verb_light_construction,VERB
+hak egin du,hack,eu,verb_light_construction,VERB
+hak egin zen,hack,eu,verb_light_construction,VERB
+hakatu,hack,eu,verb_morph_integrated,VERB
+hakatzen,hack,eu,verb_habitual,VERB
+ban,ban,eu,noun_raw,NOUN
+bana,ban,eu,noun_integrated_sg,NOUN
+banak,ban,eu,noun_integrated_pl,NOUN
+ban egin,ban,eu,verb_light_construction,VERB
+ban egiten,ban,eu,verb_light_construction,VERB
+ban egingo,ban,eu,verb_light_construction,VERB
+ban egin du,ban,eu,verb_light_construction,VERB
+ban egin zen,ban,eu,verb_light_construction,VERB
+banatu,ban,eu,verb_morph_integrated,VERB
+banatzen,ban,eu,verb_habitual,VERB
+log,log,eu,noun_raw,NOUN
+loga,log,eu,noun_integrated_sg,NOUN
+logak,log,eu,noun_integrated_pl,NOUN
+log egin,log,eu,verb_light_construction,VERB
+log egiten,log,eu,verb_light_construction,VERB
+log egingo,log,eu,verb_light_construction,VERB
+log egin du,log,eu,verb_light_construction,VERB
+log egin zen,log,eu,verb_light_construction,VERB
+logatu,log,eu,verb_morph_integrated,VERB
+logatzen,log,eu,verb_habitual,VERB
+reset,reset,eu,noun_raw,NOUN
+reseta,reset,eu,noun_integrated_sg,NOUN
+resetak,reset,eu,noun_integrated_pl,NOUN
+reset egin,reset,eu,verb_light_construction,VERB
+reset egiten,reset,eu,verb_light_construction,VERB
+reset egingo,reset,eu,verb_light_construction,VERB
+reset egin du,reset,eu,verb_light_construction,VERB
+reset egin zen,reset,eu,verb_light_construction,VERB
+resetatu,reset,eu,verb_morph_integrated,VERB
+resetatzen,reset,eu,verb_habitual,VERB
+download,download,eu,noun_raw,NOUN
+downloada,download,eu,noun_integrated_sg,NOUN
+downloadak,download,eu,noun_integrated_pl,NOUN
+download egin,download,eu,verb_light_construction,VERB
+download egiten,download,eu,verb_light_construction,VERB
+download egingo,download,eu,verb_light_construction,VERB
+download egin du,download,eu,verb_light_construction,VERB
+download egin zen,download,eu,verb_light_construction,VERB
+downloadatu,download,eu,verb_morph_integrated,VERB
+downloadatzen,download,eu,verb_habitual,VERB
+stream,stream,eu,noun_raw,NOUN
+estreama,stream,eu,noun_integrated_sg,NOUN
+estreamak,stream,eu,noun_integrated_pl,NOUN
+estream egin,stream,eu,verb_light_construction,VERB
+estream egiten,stream,eu,verb_light_construction,VERB
+estream egingo,stream,eu,verb_light_construction,VERB
+estream egin du,stream,eu,verb_light_construction,VERB
+estream egin zen,stream,eu,verb_light_construction,VERB
+estreamatu,stream,eu,verb_morph_integrated,VERB
+estreamatzen,stream,eu,verb_habitual,VERB
+like,like,eu,noun_raw,NOUN
+likea,like,eu,noun_integrated_sg,NOUN
+likeak,like,eu,noun_integrated_pl,NOUN
+like egin,like,eu,verb_light_construction,VERB
+like egiten,like,eu,verb_light_construction,VERB
+like egingo,like,eu,verb_light_construction,VERB
+like egin du,like,eu,verb_light_construction,VERB
+like egin zen,like,eu,verb_light_construction,VERB
+likatu,like,eu,verb_morph_integrated,VERB
+likatzen,like,eu,verb_habitual,VERB
+scroll,scroll,eu,noun_raw,NOUN
+eskrolla,scroll,eu,noun_integrated_sg,NOUN
+eskrollak,scroll,eu,noun_integrated_pl,NOUN
+eskroll egin,scroll,eu,verb_light_construction,VERB
+eskroll egiten,scroll,eu,verb_light_construction,VERB
+eskroll egingo,scroll,eu,verb_light_construction,VERB
+eskroll egin du,scroll,eu,verb_light_construction,VERB
+eskroll egin zen,scroll,eu,verb_light_construction,VERB
+eskrollatu,scroll,eu,verb_morph_integrated,VERB
+eskrollatzen,scroll,eu,verb_habitual,VERB
+update,update,eu,noun_raw,NOUN
+updatea,update,eu,noun_integrated_sg,NOUN
+updateak,update,eu,noun_integrated_pl,NOUN
+update egin,update,eu,verb_light_construction,VERB
+update egiten,update,eu,verb_light_construction,VERB
+update egingo,update,eu,verb_light_construction,VERB
+update egin du,update,eu,verb_light_construction,VERB
+update egin zen,update,eu,verb_light_construction,VERB
+updatatu,update,eu,verb_morph_integrated,VERB
+updatatzen,update,eu,verb_habitual,VERB
+forward,forward,eu,noun_raw,NOUN
+forwarda,forward,eu,noun_integrated_sg,NOUN
+forwardak,forward,eu,noun_integrated_pl,NOUN
+forward egin,forward,eu,verb_light_construction,VERB
+forward egiten,forward,eu,verb_light_construction,VERB
+forward egingo,forward,eu,verb_light_construction,VERB
+forward egin du,forward,eu,verb_light_construction,VERB
+forward egin zen,forward,eu,verb_light_construction,VERB
+forwardatu,forward,eu,verb_morph_integrated,VERB
+forwardatzen,forward,eu,verb_habitual,VERB
+spam,spam,eu,noun_raw,NOUN
+espama,spam,eu,noun_integrated_sg,NOUN
+espamak,spam,eu,noun_integrated_pl,NOUN
+espam egin,spam,eu,verb_light_construction,VERB
+espam egiten,spam,eu,verb_light_construction,VERB
+espam egingo,spam,eu,verb_light_construction,VERB
+espam egin du,spam,eu,verb_light_construction,VERB
+espam egin zen,spam,eu,verb_light_construction,VERB
+espamatu,spam,eu,verb_morph_integrated,VERB
+espamatzen,spam,eu,verb_habitual,VERB
+check,check,eu,noun_raw,NOUN
+txeka,check,eu,noun_integrated_sg,NOUN
+txekak,check,eu,noun_integrated_pl,NOUN
+txek egin,check,eu,verb_light_construction,VERB
+txek egiten,check,eu,verb_light_construction,VERB
+txek egingo,check,eu,verb_light_construction,VERB
+txek egin du,check,eu,verb_light_construction,VERB
+txek egin zen,check,eu,verb_light_construction,VERB
+txekatu,check,eu,verb_morph_integrated,VERB
+txekatzen,check,eu,verb_habitual,VERB
+spoiler,spoiler,eu,noun_raw,NOUN
+espoilera,spoiler,eu,noun_integrated_sg,NOUN
+espoilerak,spoiler,eu,noun_integrated_pl,NOUN
+espoiler egin,spoiler,eu,verb_light_construction,VERB
+espoiler egiten,spoiler,eu,verb_light_construction,VERB
+espoiler egingo,spoiler,eu,verb_light_construction,VERB
+espoiler egin du,spoiler,eu,verb_light_construction,VERB
+espoiler egin zen,spoiler,eu,verb_light_construction,VERB
+espoileratu,spoiler,eu,verb_morph_integrated,VERB
+espoileratzen,spoiler,eu,verb_habitual,VERB
+troll,troll,eu,noun_raw,NOUN
+trolla,troll,eu,noun_integrated_sg,NOUN
+trollak,troll,eu,noun_integrated_pl,NOUN
+troll egin,troll,eu,verb_light_construction,VERB
+troll egiten,troll,eu,verb_light_construction,VERB
+troll egingo,troll,eu,verb_light_construction,VERB
+troll egin du,troll,eu,verb_light_construction,VERB
+troll egin zen,troll,eu,verb_light_construction,VERB
+trollatu,troll,eu,verb_morph_integrated,VERB
+trollatzen,troll,eu,verb_habitual,VERB
+bug,bug,eu,noun_raw,NOUN
+buga,bug,eu,noun_integrated_sg,NOUN
+bugak,bug,eu,noun_integrated_pl,NOUN
+server,server,eu,noun_raw,NOUN
+servera,server,eu,noun_integrated_sg,NOUN
+serverak,server,eu,noun_integrated_pl,NOUN
+cloud,cloud,eu,noun_raw,NOUN
+klouda,cloud,eu,noun_integrated_sg,NOUN
+kloudak,cloud,eu,noun_integrated_pl,NOUN
+software,software,eu,noun_raw,NOUN
+softwarea,software,eu,noun_integrated_sg,NOUN
+softwareak,software,eu,noun_integrated_pl,NOUN
+hardware,hardware,eu,noun_raw,NOUN
+hardwarea,hardware,eu,noun_integrated_sg,NOUN
+hardwareak,hardware,eu,noun_integrated_pl,NOUN
+online,online,eu,noun_raw,NOUN
+onlinea,online,eu,noun_integrated_sg,NOUN
+onlineak,online,eu,noun_integrated_pl,NOUN
+interface,interface,eu,noun_raw,NOUN
+interfakea,interface,eu,noun_integrated_sg,NOUN
+interfakeak,interface,eu,noun_integrated_pl,NOUN
+user,user,eu,noun_raw,NOUN
+usera,user,eu,noun_integrated_sg,NOUN
+userak,user,eu,noun_integrated_pl,NOUN
+bot,bot,eu,noun_raw,NOUN
+bota,bot,eu,noun_integrated_sg,NOUN
+botak,bot,eu,noun_integrated_pl,NOUN
+app,app,eu,noun_raw,NOUN
+appa,app,eu,noun_integrated_sg,NOUN
+appak,app,eu,noun_integrated_pl,NOUN
+pixel,pixel,eu,noun_raw,NOUN
+pixela,pixel,eu,noun_integrated_sg,NOUN
+pixelak,pixel,eu,noun_integrated_pl,NOUN
+click,click,el,cs_latin_raw,NOUN
+κάνω click,click,el,verb_light_latin,VERB
+κάνει click,click,el,verb_light_latin,VERB
+έκανε click,click,el,verb_light_latin,VERB
+κάνοντας click,click,el,verb_light_latin,VERB
+κλικ,click,el,noun_transliterated,NOUN
+κάνω κλικ,click,el,verb_light_greek,VERB
+κάνει κλικ,click,el,verb_light_greek,VERB
+έκανε κλικ,click,el,verb_light_greek,VERB
+κάνοντας κλικ,click,el,verb_light_greek,VERB
+κλικάρω,click,el,verb_morph_aro,VERB
+κλικαρισμένος,click,el,verb_participle,VERB
+post,post,el,cs_latin_raw,NOUN
+κάνω post,post,el,verb_light_latin,VERB
+κάνει post,post,el,verb_light_latin,VERB
+έκανε post,post,el,verb_light_latin,VERB
+κάνοντας post,post,el,verb_light_latin,VERB
+ποστ,post,el,noun_transliterated,NOUN
+κάνω ποστ,post,el,verb_light_greek,VERB
+κάνει ποστ,post,el,verb_light_greek,VERB
+έκανε ποστ,post,el,verb_light_greek,VERB
+κάνοντας ποστ,post,el,verb_light_greek,VERB
+ποστάρω,post,el,verb_morph_aro,VERB
+ποσταρισμένος,post,el,verb_participle,VERB
+chat,chat,el,cs_latin_raw,NOUN
+κάνω chat,chat,el,verb_light_latin,VERB
+κάνει chat,chat,el,verb_light_latin,VERB
+έκανε chat,chat,el,verb_light_latin,VERB
+κάνοντας chat,chat,el,verb_light_latin,VERB
+τσατ,chat,el,noun_transliterated,NOUN
+κάνω τσατ,chat,el,verb_light_greek,VERB
+κάνει τσατ,chat,el,verb_light_greek,VERB
+έκανε τσατ,chat,el,verb_light_greek,VERB
+κάνοντας τσατ,chat,el,verb_light_greek,VERB
+τσατάρω,chat,el,verb_morph_aro,VERB
+τσαταρισμένος,chat,el,verb_participle,VERB
+link,link,el,cs_latin_raw,NOUN
+κάνω link,link,el,verb_light_latin,VERB
+κάνει link,link,el,verb_light_latin,VERB
+έκανε link,link,el,verb_light_latin,VERB
+κάνοντας link,link,el,verb_light_latin,VERB
+λινκ,link,el,noun_transliterated,NOUN
+κάνω λινκ,link,el,verb_light_greek,VERB
+κάνει λινκ,link,el,verb_light_greek,VERB
+έκανε λινκ,link,el,verb_light_greek,VERB
+κάνοντας λινκ,link,el,verb_light_greek,VERB
+λινκάρω,link,el,verb_morph_aro,VERB
+λινκαρισμένος,link,el,verb_participle,VERB
+tag,tag,el,cs_latin_raw,NOUN
+κάνω tag,tag,el,verb_light_latin,VERB
+κάνει tag,tag,el,verb_light_latin,VERB
+έκανε tag,tag,el,verb_light_latin,VERB
+κάνοντας tag,tag,el,verb_light_latin,VERB
+ταγκ,tag,el,noun_transliterated,NOUN
+κάνω ταγκ,tag,el,verb_light_greek,VERB
+κάνει ταγκ,tag,el,verb_light_greek,VERB
+έκανε ταγκ,tag,el,verb_light_greek,VERB
+κάνοντας ταγκ,tag,el,verb_light_greek,VERB
+ταγκάρω,tag,el,verb_morph_aro,VERB
+ταγκαρισμένος,tag,el,verb_participle,VERB
+tweet,tweet,el,cs_latin_raw,NOUN
+κάνω tweet,tweet,el,verb_light_latin,VERB
+κάνει tweet,tweet,el,verb_light_latin,VERB
+έκανε tweet,tweet,el,verb_light_latin,VERB
+κάνοντας tweet,tweet,el,verb_light_latin,VERB
+τουίτ,tweet,el,noun_transliterated,NOUN
+κάνω τουίτ,tweet,el,verb_light_greek,VERB
+κάνει τουίτ,tweet,el,verb_light_greek,VERB
+έκανε τουίτ,tweet,el,verb_light_greek,VERB
+κάνοντας τουίτ,tweet,el,verb_light_greek,VERB
+τουιτάρω,tweet,el,verb_morph_aro,VERB
+τουιταρισμένος,tweet,el,verb_participle,VERB
+scan,scan,el,cs_latin_raw,NOUN
+κάνω scan,scan,el,verb_light_latin,VERB
+κάνει scan,scan,el,verb_light_latin,VERB
+έκανε scan,scan,el,verb_light_latin,VERB
+κάνοντας scan,scan,el,verb_light_latin,VERB
+σκαν,scan,el,noun_transliterated,NOUN
+κάνω σκαν,scan,el,verb_light_greek,VERB
+κάνει σκαν,scan,el,verb_light_greek,VERB
+έκανε σκαν,scan,el,verb_light_greek,VERB
+κάνοντας σκαν,scan,el,verb_light_greek,VERB
+σκανάρω,scan,el,verb_morph_aro,VERB
+σκαναρισμένος,scan,el,verb_participle,VERB
+format,format,el,cs_latin_raw,NOUN
+κάνω format,format,el,verb_light_latin,VERB
+κάνει format,format,el,verb_light_latin,VERB
+έκανε format,format,el,verb_light_latin,VERB
+κάνοντας format,format,el,verb_light_latin,VERB
+φορμάτ,format,el,noun_transliterated,NOUN
+κάνω φορμάτ,format,el,verb_light_greek,VERB
+κάνει φορμάτ,format,el,verb_light_greek,VERB
+έκανε φορμάτ,format,el,verb_light_greek,VERB
+κάνοντας φορμάτ,format,el,verb_light_greek,VERB
+φορματάρω,format,el,verb_morph_aro,VERB
+φορματαρισμένος,format,el,verb_participle,VERB
+hack,hack,el,cs_latin_raw,NOUN
+κάνω hack,hack,el,verb_light_latin,VERB
+κάνει hack,hack,el,verb_light_latin,VERB
+έκανε hack,hack,el,verb_light_latin,VERB
+κάνοντας hack,hack,el,verb_light_latin,VERB
+χακ,hack,el,noun_transliterated,NOUN
+κάνω χακ,hack,el,verb_light_greek,VERB
+κάνει χακ,hack,el,verb_light_greek,VERB
+έκανε χακ,hack,el,verb_light_greek,VERB
+κάνοντας χακ,hack,el,verb_light_greek,VERB
+χακάρω,hack,el,verb_morph_aro,VERB
+χακαρισμένος,hack,el,verb_participle,VERB
+ban,ban,el,cs_latin_raw,NOUN
+κάνω ban,ban,el,verb_light_latin,VERB
+κάνει ban,ban,el,verb_light_latin,VERB
+έκανε ban,ban,el,verb_light_latin,VERB
+κάνοντας ban,ban,el,verb_light_latin,VERB
+μπαν,ban,el,noun_transliterated,NOUN
+κάνω μπαν,ban,el,verb_light_greek,VERB
+κάνει μπαν,ban,el,verb_light_greek,VERB
+έκανε μπαν,ban,el,verb_light_greek,VERB
+κάνοντας μπαν,ban,el,verb_light_greek,VERB
+μπανάρω,ban,el,verb_morph_aro,VERB
+μπαναρισμένος,ban,el,verb_participle,VERB
+log,log,el,cs_latin_raw,NOUN
+κάνω log,log,el,verb_light_latin,VERB
+κάνει log,log,el,verb_light_latin,VERB
+έκανε log,log,el,verb_light_latin,VERB
+κάνοντας log,log,el,verb_light_latin,VERB
+λογκ,log,el,noun_transliterated,NOUN
+κάνω λογκ,log,el,verb_light_greek,VERB
+κάνει λογκ,log,el,verb_light_greek,VERB
+έκανε λογκ,log,el,verb_light_greek,VERB
+κάνοντας λογκ,log,el,verb_light_greek,VERB
+λογκάρω,log,el,verb_morph_aro,VERB
+λογκαρισμένος,log,el,verb_participle,VERB
+reset,reset,el,cs_latin_raw,NOUN
+κάνω reset,reset,el,verb_light_latin,VERB
+κάνει reset,reset,el,verb_light_latin,VERB
+έκανε reset,reset,el,verb_light_latin,VERB
+κάνοντας reset,reset,el,verb_light_latin,VERB
+ρισέτ,reset,el,noun_transliterated,NOUN
+κάνω ρισέτ,reset,el,verb_light_greek,VERB
+κάνει ρισέτ,reset,el,verb_light_greek,VERB
+έκανε ρισέτ,reset,el,verb_light_greek,VERB
+κάνοντας ρισέτ,reset,el,verb_light_greek,VERB
+ρισετάρω,reset,el,verb_morph_aro,VERB
+ρισεταρισμένος,reset,el,verb_participle,VERB
+download,download,el,cs_latin_raw,NOUN
+κάνω download,download,el,verb_light_latin,VERB
+κάνει download,download,el,verb_light_latin,VERB
+έκανε download,download,el,verb_light_latin,VERB
+κάνοντας download,download,el,verb_light_latin,VERB
+νταουνλόουντ,download,el,noun_transliterated,NOUN
+κάνω νταουνλόουντ,download,el,verb_light_greek,VERB
+κάνει νταουνλόουντ,download,el,verb_light_greek,VERB
+έκανε νταουνλόουντ,download,el,verb_light_greek,VERB
+κάνοντας νταουνλόουντ,download,el,verb_light_greek,VERB
+νταουνλοουντάρω,download,el,verb_morph_aro,VERB
+νταουνλοουνταρισμένος,download,el,verb_participle,VERB
+stream,stream,el,cs_latin_raw,NOUN
+κάνω stream,stream,el,verb_light_latin,VERB
+κάνει stream,stream,el,verb_light_latin,VERB
+έκανε stream,stream,el,verb_light_latin,VERB
+κάνοντας stream,stream,el,verb_light_latin,VERB
+στριμ,stream,el,noun_transliterated,NOUN
+κάνω στριμ,stream,el,verb_light_greek,VERB
+κάνει στριμ,stream,el,verb_light_greek,VERB
+έκανε στριμ,stream,el,verb_light_greek,VERB
+κάνοντας στριμ,stream,el,verb_light_greek,VERB
+στριμάρω,stream,el,verb_morph_aro,VERB
+στριμαρισμένος,stream,el,verb_participle,VERB
+like,like,el,cs_latin_raw,NOUN
+κάνω like,like,el,verb_light_latin,VERB
+κάνει like,like,el,verb_light_latin,VERB
+έκανε like,like,el,verb_light_latin,VERB
+κάνοντας like,like,el,verb_light_latin,VERB
+λάικ,like,el,noun_transliterated,NOUN
+κάνω λάικ,like,el,verb_light_greek,VERB
+κάνει λάικ,like,el,verb_light_greek,VERB
+έκανε λάικ,like,el,verb_light_greek,VERB
+κάνοντας λάικ,like,el,verb_light_greek,VERB
+λαικάρω,like,el,verb_morph_aro,VERB
+λαικαρισμένος,like,el,verb_participle,VERB
+scroll,scroll,el,cs_latin_raw,NOUN
+κάνω scroll,scroll,el,verb_light_latin,VERB
+κάνει scroll,scroll,el,verb_light_latin,VERB
+έκανε scroll,scroll,el,verb_light_latin,VERB
+κάνοντας scroll,scroll,el,verb_light_latin,VERB
+σκρολ,scroll,el,noun_transliterated,NOUN
+κάνω σκρολ,scroll,el,verb_light_greek,VERB
+κάνει σκρολ,scroll,el,verb_light_greek,VERB
+έκανε σκρολ,scroll,el,verb_light_greek,VERB
+κάνοντας σκρολ,scroll,el,verb_light_greek,VERB
+σκρολάρω,scroll,el,verb_morph_aro,VERB
+σκρολαρισμένος,scroll,el,verb_participle,VERB
+update,update,el,cs_latin_raw,NOUN
+κάνω update,update,el,verb_light_latin,VERB
+κάνει update,update,el,verb_light_latin,VERB
+έκανε update,update,el,verb_light_latin,VERB
+κάνοντας update,update,el,verb_light_latin,VERB
+απντέιτ,update,el,noun_transliterated,NOUN
+κάνω απντέιτ,update,el,verb_light_greek,VERB
+κάνει απντέιτ,update,el,verb_light_greek,VERB
+έκανε απντέιτ,update,el,verb_light_greek,VERB
+κάνοντας απντέιτ,update,el,verb_light_greek,VERB
+απντειτάρω,update,el,verb_morph_aro,VERB
+απντειταρισμένος,update,el,verb_participle,VERB
+forward,forward,el,cs_latin_raw,NOUN
+κάνω forward,forward,el,verb_light_latin,VERB
+κάνει forward,forward,el,verb_light_latin,VERB
+έκανε forward,forward,el,verb_light_latin,VERB
+κάνοντας forward,forward,el,verb_light_latin,VERB
+φόργουορντ,forward,el,noun_transliterated,NOUN
+κάνω φόργουορντ,forward,el,verb_light_greek,VERB
+κάνει φόργουορντ,forward,el,verb_light_greek,VERB
+έκανε φόργουορντ,forward,el,verb_light_greek,VERB
+κάνοντας φόργουορντ,forward,el,verb_light_greek,VERB
+φοργουορντάρω,forward,el,verb_morph_aro,VERB
+φοργουορνταρισμένος,forward,el,verb_participle,VERB
+spam,spam,el,cs_latin_raw,NOUN
+κάνω spam,spam,el,verb_light_latin,VERB
+κάνει spam,spam,el,verb_light_latin,VERB
+έκανε spam,spam,el,verb_light_latin,VERB
+κάνοντας spam,spam,el,verb_light_latin,VERB
+σπαμ,spam,el,noun_transliterated,NOUN
+κάνω σπαμ,spam,el,verb_light_greek,VERB
+κάνει σπαμ,spam,el,verb_light_greek,VERB
+έκανε σπαμ,spam,el,verb_light_greek,VERB
+κάνοντας σπαμ,spam,el,verb_light_greek,VERB
+σπαμάρω,spam,el,verb_morph_aro,VERB
+σπαμαρισμένος,spam,el,verb_participle,VERB
+check,check,el,cs_latin_raw,NOUN
+κάνω check,check,el,verb_light_latin,VERB
+κάνει check,check,el,verb_light_latin,VERB
+έκανε check,check,el,verb_light_latin,VERB
+κάνοντας check,check,el,verb_light_latin,VERB
+τσεκ,check,el,noun_transliterated,NOUN
+κάνω τσεκ,check,el,verb_light_greek,VERB
+κάνει τσεκ,check,el,verb_light_greek,VERB
+έκανε τσεκ,check,el,verb_light_greek,VERB
+κάνοντας τσεκ,check,el,verb_light_greek,VERB
+τσεκάρω,check,el,verb_morph_aro,VERB
+τσεκαρισμένος,check,el,verb_participle,VERB
+spoiler,spoiler,el,cs_latin_raw,NOUN
+κάνω spoiler,spoiler,el,verb_light_latin,VERB
+κάνει spoiler,spoiler,el,verb_light_latin,VERB
+έκανε spoiler,spoiler,el,verb_light_latin,VERB
+κάνοντας spoiler,spoiler,el,verb_light_latin,VERB
+σπόιλερ,spoiler,el,noun_transliterated,NOUN
+κάνω σπόιλερ,spoiler,el,verb_light_greek,VERB
+κάνει σπόιλερ,spoiler,el,verb_light_greek,VERB
+έκανε σπόιλερ,spoiler,el,verb_light_greek,VERB
+κάνοντας σπόιλερ,spoiler,el,verb_light_greek,VERB
+σποιλεράρω,spoiler,el,verb_morph_aro,VERB
+σποιλεραρισμένος,spoiler,el,verb_participle,VERB
+troll,troll,el,cs_latin_raw,NOUN
+κάνω troll,troll,el,verb_light_latin,VERB
+κάνει troll,troll,el,verb_light_latin,VERB
+έκανε troll,troll,el,verb_light_latin,VERB
+κάνοντας troll,troll,el,verb_light_latin,VERB
+τρολ,troll,el,noun_transliterated,NOUN
+κάνω τρολ,troll,el,verb_light_greek,VERB
+κάνει τρολ,troll,el,verb_light_greek,VERB
+έκανε τρολ,troll,el,verb_light_greek,VERB
+κάνοντας τρολ,troll,el,verb_light_greek,VERB
+τρολάρω,troll,el,verb_morph_aro,VERB
+τρολαρισμένος,troll,el,verb_participle,VERB
+bug,bug,el,cs_latin_raw,NOUN
+μπαγκ,bug,el,noun_transliterated,NOUN
+server,server,el,cs_latin_raw,NOUN
+σέρβερ,server,el,noun_transliterated,NOUN
+cloud,cloud,el,cs_latin_raw,NOUN
+κλάουντ,cloud,el,noun_transliterated,NOUN
+software,software,el,cs_latin_raw,NOUN
+σόφτγουερ,software,el,noun_transliterated,NOUN
+hardware,hardware,el,cs_latin_raw,NOUN
+χάρντγουερ,hardware,el,noun_transliterated,NOUN
+online,online,el,cs_latin_raw,NOUN
+ονλάιν,online,el,noun_transliterated,NOUN
+interface,interface,el,cs_latin_raw,NOUN
+ιντερφέις,interface,el,noun_transliterated,NOUN
+user,user,el,cs_latin_raw,NOUN
+γιούζερ,user,el,noun_transliterated,NOUN
+bot,bot,el,cs_latin_raw,NOUN
+μποτ,bot,el,noun_transliterated,NOUN
+app,app,el,cs_latin_raw,NOUN
+απ,app,el,noun_transliterated,NOUN
+pixel,pixel,el,cs_latin_raw,NOUN
+πίξελ,pixel,el,noun_transliterated,NOUN
