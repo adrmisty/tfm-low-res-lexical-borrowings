@@ -6,7 +6,7 @@
 # jan-2026
 
 from typing import Dict, List
-from .base import BorrowingGenerator
+from .seeds import BorrowingGenerator
 from src.config import GREEK_TRANSLITERATION
 
 class GreekGenerator(BorrowingGenerator):
