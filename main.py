@@ -22,6 +22,7 @@ from src.mining.miner import WikipediaMiner
 from src.mining.cleaner import MiningCleaner
 from src.analysis.stats import BorrowingStats
 from src.analysis.plot import BorrowingPlots
+from src.analysis.sampler import get_unannotated_gold_sample as sample
 
 # --- CONFIGURATION PATHS ---
 DATA_DIR = "data"
@@ -170,6 +171,10 @@ def run_analysis():
     
     print(f">>> Plots saved to directory: {PLOTS_DIR}/")
 
+def run_sampling():
+    print(f"\n[6] Generating gold standard sample for annotation...")
+    sample(split=0.5)
+
 # -----------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
@@ -177,7 +182,7 @@ if __name__ == "__main__":
     
     parser.add_argument(
         "step", 
-        choices=["scrape", "generate", "mine", "clean", "analyze", "all"],
+        choices=["scrape", "generate", "mine", "clean", "analyze", "sample", "all"],
         help="The pipeline step to execute."
     )
     
@@ -198,3 +203,6 @@ if __name__ == "__main__":
     if args.step in ["analyze", "all"]:
         run_stats()
         run_analysis()
+    
+    if args.step in ["sample", "all"]:
+        run_sampling()
