@@ -23,6 +23,7 @@ from src.mining.cleaner import MiningCleaner
 from src.analysis.stats import BorrowingStats
 from src.analysis.plot import BorrowingPlots
 from src.analysis.sampler import get_unannotated_gold_sample as sample
+from src.analysis.corpus import CorpusValidator 
 
 # --- CONFIGURATION PATHS ---
 DATA_DIR = "data"
@@ -36,7 +37,7 @@ MINED_FILE = os.path.join(MINED_DIR, "mined_sentences.jsonl")
 CLEAN_FILE = os.path.join(PROCESSED_DIR, "mined_sentences.clean.jsonl")
 STATS_FILE = os.path.join(PLOTS_DIR, "stats")
 WIKTIONARY_FILE = os.path.join(RAW_DIR, "wiktionary_borrowings.csv")
-
+CORPUS_FILE = os.path.join(PROCESSED_DIR, "corpus_terms.csv")
 
 for d in [RAW_DIR, MINED_DIR, PROCESSED_DIR, PLOTS_DIR]:
     os.makedirs(d, exist_ok=True)
@@ -171,9 +172,10 @@ def run_analysis():
     
     print(f">>> Plots saved to directory: {PLOTS_DIR}/")
 
-def run_sampling():
-    print(f"\n[6] Generating gold standard sample for annotation...")
-    sample(split=0.5)
+def run_corpus():
+    print(f"\n[6] Validating corpus terms...")
+    corpus = CorpusValidator(CLEAN_FILE, CORPUS_FILE)
+    corpus_results = corpus.process()
 
 # -----------------------------------------------------------------------------------------
 
@@ -182,7 +184,7 @@ if __name__ == "__main__":
     
     parser.add_argument(
         "step", 
-        choices=["scrape", "generate", "mine", "clean", "analyze", "sample", "all"],
+        choices=["scrape", "generate", "mine", "clean", "analyze", "sample", "corpus", "all"],
         help="The pipeline step to execute."
     )
     
@@ -205,4 +207,7 @@ if __name__ == "__main__":
         run_analysis()
     
     if args.step in ["sample", "all"]:
-        run_sampling()
+        sample()
+
+    if args.step in ["corpus", "all"]:
+        run_corpus()
