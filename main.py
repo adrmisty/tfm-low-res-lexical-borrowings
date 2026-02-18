@@ -22,7 +22,7 @@ from src.mining.miner import WikipediaMiner
 from src.mining.cleaner import MiningCleaner
 from src.analysis.stats import BorrowingStats
 from src.analysis.plot import BorrowingPlots
-from src.analysis.sampler import get_unannotated_gold_sample as sample
+from src.analysis.annotation import sample_in_csv as sample, sample_in_json as json_sample
 from src.analysis.corpus import CorpusValidator 
 
 # --- CONFIGURATION PATHS ---
@@ -173,9 +173,9 @@ def run_analysis():
     print(f">>> Plots saved to directory: {PLOTS_DIR}/")
 
 def run_corpus():
-    print(f"\n[6] Validating corpus terms...")
+    print(f"\n[Annex] Validating corpus terms...")
     corpus = CorpusValidator(CLEAN_FILE, CORPUS_FILE)
-    corpus_results = corpus.process()
+    corpus.process()
 
 # -----------------------------------------------------------------------------------------
 
@@ -184,7 +184,7 @@ if __name__ == "__main__":
     
     parser.add_argument(
         "step", 
-        choices=["scrape", "generate", "mine", "clean", "analyze", "sample", "corpus", "all"],
+        choices=["scrape", "generate", "mine", "clean", "analyze", "sample", "reformat", "corpus", "all"],
         help="The pipeline step to execute."
     )
     
@@ -208,6 +208,9 @@ if __name__ == "__main__":
     
     if args.step in ["sample", "all"]:
         sample()
+
+    if args.step in ["reformat", "all"]:
+        json_sample()
 
     if args.step in ["corpus", "all"]:
         run_corpus()
