@@ -22,7 +22,8 @@ from src.mining.miner import WikipediaMiner
 from src.mining.cleaner import MiningCleaner
 from src.analysis.stats import BorrowingStats
 from src.analysis.plot import BorrowingPlots
-from src.analysis.annotation import sample_in_csv as sample, sample_in_json as json_sample
+from src.analysis.annotation import sample_in_csv as sample, sample_in_json as json_sample, sample_in_labelstudio as label
+from src.analysis.etymology import add_etymology_data
 from src.analysis.corpus import CorpusValidator 
 
 # --- CONFIGURATION PATHS ---
@@ -52,36 +53,34 @@ def run_scraping():
 
 def run_generation():
     print(f"\n[1] Generating synthetic seeds...")
-    
+
     generators = [
         AsturianGenerator(),
         BasqueGenerator(),
         GreekGenerator()
     ]
-    
+
     all_seeds = []
-    
+
     # synthetic
     for gen in generators:
         print(f"\tRunning generator for: {gen.lang.upper()}")
         all_seeds.extend(gen.generate_all(ALL_ROOTS))
-    
+
     # wiktionary
     print("\tLoading Wiktionary lexical borrowings...")
     scraper = WiktionaryScraper(WIKTIONARY_FILE)
-    wik_seeds = scraper.load_seeds(target_langs=['ast', 'eu', 'el'])
-    
-    if wik_seeds:
+    if wik_seeds := scraper.load_seeds(target_langs=['ast', 'eu', 'el']):
         all_seeds.extend(wik_seeds)
         print(f"\tAdded {len(wik_seeds)} loans from Wiktionary.")
     else:
         print("\tNo Wiktionary seeds loaded (file missing or empty).")
-        
+
     df = pd.DataFrame(all_seeds)
     df_clean = df.drop_duplicates(subset=['term', 'lang', 'type'])
-    
+
     df_clean.to_csv(SEEDS_FILE, index=False)
-    
+
     print(f">>> Generated {len(df_clean)} unique seeds.")
     print(f"\tSaved to: {SEEDS_FILE}")
     print("\tSample:")
@@ -119,7 +118,6 @@ def run_cleaning():
     cleaner = MiningCleaner()
     kept, d_eng, d_sem = cleaner.clean_file(MINED_FILE, CLEAN_FILE)
             
-    print(f">>> Cleaning complete.")
     print(f"\tKept: {kept}")
     print(f"\tDropped (English): {d_eng}")
     print(f"\tDropped (Semantic/Homonyms): {d_sem}")
@@ -139,37 +137,34 @@ def run_stats():
 
 def run_analysis():
     print(f"\n[5] Generating visualization plots...")
-    
+
     if not os.path.exists(CLEAN_FILE):
         print(f"(!) > Clean file not found at {CLEAN_FILE}. Run 'clean' first.")
         return
 
     data = []
     with open(CLEAN_FILE, 'r', encoding='utf-8') as f:
-        for line in f:
-            if line.strip():
-                data.append(json.loads(line))
-    
+        data.extend(json.loads(line) for line in f if line.strip())
     if not data:
         print("\t(!) > Clean file is empty. No data to plot.")
         return
 
     df = pd.DataFrame(data)
     viz = BorrowingPlots(df)
-    
+
     print("\tGenerating word-class plot...")
     viz.plot_pos_distribution(os.path.join(PLOTS_DIR, "1_pos_distribution.png"))
-    
+
     print("\tGenerating morphological integration plot...")
     viz.plot_integration_strategies(os.path.join(PLOTS_DIR, "2_integration_strats.png"))
-    
+
     print("\tGenerating visual fidelity plot...")
     viz.plot_spelling_adaptation(os.path.join(PLOTS_DIR, "3_spelling_retained.png"))
-    
+
     print("\tGenerating (synthetic vs. wiktionary) data comparison...")
     viz.plot_data_amounts(os.path.join(PLOTS_DIR, "4_dataset_sizes.png"))
     viz.plot_origin_languages(os.path.join(PLOTS_DIR, "5_origin_langs.png"))
-    
+
     print(f">>> Plots saved to directory: {PLOTS_DIR}/")
 
 def run_corpus():
@@ -184,7 +179,7 @@ if __name__ == "__main__":
     
     parser.add_argument(
         "step", 
-        choices=["scrape", "generate", "mine", "clean", "analyze", "sample", "reformat", "corpus", "all"],
+        choices=["scrape", "generate", "mine", "clean", "analyze", "sample", "label", "corpus", "all"],
         help="The pipeline step to execute."
     )
     
@@ -209,8 +204,10 @@ if __name__ == "__main__":
     if args.step in ["sample", "all"]:
         sample()
 
-    if args.step in ["reformat", "all"]:
-        json_sample()
+    if args.step in ["label", "all"]:
+        #json_sample()
+        #add_etymology_data()
+        label()
 
     if args.step in ["corpus", "all"]:
         run_corpus()
