@@ -83,7 +83,7 @@ class BorrowingStats:
         else:
             mined = pd.DataFrame(columns=['term'])
         raw_sentences = len(mined)
-        found_terms_raw = mined['term'].unique() if not mined.empty else []
+        found_terms_raw = [] if mined.empty else mined['term'].unique()
         seeds_found_count = len(found_terms_raw)
 
         # processed mined
@@ -92,7 +92,7 @@ class BorrowingStats:
         else:
             clean = pd.DataFrame(columns=['term'])
         valid_sentences = len(clean)
-        found_terms_clean = clean['term'].unique() if not clean.empty else []
+        found_terms_clean = [] if clean.empty else clean['term'].unique()
         seeds_valid_count = len(found_terms_clean)
 
 

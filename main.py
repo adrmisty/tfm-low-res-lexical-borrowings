@@ -22,9 +22,7 @@ from src.mining.miner import WikipediaMiner
 from src.mining.cleaner import MiningCleaner
 from src.analysis.stats import BorrowingStats
 from src.analysis.plot import BorrowingPlots
-from src.analysis.annotation import sample_in_csv as sample, sample_in_json as json_sample, sample_in_labelstudio as label
-from src.analysis.etymology import add_etymology_data
-from src.analysis.corpus import CorpusValidator 
+from src.analysis.annotation import sample_for_annotation
 
 # --- CONFIGURATION PATHS ---
 DATA_DIR = "data"
@@ -134,7 +132,6 @@ def run_stats():
     stats = BorrowingStats(SEEDS_FILE, MINED_FILE, CLEAN_FILE)
     stats.report(STATS_FILE)
 
-
 def run_analysis():
     print(f"\n[5] Generating visualization plots...")
 
@@ -167,11 +164,6 @@ def run_analysis():
 
     print(f">>> Plots saved to directory: {PLOTS_DIR}/")
 
-def run_corpus():
-    print(f"\n[Annex] Validating corpus terms...")
-    corpus = CorpusValidator(CLEAN_FILE, CORPUS_FILE)
-    corpus.process()
-
 # -----------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
@@ -179,7 +171,7 @@ if __name__ == "__main__":
     
     parser.add_argument(
         "step", 
-        choices=["scrape", "generate", "mine", "clean", "analyze", "sample", "label", "corpus", "all"],
+        choices=["scrape", "generate", "mine", "clean", "analyze", "sample", "all"],
         help="The pipeline step to execute."
     )
     
@@ -202,12 +194,4 @@ if __name__ == "__main__":
         run_analysis()
     
     if args.step in ["sample", "all"]:
-        sample()
-
-    if args.step in ["label", "all"]:
-        #json_sample()
-        #add_etymology_data()
-        label()
-
-    if args.step in ["corpus", "all"]:
-        run_corpus()
+        sample_for_annotation()

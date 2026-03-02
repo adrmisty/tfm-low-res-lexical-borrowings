@@ -1,32 +1,56 @@
 # annotation.py
 # ----------------------------------------------------------------
-# utility functions for annotation of gold standard testsample
+# generation, enrichment & format of gold test set for Label Studio
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
 # feb-2026
+
 import pandas as pd
 import json
 import os
 
+# --- PATH CONFIGURATION ---
 INPUT_FILE = "data/processed/mined_sentences.clean.jsonl"
-OUTPUT_DIR = "data/annotation"
-#OUTPUT_FILE = os.path.join(OUTPUT_DIR, "gold_standard_sample.csv")
-OUTPUT_FILE_CSV = os.path.join(OUTPUT_DIR, "annotations.csv.xlsx")
-OUTPUT_FILE_JSON = os.path.join(OUTPUT_DIR, "gold_standard.json")
-OUTPUT_FILE_LABEL = os.path.join(OUTPUT_DIR, "label_studio_import.json")
-SAMPLE_SIZE = 100
+OUTPUT_DIR = "data/annotation/final"
+OUTPUT_FILE_LABEL = os.path.join(OUTPUT_DIR, "sample_final.json")
 
-# columns
-# new category: old/new
-cols = ['lang', 'term', 'sentence', 'IS_VALID_LOAN', 'OTHER_LOANS', 'NOTES', 'category', 'type', 'source_page']
+WIKTEXTRACT_FILES = {
+    "ast": "data/external/kaikki.org-dictionary-Asturian.jsonl",
+    "eu": "data/external/kaikki.org-dictionary-Basque.jsonl",
+    "el": "data/external/kaikki.org-dictionary-Greek.jsonl"
+}
 
-def sample_in_csv(n: int=SAMPLE_SIZE, split: float=0.5):
-    """Generates gold sample to-be-annotated of n random sentences."""
-    if not os.path.exists(INPUT_FILE):
-        print("(!) > Error: cleaned mined sentences file not found")
+PATH_COGNET = "data/external/cognet.tsv"
+PATH_UNIMORPH = "data/external/unimorph_eus.tsv"
+PATH_CONLOAN = "data/external/conloan_ell.tsv"
+
+TARGET_TOTAL = 200
+TARGET_ESTABLISHED = 100
+
+def sample_for_annotation():
+    """Samples data, enriches with etymology/corpus info off of Cognet/Wiktionary, and exports to Label Studio."""
+    print("> Sampling data for annotation...")
+    sampled_data = _sample_sentences()
+    
+    if not sampled_data:
         return
 
-    print(f"> Loading data from {INPUT_FILE}...")
+    print("> Enriching with etymological data...")
+    enriched_data = _add_etymology_data(sampled_data)
+
+    print("> Checking cognates...")
+    validated_data = _validate_corpus(enriched_data)
+
+    print("> Exporting to label studio...")
+    _export_to_label_studio(validated_data)
+
+
+def _sample_sentences(N=TARGET_TOTAL, E=TARGET_ESTABLISHED):
+    """Generates a sample of max N sentences per lang (scaling synthetic if established loans are not enough)."""
+    if not os.path.exists(INPUT_FILE):
+        print(f"(!) > Error: Cleaned mined sentences file not found at {INPUT_FILE}")
+        return []
+
     data = []
     with open(INPUT_FILE, 'r', encoding='utf-8') as f:
         for line in f:
@@ -38,7 +62,6 @@ def sample_in_csv(n: int=SAMPLE_SIZE, split: float=0.5):
 
     df = pd.DataFrame(data)
     final_samples = []
-    target_per_group = n * split  # fifty fifty
 
     for lang in ['ast', 'eu', 'el']:
         print(f"\nProcessing [{lang}]...")
@@ -48,125 +71,134 @@ def sample_in_csv(n: int=SAMPLE_SIZE, split: float=0.5):
             print(f"(!) > Warning: No lexical borrowing data found for {lang}")
             continue
 
-        # ** WIKTIONARY ** established borrowings
         mask_wikt = subset['type'].str.contains('wiktionary', case=False, na=False)
-        pool_wikt = subset[mask_wikt].copy()
-        # ** RAW/NEW ** synthetic borrowings
-        pool_syn = subset[~mask_wikt].copy()
+        wiktionary = subset[mask_wikt].drop_duplicates(subset=['term'])
+        synthetic = subset[~mask_wikt].drop_duplicates(subset=['term'])
 
-        wiktionary = pool_wikt.sample(frac=1, random_state=42).drop_duplicates(subset=['term'])
-        synthetic = pool_syn.sample(frac=1, random_state=42).drop_duplicates(subset=['term'])
+        # must ensure the target total per lang
+        n_wikt_actual = min(E, len(wiktionary))
+        n_syn_target = N - n_wikt_actual
+        n_syn_actual = min(n_syn_target, len(synthetic))
 
-        # sample with the same seed        
-        n_wikt = int(min(target_per_group, len(wiktionary)))
-        sample_wikt = wiktionary.sample(n=n_wikt, random_state=42).copy()
+        sample_wikt = wiktionary.sample(n=n_wikt_actual, random_state=42).copy()
         sample_wikt['category'] = 'established'
-        n_syn = int(min(target_per_group, len(synthetic)))
-        sample_syn = synthetic.sample(n=n_syn, random_state=42).copy()
-        sample_syn['category'] = 'new'
+        
+        sample_syn = synthetic.sample(n=n_syn_actual, random_state=42).copy()
+        sample_syn['category'] = 'synthetic'
 
         final_samples.extend((sample_wikt, sample_syn))
-        print(f"    > Wiktionary (Established LWs): Found {n_wikt} unique terms")
-        print(f"    > Synthetic  (New LWs): Found {n_syn} unique terms")
-
-        if n_syn < target_per_group:
-            print(f">> (!) Only found {n_syn} synthetic terms for {lang}, so sample includes all of them")
+        print(f"    > Established LWs sampled: {n_wikt_actual}")
+        print(f"    > Synthetic LWs sampled:   {n_syn_actual}")
+        print(f"    > Total for {lang}:        {n_wikt_actual + n_syn_actual}")
 
     if not final_samples:
-        print("(!) > Warning: no samples generated")
-        return
+        return []
 
+    # df > jsonl structure for LS
     df_sample = pd.concat(final_samples)
-
-    df_sample['IS_VALID_LOAN'] = ''
-    df_sample['OTHER_LOANS'] = ''
-    df_sample['NOTES'] = ''
-    df_sample = df_sample[cols]
-
-    os.makedirs(OUTPUT_DIR, exist_ok=True)
-    df_sample.to_csv(OUTPUT_FILE_CSV, index=False, sep=';', encoding='utf-8-sig')
-
-    print(f"\n>>> Split gold standard sample saved to: {OUTPUT_FILE_CSV}")
-    print(f">>> Total rows: {len(df_sample)}")
-
-def sample_in_json(csv_path: str = OUTPUT_FILE_CSV, json_path: str = OUTPUT_FILE_JSON, version: str = "v1"):
-    # sourcery skip: low-code-quality
-    """Converts an already-annotated CSV sample into a structured JSON format."""
-    try:
-        print(f"> Loading annotations CSV from {csv_path}...")
-        df = pd.read_excel(csv_path, sheet_name=f"Annotations ({version})")
-    except Exception as e:
-        print(f"(!) > Error: Annotations CSV file not found or could not be read: {e}")
-        return
-    json_data = []
-
-    for idx, row in df.iterrows():
-        if pd.isna(row['sentence']): continue
-        # main mined term off wikipedia context
-        # 'is_valid': 0 (incorrect, proper nouns) or 1 (correct, vlaid loan)
-        main_loan = {
-            "term": str(row['term']),
-            "role": "main",
-            "is_valid": (
-                row['IS_VALID_LOAN'] == 1.0
-                if pd.notna(row['IS_VALID_LOAN'])
-                else False
-            ),
-            "category": (
-                str(row['category']) if pd.notna(row['category']) else None
-            ),
-            "type": str(row['type']) if pd.notna(row['type']) else None,
-            "notes": str(row['NOTES']) if pd.notna(row['NOTES']) else "",
-        }
-
-        # substructure off main mined term
-        loans_list = [main_loan]
-
-        # other loans for mined sentence
-        if pd.notna(row['OTHER_LOANS']):
-            others = str(row['OTHER_LOANS']).split(',')
-            for term in others:
-                if term_clean := term.strip():
-                    # quick check for potential NEs (uppercase: iPad, App Store)
-                    is_NE = term_clean[0].isupper()
-
-                    loans_list.append({
-                        "term": term_clean,
-                        "role": "secondary",
-                        "is_valid": not is_NE, 
-                        "category": None,
-                        "type": "manual_annotation",
-                        "notes": "NE (adversarial)" if is_NE else "in-context loan (manual annotation)"
-                    })
-        # sentence object containing these mined terms
+    structured_data = []
+    
+    for idx, row in df_sample.iterrows():
         entry = {
             "id": idx,
             "lang": row['lang'],
             "sentence": row['sentence'],
-            "source": str(row['source_page']) if pd.notna(row['source_page']) else None,
-            "loans": loans_list
+            "source": str(row.get('source_page', '')),
+            "loans": [{
+                "term": str(row['term']),
+                "role": "main",
+                "category": str(row['category']),
+                "type": str(row.get('type', '')),
+                "notes": ""
+            }]
         }
-        json_data.append(entry)
+        structured_data.append(entry)
 
-    with open(json_path, 'w', encoding='utf-8') as f:
-        json.dump(json_data, f, indent=4, ensure_ascii=False)
-    print(f">>> Annotations converted to JSON format and saved to: {json_path}")
+    return structured_data
 
 
-def sample_in_labelstudio(input_path: str = OUTPUT_FILE_JSON, output_path: str = OUTPUT_FILE_LABEL):
-    # sourcery skip: low-code-quality
-    """Converts an already-annotated JSON sample into a structured LabelStudio format."""
-    try:
-        print(f"> Loading annotated JSON from {input_path} for Label Studio import...")
-        with open(input_path, 'r', encoding='utf-8') as f:
-            data = json.load(f)
-    except Exception as e:
-        print(f"(!) > Error: Annotated JSON file not found or could not be read: {e}")
-        return
+def _add_etymology_data(data):
+    """Enriches data with Wiktextract etymology."""
+    term_map = {}
+    for entry in data:
+        for loan in entry['loans']:
+            t = loan['term']
+            if t not in term_map: term_map[t] = []
+            term_map[t].append(entry['id'])
 
+    etym_info = {}
+    for lang, filepath in WIKTEXTRACT_FILES.items():
+        if not os.path.exists(filepath): continue
+        
+        with open(filepath, 'rt', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    record = json.loads(line)
+                    word = record.get("word")
+                    if word in term_map:
+                        templates = record.get("etymology_templates", [])
+                        for t in templates:
+                            name = t.get("name", "").lower()
+                            if "bor" in name or "loan" in name or "der" in name or "inh" in name:
+                                etym_info[word] = {
+                                    "found": True,
+                                    "source_lang": t.get("args", {}).get("2", "unknown")
+                                }
+                                break
+                except Exception as e: continue
+
+    for entry in data:
+        for loan in entry['loans']:
+            loan['etymology'] = etym_info.get(loan['term'], {"found": False})
+            
+    return data
+
+
+def _validate_corpus(data):
+    """Validates terms against CogNet, Unimorph, and ConLoan."""
+    sources = {'ast_cognates': set(), 'eu_forms': set(), 'el_loans': set()}
+    
+    # > CogNet (Asturian cognates)
+    if os.path.exists(PATH_COGNET):
+        with open(PATH_COGNET, 'r', encoding='utf-8') as f:
+            for line in f:
+                parts = line.strip().split('\t')
+                if len(parts) >= 5 and parts[1] == 'ast' and parts[3] in ['spa', 'lat', 'xib']:
+                    sources['ast_cognates'].add(parts[2].lower())
+                    
+    # > Unimorph (Basque morphological forms)
+    if os.path.exists(PATH_UNIMORPH):
+        with open(PATH_UNIMORPH, 'r', encoding='utf-8') as f:
+            for line in f:
+                parts = line.strip().split('\t')
+                if len(parts) >= 2:
+                    sources['eu_forms'].add(parts[1].lower())
+
+    # > ConLoan (Greek historical loans)
+    if os.path.exists(PATH_CONLOAN):
+        with open(PATH_CONLOAN, 'r', encoding='utf-8') as f:
+            for line in f:
+                parts = line.strip().split('\t')
+                if len(parts) >= 1:
+                    sources['el_loans'].add(parts[0].lower())
+
+    # Attach flags
+    for entry in data:
+        lang = entry['lang']
+        for loan in entry['loans']:
+            term_lower = loan['term'].lower()
+            
+            loan['is_cognate'] = (lang == 'ast' and term_lower in sources['ast_cognates'])
+            loan['is_integrated'] = (lang == 'eu' and term_lower in sources['eu_forms'])
+            loan['is_historical'] = (lang == 'el' and term_lower in sources['el_loans'])
+
+    return data
+
+def _export_to_label_studio(data):
+    """Formats the enriched data into Label Studio JSON with pre-populated predictions for annotation."""
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
     ls_tasks = []
 
-    # ** import my annotations to label studio to make my life easier **
     for entry in data:
         text = entry['sentence']
         task = {
@@ -175,46 +207,42 @@ def sample_in_labelstudio(input_path: str = OUTPUT_FILE_JSON, output_path: str =
                 "lang": entry['lang'],
                 "source": entry.get('source', '')
             },
-            "predictions": [{"model_version": "v1_import", "result": []}]
+            "predictions": [{"model_version": "final_tagset", "result": []}]
         }
 
         for loan in entry['loans']:
             term = loan['term']
             start = text.find(term)
+            if start == -1: continue
 
-            if start == -1: 
-                continue
-
-            # ** INVALID LOANS ** (adversarial examples: proper nouns/NEs, false positives)
-            if not loan.get('is_valid', True):
-                if 'uppercase' in str(loan.get('notes', '')).lower() or loan['term'][0].isupper():
-                    label = "Invalid_NE"
-                else:
-                    label = "Invalid_FalsePositive"
-
-            elif loan.get('etymology', {}).get('source_lang') in ['es', 'lat']:
-                label = "Romance_Cognate"
-
-            elif 'raw' in str(loan.get('type', '')).lower() or 'cs_latin' in str(loan.get('type', '')).lower():
-                label = "Raw_Latin_Script" if entry['lang'] == 'el' else "Raw_English"
-            else:
-                type_str = str(loan.get('type', '')).lower()
-                notes = str(loan.get('notes', '')).lower()
-                
-                if 'light_greek' in type_str:
-                    label = "Adapted_LightVerb_Translit" # kanei klik
-                elif 'light_latin' in type_str in type_str or ('light_construction' in type_str and entry['lang'] == 'ast'): # facer click, kanei click
-                    label = "Adapted_LightVerb_Latin" # kanei click
-                elif 'light_construction' in type_str and entry['lang'] == 'eus': # klik egin
-                    label = "Adapted_LightVerb_Phono" 
-
-                elif 'transliteration' in notes or entry['lang'] == 'el' and 'noun_transliterated' in type_str:
-                    label = "Adapted_Translit" # transliteration adaptation
-                elif 'phonological' in notes:
-                    label = "Adapted_Phono"   # letter changes
-                else:
-                    label = "Adapted_Morph"   # default
+            type_str = str(loan.get('type', '')).lower()
+            notes = str(loan.get('notes', '')).lower()
+            lang = entry['lang']
             
+            label = "Raw"
+
+            # established or cognates
+            if loan.get('is_cognate') or loan.get('etymology', {}).get('source_lang') in ['es', 'lat', 'fr'] or loan.get('is_historical'):
+                label = "Internationalism_Cognate"
+            
+            # light verbs
+            elif 'light_greek' in type_str:
+                label = "LightVerb_Translit"
+            elif 'light_latin' in type_str or ('light_construction' in type_str and lang == 'ast'):
+                label = "LightVerb_Raw"
+            elif 'light_construction' in type_str and lang == 'eu':
+                label = "LightVerb_Adapted"
+            
+            # morphology and spelling integration
+            elif 'transliteration' in notes or (lang == 'el' and 'noun_transliterated' in type_str):
+                label = "Adapted_Translit"
+            elif 'phonological' in notes or 'morph' in type_str or 'integrated' in type_str:
+                label = "Adapted_Morph"
+            
+            # code switch
+            elif 'raw' in type_str or 'cs_latin' in type_str:
+                label = "Raw"
+
             region = {
                 "from_name": "label",
                 "to_name": "text",
@@ -230,6 +258,7 @@ def sample_in_labelstudio(input_path: str = OUTPUT_FILE_JSON, output_path: str =
 
         ls_tasks.append(task)
 
-    with open(output_path, 'w', encoding='utf-8') as f:
+    with open(OUTPUT_FILE_LABEL, 'w', encoding='utf-8') as f:
         json.dump(ls_tasks, f, indent=4, ensure_ascii=False)
-    print(f">>> Exported {len(ls_tasks)} tasks to {output_path} for Label Studio labeling")
+    
+    print(f">>> Exported {len(ls_tasks)} tasks to {OUTPUT_FILE_LABEL}")
