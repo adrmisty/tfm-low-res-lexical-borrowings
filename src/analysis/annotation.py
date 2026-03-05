@@ -5,6 +5,8 @@
 # adriana r.f. (@adrmisty)
 # feb-2026
 
+from collections import Counter, defaultdict
+
 import pandas as pd
 import json
 import os
@@ -23,6 +25,8 @@ WIKTEXTRACT_FILES = {
 PATH_COGNET = "data/external/cognet.tsv"
 PATH_UNIMORPH = "data/external/unimorph_eus.tsv"
 PATH_CONLOAN = "data/external/conloan_ell.tsv"
+
+ANNOTATIONS_LS = os.path.join(OUTPUT_DIR, "test_gold_annotations.json")
 
 TARGET_TOTAL = 200
 TARGET_ESTABLISHED = 100
@@ -44,6 +48,55 @@ def sample_for_annotation():
     print("> Exporting to label studio...")
     _export_to_label_studio(validated_data)
 
+def get_annotation_stats():
+    """Calculates and prints annotation statistics from the Label Studio JSON."""
+    with open(ANNOTATIONS_LS, "r", encoding="utf-8") as f:
+        content = f.read().strip()
+
+    try:
+        data = json.loads(content)
+    except json.JSONDecodeError:
+        content = "[" + content.replace("}\n{", "},\n{").replace("}\r\n{", "},\n{").strip("[]") + "]"
+        try:
+            data = json.loads(content)
+            print(data)
+        except json.JSONDecodeError:
+            data = [json.loads(line) for line in content.splitlines() if line.strip()]
+
+    stats = defaultdict(Counter)
+
+    for entry in data:
+        lang = entry.get("lang", "unknown")
+        # label studio native format or json-min
+        
+        if "annotations" in entry:
+            for a in entry["annotations"]:
+                if a.get("was_cancelled"): continue
+                for result in a.get("result", []):
+                    for label in result.get("value", {}).get("labels", []):
+                        _label(stats, lang, label)
+                        
+        elif "label" in entry:
+            for label_block in entry["label"]:
+                for label in label_block.get("labels", []):
+                    _label(stats, lang, label)
+                    
+    print("=== GOLD STANDARD test set annotations ===")
+    for lang, counts in stats.items():
+        print(f"\nLang: [{lang.upper()}]")
+        total_tags = sum(counts.values())
+        for tag, count in sorted(counts.items(), key=lambda x: x[1], reverse=True):
+            print(f"  - {tag}: {count}")
+        print(f"  > Total annotations: {total_tags}")
+
+def _label(stats, lang, label):
+    """Renaming label studio labels to match the final tagset."""
+    mapping = {
+        "Internationalism_Cognate": "Internationalism",
+        "LightVerb_Translit": "LightVerb_Adapted",
+        "Adapted_Spelling": "Adapted_Orthogra"
+    }
+    stats[lang][mapping.get(label, label)] += 1
 
 def _sample_sentences(N=TARGET_TOTAL, E=TARGET_ESTABLISHED):
     """Generates a sample of max N sentences per lang (scaling synthetic if established loans are not enough)."""
