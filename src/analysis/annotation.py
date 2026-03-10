@@ -9,6 +9,7 @@ from collections import Counter, defaultdict
 
 import pandas as pd
 import json
+import uuid
 import os
 
 # --- PATH CONFIGURATION ---
@@ -22,11 +23,24 @@ WIKTEXTRACT_FILES = {
     "el": "data/external/kaikki.org-dictionary-Greek.jsonl"
 }
 
+LABEL_MAP = {
+    # label-studio format fixes
+    "Internationalism_Cognate": "Internationalism",
+    "Adapted_Spelling": "Adapted_Orthogra",
+    
+    # hierarchy (2nd level) fixes
+    "LightVerb_Translit": "LightVerb_Integrated",
+    "LightVerb_Adapted": "LightVerb_Integrated",
+    "LightVerb_Raw": "LightVerb_Unintegrated"
+}
+
+
 PATH_COGNET = "data/external/cognet.tsv"
 PATH_UNIMORPH = "data/external/unimorph_eus.tsv"
 PATH_CONLOAN = "data/external/conloan_ell.tsv"
 
 ANNOTATIONS_LS = os.path.join(OUTPUT_DIR, "test_gold_annotations.json")
+ANNOTATIONS_FLS = os.path.join(OUTPUT_DIR, "fixed-test_gold_annotations.json")
 
 TARGET_TOTAL = 200
 TARGET_ESTABLISHED = 100
@@ -59,16 +73,16 @@ def get_annotation_stats():
         content = "[" + content.replace("}\n{", "},\n{").replace("}\r\n{", "},\n{").strip("[]") + "]"
         try:
             data = json.loads(content)
-            print(data)
         except json.JSONDecodeError:
             data = [json.loads(line) for line in content.splitlines() if line.strip()]
 
     stats = defaultdict(Counter)
 
     for entry in data:
-        lang = entry.get("lang", "unknown")
-        # label studio native format or json-min
+        # after format fix the language should be in the root 'data' field
+        lang = entry.get("data", {}).get("lang") or entry.get("lang", "unknown")
         
+        # label studio native format or json-min
         if "annotations" in entry:
             for a in entry["annotations"]:
                 if a.get("was_cancelled"): continue
@@ -82,8 +96,8 @@ def get_annotation_stats():
                     _label(stats, lang, label)
                     
     print("=== GOLD STANDARD test set annotations ===")
-    for lang, counts in stats.items():
-        print(f"\nLang: [{lang.upper()}]")
+    for lang_key, counts in stats.items():
+        print(f"\nLang: [{lang_key.upper()}]")
         total_tags = sum(counts.values())
         for tag, count in sorted(counts.items(), key=lambda x: x[1], reverse=True):
             print(f"  - {tag}: {count}")
@@ -91,12 +105,7 @@ def get_annotation_stats():
 
 def _label(stats, lang, label):
     """Renaming label studio labels to match the final tagset."""
-    mapping = {
-        "Internationalism_Cognate": "Internationalism",
-        "LightVerb_Translit": "LightVerb_Adapted",
-        "Adapted_Spelling": "Adapted_Orthogra"
-    }
-    stats[lang][mapping.get(label, label)] += 1
+    stats[lang][LABEL_MAP.get(label, label)] += 1
 
 def _sample_sentences(N=TARGET_TOTAL, E=TARGET_ESTABLISHED):
     """Generates a sample of max N sentences per lang (scaling synthetic if established loans are not enough)."""
@@ -315,3 +324,52 @@ def _export_to_label_studio(data):
         json.dump(ls_tasks, f, indent=4, ensure_ascii=False)
     
     print(f">>> Exported {len(ls_tasks)} tasks to {OUTPUT_FILE_LABEL}")
+
+
+def fix_labels(input_path: str = ANNOTATIONS_LS, output_path: str = ANNOTATIONS_FLS):
+    """Fixes label names in the Label Studio annotations to match the final tagset so that they can be (re-)imported."""
+    if not os.path.exists(input_path):
+        print(f"(!) Error: Could not find the input file at:\n{input_path}")
+        return
+
+    with open(input_path, 'r', encoding='utf-8') as f:
+        data = json.load(f)
+
+    formatted_data = []
+
+    for item in data:
+        new_item = {
+            # Removed the root 'id' to prevent database collisions during import
+            "data": {
+                "text": item.get("text", ""),
+                "lang": item.get("lang", ""),
+                "source": item.get("source", "")
+            },
+            "annotations": [{"result": []}]
+        }
+
+        if "label" in item:
+            for span in item["label"]:
+                old_labels = span.get("labels", [])
+                new_labels = [LABEL_MAP.get(l, l) for l in old_labels]
+
+                region = {
+                    "id": str(uuid.uuid4())[:8], # <-- THE MAGIC FIX: Unique UI ID
+                    "from_name": "label",  
+                    "to_name": "text",     
+                    "type": "labels",
+                    "value": {
+                        "start": span["start"],
+                        "end": span["end"],
+                        "text": span["text"],
+                        "labels": new_labels
+                    }
+                }
+                new_item["annotations"][0]["result"].append(region)
+
+        formatted_data.append(new_item)
+
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(formatted_data, f, indent=2, ensure_ascii=False)
+        
+    print(f">>> Processed {len(formatted_data)} tasks with their unique IDs and labels, saved to {output_path}")

@@ -22,7 +22,7 @@ from src.mining.miner import WikipediaMiner
 from src.mining.cleaner import MiningCleaner
 from src.analysis.stats import BorrowingStats
 from src.analysis.plot import BorrowingPlots
-from src.analysis.annotation import sample_for_annotation, get_annotation_stats
+from src.analysis.annotation import sample_for_annotation, get_annotation_stats, fix_labels
 
 # --- CONFIGURATION PATHS ---
 DATA_DIR = "data"
@@ -196,3 +196,4 @@ if __name__ == "__main__":
     if args.step in ["sample", "all"]:
         #sample_for_annotation()
         get_annotation_stats()
+        #fix_labels()

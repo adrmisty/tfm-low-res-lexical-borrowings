@@ -1,23 +1,23 @@
 === GOLD STANDARD test set annotations ===
 
 Lang: [AST]
-  - Internationalism: 142
+  - Internationalism: 142    
   - Invalid_NE: 99
   - Invalid_FalsePositive: 56
   - Raw: 47
-  - Adapted_Orthogra: 16
-  - Adapted_Morph: 10
-  - LightVerb_Raw: 1
-  > Total annotations: 371
+  - Adapted_Orthogra: 16     
+  - Adapted_Morph: 10        
+  - LightVerb_Unintegrated: 1
+  > Total annotations: 371   
 
 Lang: [EU]
-  - Internationalism: 507
+  - Internationalism: 507    
   - Invalid_NE: 76
   - Invalid_FalsePositive: 34
   - Raw: 32
   - Adapted_Morph: 30
   - Adapted_Orthogra: 12
-  - LightVerb_Adapted: 2
+  - LightVerb_Integrated: 2
   > Total annotations: 693
 
 Lang: [EL]
@@ -26,7 +26,7 @@ Lang: [EL]
   - Invalid_FalsePositive: 58
   - Adapted_Translit: 41
   - Raw: 33
-  - LightVerb_Raw: 10
-  - LightVerb_Adapted: 6
+  - LightVerb_Unintegrated: 10
+  - LightVerb_Integrated: 6
   - Adapted_Morph: 1
   > Total annotations: 443
