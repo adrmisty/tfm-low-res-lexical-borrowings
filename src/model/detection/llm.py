@@ -9,7 +9,7 @@ import torch
 import logging
 from typing import List, Dict, Any, Optional
 from transformers import AutoModelForCausalLM, AutoTokenizer
-from prompt import get_system_prompt, get_fewshot_prompt, load_gold
+from .prompt import get_system_prompt, get_fewshot_prompt, load_gold
 
 logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 
@@ -23,6 +23,7 @@ class BorrowingLLM:
         self._load_model()
 
     def get_borrowings(self, test_data: List[Dict[str, Any]], language: str, examples: Optional[List] = None):
+        """Extracts borrowings from test and classifies them based on a built prompt."""
         system_prompt = get_system_prompt(language)
         results = []
         
@@ -32,11 +33,11 @@ class BorrowingLLM:
             results.append({
                 "id": case.get("id"),
                 "lang": language,
+                "prompt": user_prompt,
                 "prediction": prediction
             })
             
         return results
-
     # --- response generation -------------------------------------------------------------------------
 
     def _load_model(self):
@@ -66,5 +67,7 @@ class BorrowingLLM:
                 pad_token_id=self.tokenizer.eos_token_id
             )
         
-        out_text = self.tokenizer.decode(outputs[inputs.input_ids.shape:], skip_special_tokens=True)
+        out_text = self.tokenizer.decode(
+            outputs[0][inputs.input_ids.shape[1]:],
+            skip_special_tokens=True)        
         return prefill + out_text

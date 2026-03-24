@@ -13,9 +13,6 @@ from src.model.detection.baseline import run_fewzeroshot_baseline
 logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 
 def main():
-    script_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(script_dir)
-    gold_standard_path = os.path.join(project_root, "data", "annotation", "final", "test_gold_annotations.json")
     
     parser = argparse.ArgumentParser(description="Run lexical borrowing baselines")
     parser.add_argument(
@@ -32,13 +29,10 @@ def main():
     )
     args = parser.parse_args()
 
-    if not os.path.exists(gold_standard_path):
-        logging.error(f"> (!) Gold standard file not found at: {gold_standard_path}")
-        return
     run_fewzeroshot_baseline(
         langs=args.langs,
         model_id=args.model,
-        gt=gold_standard_path
+        gt="data/annotation/test_gold_annotations.json"
     )
 
 if __name__ == "__main__":

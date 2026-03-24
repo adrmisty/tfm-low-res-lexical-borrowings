@@ -5,9 +5,11 @@
 # adriana r.f. (@adrmisty)
 # mar-2026
 
-from llm import BorrowingLLM
-from eval import eval_borrowings
-
+from .llm import BorrowingLLM
+from .eval import eval_borrowings
+import os
+from datetime import datetime
+import json
 
 def run_fewzeroshot_baseline(langs: list[str], model_id="Qwen/Qwen2.5-7B-Instruct", gt="data/annotation/final/test_gold_annotations.json"):
     """Few-shot/Zero-shot prompting on LLM for (step 1) LEXICAL BORROWING IDENTIFICATION."""
@@ -39,4 +41,17 @@ def run_fewzeroshot_baseline(langs: list[str], model_id="Qwen/Qwen2.5-7B-Instruc
     print("\n" + "="*50)
     print("ZERO-SHOT/FEW-SHOT EVALUATION RESULTS")
     print("="*50)
-    eval_borrowings(all_predictions, all_ground_truth)
+    
+    out_dir = "data/model"
+    os.makedirs(out_dir, exist_ok=True)
+    
+    clean_model_name = model_id.replace("/", "-")
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    pred_path = os.path.join(out_dir, f"predictions_{clean_model_name}_{timestamp}.json")
+    with open(pred_path, "w", encoding="utf-8") as f:
+        json.dump(all_predictions, f, indent=4, ensure_ascii=False)
+    print(f">>> Predictions saved to: {pred_path}")
+    
+    eval_path = os.path.join(out_dir, f"eval_metrics_{clean_model_name}_{timestamp}.txt")
+    eval_borrowings(all_predictions, all_ground_truth, out_file=eval_path)
