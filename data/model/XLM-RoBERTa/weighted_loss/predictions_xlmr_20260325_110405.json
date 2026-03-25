@@ -1,0 +1,2247 @@
+[
+    {
+        "id": "-1354511055631226896",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Tipos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"clasificación\", \"label\": \"Adapted_Morph\"}, {\"span\": \"nubes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"nubes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"coles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7114667148607724134",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"ntes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mosca\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "5153818473186534766",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"escusá\", \"label\": \"Adapted_Morph\"}, {\"span\": \"zá\", \"label\": \"Adapted_Morph\"}, {\"span\": \"recoyer\", \"label\": \"Raw\"}, {\"span\": \"sacupar\", \"label\": \"Adapted_Morph\"}, {\"span\": \"escrementos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"to\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ores\", \"label\": \"Adapted_Morph\"}, {\"span\": \"espacios\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6744723542452276499",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"ros\", \"label\": \"Adapted_Morph\"}, {\"span\": \"los drames\", \"label\": \"Adapted_Morph\"}, {\"span\": \"col box\", \"label\": \"Adapted_Morph\"}, {\"span\": \"u\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3261692377463693095",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Post\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6401353260414671794",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"update\", \"label\": \"Raw\"}, {\"span\": \"orders\", \"label\": \"Raw\"}, {\"span\": \"families\", \"label\": \"Raw\"}, {\"span\": \"plants\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "1542616033877438777",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Plants\", \"label\": \"Raw\"}, {\"span\": \"updates\", \"label\": \"Raw\"}, {\"span\": \"web\", \"label\": \"Raw\"}, {\"span\": \"archive\", \"label\": \"Raw\"}, {\"span\": \"web\", \"label\": \"Raw\"}, {\"span\": \"browse\", \"label\": \"Raw\"}, {\"span\": \"asp\", \"label\": \"Raw\"}, {\"span\": \"lang\", \"label\": \"Raw\"}, {\"span\": \"action\", \"label\": \"Raw\"}, {\"span\": \"showfile\", \"label\": \"Raw\"}, {\"span\": \"fileid\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "7993195342154901241",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"nome\", \"label\": \"Adapted_Morph\"}, {\"span\": \"diar\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ir\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ali\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5570920940481253568",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"echar zucre\", \"label\": \"Adapted_Morph\"}, {\"span\": \"íu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"causa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"que\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ures\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "8352257777482935290",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"platos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"trés\", \"label\": \"Adapted_Morph\"}, {\"span\": \"rniciones\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fondu\", \"label\": \"Raw\"}, {\"span\": \"pescáu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fondu\", \"label\": \"Raw\"}, {\"span\": \"pescáu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"verdures\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4023270619269776951",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Chat\", \"label\": \"Raw\"}, {\"span\": \"cí\", \"label\": \"Adapted_Morph\"}, {\"span\": \"Chat\", \"label\": \"Raw\"}, {\"span\": \"xchat\", \"label\": \"Raw\"}, {\"span\": \"s\", \"label\": \"Adapted_Morph\"}, {\"span\": \"clientes open source\", \"label\": \"Raw\"}, {\"span\": \"sistemes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"like\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "2165086274199679071",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"es causaes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"sexos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"stici\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2021190933921891098",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"limitar\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6117933986962645923",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"áu\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3816933156217979124",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"software\", \"label\": \"Raw\"}, {\"span\": \"animales\", \"label\": \"Adapted_Morph\"}, {\"span\": \"microbios\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3320320796931881345",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"sos\", \"label\": \"Raw\"}, {\"span\": \"logs\", \"label\": \"Raw\"}, {\"span\": \"movimientos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"elimina\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ingresa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"partida\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3709613598985095962",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"plomu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"plumbum\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "5318043794824505172",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"tuits\", \"label\": \"Raw\"}, {\"span\": \"ec\", \"label\": \"Adapted_Morph\"}, {\"span\": \"primer\", \"label\": \"Raw\"}, {\"span\": \"realice\", \"label\": \"Adapted_Morph\"}, {\"span\": \"busca\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mensaxes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-1501194835922019433",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"c\", \"label\": \"Raw\"}, {\"span\": \"album\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-9094221640723406113",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"cerveza\", \"label\": \"Adapted_Morph\"}, {\"span\": \"granos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"cereales\", \"label\": \"Adapted_Morph\"}, {\"span\": \"áu\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-950420340276493349",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"páxina\", \"label\": \"Adapted_Morph\"}, {\"span\": \"programa\", \"label\": \"Raw\"}, {\"span\": \"coles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"formes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"interface\", \"label\": \"Raw\"}, {\"span\": \"interface\", \"label\": \"Raw\"}, {\"span\": \"interface\", \"label\": \"Raw\"}, {\"span\": \"interface\", \"label\": \"Raw\"}, {\"span\": \"0.1\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-3858445894682824643",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"funciones\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5550654075766315268",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Hackes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "269555665668448922",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"mesa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dos xugadores nomáu tables reales\", \"label\": \"Adapted_Morph\"}, {\"span\": \"chaquete\", \"label\": \"Adapted_Morph\"}, {\"span\": \"introduc\", \"label\": \"Adapted_Morph\"}, {\"span\": \"backgammon\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "3119097745327129521",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"pista\", \"label\": \"Adapted_Morph\"}, {\"span\": \"met\", \"label\": \"Adapted_Morph\"}, {\"span\": \"cable\", \"label\": \"Adapted_Morph\"}, {\"span\": \"los\", \"label\": \"Adapted_Morph\"}, {\"span\": \"afitaos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"postes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pas\", \"label\": \"Adapted_Morph\"}, {\"span\": \"postes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3475803705792601119",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Tagetes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "260459499788614157",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"stic\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2664803917886350286",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"interfaces\", \"label\": \"Adapted_Morph\"}, {\"span\": \"consulta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"áu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"interfaz\", \"label\": \"Adapted_Morph\"}, {\"span\": \"resultaos globales\", \"label\": \"Adapted_Morph\"}, {\"span\": \"interpretaciones\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tiques\", \"label\": \"Adapted_Morph\"}, {\"span\": \"interfaz\", \"label\": \"Adapted_Morph\"}, {\"span\": \"resultaos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"os\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ferencias\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tiques\", \"label\": \"Adapted_Morph\"}, {\"span\": \"correutes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-533928525089539866",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"de\", \"label\": \"Adapted_Morph\"}, {\"span\": \"edificios\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3473669273715650592",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"ETF language tags\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "5864429016207343108",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Link\", \"label\": \"Raw\"}, {\"span\": \"Nutt\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "2992923573086433636",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "-2227681832733746158",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"pexe\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2615252947762137964",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Forward genetics\", \"label\": \"Raw\"}, {\"span\": \"primeres\", \"label\": \"Adapted_Morph\"}, {\"span\": \"istes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3211717815190575371",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "2114147079738929687",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"descri\", \"label\": \"Adapted_Morph\"}, {\"span\": \"exemplu\", \"label\": \"Raw\"}, {\"span\": \"xuntar datos\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6448350751788890982",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Disciplines\", \"label\": \"Adapted_Morph\"}, {\"span\": \"cies\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fechos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ción\", \"label\": \"Adapted_Morph\"}, {\"span\": \"consulte\", \"label\": \"Adapted_Morph\"}, {\"span\": \"plantilles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"encia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"los autores\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3430288997304818848",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"armes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gun\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-3127756653543053299",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"vatiu\", \"label\": \"Raw\"}, {\"span\": \"watt\", \"label\": \"Raw\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "1829911550031874582",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"servicios\", \"label\": \"Adapted_Morph\"}, {\"span\": \"Web\", \"label\": \"Raw\"}, {\"span\": \"acce\", \"label\": \"Adapted_Morph\"}, {\"span\": \"quines\", \"label\": \"Adapted_Morph\"}, {\"span\": \"SH\", \"label\": \"Raw\"}, {\"span\": \"net\", \"label\": \"Raw\"}, {\"span\": \"ncies\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ficheros\", \"label\": \"Adapted_Morph\"}, {\"span\": \"P\", \"label\": \"Raw\"}, {\"span\": \"boletines electrónicos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"news\", \"label\": \"Raw\"}, {\"span\": \"grupos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"charres\", \"label\": \"Adapted_Morph\"}, {\"span\": \"chats\", \"label\": \"Raw\"}, {\"span\": \"Messenger\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-7991773255159519245",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Ficheru\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ridaes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"File\", \"label\": \"Raw\"}, {\"span\": \"utu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"teques\", \"label\": \"Adapted_Morph\"}, {\"span\": \"operáu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"los ficheros\", \"label\": \"Adapted_Morph\"}, {\"span\": \"virtual\", \"label\": \"Raw\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"teques\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "1981102649435533593",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"carne\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gochu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tocí\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3808350353921633716",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "-2687349118065079465",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"inscripción\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lá\", \"label\": \"Adapted_Morph\"}, {\"span\": \"likes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"interpretáronse\", \"label\": \"Adapted_Morph\"}, {\"span\": \"Likes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6657845370518137764",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"da poles\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5647473414171181005",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"s pueblos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"cargos\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4026357165193154421",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pilotos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"los pilotos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ordenaos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ores\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3279985297384282316",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"cuidáu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"formá\", \"label\": \"Adapted_Morph\"}, {\"span\": \"variable\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "2224436140492613885",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"es\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "622183474877835468",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"mal\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-2098261570165486132",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Softwares químicos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"munchos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"usaos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"químicos computacionales\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2510793581332073181",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Protocolos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"medios\", \"label\": \"Adapted_Morph\"}, {\"span\": \"LC playback Features\", \"label\": \"Raw\"}, {\"span\": \"Input formats\", \"label\": \"Raw\"}, {\"span\": \"Formatos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dores\", \"label\": \"Adapted_Morph\"}, {\"span\": \"LC playback Features\", \"label\": \"Raw\"}, {\"span\": \"Input formats\", \"label\": \"Raw\"}, {\"span\": \"Formatos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"LC playback Features\", \"label\": \"Raw\"}, {\"span\": \"Video formats\", \"label\": \"Raw\"}, {\"span\": \"Formatos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"LC playback Features\", \"label\": \"Raw\"}, {\"span\": \"Audio formats\", \"label\": \"Raw\"}, {\"span\": \"Formatos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"subtítulos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"etiquetes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"Player\", \"label\": \"Raw\"}, {\"span\": \"ncies\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-3787373130926972573",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"complementu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ropa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"cu\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6089300471804297182",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"medline\", \"label\": \"Raw\"}, {\"span\": \"cy\", \"label\": \"Raw\"}, {\"span\": \"article\", \"label\": \"Raw\"}, {\"span\": \"htm\", \"label\": \"Raw\"}, {\"span\": \"asp\", \"label\": \"Raw\"}, {\"span\": \"shock\", \"label\": \"Raw\"}, {\"span\": \"htm\", \"label\": \"Raw\"}, {\"span\": \"htm\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "8383560321039486471",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"visitantes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6579473885453890837",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"bienes culturales\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "1862506857566490555",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"formes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"des\", \"label\": \"Adapted_Morph\"}, {\"span\": \"étique\", \"label\": \"Adapted_Morph\"}, {\"span\": \"is\", \"label\": \"Adapted_Morph\"}, {\"span\": \"formates\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2128113312891339429",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Lleva\", \"label\": \"Adapted_Morph\"}, {\"span\": \"nome\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3928761284648722586",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"usuarios escaniar documentos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"compartir\", \"label\": \"Adapted_Morph\"}, {\"span\": \"semeya\", \"label\": \"Adapted_Morph\"}, {\"span\": \"JPEG\", \"label\": \"Raw\"}, {\"span\": \"PDF\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "5105918326455375681",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Malware\", \"label\": \"Raw\"}, {\"span\": \"drive-by downloads\", \"label\": \"Raw\"}, {\"span\": \"rootkits\", \"label\": \"Raw\"}, {\"span\": \"yanos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"software\", \"label\": \"Raw\"}, {\"span\": \"sos\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-7782078388764657336",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dores\", \"label\": \"Adapted_Morph\"}, {\"span\": \"eses camises\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pantalones\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"medies\", \"label\": \"Adapted_Morph\"}, {\"span\": \"íes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"des botes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6447754912941886729",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"fungos micro\", \"label\": \"Adapted_Morph\"}, {\"span\": \"picos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hidratos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"distintes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ncies\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6327933562642607620",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"estáu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"los\", \"label\": \"Adapted_Morph\"}, {\"span\": \"os\", \"label\": \"Adapted_Morph\"}, {\"span\": \"os\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2622920671584247721",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"supervisor\", \"label\": \"Raw\"}, {\"span\": \"estatu\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "9205196517436356897",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "-2403072513220776739",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"casos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"censu\", \"label\": \"Raw\"}, {\"span\": \"coles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"áu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6212922687961810214",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"llamá\", \"label\": \"Adapted_Morph\"}, {\"span\": \"doctor\", \"label\": \"Raw\"}, {\"span\": \"doctora\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2736359002701785037",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"polos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"reportaxes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"utos\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2282218140864321401",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"menes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5636551302994488274",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"pes produce\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dolor\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-4384623939398733873",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "-6222332089628062507",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"quier\", \"label\": \"Adapted_Morph\"}, {\"span\": \"blanca\", \"label\": \"Adapted_Morph\"}, {\"span\": \"prieta\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-1116954503912375026",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"zona\", \"label\": \"Adapted_Morph\"}, {\"span\": \"res\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bri\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2914113184254186591",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Dimensiones\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pixeles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"píxeles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"activa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"zoom\", \"label\": \"Raw\"}, {\"span\": \"píxeles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"imaxe\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3495158175716743454",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"niveles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"depósitos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"revistes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"libros\", \"label\": \"Adapted_Morph\"}, {\"span\": \"oficines\", \"label\": \"Adapted_Morph\"}, {\"span\": \"teca\", \"label\": \"Adapted_Morph\"}, {\"span\": \"acce\", \"label\": \"Adapted_Morph\"}, {\"span\": \"cúpula\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2761567402360418643",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Nomes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"nome\", \"label\": \"Raw\"}, {\"span\": \"brúnca\", \"label\": \"Adapted_Morph\"}, {\"span\": \"too\", \"label\": \"Raw\"}, {\"span\": \"mon\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-1493700991577041001",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"en\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6968213590585501246",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "7910312365298859607",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"ifying clicks\", \"label\": \"Raw\"}, {\"span\": \"á\", \"label\": \"Adapted_Morph\"}, {\"span\": \"clicks\", \"label\": \"Raw\"}, {\"span\": \"language\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "8296316523392068787",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"PDF\", \"label\": \"Raw\"}, {\"span\": \"Document Format\", \"label\": \"Raw\"}, {\"span\": \"format\", \"label\": \"Raw\"}, {\"span\": \"document\", \"label\": \"Adapted_Morph\"}, {\"span\": \"format\", \"label\": \"Raw\"}, {\"span\": \"u\", \"label\": \"Adapted_Morph\"}, {\"span\": \"documentos dixitales\", \"label\": \"Adapted_Morph\"}, {\"span\": \"formes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"software\", \"label\": \"Raw\"}, {\"span\": \"hardware\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "3244057100101177944",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"xel\", \"label\": \"Raw\"}, {\"span\": \"pixel\", \"label\": \"Raw\"}, {\"span\": \"píxeles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"picture element\", \"label\": \"Raw\"}, {\"span\": \"xe\", \"label\": \"Adapted_Morph\"}, {\"span\": \"color\", \"label\": \"Raw\"}, {\"span\": \"imaxe\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2012354424792265824",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"product\", \"label\": \"Adapted_Morph\"}, {\"span\": \"zá\", \"label\": \"Adapted_Morph\"}, {\"span\": \"izá\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "5199954317101552809",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Resulta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dos individuos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"patrón\", \"label\": \"Adapted_Morph\"}, {\"span\": \"manches\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7389795765900013415",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "592949300239583986",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"tostadora\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tostador\", \"label\": \"Adapted_Morph\"}, {\"span\": \"aparatu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"electro\", \"label\": \"Adapted_Morph\"}, {\"span\": \"icu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"turrar rebanadas\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pan\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "959100344626339813",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"fabricantes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mainframes\", \"label\": \"Raw\"}, {\"span\": \"miniordenadores\", \"label\": \"Adapted_Morph\"}, {\"span\": \"programes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"propietarios\", \"label\": \"Adapted_Morph\"}, {\"span\": \"arquitectures\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ordenadores\", \"label\": \"Adapted_Morph\"}, {\"span\": \"microprocesadores\", \"label\": \"Adapted_Morph\"}, {\"span\": \"iciones conxuntos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"iciones\", \"label\": \"Adapted_Morph\"}, {\"span\": \"com\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bles coles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hardwares\", \"label\": \"Adapted_Morph\"}, {\"span\": \"softwares\", \"label\": \"Adapted_Morph\"}, {\"span\": \"yos\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "5787390685692186301",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"años\", \"label\": \"Adapted_Morph\"}, {\"span\": \"s\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7072333812935303930",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"coche\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ruedes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"áu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"asientos\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2767932218192798359",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "3725680246264890446",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"esta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"nun tuit\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "1123312481106832306",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "3443779235622705341",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"cu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"colos tenedores\", \"label\": \"Adapted_Morph\"}, {\"span\": \"te\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dor\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-9103323134419977162",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"ues chates\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-802252570288250414",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"s\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mientos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"os\", \"label\": \"Adapted_Morph\"}, {\"span\": \"túmulos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ros\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4232835331831140622",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"lles estructures\", \"label\": \"Adapted_Morph\"}, {\"span\": \"subdominios\", \"label\": \"Adapted_Morph\"}, {\"span\": \"nomes\", \"label\": \"Raw\"}, {\"span\": \"escructuras\", \"label\": \"Adapted_Morph\"}, {\"span\": \"domain hacks\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-8201681530695721962",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"gan\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gan\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "8605004356096818335",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"entres\", \"label\": \"Adapted_Morph\"}, {\"span\": \"res\", \"label\": \"Adapted_Morph\"}, {\"span\": \"trolles\", \"label\": \"Adapted_Morph\"}, {\"span\": \"banzaos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"home\", \"label\": \"Raw\"}, {\"span\": \"pasos\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "8484916797748349220",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"estudió\", \"label\": \"Adapted_Morph\"}, {\"span\": \"estructures fixes los mitos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"comproba\", \"label\": \"Adapted_Morph\"}, {\"span\": \"sociedaes estreames dá\", \"label\": \"Adapted_Morph\"}, {\"span\": \"histories asemeyaes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-4824399497097393526",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"western\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-6320380711738226170",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"click\", \"label\": \"Raw\"}, {\"span\": \"n\", \"label\": \"Adapted_Morph\"}, {\"span\": \"Sprachen\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6029058345238733314",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"subsp\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-8987697078811772280",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"sta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"caza\", \"label\": \"Adapted_Morph\"}, {\"span\": \"Trolls\", \"label\": \"Raw\"}, {\"span\": \"s\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-889902297978494306",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"runes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5497205116726886335",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"zalete\", \"label\": \"Adapted_Morph\"}, {\"span\": \"midida\", \"label\": \"Adapted_Morph\"}, {\"span\": \"arteries\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ect\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7389617447413266780",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"pieza\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dimensiones\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "70154429802166419",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"equipu\", \"label\": \"Raw\"}, {\"span\": \"xuegu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"xugadores\", \"label\": \"Adapted_Morph\"}, {\"span\": \"os\", \"label\": \"Adapted_Morph\"}, {\"span\": \"grupos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"forwards\", \"label\": \"Raw\"}, {\"span\": \"ros\", \"label\": \"Adapted_Morph\"}, {\"span\": \"backs\", \"label\": \"Raw\"}, {\"span\": \"tré\", \"label\": \"Adapted_Morph\"}, {\"span\": \"s\", \"label\": \"Raw\"}, {\"span\": \"cuartos\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6189737645798734930",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "3712637621542102645",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"secuestr\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pauta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"delitos\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4993822147091847020",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"es frutes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"frutes son\", \"label\": \"Adapted_Morph\"}, {\"span\": \"cate\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3930945843015180470",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"soporte\", \"label\": \"Raw\"}, {\"span\": \"hardware\", \"label\": \"Raw\"}, {\"span\": \"elementos materiales\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ordenador\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7011180496143490484",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"vos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"costes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3265383496007210409",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"data\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-3872881469423758456",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Utilidaes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"servers\", \"label\": \"Raw\"}, {\"span\": \"modX\", \"label\": \"Raw\"}, {\"span\": \"ministres\", \"label\": \"Adapted_Morph\"}, {\"span\": \"to server\", \"label\": \"Raw\"}, {\"span\": \"servidor\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "3582683226369641219",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"segundos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"4,5 pixels\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-8787386259155201532",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"Fax Fax\", \"label\": \"Raw\"}, {\"span\": \"iación\", \"label\": \"Adapted_Morph\"}, {\"span\": \"cu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"llamáu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"copia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"escaniáu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"xenes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"conectáu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"disposi\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2855112253274271999",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"tractor\", \"label\": \"Raw\"}, {\"span\": \"tirar\", \"label\": \"Adapted_Morph\"}, {\"span\": \"snar\", \"label\": \"Adapted_Morph\"}, {\"span\": \"riar remolques\", \"label\": \"Adapted_Morph\"}, {\"span\": \"embarcaciones\", \"label\": \"Adapted_Morph\"}, {\"span\": \"preseos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"cargues pesaes\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7732635722109208771",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"u\", \"label\": \"Adapted_Morph\"}, {\"span\": \"reset\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "2622958293112658966",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"ación\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6463285785355877117",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"copia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"s sitios\", \"label\": \"Adapted_Morph\"}, {\"span\": \"index\", \"label\": \"Adapted_Morph\"}, {\"span\": \"grabación\", \"label\": \"Adapted_Morph\"}, {\"span\": \"información\", \"label\": \"Adapted_Morph\"}, {\"span\": \"robot\", \"label\": \"Raw\"}, {\"span\": \"txt\", \"label\": \"Raw\"}, {\"span\": \"agent\", \"label\": \"Raw\"}, {\"span\": \"archive\", \"label\": \"Raw\"}, {\"span\": \"API\", \"label\": \"Raw\"}, {\"span\": \"indexado\", \"label\": \"Adapted_Morph\"}, {\"span\": \"captures\", \"label\": \"Adapted_Morph\"}, {\"span\": \"páxines\", \"label\": \"Adapted_Morph\"}, {\"span\": \"historia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"grabáu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"URL\", \"label\": \"Raw\"}, {\"span\": \"SON\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-8119577605061492766",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "-1168437124161870505",
+        "lang": "ast",
+        "prediction": "[]"
+    },
+    {
+        "id": "6108838488642850060",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"s\", \"label\": \"Adapted_Morph\"}, {\"span\": \"API\", \"label\": \"Raw\"}, {\"span\": \"aplicación\", \"label\": \"Adapted_Morph\"}, {\"span\": \"terceros\", \"label\": \"Adapted_Morph\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"apps\", \"label\": \"Raw\"}, {\"span\": \"incluye\", \"label\": \"Adapted_Morph\"}, {\"span\": \"servicios\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6516291905620224809",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"estos conos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ñes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pinos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"piñones\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-670499812300043697",
+        "lang": "ast",
+        "prediction": "[{\"span\": \"xos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"o\", \"label\": \"Adapted_Morph\"}, {\"span\": \"o\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "5686376350857710354",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Hakak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"adieraz\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-4884871913420884031",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Amu motak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"amuak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kategoriatan\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ape\", \"label\": \"Adapted_Morph\"}, {\"span\": \"amuak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"amuak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"amuak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3213829150817948543",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Plan\", \"label\": \"Raw\"}, {\"span\": \"Check\", \"label\": \"Raw\"}, {\"span\": \"Act\", \"label\": \"Raw\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kloa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kloa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"metodologia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"statistik\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3704918118919680762",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ki\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-426989333997003726",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kiak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7654776400269492947",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Botak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ina\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a est\", \"label\": \"Adapted_Morph\"}, {\"span\": \"in\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kasu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"una\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a estal\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-1067064553644421917",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Trena\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bul\", \"label\": \"Adapted_Morph\"}, {\"span\": \"zia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lo\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bagoi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kotxe sorta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ibilgailua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"motor\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kotxe\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6751674422317178073",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"estatua kontrol\", \"label\": \"Adapted_Morph\"}, {\"span\": \"erakundeak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"eskubide\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bermeak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7313439769441881986",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-4344562977892738176",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lack\", \"label\": \"Raw\"}, {\"span\": \"esti\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7584230206860492594",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-8206865092875060781",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ahi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ikus\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-1705409988315534717",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"kia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"flash\", \"label\": \"Raw\"}, {\"span\": \"forwardak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"talet\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2074926257900305665",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"joka\", \"label\": \"Adapted_Morph\"}, {\"span\": \"joka\", \"label\": \"Adapted_Morph\"}, {\"span\": \"posizio\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gol\", \"label\": \"Raw\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "32262387108361820",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"elektrikoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"koa met\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gailu elektronik\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6144020275147241761",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"gai guztiak kudeatuko\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-1004979580347193860",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Postak bidal\", \"label\": \"Adapted_Morph\"}, {\"span\": \"SMTP\", \"label\": \"Raw\"}, {\"span\": \"sendmail\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "3129790860142891554",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Jokalariek haka\", \"label\": \"Adapted_Morph\"}, {\"span\": \"oria\", \"label\": \"Adapted_Morph\"}, {\"span\": \"partidak hasi\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6947581601478452695",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"online\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-8965305161329410949",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"koak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hiriak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-4410127915567375174",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"kategoria horiek\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mota\", \"label\": \"Adapted_Morph\"}, {\"span\": \"riak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"afrikatuak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"oak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tiboak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"klikak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5747538429688645788",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-8649991553855120530",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ismoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"politika\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3099774964339178057",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"rock\", \"label\": \"Raw\"}, {\"span\": \"roll\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "8648773887096722215",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-1525741518858960539",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"banaketa nagusiak kode\", \"label\": \"Adapted_Morph\"}, {\"span\": \"geografia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kode\", \"label\": \"Raw\"}, {\"span\": \"sistema bat\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-9130934746485065236",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"definizioak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kategoria\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6052448479820900419",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Taga asteroide\", \"label\": \"Adapted_Morph\"}, {\"span\": \"izena\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6374406267148242270",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bila\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7298804329332402252",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"erdi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5976911203401317133",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-790528031423256902",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Reset\", \"label\": \"Raw\"}, {\"span\": \"botoia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"saka\", \"label\": \"Adapted_Morph\"}, {\"span\": \"reset\", \"label\": \"Raw\"}, {\"span\": \"botoid\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lanka\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kontaktu nagusiak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kontaktu batzuk\", \"label\": \"Adapted_Morph\"}, {\"span\": \"itxi\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "5210922736087148125",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"linkak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"argazkiak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"burua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"webgunea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"estekak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4574890023330618913",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"zia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dura\", \"label\": \"Adapted_Morph\"}, {\"span\": \"harremanak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"negoziazio\", \"label\": \"Adapted_Morph\"}, {\"span\": \"estatuak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ordez\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2213210400984553980",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"MB\", \"label\": \"Raw\"}, {\"span\": \"FS\", \"label\": \"Raw\"}, {\"span\": \"Server\", \"label\": \"Raw\"}, {\"span\": \"age Block\", \"label\": \"Raw\"}, {\"span\": \"nodo\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gailuak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fitxategiak konparti\", \"label\": \"Adapted_Morph\"}, {\"span\": \"protokol\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6342638885586364841",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"digital\", \"label\": \"Raw\"}, {\"span\": \"handi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"zoom\", \"label\": \"Raw\"}, {\"span\": \"irudi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pixelak ikustea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kar\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ek\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ikus\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-162414810703490486",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"formata\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7608068762211863795",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"soldadu taldeak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"izen\", \"label\": \"Adapted_Morph\"}, {\"span\": \"arme\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bana\", \"label\": \"Adapted_Morph\"}, {\"span\": \"eria\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-337738246774542879",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Hau\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mekanismoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mekanikoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kontaktu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ordezka\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6632209700237334086",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Hardwarea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"uki\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gai\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mekanikoak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"software\", \"label\": \"Raw\"}, {\"span\": \"gai uki\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "5309659056854662795",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"fatxada\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fatxada hitza\", \"label\": \"Adapted_Morph\"}, {\"span\": \"datu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ip\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fatxada\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fatxada\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2377574873221163964",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"pisu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "875894544403972283",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"aerosol\", \"label\": \"Raw\"}, {\"span\": \"atmosfera\", \"label\": \"Adapted_Morph\"}, {\"span\": \"toki\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gasen\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7072878961761532597",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"lda\", \"label\": \"Adapted_Morph\"}, {\"span\": \"estatistika\", \"label\": \"Adapted_Morph\"}, {\"span\": \"nagusiak bil\", \"label\": \"Adapted_Morph\"}, {\"span\": \"estatistikoak koordin\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ikuska\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5346219201486182027",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"atokia\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-8422615679836751280",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"aire\", \"label\": \"Raw\"}, {\"span\": \"azioa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"makin\", \"label\": \"Adapted_Morph\"}, {\"span\": \"diseinua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fabrikazioa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"artea\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5382880233266671058",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "963917097776672788",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"zia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gobernua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"zia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3990700740364911100",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"joko\", \"label\": \"Adapted_Morph\"}, {\"span\": \"onlinea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"sare\", \"label\": \"Adapted_Morph\"}, {\"span\": \"jo\", \"label\": \"Adapted_Morph\"}, {\"span\": \"joka\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-4903409657506020628",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"funtzio\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"funtzio\", \"label\": \"Adapted_Morph\"}, {\"span\": \"puntu guztiak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lo\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7755582079610961437",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bideak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"copyright\", \"label\": \"Raw\"}, {\"span\": \"es\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bideak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4680294888086056642",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"gurasoek zaindu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"likatzen\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4701129672742469470",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"barruti\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-8478411704170688478",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-4247302641782797827",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"asko\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3771065528088050218",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"kateto\", \"label\": \"Adapted_Morph\"}, {\"span\": \"koa\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "5356432450504616429",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Txantxa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"trufa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"jo\", \"label\": \"Adapted_Morph\"}, {\"span\": \"barre\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mo\", \"label\": \"Adapted_Morph\"}, {\"span\": \"txantxa\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-743764182102394598",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Tu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"motako minerala\", \"label\": \"Adapted_Morph\"}, {\"span\": \"whitlock\", \"label\": \"Raw\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "8598810742782566852",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"pertsonala\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"sare\", \"label\": \"Adapted_Morph\"}, {\"span\": \"klik egiten\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"konfigur\", \"label\": \"Adapted_Morph\"}, {\"span\": \"boto\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2341543118909545333",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Bug\", \"label\": \"Raw\"}, {\"span\": \"Bug\", \"label\": \"Raw\"}, {\"span\": \"ia\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-55489090792144921",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Rally motor\", \"label\": \"Raw\"}, {\"span\": \"keta mota\", \"label\": \"Adapted_Morph\"}, {\"span\": \"automobil\", \"label\": \"Raw\"}, {\"span\": \"arruntak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7198079482742120507",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Softwareak konputagailuak zer\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5780092152754366108",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ka\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5207985605783781588",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"croissant\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "7239403586371862174",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"erak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"download & delete\", \"label\": \"Raw\"}, {\"span\": \"jaitsi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"abatu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"download & keep\", \"label\": \"Raw\"}, {\"span\": \"jaitsi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mantendu\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6022663596109078816",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-715812787507130766",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"deta ego\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ordua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"katu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"buka\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6340703621115643788",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Kula\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kanpainak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"txekak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"askok\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ikagai\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-377574271888401201",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"izenak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4414444486997180901",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"log-log\", \"label\": \"Raw\"}, {\"span\": \"grafikoak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"logaritmik\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kala\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3097080555688283583",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7936072455528403251",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ka\", \"label\": \"Adapted_Morph\"}, {\"span\": \"logos\", \"label\": \"Raw\"}, {\"span\": \"funts\", \"label\": \"Raw\"}, {\"span\": \"pioak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ziak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"paradoxak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6204453947714392182",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-3936106481084151428",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"kasu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hardwareak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"sistema\", \"label\": \"Adapted_Morph\"}, {\"span\": \"Macak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"PCak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"sistemak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"softwarea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"software\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-294888925889802283",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"filosofia\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "9004735246422658894",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"txio\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pio\", \"label\": \"Raw\"}, {\"span\": \"cuic\", \"label\": \"Raw\"}, {\"span\": \"tweet\", \"label\": \"Raw\"}, {\"span\": \"piep\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "2681563141876400646",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Txa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"erabiltzailek\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mezu trukatzen\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6319452809876624092",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"posta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"spam\", \"label\": \"Raw\"}, {\"span\": \"bidali\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mezuak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2208641855455418715",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-6301024419012669220",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"este\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7304736928004319226",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ologia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hitza\", \"label\": \"Adapted_Morph\"}, {\"span\": \"llus\", \"label\": \"Raw\"}, {\"span\": \"erro\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "9059268580786296573",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Prezio desberdinak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2803561378072660252",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a gai\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"doktrina\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3209732049010688161",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"parkea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"parke\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "210433082248910893",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-69439306143088051",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"buztana\", \"label\": \"Adapted_Morph\"}, {\"span\": \"irudikatzen\", \"label\": \"Adapted_Morph\"}, {\"span\": \"burua klikatzen\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2116229618960644559",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"produk\", \"label\": \"Adapted_Morph\"}, {\"span\": \"produktua\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "72412362111141193",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"digital\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "5924604864614497865",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"landuak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2564278220870962750",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ontziak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ontzi horia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ontziak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"plastikoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ontzi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"edukiontzia\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2863940699956000149",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "2688133478579014294",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"tak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ip\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-8307862661906596646",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"uak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"to\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "8221222984994541046",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"PDF\", \"label\": \"Raw\"}, {\"span\": \"Document Format\", \"label\": \"Raw\"}, {\"span\": \"Dokument\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dokumentu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fitxategi\", \"label\": \"Raw\"}, {\"span\": \"formatua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6057252013225847091",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"azal\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bil\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kontzeptua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tokia\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "881776984632177410",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"abortu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"seguruak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tze\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-1580515867500302228",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"1080\", \"label\": \"Raw\"}, {\"span\": \"zenbakiak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"1080\", \"label\": \"Raw\"}, {\"span\": \"lerroak adieraz\", \"label\": \"Adapted_Morph\"}, {\"span\": \"p\", \"label\": \"Raw\"}, {\"span\": \"zkiak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"progressive scan\", \"label\": \"Raw\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "9144611011962318896",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"modu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bideoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"momentu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ikustea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bideoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"graba\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hardware\", \"label\": \"Raw\"}, {\"span\": \"graba\", \"label\": \"Adapted_Morph\"}, {\"span\": \"moment\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2512051643768563971",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"lariek plaza\", \"label\": \"Adapted_Morph\"}, {\"span\": \"i\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fari\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ket\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-747654428175479529",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"barra\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kontrol\", \"label\": \"Raw\"}, {\"span\": \"grafiko sistemei\", \"label\": \"Adapted_Morph\"}, {\"span\": \"scroll\", \"label\": \"Raw\"}, {\"span\": \"korritze ariketa\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-96228339586361237",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Spoiler\", \"label\": \"Raw\"}, {\"span\": \"hitza\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hond\", \"label\": \"Adapted_Morph\"}, {\"span\": \"telebista\", \"label\": \"Adapted_Morph\"}, {\"span\": \"film\", \"label\": \"Raw\"}, {\"span\": \"programa\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2001196437033024994",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"TAG\", \"label\": \"Raw\"}, {\"span\": \"molekulen\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lipidoa\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "1450178383737873306",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"kontakizun\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bisita\", \"label\": \"Adapted_Morph\"}, {\"span\": \"eu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kura itzuli\", \"label\": \"Adapted_Morph\"}, {\"span\": \"arrak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"heriotzak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6009515504637473175",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"klub\", \"label\": \"Raw\"}, {\"span\": \"iak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2431857495405525813",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2047575668292112432",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"agai\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ondorioak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"haziak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"k\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6399646500092387702",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"painiak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"Update\", \"label\": \"Raw\"}, {\"span\": \"erabiltzaileek\", \"label\": \"Adapted_Morph\"}, {\"span\": \"itsi\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6369924639436685195",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"nia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"itza\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "755196807516092155",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Terminoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gidoi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hack-and-slash\", \"label\": \"Raw\"}, {\"span\": \"hack\", \"label\": \"Raw\"}, {\"span\": \"n' slay\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-4529768559819419080",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"botere\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "1137879631243707367",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "3306410678569013663",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ipuina\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ipuinak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"txoak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"elfoak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"sorginak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"arrak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"iak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"minak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"reak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"trollak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"nomoak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"animalia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"nak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7318666370790946276",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"definit\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mota\", \"label\": \"Adapted_Morph\"}, {\"span\": \"izakiak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"risi\", \"label\": \"Raw\"}, {\"span\": \"thurs\", \"label\": \"Raw\"}, {\"span\": \"troll\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "5179986212783875256",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"leta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"motoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kleta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"motor\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ibilgailua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ku\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ku\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5462254378820440347",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"zes\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ek\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-673314729739933793",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"RC\", \"label\": \"Raw\"}, {\"span\": \"Chat\", \"label\": \"Raw\"}, {\"span\": \"txate\", \"label\": \"Adapted_Morph\"}, {\"span\": \"sistema\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4433913682484463690",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2827133246997880634",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"hasi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tuitak i\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "5528924185261784423",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"transmit\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "5792035945052571181",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Zeta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"proteinaz\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7166089401520404303",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"hotsa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gitarra\", \"label\": \"Adapted_Morph\"}, {\"span\": \"soinua\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-8797005404032968394",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Pixel\", \"label\": \"Raw\"}, {\"span\": \"bat\", \"label\": \"Adapted_Morph\"}, {\"span\": \"picture element\", \"label\": \"Raw\"}, {\"span\": \"irudi digital\", \"label\": \"Raw\"}, {\"span\": \"unitate\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3257456921172599661",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Batela\", \"label\": \"Adapted_Morph\"}, {\"span\": \"batelekua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"metro\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tosta\", \"label\": \"Adapted_Morph\"}, {\"span\": \"zia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"unk\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pada\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2823770641790995901",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ste\", \"label\": \"Adapted_Morph\"}, {\"span\": \"elkarrizketak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"odua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lana graba\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dokumentala gauza\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3292687924883881464",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"itza\", \"label\": \"Adapted_Morph\"}, {\"span\": \"terketa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tratatua\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5886749555346495049",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"plano\", \"label\": \"Adapted_Morph\"}, {\"span\": \"graba\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lana\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3930645436091140068",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Gerra\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gerra\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-4150221360228262166",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2432733092826269286",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ina\", \"label\": \"Adapted_Morph\"}, {\"span\": \"organikoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"formula\", \"label\": \"Adapted_Morph\"}, {\"span\": \"base\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-5144456374623092957",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"gobernuak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"sina\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kendu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gune\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7445302833243047518",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"PlayStation App\", \"label\": \"Raw\"}, {\"span\": \"Appak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2404799123233156310",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Son\", \"label\": \"Raw\"}, {\"span\": \"Servera\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-2019797602355910132",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"abade\", \"label\": \"Adapted_Morph\"}, {\"span\": \"dei\", \"label\": \"Adapted_Morph\"}, {\"span\": \"mos\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3348531730694094480",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"sabo\", \"label\": \"Adapted_Morph\"}, {\"span\": \"jea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"gasa askatu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a hondatu\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "1286108803605358996",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"are\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ke\", \"label\": \"Adapted_Morph\"}, {\"span\": \"aran\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7544921242464488331",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"era\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pixela\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kolorea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"elementu batzuk alda\", \"label\": \"Adapted_Morph\"}, {\"span\": \"aduak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"politika\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}, {\"span\": \"defend\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7110910796145000956",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"izenak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"iera\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pel\", \"label\": \"Adapted_Morph\"}, {\"span\": \"teknika\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3867087718203378055",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"klub\", \"label\": \"Adapted_Morph\"}, {\"span\": \"denboraldi\", \"label\": \"Adapted_Morph\"}, {\"span\": \"klubak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"loga\", \"label\": \"Adapted_Morph\"}, {\"span\": \"klub\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "3110221229743816068",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"na\", \"label\": \"Adapted_Morph\"}, {\"span\": \"area\", \"label\": \"Adapted_Morph\"}, {\"span\": \"land\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4874818657458819102",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ak aerodrom\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "2532003866096944046",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ia\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-6917154228377915703",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"io\", \"label\": \"Adapted_Morph\"}, {\"span\": \"argazkiak ikusteko\", \"label\": \"Adapted_Morph\"}, {\"span\": \"klikatu\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-671755101715212116",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"buru\", \"label\": \"Adapted_Morph\"}, {\"span\": \"koaderno\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kaier\", \"label\": \"Raw\"}, {\"span\": \"oharrak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ina\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "8921336494560471184",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"tzaileak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"likeak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"curricul\", \"label\": \"Raw\"}, {\"span\": \"produk\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tresna\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7555190710670518736",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"txa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"klika\", \"label\": \"Adapted_Morph\"}, {\"span\": \"tres\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kalejirak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kale\", \"label\": \"Adapted_Morph\"}, {\"span\": \"jaiak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7533483661935071653",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"koloretakoak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"beltzak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"formalekin janztea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"riak kirol\", \"label\": \"Adapted_Morph\"}, {\"span\": \"jantziekin\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7276109803093427783",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"programa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"softwarea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"App\", \"label\": \"Raw\"}, {\"span\": \"programa\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-8906636011401253472",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"API\", \"label\": \"Raw\"}, {\"span\": \"application programming interface\", \"label\": \"Raw\"}, {\"span\": \"aplikazioak programa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"zea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"software\", \"label\": \"Raw\"}, {\"span\": \"funtzioak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"metodoak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"objektuei\", \"label\": \"Adapted_Morph\"}, {\"span\": \"programazioa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"zoa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"software\", \"label\": \"Raw\"}, {\"span\": \"mai\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-9149761946987379994",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Trolla\", \"label\": \"Adapted_Morph\"}, {\"span\": \"oa\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4510040379808888995",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "-3182002039075901454",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"lasterketa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"multzoak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4663681151761362477",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"nua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pixa\", \"label\": \"Adapted_Morph\"}, {\"span\": \"iza\", \"label\": \"Adapted_Morph\"}, {\"span\": \"jariatu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"kanpo\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3833356957068754226",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ldunek\", \"label\": \"Adapted_Morph\"}, {\"span\": \"abisu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ale\", \"label\": \"Adapted_Morph\"}, {\"span\": \"jo\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7800612921381306977",
+        "lang": "eu",
+        "prediction": "[]"
+    },
+    {
+        "id": "6463154748281820677",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ka\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hizketak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"txatak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-1909215314370999115",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"bateria\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"produktu formatatu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7961572656475679103",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"hil\", \"label\": \"Adapted_Morph\"}, {\"span\": \"atentatua\", \"label\": \"Adapted_Morph\"}, {\"span\": \"opera\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hil\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4934553077507742786",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"Kode\", \"label\": \"Adapted_Morph\"}, {\"span\": \"baki\", \"label\": \"Adapted_Morph\"}, {\"span\": \"era\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"lekuak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"pertsonak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"posta-kodeak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"posta\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "3236057012678750650",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"nek\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hitza\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "4160516189407690804",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"rea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"izendatu\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "8390727436038041077",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ia\", \"label\": \"Adapted_Morph\"}, {\"span\": \"toki\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7618381144609962087",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"ora\", \"label\": \"Adapted_Morph\"}, {\"span\": \"koment\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "1437334483830363117",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5008772145511614825",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"gizakiak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"to\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-7727114397878384078",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"motak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"ak\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "6472870220804484661",
+        "lang": "eu",
+        "prediction": "[{\"span\": \"License\", \"label\": \"Raw\"}, {\"span\": \"copyleft\", \"label\": \"Raw\"}, {\"span\": \"a\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-5825759598903871490",
+        "lang": "el",
+        "prediction": "[{\"span\": \"έπ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"πορ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"πολ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-6605112438938327860",
+        "lang": "el",
+        "prediction": "[{\"span\": \"γκεστ σταρ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-6580129255609566508",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ΚΙ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-3738574876441759464",
+        "lang": "el",
+        "prediction": "[{\"span\": \"sambaz-tag\", \"label\": \"Raw\"}, {\"span\": \"γερμ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "6480922774748630029",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-7440274582078059986",
+        "lang": "el",
+        "prediction": "[{\"span\": \"μεσκλάν\", \"label\": \"Adapted_Translit\"}, {\"span\": \"Mesclun\", \"label\": \"Adapted_Translit\"}, {\"span\": \"μίξη\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ικο\", \"label\": \"Adapted_Translit\"}, {\"span\": \"άνα\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "7591089110026983096",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Digital download\", \"label\": \"Raw\"}, {\"span\": \"άλμπουμ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ίντερνετ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "4429132325952001473",
+        "lang": "el",
+        "prediction": "[{\"span\": \"φαν\", \"label\": \"Adapted_Translit\"}, {\"span\": \"άστε\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "4754424632690277623",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Cloud\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-1908756390588514207",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κάνοντας κλικ\", \"label\": \"LightVerb_Integrated\"}, {\"span\": \"φωτογραφ\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "-3862965391019064516",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "4903375184497553662",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-1812113296054518279",
+        "lang": "el",
+        "prediction": "[{\"span\": \"σκέιτμπορντινγκ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ska\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ing\", \"label\": \"Raw\"}, {\"span\": \"σκέιτμπορντ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "517209772089463650",
+        "lang": "el",
+        "prediction": "[{\"span\": \"smartphone\", \"label\": \"Raw\"}, {\"span\": \"γιο σκρολ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "1127600238651774664",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Παμπ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"pub\", \"label\": \"Raw\"}, {\"span\": \"public house\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "6803048732603104822",
+        "lang": "el",
+        "prediction": "[{\"span\": \"έπμπορ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "4321287435505042773",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ικ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ΦΚ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"από\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ίτ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-7392253316720187336",
+        "lang": "el",
+        "prediction": "[{\"span\": \"μιούζικαλ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"Φιλμ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "1400505071305530936",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "7780020016369375307",
+        "lang": "el",
+        "prediction": "[{\"span\": \"δί\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "5946836460035210860",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-2596443209853073290",
+        "lang": "el",
+        "prediction": "[{\"span\": \"τρι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ίμ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-5470653969578537241",
+        "lang": "el",
+        "prediction": "[{\"span\": \"φο\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-4745086043361251553",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "7681207178731975461",
+        "lang": "el",
+        "prediction": "[{\"span\": \"re\", \"label\": \"Raw\"}, {\"span\": \"reverse engineering\", \"label\": \"Raw\"}, {\"span\": \"domain hack\", \"label\": \"Raw\"}, {\"span\": \"-re\", \"label\": \"Raw\"}, {\"span\": \"re\", \"label\": \"Raw\"}, {\"span\": \"bit\", \"label\": \"Raw\"}, {\"span\": \"ly\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "9107853013356020057",
+        "lang": "el",
+        "prediction": "[{\"span\": \"έκανε check in\", \"label\": \"LightVerb_Unintegrated\"}]"
+    },
+    {
+        "id": "-4652798016936218037",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κάνει tweet\", \"label\": \"LightVerb_Unintegrated\"}]"
+    },
+    {
+        "id": "-7057488270466368687",
+        "lang": "el",
+        "prediction": "[{\"span\": \"-\", \"label\": \"Adapted_Translit\"}, {\"span\": \"-\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "3406508580617784297",
+        "lang": "el",
+        "prediction": "[{\"span\": \"pixel\", \"label\": \"Raw\"}, {\"span\": \"picture element\", \"label\": \"Raw\"}, {\"span\": \"στοιχείο\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "6382293346601403966",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-508514042068227590",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "8801396860020500615",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ντουέτο\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ρεσιτάλ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"τάξης\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-7564051522406547805",
+        "lang": "el",
+        "prediction": "[{\"span\": \"πάρ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ντελίβερι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"κοόλ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "5808819643088103641",
+        "lang": "el",
+        "prediction": "[{\"span\": \"白\", \"label\": \"Adapted_Translit\"}, {\"span\": \"金\", \"label\": \"Adapted_Translit\"}, {\"span\": \"hakkin\", \"label\": \"Adapted_Translit\"}, {\"span\": \"χακ-κίν\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ijīn\", \"label\": \"Adapted_Translit\"}, {\"span\": \"πάι-τσιν\", \"label\": \"Adapted_Translit\"}, {\"span\": \"geum\", \"label\": \"Adapted_Translit\"}, {\"span\": \"πεκ-κουμ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-7786986295864106286",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ίνακες\", \"label\": \"Adapted_Morph\"}, {\"span\": \"πάνελ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-3860104424386500413",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "6911673089972658611",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "5553765812365820947",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Γουόκερ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ω\", \"label\": \"Adapted_Translit\"}, {\"span\": \"Λι\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "4119114670187838239",
+        "lang": "el",
+        "prediction": "[{\"span\": \"πάλσαρ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"πλανήτη\", \"label\": \"Adapted_Translit\"}, {\"span\": \"σφαιρ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"πάλσαρ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "6647369099685106728",
+        "lang": "el",
+        "prediction": "[{\"span\": \"τατουάζ, piercing\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "362264573843117897",
+        "lang": "el",
+        "prediction": "[{\"span\": \"άντ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ζ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "4454676335265024425",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κλικ\", \"label\": \"LightVerb_Unintegrated\"}]"
+    },
+    {
+        "id": "8497256826604339992",
+        "lang": "el",
+        "prediction": "[{\"span\": \"μπλε\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "2652907960011765669",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "1565159561394504662",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-2125159970928805429",
+        "lang": "el",
+        "prediction": "[{\"span\": \"γκράουν\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "6951437068278793842",
+        "lang": "el",
+        "prediction": "[{\"span\": \"app\", \"label\": \"Raw\"}, {\"span\": \"app\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-1980212518900838887",
+        "lang": "el",
+        "prediction": "[{\"span\": \"καν\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-2868602122165321541",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ή τζάγκουαρ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"onca\", \"label\": \"Adapted_Translit\"}, {\"span\": \"όνκα\", \"label\": \"Adapted_Translit\"}, {\"span\": \"κου\", \"label\": \"Adapted_Translit\"}, {\"span\": \"Χαγουάρ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ΦΑ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-5481472921149224269",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Σμολ φόργουορντ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"small forward\", \"label\": \"Raw\"}, {\"span\": \"μπάσκετ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "7304758638245514079",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "785690503793230975",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Click\", \"label\": \"Raw\"}, {\"span\": \"talk\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-6720317933899253722",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κόρνο\", \"label\": \"Adapted_Translit\"}, {\"span\": \"σύγχρονο κόρνο\", \"label\": \"Adapted_Translit\"}, {\"span\": \"κόρνο\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-6864437720961889792",
+        "lang": "el",
+        "prediction": "[{\"span\": \"σπόιλερ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"άλμπουμ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"άλμπουμ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "1481996766309613639",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "6140305046818563015",
+        "lang": "el",
+        "prediction": "[{\"span\": \"έ 87\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-3073685000346930766",
+        "lang": "el",
+        "prediction": "[{\"span\": \"cat\", \"label\": \"Raw\"}, {\"span\": \"catt\", \"label\": \"Raw\"}, {\"span\": \"cath\", \"label\": \"Raw\"}, {\"span\": \"chat\", \"label\": \"Raw\"}, {\"span\": \"σα\", \"label\": \"Adapted_Translit\"}, {\"span\": \"gato\", \"label\": \"Raw\"}, {\"span\": \"γκάτο\", \"label\": \"Adapted_Translit\"}, {\"span\": \"katu\", \"label\": \"Adapted_Translit\"}, {\"span\": \"κάτια\", \"label\": \"Adapted_Translit\"}, {\"span\": \"cat\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-1986600241316318611",
+        "lang": "el",
+        "prediction": "[{\"span\": \"καρτ-ποστάλ.\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "3521849733043266045",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-9148794382385986300",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "2995501508886401290",
+        "lang": "el",
+        "prediction": "[{\"span\": \"τραξιόν\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-5272687545657038661",
+        "lang": "el",
+        "prediction": "[{\"span\": \"τρολ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"troll\", \"label\": \"Raw\"}, {\"span\": \"mailing list\", \"label\": \"Raw\"}, {\"span\": \"chat room\", \"label\": \"Raw\"}, {\"span\": \"μπλογκ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-4892456984633639971",
+        "lang": "el",
+        "prediction": "[{\"span\": \"λι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"φον\", \"label\": \"Adapted_Translit\"}, {\"span\": \"έλ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"σχ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ουζε\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-651964681303303832",
+        "lang": "el",
+        "prediction": "[{\"span\": \"hardware\", \"label\": \"Raw\"}, {\"span\": \"υπολογιστή\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "3841588794830057379",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ίνγκλς\", \"label\": \"Adapted_Translit\"}, {\"span\": \"καλ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"Επιπλέον λινκ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-8506887352829134272",
+        "lang": "el",
+        "prediction": "[{\"span\": \"καναπ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ή ντιβάνι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"δέρμα\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "9103247638858280016",
+        "lang": "el",
+        "prediction": "[{\"span\": \"server\", \"label\": \"Raw\"}, {\"span\": \"υλικό\", \"label\": \"Raw\"}, {\"span\": \"πελάτες\", \"label\": \"Raw\"}, {\"span\": \"clients\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "1805856705758563185",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ι Λογκ (ρωσ.\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-5652934423467344476",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "3602462140184203208",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-6921947031884612311",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κάνει κλικ\", \"label\": \"LightVerb_Integrated\"}]"
+    },
+    {
+        "id": "4342171455697318400",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-5692514232673589701",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κούρ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "7621228092257931012",
+        "lang": "el",
+        "prediction": "[{\"span\": \"καν\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "4926489509162199753",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Χάκερ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"cker\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "2388190053897925918",
+        "lang": "el",
+        "prediction": "[{\"span\": \"χρυσ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-5272687545657038661",
+        "lang": "el",
+        "prediction": "[{\"span\": \"τρολ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"troll\", \"label\": \"Raw\"}, {\"span\": \"mailing list\", \"label\": \"Raw\"}, {\"span\": \"chat room\", \"label\": \"Raw\"}, {\"span\": \"μπλογκ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-2462494473279637096",
+        "lang": "el",
+        "prediction": "[{\"span\": \"χλμ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "5002541101577989642",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Ερλ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"Τζίμι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"(αγγλ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-5197860986555211548",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "7827294454527266275",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "6404081938972109074",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ούνταλ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"fusion\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-5125771483393523969",
+        "lang": "el",
+        "prediction": "[{\"span\": \"software\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-3289653086774755724",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Λι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"λαίδη\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "8789258894808805020",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "6178238964123907756",
+        "lang": "el",
+        "prediction": "[{\"span\": \"βίντεο\", \"label\": \"Raw\"}, {\"span\": \"βίντεο\", \"label\": \"Raw\"}, {\"span\": \"βι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"βι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"CR\", \"label\": \"Raw\"}, {\"span\": \"φορμάτ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-15603840424220055",
+        "lang": "el",
+        "prediction": "[{\"span\": \"άριο\", \"label\": \"Adapted_Translit\"}, {\"span\": \"Λ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"Ραλφ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"πρό\", \"label\": \"Adapted_Translit\"}, {\"span\": \"κτ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "1205838454530642244",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Σπαμ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"spam\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "180782277700053998",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Πάουερ φόργουορντ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"power forward\", \"label\": \"Raw\"}, {\"span\": \"μπάσκε\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-217198944592639198",
+        "lang": "el",
+        "prediction": "[{\"span\": \"x\", \"label\": \"Raw\"}, {\"span\": \"log\", \"label\": \"Raw\"}, {\"span\": \"log\", \"label\": \"Raw\"}, {\"span\": \"log\", \"label\": \"Raw\"}, {\"span\": \"log\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-5870815894436438998",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-6677626023687027757",
+        "lang": "el",
+        "prediction": "[{\"span\": \"graphical user interface\", \"label\": \"Raw\"}, {\"span\": \"GUI\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-210571942809500282",
+        "lang": "el",
+        "prediction": "[{\"span\": \"interface\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "3465526573026640761",
+        "lang": "el",
+        "prediction": "[{\"span\": \"αχ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"check\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-1050127008987041285",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "6146089546457179327",
+        "lang": "el",
+        "prediction": "[{\"span\": \"έβρα\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "8008765910983188531",
+        "lang": "el",
+        "prediction": "[{\"span\": \"εντ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"γκρι λ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"τζιν παντελόνι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ον\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "3353298664374547700",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κάνει\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"post doc\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "5237120933905000195",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ΕΡ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"metal\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-1288270890180071398",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-2337456949860386652",
+        "lang": "el",
+        "prediction": "[{\"span\": \"μπιούτι βλόγκερ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ονλάιν\", \"label\": \"Adapted_Translit\"}, {\"span\": \"scenes\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-8476592385627481102",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "5096097186015709154",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "4373240615226606134",
+        "lang": "el",
+        "prediction": "[{\"span\": \"μπρελόκ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"κα\", \"label\": \"Adapted_Translit\"}, {\"span\": \"έλα\", \"label\": \"Adapted_Translit\"}, {\"span\": \"χειρ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-1680153751487130743",
+        "lang": "el",
+        "prediction": "[{\"span\": \"μοβ τήβεννο\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "6398972642758159894",
+        "lang": "el",
+        "prediction": "[{\"span\": \"System\", \"label\": \"Raw\"}, {\"span\": \"Scan\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "4256499742176836590",
+        "lang": "el",
+        "prediction": "[{\"span\": \"μπαλαντέρ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "146853593523414518",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κομμάτι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"κάνει check-in\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"solo\", \"label\": \"Adapted_Translit\"}, {\"span\": \"backbeat\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-2499449714469796969",
+        "lang": "el",
+        "prediction": "[{\"span\": \"τι\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "1869694691598759570",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ζ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ίθ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "158275548632015711",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "2308678284512391506",
+        "lang": "el",
+        "prediction": "[{\"span\": \"νανδρολό\", \"label\": \"Adapted_Translit\"}, {\"span\": \"19-νορ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"μπόντι μπίλντερς\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-692813184920248112",
+        "lang": "el",
+        "prediction": "[{\"span\": \"\", \"label\": \"Adapted_Translit\"}, {\"span\": \"αεροζόλ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "6016755109946767287",
+        "lang": "el",
+        "prediction": "[{\"span\": \"καμουφλάζ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "3571328579725167086",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ελέ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "8268104386905599639",
+        "lang": "el",
+        "prediction": "[{\"span\": \"έκανε\", \"label\": \"LightVerb_Integrated\"}, {\"span\": \"εκ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-7092592383824094682",
+        "lang": "el",
+        "prediction": "[{\"span\": \"σινεμά\", \"label\": \"Adapted_Translit\"}, {\"span\": \"cinema\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-6398350954231063690",
+        "lang": "el",
+        "prediction": "[{\"span\": \"γάντι\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-8176281449864871997",
+        "lang": "el",
+        "prediction": "[{\"span\": \"μπατ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "1165148653464234191",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "3734912080670460147",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Ρό\", \"label\": \"Adapted_Translit\"}, {\"span\": \"γουελ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"στόπ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-5101367317689922835",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-5621662249695269494",
+        "lang": "el",
+        "prediction": "[{\"span\": \"νέιβι μπλου\", \"label\": \"Adapted_Translit\"}, {\"span\": \"μπλε\", \"label\": \"Adapted_Translit\"}, {\"span\": \"μπλε μαρέν\", \"label\": \"Adapted_Translit\"}, {\"span\": \"μπλε\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "1205838454530642244",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Σπαμ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"spam\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "5796072542357696682",
+        "lang": "el",
+        "prediction": "[{\"span\": \"online\", \"label\": \"Raw\"}, {\"span\": \"HIV\", \"label\": \"Raw\"}, {\"span\": \"AIDS\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-29449700087452029",
+        "lang": "el",
+        "prediction": "[{\"span\": \"τσιπ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"chip\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "6507236054725880262",
+        "lang": "el",
+        "prediction": "[{\"span\": \"σέρβερ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "1050916856941607116",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ελλ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-5434489171507472830",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-1705647921406516299",
+        "lang": "el",
+        "prediction": "[{\"span\": \"γρανάζι\", \"label\": \"Adapted_Translit\"}, {\"span\": \"άρα\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "3125974209519657559",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Κλάουντ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-4276584671253602348",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ισμού\", \"label\": \"Adapted_Translit\"}, {\"span\": \"μαργρά\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "5002589925673124393",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "1395289766873689054",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "962323278667177204",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κάνει like\", \"label\": \"LightVerb_Unintegrated\"}]"
+    },
+    {
+        "id": "6198331563845671741",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-8105246663299096531",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κάνει tag\", \"label\": \"LightVerb_Unintegrated\"}]"
+    },
+    {
+        "id": "-4114242603910270930",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Document Format\", \"label\": \"Raw\"}, {\"span\": \"PDF\", \"label\": \"Raw\"}, {\"span\": \"hardware\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "3785360147381171321",
+        "lang": "el",
+        "prediction": "[{\"span\": \"γου\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-8373063413526251701",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Season\", \"label\": \"Raw\"}, {\"span\": \"κάν\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"reset\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-7812322437188510909",
+        "lang": "el",
+        "prediction": "[{\"span\": \"έκανε tweet\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"video teaser\", \"label\": \"Raw\"}, {\"span\": \"packed\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "6818301387603355426",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Σπιντ μπαγκ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"σπιντ μπαγκ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"speed bag\", \"label\": \"Raw\"}, {\"span\": \"δι\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "5854316976644331336",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-1778892134084920373",
+        "lang": "el",
+        "prediction": "[{\"span\": \"άναγου\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-6382301656017546532",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ρετιρέ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"Ρε\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "8871661071132783443",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Τραμ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"tram\", \"label\": \"Raw\"}, {\"span\": \"streetcar\", \"label\": \"Raw\"}, {\"span\": \"trolley\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "718770007961340745",
+        "lang": "el",
+        "prediction": "[{\"span\": \"Όσικατ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"καφέ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"καν\", \"label\": \"Adapted_Translit\"}, {\"span\": \"λί\", \"label\": \"Adapted_Translit\"}, {\"span\": \"μπλε\", \"label\": \"Adapted_Translit\"}, {\"span\": \"καθαρ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"αρζαντέ πιτσιλι\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-6035562688103305897",
+        "lang": "el",
+        "prediction": "[{\"span\": \"scanner\", \"label\": \"Raw\"}, {\"span\": \"πίξελ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"ppi\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "-4895876472082412005",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "4463285172709838334",
+        "lang": "el",
+        "prediction": "[{\"span\": \"τραβεστί\", \"label\": \"Adapted_Translit\"}, {\"span\": \"cross-dresser\", \"label\": \"Raw\"}, {\"span\": \"τρανς άτομα\", \"label\": \"Adapted_Translit\"}, {\"span\": \"cross-dresser\", \"label\": \"Raw\"}]"
+    },
+    {
+        "id": "8401627788480431909",
+        "lang": "el",
+        "prediction": "[{\"span\": \"κάνει stream\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"αρχ\", \"label\": \"Adapted_Morph\"}]"
+    },
+    {
+        "id": "7143833878972722990",
+        "lang": "el",
+        "prediction": "[{\"span\": \"μπε\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "4666002514734850193",
+        "lang": "el",
+        "prediction": "[{\"span\": \"δύ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"χόμπι\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-3316116865316630832",
+        "lang": "el",
+        "prediction": "[{\"span\": \"ίκ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-8040346070671359574",
+        "lang": "el",
+        "prediction": "[{\"span\": \"σκέιτ επί\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "6643791280578619400",
+        "lang": "el",
+        "prediction": "[]"
+    },
+    {
+        "id": "-1631570810606283826",
+        "lang": "el",
+        "prediction": "[{\"span\": \"βαλς\", \"label\": \"Adapted_Translit\"}, {\"span\": \"βαλς\", \"label\": \"Adapted_Translit\"}, {\"span\": \"βαλς\", \"label\": \"Adapted_Translit\"}, {\"span\": \"βαλ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"βαλ\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-2008580603190743456",
+        "lang": "el",
+        "prediction": "[{\"span\": \"καλοριφέρ\", \"label\": \"Adapted_Translit\"}, {\"span\": \"μέσο θέρμανση\", \"label\": \"Adapted_Translit\"}]"
+    },
+    {
+        "id": "-4546921421743687835",
+        "lang": "el",
+        "prediction": "[]"
+    }
+]

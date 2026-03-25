@@ -7,3 +7,5 @@ __pycache__/
 .DS_Store
 data/external/
 lid.176.bin
+data/model/XLM-RoBERTa/masked_loss/xlmr/
+data/model/XLM-RoBERTa/weighted_loss/xlmr/
