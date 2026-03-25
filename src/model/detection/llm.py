@@ -38,6 +38,7 @@ class BorrowingLLM:
             })
             
         return results
+    
     # --- response generation -------------------------------------------------------------------------
 
     def _load_model(self):

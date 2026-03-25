@@ -31,7 +31,7 @@ def get_fewshot_prompt(text: str, examples: list = None) -> str:
     prompt += f"Text to analyze:\n{text}\n\nOutput:"
     return prompt
 
-def load_gold(filepath: str, num_few_shot: int = 3) -> Dict[str, Tuple[List[Dict], List[Dict]]]:
+def load_gold(filepath: str, num_few_shot: int = 3, verbose: bool = True) -> Dict[str, Tuple[List[Dict], List[Dict]]]:
     """Loads gold standard data, to use annotations as few-shot examples and test set splits per language."""
     with open(filepath, 'r', encoding='utf-8') as f:
         raw_data = json.load(f)
@@ -103,6 +103,7 @@ def load_gold(filepath: str, num_few_shot: int = 3) -> Dict[str, Tuple[List[Dict
                 test_set.append(item)
                 
         splits[lang] = (few_shot, test_set)
-        print(f"[{lang.upper()}] Few-shot prompt created with {len(few_shot)} examples covering: {[t for t, v in found_tags.items() if v]}")
+        if verbose:
+            print(f"[{lang.upper()}] Few-shot prompt created with {len(few_shot)} examples covering: {[t for t, v in found_tags.items() if v]}")
         
     return splits

@@ -8,7 +8,7 @@
 import os
 import argparse
 import logging
-from src.model.detection.baseline import run_fewzeroshot_baseline
+from src.model.detection.baseline import run_llm_baseline, run_langid_baseline
 
 logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 
@@ -29,11 +29,14 @@ def main():
     )
     args = parser.parse_args()
 
-    run_fewzeroshot_baseline(
+    """
+    run_llm_baseline(
         langs=args.langs,
         model_id=args.model,
         gt="data/annotation/test_gold_annotations.json"
     )
+    """
+    run_langid_baseline(langs=args.langs, gt="data/annotation/test_gold_annotations.json")
 
 if __name__ == "__main__":
     main()
