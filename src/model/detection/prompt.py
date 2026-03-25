@@ -6,7 +6,6 @@
 # mar-2026
 
 import json
-import random
 from typing import List, Dict, Tuple
 
 def get_system_prompt(language: str) -> str:
@@ -20,7 +19,7 @@ def get_system_prompt(language: str) -> str:
     )
 
 def get_fewshot_prompt(text: str, examples: list = None) -> str:
-    prompt = "WARNING: Only generate the required JSON output, no explanations or thinking process.\n\n"
+    prompt = "Only generate the required JSON output, no explanations or thinking process.\n\n"
     if examples:
         prompt += "--- EXAMPLES start ---\n"
         for ex in examples:
@@ -31,7 +30,7 @@ def get_fewshot_prompt(text: str, examples: list = None) -> str:
     prompt += f"Text to analyze:\n{text}\n\nOutput:"
     return prompt
 
-def load_gold(filepath: str, num_few_shot: int = 3, verbose: bool = True) -> Dict[str, Tuple[List[Dict], List[Dict]]]:
+def load_gold(filepath: str, verbose: bool = True) -> Dict[str, Tuple[List[Dict], List[Dict]]]:
     """Loads gold standard data, to use annotations as few-shot examples and test set splits per language."""
     with open(filepath, 'r', encoding='utf-8') as f:
         raw_data = json.load(f)

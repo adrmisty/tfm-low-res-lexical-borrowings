@@ -23,7 +23,7 @@ ID_TO_TAG = {v: k for k, v in TAG_TO_ID.items()}
 class BorrowingXLM:
     """XLM-RoBERTa wrapper class for training and inference."""
     
-    def __init__(self, gt: str, model_id: str = "xlm-roberta-base", output_dir: str = "data/model/XLM-RoBERTa"):
+    def __init__(self, gt: str, model_id: str = "xlm-roberta-base", output_dir: str = "data/model/XLM-RoBERTa/xlmr"):
         self.model_id = model_id
         self.output_dir = output_dir
         self.data_splits = load_gold(gt, verbose=False)

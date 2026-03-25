@@ -103,7 +103,6 @@ def run_xlmr_baseline(langs: list[str], silver_data: str, gt: str = "data/annota
     xlm = BorrowingXLM(gt)
     xlm.train(train_json=silver_data)
     
-    # 2. Evaluate the model
     all_predictions = []
     all_ground_truth = []
 
