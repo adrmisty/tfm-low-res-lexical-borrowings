@@ -8,7 +8,7 @@
 from .llm import BorrowingLLM
 from .langid import BorrowingLangId
 from .xlmr import BorrowingXLM
-from .eval import eval_borrowings
+from .eval import get_metrics
 
 import os
 from datetime import datetime
@@ -59,7 +59,7 @@ def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen2.5-7B-Instru
     print(f">>> Predictions saved to: {pred_path}")
     
     eval_path = os.path.join(out_dir, f"eval_metrics_{clean_model_name}_{timestamp}.txt")
-    eval_borrowings(all_predictions, all_ground_truth, out_file=eval_path)
+    get_metrics(all_predictions, all_ground_truth, out_file=eval_path)
 
 def run_langid_baseline(langs: list[str], gt: str):
     print(">>> Initializing [world-level LANGUAGE IDENTIFICATION] baseline...")
@@ -94,7 +94,7 @@ def run_langid_baseline(langs: list[str], gt: str):
         json.dump(all_predictions, f, indent=4, ensure_ascii=False)
         
     eval_path = os.path.join(out_dir, f"eval_metrics_fasttext_{timestamp}.txt")
-    eval_borrowings(all_predictions, all_ground_truth, out_file=eval_path)
+    get_metrics(all_predictions, all_ground_truth, out_file=eval_path)
 
 def run_xlmr_baseline(langs: list[str], silver_data: str, gt: str = "data/annotation/final/test_gold_annotations.json"):
     """Trains and evaluates XLM-RoBERTa on Silver Data for LEXICAL BORROWING IDENTIFICATION."""
@@ -132,4 +132,4 @@ def run_xlmr_baseline(langs: list[str], silver_data: str, gt: str = "data/annota
         json.dump(all_predictions, f, indent=4, ensure_ascii=False)
         
     eval_path = os.path.join(out_dir, f"eval_metrics_xlmr_{timestamp}.txt")
-    eval_borrowings(all_predictions, all_ground_truth, out_file=eval_path)
+    get_metrics(all_predictions, all_ground_truth, out_file=eval_path)

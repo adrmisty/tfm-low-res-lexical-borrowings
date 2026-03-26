@@ -7,6 +7,7 @@
 
 import json
 from typing import List, Dict, Tuple
+import hashlib # hashing fix
 
 def get_system_prompt(language: str) -> str:
     return (
@@ -45,10 +46,13 @@ def load_gold(filepath: str, verbose: bool = True) -> Dict[str, Tuple[List[Dict]
     ]
     
     for item in raw_data:
-        case_id = item.get("id", str(hash(item["data"]["text"]))) 
-        lang = item["data"]["lang"]
-        text = item["data"]["text"]
         
+        text = item["data"]["text"]
+        # consistent hashing for true/pred comparison
+        stable_id = hashlib.md5(text.encode('utf-8')).hexdigest()
+        case_id = str(item.get("id", stable_id))
+        lang = item["data"]["lang"]
+
         gold_spans = []
         if "annotations" in item and len(item["annotations"]) > 0:
             for result in item["annotations"][0].get("result", []):

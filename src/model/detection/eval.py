@@ -1,6 +1,7 @@
 # eval.py
 # ----------------------------------------------------------------------------------------
 # LLM output evaluation for [(step 1) LEXICAL BORROWING IDENTIFICATION]
+# and plotting of confusion matrices
 # ----------------------------------------------------------------------------------------
 # adriana r.f. (@adrmisty)
 # mar-2026
@@ -8,17 +9,123 @@
 import json
 import re
 from typing import List, Dict
+import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix
+from typing import List, Dict
+import os
+import hashlib
 
-def _parse_llm_output(prediction_str: str) -> List[Dict[str, str]]:
-    """Parses JSON output for an LLM prompted to carry out the task of lexical borrowing identification."""
-    try:
-        prediction_str = re.sub(r"<think>.*?</think>", "", prediction_str, flags=re.DOTALL).strip()
-        match = re.search(r"\[.*\]", prediction_str, re.DOTALL)
-        return json.loads(match.group()) if match else json.loads(prediction_str)
-    except Exception:
-        return []
+LABELS = [
+    "O", # outside, false pos/neg
+    "Internationalism", 
+    "Raw", 
+    "Adapted_Orthogra", 
+    "Adapted_Morph", 
+    "Adapted_Translit", 
+    "LightVerb_Unintegrated", 
+    "LightVerb_Integrated"
+]
 
-def eval_borrowings(predictions: List[dict], ground_truth: List[dict], out_file: str = None):
+def get_confusion_matrix(pred_path: str, gold_path: str, output_img: str, experiment: str):
+    """Generates and plot confusion matrix for prediction comparison against gold data."""
+    
+    print(f"\n> Generating confusion matrix for: {pred_path} [{experiment}]")
+    
+    with open(pred_path, "r", encoding="utf-8") as f:
+        predictions = json.load(f)
+    with open(gold_path, "r", encoding="utf-8") as f:
+        ground_truth = json.load(f)
+
+    # ** GROUND TRUTH IDs ** with hashlib
+    # same hashing mech as gold data loading
+    gt_map = {}
+    for item in ground_truth:
+        text = item["data"]["text"]
+        stable_id = hashlib.md5(text.encode('utf-8')).hexdigest()
+        case_id = str(item.get("id", stable_id))
+        gt_map[case_id] = item.get("annotations", [])
+
+    # ** LABELS **
+    y_true = []
+    y_pred = []
+    debug_true_positives = 0
+
+    for record in predictions:
+        case_id = str(record["id"])
+        if case_id not in gt_map:
+            continue
+
+        # predicted/model-generated annotations
+        pred_items = _parse_llm_output(record.get("prediction", "[]"))
+        pred_dict = {}
+        for p in pred_items:
+            if p.get("span") and p.get("label"):
+                txt = _normalize_text(p["span"])
+                lbl = _extract_label(p["label"])
+                pred_dict[txt] = lbl
+
+        # manual gold annotations
+        true_items = []
+        for ann in gt_map[case_id]:
+            if isinstance(ann, dict):
+                true_items.extend(ann.get("result", []))
+        true_dict = {}
+        for t in true_items:
+            val = t.get("value", {})
+            if "text" in val and "labels" in val:
+                txt = _normalize_text(val["text"])
+                lbl = _extract_label(val["labels"])
+                true_dict[txt] = lbl
+
+        # print("TRUE:", true_dict)
+        # print("PRED:", pred_dict)
+
+        # 5. Align spans
+        all_spans = set(true_dict.keys()).union(set(pred_dict.keys()))
+        for span in all_spans:
+            # all invalid/unmatched labels collapse to O
+            t_label = true_dict.get(span, "O")
+            p_label = pred_dict.get(span, "O")
+
+            if t_label not in LABELS:
+                t_label = "O"
+            if p_label not in LABELS:
+                p_label = "O"
+            y_true.append(t_label)
+            y_pred.append(p_label)
+
+            if t_label != "O":
+                debug_true_positives += 1
+
+    print(f"\t>[*] Debug: {debug_true_positives} valid labeled spans")
+
+    if not y_true:
+        print("> (!) Warning: No overlapping spans")
+        return
+
+    cm = confusion_matrix(y_true, y_pred, labels=LABELS)
+
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(
+        cm,
+        annot=True,
+        fmt='d',
+        cmap='Blues',
+        xticklabels=LABELS,
+        yticklabels=LABELS
+    )
+
+    plt.title(f"Span-level confusion matrix\n{os.path.basename(pred_path)}\n[{experiment.upper()}]")
+    plt.ylabel('True label')
+    plt.xlabel('Predicted label')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig(output_img, dpi=300)
+
+    print(f">>> CM saved to {output_img}\n")
+            
+def get_metrics(predictions: List[dict], ground_truth: List[dict], out_file: str = None):
     """Computes exact match precision, recall, and F1 for lexical borrowing identification.."""
 
     id_tp, id_fp, id_fn = 0, 0, 0
@@ -88,7 +195,9 @@ def eval_borrowings(predictions: List[dict], ground_truth: List[dict], out_file:
         with open(out_file, "w", encoding="utf-8") as f:
             f.write(output_str)
         print(f">>> Evaluation saved to: {out_file}")
-        
+
+# --- aux -------------------------------------------------------------------------
+
 def _normalize_text(text: str) -> str:
     return re.sub(r"[^\w\s]", "", text.lower().strip())
 
@@ -96,3 +205,18 @@ def _normalize_labels(labels):
     if isinstance(labels, list):
         return tuple(labels)
     return (labels,)
+
+def _extract_label(lbl):
+    if isinstance(lbl, list) and len(lbl) > 0:
+        return lbl[0].strip()
+    elif isinstance(lbl, str):
+        return lbl.strip()
+    return "O"
+
+def _parse_llm_output(prediction_str: str) -> List[Dict[str, str]]:
+    try:
+        prediction_str = re.sub(r"<think>.*?</think>", "", prediction_str, flags=re.DOTALL).strip()
+        match = re.search(r"\[.*\]", prediction_str, re.DOTALL)
+        return json.loads(match.group()) if match else json.loads(prediction_str)
+    except Exception:
+        return []

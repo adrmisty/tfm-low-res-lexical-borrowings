@@ -18,7 +18,7 @@ class BorrowingLLM:
     def __init__(self, model_id: str, gt: str):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         self.model_id = model_id
-        self.data_splits = load_gold(gt, num_few_shot=3)
+        self.data_splits = load_gold(gt, verbose=True)
 
         self._load_model()
 

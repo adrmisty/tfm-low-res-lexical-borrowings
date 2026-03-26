@@ -20,7 +20,7 @@ class BorrowingLangId:
         (https://fasttext.cc/docs/en/language-identification.html), which supports:
         Asturian, Greek and Euskera."""
         self._load_model(model_path)
-        self.data_splits = load_gold(gt, num_few_shot=3, verbose=False)
+        self.data_splits = load_gold(gt, verbose=False)
 
     def get_borrowings(self, test_data: List[Dict[str, Any]], target_lang: str):
         """Extracts borrowings with regards to language identification at the word level."""
