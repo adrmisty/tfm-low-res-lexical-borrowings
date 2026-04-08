@@ -3,24 +3,37 @@
 # configurations for loanword identification & classification
 # ----------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# mar-2026
+# apr-2026
 
 import json
 from typing import List, Dict, Tuple
 import hashlib # hashing fix
 
 def get_system_prompt(language: str) -> str:
+    """Crafts the system prompt for the LLM, with instructions and tagset definitions."""
     return (
-        f"You are an expert computational linguist analyzing text in {language.upper()}. "
-        "Identify all lexical borrowings and historical loans in the text. "
-        "Classify each into ONE of the following tags: "
-        "['Internationalism', 'Raw', 'Adapted_Orthogra', 'Adapted_Morph', 'Adapted_Translit', 'LightVerb_Unintegrated', 'LightVerb_Integrated']. "
-        "Respond STRICTLY with a JSON array of objects, where each object has 'span' (the exact text span) and 'label' (the tag). "
-        "If no borrowings exist, return []."
+        f"""You are an expert computational linguist analyzing text in {language.upper()}. 
+        Your task is to identify lexical borrowings (loanwords) in the provided text and classify their morphological adaptation into the target language.
+
+        You must evaluate the text and extract ALL loanwords. Native vocabulary MUST NOT be extracted. 
+        For every loanword you find, you must classify it using STRICTLY one of the following tags:
+
+        --- TAGSET ---
+        1. "Raw": Unassimilated borrowings that retain their exact original foreign spelling and morphology without any adaptation.
+        2. "Adapted_Orthogra": Borrowings adapted to the target language's spelling or phonological rules, but lacking native morphological inflection.
+        3. "Adapted_Morph": Borrowings that have been fully integrated by taking on native suffixes, prefixes, plural markers, or grammatical gender.
+        4. "Adapted_Translit": Borrowings that have been transliterated into a different alphabet to match the target language's script.
+        5. "LightVerb_Unintegrated": A multi-word construction pairing a native verb with a completely raw, unassimilated foreign loanword.
+        6. "LightVerb_Integrated": A multi-word construction pairing a native verb with a foreign loanword that has undergone orthographic or morphological adaptation.
+        7. "Internationalism": Widely recognized global vocabulary with shared Greco-Latin roots, deeply integrated into the language's core lexicon.
+
+        --- OUTPUT ---
+        You must output a raw JSON list of dictionaries. Each dictionary must contain exactly two keys: "span" (the exact text of the borrowing) and "label" (one of the 7 taxonomy tags above). 
+        Do not wrap the JSON in markdown blocks. Do not explain your reasoning.
+        """
     )
 
-def get_fewshot_prompt(text: str, examples: list = None) -> str:
-    prompt = "Only generate the required JSON output, no explanations or thinking process.\n\n"
+def get_fewshot_prompt(prompt: str, text: str, examples: list = None) -> str:
     if examples:
         prompt += "--- EXAMPLES start ---\n"
         for ex in examples:

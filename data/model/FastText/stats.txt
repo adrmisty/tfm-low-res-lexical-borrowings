@@ -1,0 +1,8 @@
+$ python main.py --action eval --pred_file data/model/FastText/predictions_langid_20260408_130013.json --title LANGID
+
+============================================================
+Evaluating pipeline: LANGID
+data/model/FastText/predictions_langid_20260408_130013.json
+============================================================
+[LEXICAL BORROWING IDENTIFICATION.] -> Precision: 0.1501 | Recall: 0.4853 | F1: 0.2293
+[LEXICAL BORROWING CLASSIFICATION.] -> Precision: 0.0522 | Recall: 0.1429 | F1: 0.0765

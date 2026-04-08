@@ -28,7 +28,7 @@ class BorrowingLLM:
         results = []
         
         for case in test_data:
-            user_prompt = get_fewshot_prompt(case["text"], examples)
+            user_prompt = get_fewshot_prompt(system_prompt, case["text"], examples)
             prediction = self._generate(system_prompt, user_prompt)
             results.append({
                 "id": case.get("id"),
@@ -52,7 +52,7 @@ class BorrowingLLM:
         ).eval()
 
     def _generate(self, system: str, user: str, prefill: str = "[\n") -> str:
-        """Generates LLM model's response to zero-shot/few-shot prompt."""
+        """Generates LLM model's response to few-shot prompt."""
         messages = [
             {"role": "system", "content": system},
             {"role": "user", "content": user}

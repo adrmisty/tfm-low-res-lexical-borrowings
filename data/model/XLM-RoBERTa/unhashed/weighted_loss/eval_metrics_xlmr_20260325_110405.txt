@@ -1,5 +1,0 @@
---- [LEXICAL BORROWING ID.]: Exact span ---
-Precision: 0.2389 | Recall: 0.2304 | F1: 0.2346
-
---- [LEXICAL BORROWING ID.]: Exact span + label ---
-Precision: 0.0881 | Recall: 0.0850 | F1: 0.0865

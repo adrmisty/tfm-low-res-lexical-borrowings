@@ -10,3 +10,5 @@ data/model/FastText/lid.176.bin
 data/model/XLM-RoBERTa/unhashed/masked_loss/xlmr/
 data/model/XLM-RoBERTa/unhashed/weighted_loss/xlmr/
 data/model/XLM-RoBERTa/weighted_loss_hashed/xlmr/
+data/model/XLM-RoBERTa/xlmr/
+lid.176.bin

@@ -1,10 +1,9 @@
 # dataset.py
 # ----------------------------------------------------------------
 # masked loss borrowing dataset (silver std.) for XLM-RoBERTa
-# for [(step 1) LEXICAL BORROWING IDENTIFICATION]
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# mar-2026
+# apr-2026
 
 import json
 import torch
@@ -16,7 +15,7 @@ from transformers import XLMRobertaTokenizerFast
 
 # ** identification of LABEL STUDIO tags **
 TAG_TO_ID = {
-    "O": 0, # outside: NATIVE words
+    "Native": 0, # outside: NATIVE words
     
     # labels: BORROWED words
     "Internationalism": 1,
@@ -40,7 +39,8 @@ TYPE_TO_TAG = {
     "verb_light_latin": "LightVerb_Unintegrated",
     "verb_light_greek": "LightVerb_Integrated",
 
-    # --- Orthography / morphology ---
+    #TODO: Adapted_Orthogra???
+    # --- orthography / morphology ---
     "noun_transliterated": "Adapted_Translit",
     "noun_plural_native": "Adapted_Morph",
     "noun_integrated_sg": "Adapted_Morph",
@@ -123,7 +123,7 @@ class BorrowingDataset(Dataset):
                 if random.random() < self.mask_prob:
                     labels.append(-100)
                 else:
-                    labels.append(TAG_TO_ID["O"])
+                    labels.append(TAG_TO_ID["Native"])
 
         encoding["labels"] = torch.tensor(labels)
         

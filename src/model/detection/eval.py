@@ -4,20 +4,19 @@
 # and plotting of confusion matrices
 # ----------------------------------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# mar-2026
+# apr-2026
 
 import json
 import re
-from typing import List, Dict
+from typing import List, Dict, Tuple
 import seaborn as sns
 import matplotlib.pyplot as plt
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score, confusion_matrix, precision_recall_fscore_support
 from typing import List, Dict
 import os
 import hashlib
 
 LABELS = [
-    "O", # outside, false pos/neg
     "Internationalism", 
     "Raw", 
     "Adapted_Orthogra", 
@@ -27,18 +26,103 @@ LABELS = [
     "LightVerb_Integrated"
 ]
 
-def get_confusion_matrix(pred_path: str, gold_path: str, output_img: str, experiment: str):
-    """Generates and plot confusion matrix for prediction comparison against gold data."""
+def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: str):
+    """2-step evaluation pipeline."""
+    print(f"\n{'='*60}\nEvaluating pipeline: {experiment}\n{pred_path}\n{'='*60}")
+    os.makedirs(out_dir, exist_ok=True)
     
-    print(f"\n> Generating confusion matrix for: {pred_path} [{experiment}]")
+    true_spans, pred_spans = _load_spans(pred_path, gold_path)
     
+    eval_id(true_spans, pred_spans, out_dir, experiment)
+    eval_clf(true_spans, pred_spans, out_dir, experiment)
+
+def eval_id(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str):
+    """Evaluates the binary detection task (Native vs. Borrowing)."""
+    true_keys = set(true_spans.keys())
+    pred_keys = set(pred_spans.keys())
+    all_keys = true_keys.union(pred_keys)
+
+    y_true_id, y_pred_id = [], []
+    
+    for key in all_keys:
+        y_true_id.append("Borrowing" if key in true_keys else "Native")
+        y_pred_id.append("Borrowing" if key in pred_keys else "Native")
+
+    get_metrics(y_true_id, y_pred_id, labels=["Borrowing"], average="binary")
+    _plot_cm(
+        y_true=y_true_id, y_pred=y_pred_id, labels=["Native", "Borrowing"],
+        title=f"Borrowing span identification\n[{experiment.upper()}]",
+        out_path=os.path.join(out_dir, f"{experiment}_step1_identification_cm.png")
+    )
+
+def eval_clf(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str):
+    """Evaluates the morphological tagging task."""
+    # ** only correctly identified spans considered for classification **
+    true_positives = set(true_spans.keys()).intersection(set(pred_spans.keys()))
+    
+    if not true_positives:
+        print("\n--- STEP 2: CLASSIFICATION ---")
+        print("(!) Cannot calculate Step 2: The model failed to identify any correct spans in Step 1.")
+        return
+
+    y_true_clf, y_pred_clf = [], []
+    
+    for key in true_positives:
+        t_lbl = true_spans[key]
+        p_lbl = pred_spans[key]
+        
+        # ** FALLBACK: always raw? **
+        if t_lbl not in LABELS: t_lbl = "Raw" 
+        if p_lbl not in LABELS: p_lbl = "Raw"
+        
+        y_true_clf.append(t_lbl)
+        y_pred_clf.append(p_lbl)
+
+    get_metrics(y_true_clf, y_pred_clf, labels=LABELS, average="macro", task="CLASSIFICATION")
+    _plot_cm(
+        y_true=y_true_clf, y_pred=y_pred_clf, labels=LABELS,
+        title=f"Borrowing adaptation classification\n[{experiment.upper()}]",
+        out_path=os.path.join(out_dir, f"{experiment}_step2_classification_cm.png")
+    )
+                
+def get_metrics(ground_truth: List[dict], predictions: List[dict], labels: list, average: str = "binary", out_file: str = None, task: str = "IDENTIFICATION"):
+    """Computes exact match precision, recall, and F1 for lexical borrowing identification.."""
+
+    acc = accuracy_score(ground_truth, predictions)
+    p, r, f1, _ = precision_recall_fscore_support(
+        ground_truth, 
+        predictions, 
+        labels=labels, 
+        average=average, 
+        pos_label="Borrowing" if average == "binary" else None,
+        zero_division=0
+    )
+    
+    output_str = f"[LEXICAL BORROWING {task}.] -> Precision: {p:.4f} | Recall: {r:.4f} | F1: {f1:.4f}\n"
+    print(output_str)
+    
+    if out_file:
+        with open(out_file, "w", encoding="utf-8") as f:
+            f.write(output_str)
+        print(f">>> Evaluation saved to: {out_file}")
+
+    
+    return {
+        "accuracy": acc,
+        "precision": p,
+        "recall": r,
+        "f1": f1
+    }
+
+# --- aux -------------------------------------------------------------------------
+
+def _load_spans(pred_path: str, gold_path: str) -> Tuple[Dict, Dict]:
+    """Loads JSON data and parses text [multi-word] spans into aligned dictionaries."""
     with open(pred_path, "r", encoding="utf-8") as f:
         predictions = json.load(f)
     with open(gold_path, "r", encoding="utf-8") as f:
         ground_truth = json.load(f)
 
-    # ** GROUND TRUTH IDs ** with hashlib
-    # same hashing mech as gold data loading
     gt_map = {}
     for item in ground_truth:
         text = item["data"]["text"]
@@ -46,177 +130,68 @@ def get_confusion_matrix(pred_path: str, gold_path: str, output_img: str, experi
         case_id = str(item.get("id", stable_id))
         gt_map[case_id] = item.get("annotations", [])
 
-    # ** LABELS **
-    y_true = []
-    y_pred = []
-    debug_true_positives = 0
+    true_spans_dict = {} 
+    pred_spans_dict = {} 
 
     for record in predictions:
         case_id = str(record["id"])
-        if case_id not in gt_map:
-            continue
+        if case_id not in gt_map: continue
 
-        # predicted/model-generated annotations
+        # ** predictions **
         pred_items = _parse_llm_output(record.get("prediction", "[]"))
-        pred_dict = {}
-        for p in pred_items:
-            if p.get("span") and p.get("label"):
-                txt = _normalize_text(p["span"])
-                lbl = _extract_label(p["label"])
-                pred_dict[txt] = lbl
-
-        # manual gold annotations
+        if isinstance(pred_items, list):
+            for p in pred_items:
+                if isinstance(p, dict) and p.get("span") and p.get("label"):
+                    txt = _normalize_text(p["span"])
+                    lbl = _normalize_label(p["label"]) 
+                    if lbl != "O": 
+                        pred_spans_dict[(case_id, txt)] = lbl
+                        
+        # ** true annotations **
         true_items = []
         for ann in gt_map[case_id]:
             if isinstance(ann, dict):
                 true_items.extend(ann.get("result", []))
-        true_dict = {}
+                
         for t in true_items:
             val = t.get("value", {})
             if "text" in val and "labels" in val:
                 txt = _normalize_text(val["text"])
-                lbl = _extract_label(val["labels"])
-                true_dict[txt] = lbl
+                lbl = _normalize_label(val["labels"])
+                true_spans_dict[(case_id, txt)] = lbl
+                
+    return true_spans_dict, pred_spans_dict
 
-        # print("TRUE:", true_dict)
-        # print("PRED:", pred_dict)
-
-        # 5. Align spans
-        all_spans = set(true_dict.keys()).union(set(pred_dict.keys()))
-        for span in all_spans:
-            # all invalid/unmatched labels collapse to O
-            t_label = true_dict.get(span, "O")
-            p_label = pred_dict.get(span, "O")
-
-            if t_label not in LABELS:
-                t_label = "O"
-            if p_label not in LABELS:
-                p_label = "O"
-            y_true.append(t_label)
-            y_pred.append(p_label)
-
-            if t_label != "O":
-                debug_true_positives += 1
-
-    print(f"\t>[*] Debug: {debug_true_positives} valid labeled spans")
-
-    if not y_true:
-        print("> (!) Warning: No overlapping spans")
-        return
-
-    cm = confusion_matrix(y_true, y_pred, labels=LABELS)
-
+def _plot_cm(y_true, y_pred, labels, title, out_path):
+    """Plots confusion matrix for given true/pred labels and saves to file."""
+    cm = confusion_matrix(y_true, y_pred, labels=labels)
     plt.figure(figsize=(10, 8))
-    sns.heatmap(
-        cm,
-        annot=True,
-        fmt='d',
-        cmap='Blues',
-        xticklabels=LABELS,
-        yticklabels=LABELS
-    )
-
-    plt.title(f"Span-level confusion matrix\n{os.path.basename(pred_path)}\n[{experiment.upper()}]")
-    plt.ylabel('True label')
-    plt.xlabel('Predicted label')
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
+    plt.title(title, pad=15)
+    plt.ylabel('True label (gold standard)', fontweight='bold')
+    plt.xlabel('Predicted label (model output)', fontweight='bold')
     plt.xticks(rotation=45, ha='right')
     plt.tight_layout()
-    plt.savefig(output_img, dpi=300)
-
-    print(f">>> CM saved to {output_img}\n")
-            
-def get_metrics(predictions: List[dict], ground_truth: List[dict], out_file: str = None):
-    """Computes exact match precision, recall, and F1 for lexical borrowing identification.."""
-
-    id_tp, id_fp, id_fn = 0, 0, 0
-    clf_tp, clf_fp, clf_fn = 0, 0, 0
-
-    gt_map = {item["id"]: item for item in ground_truth}  # or index-based
-
-    for record in predictions:
-        case_id = record["id"]
-        if case_id not in gt_map:
-            continue
-
-        pred_items = _parse_llm_output(record["prediction"])
-        
-        item = gt_map.get(case_id, {})
-        true_items = []
-
-        for ann in item.get("annotations", []):
-            true_items.extend(ann.get("result", []))    
-                    
-        true_set = [
-            (_normalize_text(t["value"]["text"]), _normalize_labels(t["value"]["labels"]))
-            for t in true_items
-        ]
-
-        pred_set = [
-            (_normalize_text(p.get("span", "")), _normalize_labels(p.get("label", "")))
-            for p in pred_items
-        ]
-
-        # identification (span only)
-        true_terms = {t[0] for t in true_set}
-        pred_terms = {p[0] for p in pred_set}
-
-        # classification (span + label)
-        clf_true = set(true_set)
-        clf_pred = set(pred_set)
-        
-        id_tp += len(true_terms & pred_terms)
-        id_fp += len(pred_terms - true_terms)
-        id_fn += len(true_terms - pred_terms)
-
-        clf_tp += len(set(true_set) & set(pred_set))
-        clf_fp += len(set(pred_set) - set(true_set))
-        clf_fn += len(set(true_set) - set(pred_set))
-
-    def calc_f1(tp, fp, fn):
-        p = tp / (tp + fp) if (tp + fp) else 0.0
-        r = tp / (tp + fn) if (tp + fn) else 0.0
-        f1 = 2 * p * r / (p + r) if (p + r) else 0.0
-        return p, r, f1
-
-    id_p, id_r, id_f1 = calc_f1(id_tp, id_fp, id_fn)
-    clf_p, clf_r, clf_f1 = calc_f1(clf_tp, clf_fp, clf_fn)
-
-    output_lines = [
-        "--- [LEXICAL BORROWING ID.]: Exact span ---",
-        f"Precision: {id_p:.4f} | Recall: {id_r:.4f} | F1: {id_f1:.4f}\n",
-        "--- [LEXICAL BORROWING ID.]: Exact span + label ---",
-        f"Precision: {clf_p:.4f} | Recall: {clf_r:.4f} | F1: {clf_f1:.4f}\n"
-    ]
-    
-    output_str = "\n".join(output_lines)
-    print(output_str)
-
-    if out_file:
-        with open(out_file, "w", encoding="utf-8") as f:
-            f.write(output_str)
-        print(f">>> Evaluation saved to: {out_file}")
-
-# --- aux -------------------------------------------------------------------------
+    plt.savefig(out_path, dpi=300, bbox_inches='tight')
+    plt.close()
 
 def _normalize_text(text: str) -> str:
     return re.sub(r"[^\w\s]", "", text.lower().strip())
 
-def _normalize_labels(labels):
-    if isinstance(labels, list):
-        return tuple(labels)
-    return (labels,)
-
-def _extract_label(lbl):
+def _normalize_label(lbl):
     if isinstance(lbl, list) and len(lbl) > 0:
         return lbl[0].strip()
     elif isinstance(lbl, str):
         return lbl.strip()
     return "O"
 
-def _parse_llm_output(prediction_str: str) -> List[Dict[str, str]]:
+def _parse_llm_output(prediction_str: str) -> List[Dict]:
     try:
-        prediction_str = re.sub(r"<think>.*?</think>", "", prediction_str, flags=re.DOTALL).strip()
-        match = re.search(r"\[.*\]", prediction_str, re.DOTALL)
-        return json.loads(match.group()) if match else json.loads(prediction_str)
+        prediction_str = re.sub(r"<think>.*?</think>", "", str(prediction_str), flags=re.DOTALL).strip()
+        match = re.search(r"\[\s*\{.*\}\s*\]", prediction_str, re.DOTALL)
+        if match:
+            return json.loads(match.group())
+        data = json.loads(prediction_str)
+        return data if isinstance(data, list) else []
     except Exception:
         return []

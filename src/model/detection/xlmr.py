@@ -117,9 +117,9 @@ class WeightedTrainer(Trainer):
         logits = outputs.logits
 
         # -- WEIGHTS for each class --
-        # 0:native --> 1
+        # native --> 1
         # 1-7:loanwords --> 50, much more attention to these!!!
-        class_weights = torch.tensor([1.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0]).to(model.device)
+        class_weights = torch.tensor([1.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0, 50.0], device=labels.device)
         
         # cross-entropy loss, flatten logits
         loss_fct = nn.CrossEntropyLoss(weight=class_weights)
