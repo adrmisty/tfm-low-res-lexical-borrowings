@@ -1,0 +1,18 @@
+$ python main.py --action eval --pred_file data/model/2step/Qwen3.5-9B/predictions_Qwen-Qwen3.5-9B_20260416_135109.json --title
+ QWEN-2STEP
+       
+============================================================
+Evaluating pipeline: QWEN-2STEP
+data/model/2step/Qwen3.5-9B/predictions_Qwen-Qwen3.5-9B_20260416_135109.json
+============================================================
+
+*** [LW 1]: Borrowing detection ***
+[IDENTIFICATION] -> Precision: 0.1818 | Recall: 0.1217 | F1: 0.1458
+
+
+*** [LW 2]: Borrowing classification ***
+[CLASSIFICATION] -> Precision: 0.0064 | Recall: 0.1429 | F1: 0.0123
+
+
+*** [LW 1+2]: JOINT PIPELINE: ID + CLASSIFICATION ***
+[JOINT (Macro, ex. Native)] -> Precision: 0.0000 | Recall: 0.0000 | F1: 0.0000
