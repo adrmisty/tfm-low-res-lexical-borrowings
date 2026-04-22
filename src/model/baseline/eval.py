@@ -16,7 +16,7 @@ import hashlib
 from .prompt import LABELS
 
 def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: str):
-    """Evaluation pipeline generating 3 distinct views of performance."""
+    """Evaluation pipeline generating 3 views."""
     print(f"\n{'='*60}\nEvaluating pipeline: {experiment}\n{pred_path}\n{'='*60}")
     os.makedirs(out_dir, exist_ok=True)
     

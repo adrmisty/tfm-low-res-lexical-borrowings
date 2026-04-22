@@ -154,7 +154,7 @@ class ClfDataset(Dataset):
         encoding = self.tokenizer(
             text=item["span"],
             text_pair=item["context"],
-            truncation="only_second", # (!) only truncate the context, not the target span
+            truncation="only_second", # Never truncate the target word, only the context
             max_length=self.max_length,
             padding="max_length"
         )

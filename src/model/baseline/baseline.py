@@ -5,19 +5,20 @@
 # adriana r.f. (@adrmisty)
 # apr-2026
 
-from .llm import BorrowingLLM
+from .llm import BorrowingLLM, BorrowingVLLM
 from .langid import BorrowingLangId
-from .xlmr import BorrowingXLM
+from .encoder import BorrowingEncoder
 
 import os
 from datetime import datetime
 import json
 
-OUT_DIR = "data/model"
+OUT_DIR = "results/model"
 
 def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen3.5-9B"):
     """Few-shot prompting on LLM for lexical borrowing identification and classification."""
     llm = BorrowingLLM(model_id, gt)
+    #vlm = BorrowingVLLM(model_id, gt)
 
     all_predictions = []
 
@@ -79,13 +80,13 @@ def run_langid_baseline(langs: list[str], gt: str):
     print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title LANGID")
     print("="*50)
 
-def run_xlmr_baseline(langs: list[str], silver_data: str, gt: str = "data/annotation/final/test_gold_annotations.json"):
+def run_encoder_baseline(langs: list[str], silver_data: str, gt: str = "data/annotation/final/test_gold_annotations.json"):
     """Trains and runs the 2-step XLM-RoBERTa pipeline using dynamic dataset loading."""
     
     path_binary = f"{OUT_DIR}/XLM-RoBERTa/xlmr_binary"
     path_multi = f"{OUT_DIR}/XLM-RoBERTa/xlmr_multi"
     
-    xlm = BorrowingXLM(gt)
+    xlm = BorrowingEncoder(gt)
 
     print("\t>>> [XLMR-1]: Training binary classifier (Native vs. Borrowing)...")
     xlm.output_dir = path_binary
