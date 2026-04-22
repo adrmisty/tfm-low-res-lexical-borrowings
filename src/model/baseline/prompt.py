@@ -1,4 +1,4 @@
-# prompt.py
+# prompts.py
 # ----------------------------------------------------------
 # configurations for loanword identification & classification
 # ----------------------------------------------------------
@@ -6,152 +6,235 @@
 # apr-2026
 
 import json
-import os
+from typing import List, Dict, Tuple
 import hashlib
-from typing import List, Dict
 
-FEW_SHOT_PATH = "data/icl/few_shot_examples.json"
-
-TAGSET = [ # eliminated "Internationalism" // excl. Invalid_*
+LABELS = [
+    "Internationalism", 
     "Raw", 
     "Adapted_Orthogra", 
     "Adapted_Morph", 
     "Adapted_Translit", 
     "LightVerb_Unintegrated", 
-    "LightVerb_Integrated",
-    #"Internationalism",
-    #"Invalid_NE",
-    #"Invalid_FalsePos"
+    "LightVerb_Integrated"
 ]
 
-TAGSET_DEF = """--- TAGSET ---
-1. "Raw": Unassimilated borrowings that retain their exact original foreign spelling and morphology without any adaptation.
-2. "Adapted_Orthogra": Borrowings adapted to the target language's spelling or phonological rules, but without native morphological inflection.
-3. "Adapted_Morph": Borrowings that have been fully integrated by taking on native suffixes, prefixes, plural markers, or grammatical gender.
-4. "Adapted_Translit": Borrowings that have been transliterated into a different alphabet to match the target language's script.
-5. "LightVerb_Unintegrated": A multi-word construction pairing a native verb with a completely raw, unassimilated foreign loanword.
-6. "LightVerb_Integrated": A multi-word construction pairing a native verb with a foreign loanword that has undergone orthographic or morphological adaptation.
-7. "Invalid_NE": Proper nouns, corporate brands, geographical names, or specific entities that are not general lexical borrowings.
-8. "Invalid_FalsePos": Native homonyms, metalinguistic explanations, or raw English strings that are not actually functioning as borrowings in the sentence."""
+# ** 1) borrowing identification **
 
+def get_system_prompt_id(language: str) -> str:
+    """System prompt for inference[1]: borrowing identification at the span level."""
+    return (
+        f"""You are an expert computational linguist analyzing text in {language.upper()}. 
+        Your task is exclusively to IDENTIFY lexical borrowings (loanwords) in the provided text.
 
-def load_gold_data(filepath: str, target_langs: list = None) -> List[Dict]:
-    """Loads the gold standard data as a test set."""
-    with open(filepath, 'r', encoding='utf-8') as f:
-        raw_data = json.load(f)
+        You must evaluate the text and extract ALL loanwords. Native vocabulary MUST NOT be extracted. 
         
-    test_set = []
-    for item in raw_data:
-        lang = item["data"]["lang"]
-        if target_langs and lang not in target_langs:
-            continue
-            
-        text = item["data"]["text"]
-        stable_id = hashlib.md5(text.encode('utf-8')).hexdigest()
-        
-        test_set.append({
-            "id": str(item.get("id", stable_id)),
-            "text": text,
-            "lang": lang,
-            "raw_annotations": item.get("annotations", [])
-        })
-    return test_set
+        --- OUTPUT ---
+        You must output a raw JSON list of strings, where each string is the exact text span of a borrowing. 
+        Example: ["click", "software"]
+        If there are no borrowings in the text, output an empty list: []
+        Do not wrap the JSON in markdown blocks. Do not explain your reasoning.
+        """
+    )
 
-
-# --- in-context-learning: k few-shot examples ---
-# stored in external .json
-# test with different k to see how it affects performance
-
-
-def _get_few_shots(lang: str, k: int, examples_path: str = FEW_SHOT_PATH) -> list:
-    """Loads k examples for a specific language from the external JSON."""
-    if k == 0 or not os.path.exists(examples_path):
-        return []
-    with open(examples_path, "r", encoding="utf-8") as f:
-        all_examples = json.load(f)
-    return all_examples.get(lang.lower(), [])[:k]
-
-
-# --- 1-step pipeline (identification + classification in one prompt) ---
-
-def get_system_prompt_1step(language: str) -> str:
-    """Returns the system prompt for the 1-step pipeline, which combines identification and classification in a single prompt."""
-    
-    SYSTEM_PROMPT = f"""You are an expert computational linguist analyzing text in {language.upper()}. 
-    Your task is to identify lexical borrowings (loanwords) in the provided text and classify their morphological adaptation into the target language.
-    You must evaluate the text and extract ALL loanwords, as well as any tricky entities or false candidates. 
-    For every span you extract, you must classify it using STRICTLY one of the following tags:
-    {TAGSET_DEF}
-    
-    You must output a raw JSON list of dictionaries. 
-    Each dictionary must contain exactly two keys: "span" (the exact text) and "label" (one of the 8 taxonomy tags above). 
-    Do not wrap the JSON in markdown blocks. Do not explain your reasoning."""
-    return SYSTEM_PROMPT.format(language=language, TAGSET_DEF=TAGSET_DEF)
-
-def get_fewshot_prompt_1step(system_prompt: str, text: str, lang: str, k: int) -> str:
-    """Builds the few-shot prompt for the 1-step pipeline, which includes k examples of combined identification and classification."""
+def get_fewshot_prompt_id(system_prompt: str, text: str, examples: list = None) -> str:
+    """Few-shot prompt for in-context-learning inference[1]: borrowing identification at the span level."""
     prompt = system_prompt + "\n\n"
-    examples = _get_few_shots(lang, k)
     if examples:
-        prompt += "--- EXAMPLES start:\n"
+        prompt += "--- EXAMPLES start ---\n"
         for ex in examples:
-            prompt += f"Text:\n{ex['text']}\nOutput:\n{ex['output_1step']}\n\n"
-        prompt += "EXAMPLES end ---\n\n"
+            gold_dicts = json.loads(ex['gold_output'])
+            gold_spans = [d["span"] for d in gold_dicts]
+            
+            prompt += f"Text:\n{ex['text']}\n"
+            prompt += f"Output:\n{json.dumps(gold_spans, ensure_ascii=False)}\n\n"
+        prompt += "--- EXAMPLES end ---\n\n"
     
     prompt += f"Text to analyze:\n{text}\n\nOutput:"
     return prompt
 
-
-# --- 2-step pipeline (identification + classification in 2 prompts) ---
-
-def get_system_prompt_id(language: str) -> str:
-    """Returns the system prompt for the 2-step pipeline, which focuses only on identification in the first step."""
-    
-    SYSTEM_PROMPT_ID = f"""You are an expert computational linguist analyzing text in {language.upper()}. 
-    Your task is exclusively to IDENTIFY lexical borrowings (loanwords) in the provided text.
-    You must evaluate the text and extract ALL loanwords. You should also extract tricky proper nouns or brand names so they can be filtered later. Native vocabulary MUST NOT be extracted. 
-    
-    You must output a raw JSON list of strings, where each string is the exact text span of a borrowing or entity. 
-    Example: ["click", "software", "Microsoft"]
-    f there are no borrowings in the text, output an empty list: []
-    Do not wrap the JSON in markdown blocks. Do not explain your reasoning."""
-    return SYSTEM_PROMPT_ID.format(language=language)
-
-def get_fewshot_prompt_id(system_prompt: str, text: str, lang: str, k: int) -> str:
-    """Builds the few-shot prompt for the identification step of the 2-step pipeline, which includes k examples of identification only."""
+def get_fewshot_prompt_id(system_prompt: str, text: str, examples: list = None) -> str:
+    """Few-shot formatting for identification."""
     prompt = system_prompt + "\n\n"
-    examples = _get_few_shots(lang, k)
     if examples:
         prompt += "--- EXAMPLES start ---\n"
         for ex in examples:
-            prompt += f"Text:\n{ex['text']}\nOutput:\n{ex['output_id']}\n\n"
+            try:
+                gold_dicts = json.loads(ex.get('output', '[]'))
+                gold_spans = [d.get("span", "") for d in gold_dicts]
+            except Exception:
+                gold_spans = []
+            
+            prompt += f"Text:\n{ex['text']}\n"
+            prompt += f"Output:\n{json.dumps(gold_spans, ensure_ascii=False)}\n\n"
         prompt += "--- EXAMPLES end ---\n\n"
     
     prompt += f"Text to analyze:\n{text}\n\nOutput:"
     return prompt
 
 
-def get_system_prompt_clf(language: str) -> str:
-    """Returns the system prompt for the classification step of the 2-step pipeline, which focuses only on classification of a given target span."""
-    SYSTEM_PROMPT_CLF = f"""You are an expert computational linguist analyzing text in {language.upper()}. 
-    Your task is to classify the morphological adaptation of a specific target loanword found within a context sentence.
-    You must classify the target word using STRICTLY one of the following tags:
-    {TAGSET_DEF}
-    
-    Output ONLY the exact tag name from the list above. Do not output anything else. Do not explain your reasoning."""
-    return SYSTEM_PROMPT_CLF.format(language=language, TAGSET_DEF=TAGSET_DEF)
+# ** 2) borrowing classification **
 
-def get_fewshot_prompt_clf(system_prompt: str, text: str, target_span: str, lang: str, k: int) -> str:
-    """Builds the few-shot prompt for the classification step of the 2-step pipeline, which includes k examples of classification only."""
+def get_system_prompt_clf(language: str) -> str:
+    """System prompt for inference[2]: borrowing classification at the span level."""
+    return (
+        f"""You are an expert computational linguist analyzing text in {language.upper()}. 
+        Your task is to classify the morphological adaptation of a specific target loanword found within a context sentence.
+
+        You must classify the target word using STRICTLY one of the following tags:
+
+        --- TAGSET ---
+        1. "Raw": Unassimilated borrowings that retain their exact original foreign spelling and morphology without any adaptation.
+        2. "Adapted_Orthogra": Borrowings adapted to the target language's spelling or phonological rules, but lacking native morphological inflection.
+        3. "Adapted_Morph": Borrowings that have been fully integrated by taking on native suffixes, prefixes, plural markers, or grammatical gender.
+        4. "Adapted_Translit": Borrowings that have been transliterated into a different alphabet to match the target language's script.
+        5. "LightVerb_Unintegrated": A multi-word construction pairing a native verb with a completely raw, unassimilated foreign loanword.
+        6. "LightVerb_Integrated": A multi-word construction pairing a native verb with a foreign loanword that has undergone orthographic or morphological adaptation.
+        7. "Internationalism": Widely recognized global vocabulary with shared Greco-Latin roots, deeply integrated into the language's core lexicon.
+
+        --- OUTPUT ---
+        Output ONLY the exact tag name from the list above. Do not output anything else. Do not explain your reasoning.
+        """
+    )
+
+
+def get_fewshot_prompt_clf(system_prompt: str, text: str, target_span: str, examples: list = None) -> str:
+    """Few-shot formatting for classification."""
     prompt = system_prompt + "\n\n"
-    examples = _get_few_shots(lang, k)
     if examples:
         prompt += "--- EXAMPLES start ---\n"
         for ex in examples:
-            # ** one example per extracted span, not just one example per sentence **
-            for span_data in ex['spans']:
-                prompt += f"Context:\n{ex['text']}\nTarget word:\n{span_data['span']}\nOutput:\n{span_data['label']}\n\n"
+            try:
+                gold_dicts = json.loads(ex.get('output', '[]'))
+            except Exception:
+                gold_dicts = []
+            for gd in gold_dicts:
+                prompt += f"Context:\n{ex['text']}\n"
+                prompt += f"Target word:\n{gd.get('span', '')}\n"
+                
+                # Handle list-type labels from Label Studio
+                lbl = gd.get('label', 'Raw')
+                if isinstance(lbl, list) and len(lbl) > 0:
+                    lbl = lbl
+                
+                prompt += f"Output:\n{lbl}\n\n"
         prompt += "--- EXAMPLES end ---\n\n"
     
     prompt += f"Context:\n{text}\nTarget word:\n{target_span}\n\nOutput:\n"
+    return prompt
+
+
+# ** loading gold data **
+
+def load_gold(filepath: str, verbose: bool = True) -> Dict[str, Tuple[List[Dict], List[Dict]]]:
+    """Loads gold standard data, to use annotations as few-shot examples and test set splits per language."""
+    with open(filepath, 'r', encoding='utf-8') as f:
+        raw_data = json.load(f)
+        
+    data_by_lang = {'ast': [], 'eu': [], 'el': []}
+    
+    # ** target tags as per Label Studio xml > LABELS **
+    
+    for item in raw_data:
+        text = item["data"]["text"]
+        stable_id = hashlib.md5(text.encode('utf-8')).hexdigest()
+        case_id = str(item.get("id", stable_id))
+        lang = item["data"]["lang"]
+
+        gold_spans = []
+        if "annotations" in item and len(item["annotations"]) > 0:
+            for result in item["annotations"][0].get("result", []):
+                val = result.get("value", {})
+                if "text" in val and "labels" in val:
+                    gold_spans.append({
+                        "span": val["text"].strip(),
+                        "label": val["labels"]
+                    })
+        
+        processed_item = {
+            "id": case_id,
+            "text": text,
+            "lang": lang,
+            "gold_output": json.dumps(gold_spans, ensure_ascii=False),
+            "raw_annotations": item["annotations"] 
+        }
+        
+        if lang in data_by_lang:
+            data_by_lang[lang].append(processed_item)
+
+    # ** enforce one example of each class if any **
+    splits = {}
+    for lang, items in data_by_lang.items():
+        import random
+        random.seed(42)
+        random.shuffle(items)
+        
+        few_shot = []
+        test_set = []
+        
+        found_tags = {tag: False for tag in LABELS}
+        
+        for item in items:
+            item_tags = set()
+
+            if item["raw_annotations"]:
+                for result in item["raw_annotations"][0].get("result", []):
+                    labels = result["value"].get("labels", [])
+                    item_tags.update(labels)    
+                     
+            provides_new_tag = False
+            for tag in item_tags:
+                if tag in found_tags and not found_tags[tag]:
+                    found_tags[tag] = True
+                    provides_new_tag = True         
+                       
+            if provides_new_tag:
+                few_shot.append(item)
+            else:
+                test_set.append(item)
+                
+        splits[lang] = (few_shot, test_set)
+        if verbose:
+            print(f"[{lang.upper()}] Few-shot prompt created with {len(few_shot)} examples covering: {[t for t, v in found_tags.items() if v]}")
+        
+    return splits
+
+# ** single prompt for both tasks **
+
+@DeprecationWarning
+def get_system_prompt(language: str) -> str:
+    """Crafts the system prompt for the LLM, with instructions and tagset definitions."""
+    return (
+        f"""You are an expert computational linguist analyzing text in {language.upper()}. 
+        Your task is to identify lexical borrowings (loanwords) in the provided text and classify their morphological adaptation into the target language.
+
+        You must evaluate the text and extract ALL loanwords. Native vocabulary MUST NOT be extracted. 
+        For every loanword you find, you must classify it using STRICTLY one of the following tags:
+
+        --- TAGSET ---
+        1. "Raw": Unassimilated borrowings that retain their exact original foreign spelling and morphology without any adaptation.
+        2. "Adapted_Orthogra": Borrowings adapted to the target language's spelling or phonological rules, but lacking native morphological inflection.
+        3. "Adapted_Morph": Borrowings that have been fully integrated by taking on native suffixes, prefixes, plural markers, or grammatical gender.
+        4. "Adapted_Translit": Borrowings that have been transliterated into a different alphabet to match the target language's script.
+        5. "LightVerb_Unintegrated": A multi-word construction pairing a native verb with a completely raw, unassimilated foreign loanword.
+        6. "LightVerb_Integrated": A multi-word construction pairing a native verb with a foreign loanword that has undergone orthographic or morphological adaptation.
+        7. "Internationalism": Widely recognized global vocabulary with shared Greco-Latin roots, deeply integrated into the language's core lexicon.
+
+        --- OUTPUT ---
+        You must output a raw JSON list of dictionaries. Each dictionary must contain exactly two keys: "span" (the exact text of the borrowing) and "label" (one of the 7 taxonomy tags above). 
+        Do not wrap the JSON in markdown blocks. Do not explain your reasoning.
+        """
+    )
+
+
+@DeprecationWarning
+def get_fewshot_prompt(prompt: str, text: str, examples: list = None) -> str:
+    if examples:
+        prompt += "--- EXAMPLES start ---\n"
+        for ex in examples:
+            prompt += f"Text:\n{ex['text']}\n"
+            prompt += f"Output:\n{ex['output']}\n\n"
+        prompt += "--- EXAMPLES end ---\n\n"
+    
+    prompt += f"Text to analyze:\n{text}\n\nOutput:"
     return prompt
