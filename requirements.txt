@@ -2,3 +2,11 @@ python==3.11
 wikipedia-api
 seaborn
 openpyxl
+vllm
+huggingface_hub
+transformers
+tqdm
+datasets
+scikit-learn
+accelerate 
+bitsandbytes

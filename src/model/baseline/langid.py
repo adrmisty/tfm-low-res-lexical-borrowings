@@ -1,30 +1,33 @@
 # langid.py
-# ----------------------------------------------------------------
-# word-level language identification modeling for [(step 1) LEXICAL BORROWING IDENTIFICATION]
-# ----------------------------------------------------------------
+# -------------------------------------------------------------------------------------
+# word-level language identification for borrowing detection (with facebookai/FastText)
+# -------------------------------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# mar-2026
+# apr-2026
 
-import os
 import re
 import json
-import urllib.request
 import fasttext
+from huggingface_hub import hf_hub_download
 from typing import List, Dict, Any
 
-from .prompt import load_gold
+HF_LANG_MAP = {
+    "ast": "ast_Latn",
+    "eu":  "eus_Latn",
+    "el":  "ell_Grek"
+}
 
 class BorrowingLangId:
-    def __init__(self, gt: str, model_path: str = "lid.176.bin"):
-        """Language identification at the word level for borrowings using FastText,
-        (https://fasttext.cc/docs/en/language-identification.html), which supports:
-        Asturian, Greek and Euskera."""
-        self._load_model(model_path)
-        self.data_splits = load_gold(gt, verbose=False)
+    def __init__(self, target_langs: list = None):
+        """Language identification at the word level for borrowings using FastText."""
+        self._load_model()
 
-    def get_borrowings(self, test_data: List[Dict[str, Any]], target_lang: str):
+    def get_borrowings(self, test_data: List[Dict[str, Any]], target_lang: str) -> List[Dict[str, Any]]:
         """Extracts borrowings with regards to language identification at the word level."""
         results = []
+        
+        hf_target_lang = HF_LANG_MAP.get(target_lang, target_lang)
+
         for case in test_data:
             text = case["text"]
             predictions = []
@@ -35,13 +38,14 @@ class BorrowingLangId:
                 if word.isnumeric() or len(word) < 2:
                     continue
 
-                # predict language
+                # predict language for the **isolated** word
                 labels, _ = self.model.predict(word, k=1)
-                lang_pred = labels[0].split('__label__')[-1]                
-                if lang_pred != target_lang:
+                lang_pred = labels.replace('__label__', '')                
+                
+                if lang_pred != hf_target_lang:
                     predictions.append({
                         "span": word,
-                        "label": "Raw" # no adaptation type for langid
+                        "label": "Raw" # ** cannot classify adaptation *
                     })
             
             results.append({
@@ -54,12 +58,9 @@ class BorrowingLangId:
 
     # --- response generation -------------------------------------------------------------------------
 
-    def _load_model(self, model_path: str = "lid.176.bin"):
-
-        FASTTEXT_URL = "https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin"
-        if not os.path.exists(model_path):
-            print(f"> Loading FastText lang-id. language model to {model_path} (126MB)...")
-            urllib.request.urlretrieve(FASTTEXT_URL, model_path)
-
+    def _load_model(self):
+        """Downloads and loads the FastText model (HF)."""
+        print(f"> Loading Hugging Face FastText language identification model...")
+        model_path = hf_hub_download(repo_id="facebook/fasttext-language-identification", filename="model.bin")
         fasttext.FastText.eprint = lambda x: None
         self.model = fasttext.load_model(model_path)

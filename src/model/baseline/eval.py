@@ -5,6 +5,7 @@
 # adriana r.f. (@adrmisty)
 # apr-2026
 
+# eval.py
 import json
 import re
 from typing import List, Dict, Tuple
@@ -15,12 +16,16 @@ import os
 import hashlib
 from .prompt import LABELS
 
-def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: str):
-    """Evaluation pipeline generating 3 distinct views of performance."""
+# --- full pipeline
+
+def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: str, target_langs: list = None):
+    """Evaluates the borrowing identification and classification performance of a model by comparing its predictions against the gold standard annotations. 
+    It computes metrics for identification, classification, and the joint (id+clf), and generates confusion matrices for each evaluation step."""
+    
     print(f"\n{'='*60}\nEvaluating pipeline: {experiment}\n{pred_path}\n{'='*60}")
     os.makedirs(out_dir, exist_ok=True)
     
-    true_spans, pred_spans = _load_spans(pred_path, gold_path)
+    true_spans, pred_spans = _load_spans(pred_path, gold_path, target_langs)
     
     print("\n*** [LW 1]: Borrowing detection ***")
     eval_step1_id(true_spans, pred_spans, out_dir, experiment)
@@ -31,15 +36,15 @@ def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: 
     print("\n*** [LW 1+2]: JOINT PIPELINE: ID + CLASSIFICATION ***")
     eval_joint(true_spans, pred_spans, out_dir, experiment)
 
+# --- split/joint evaluation
 
 def eval_step1_id(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str):
-    """Evaluates the binary detection task (native vs. borrowing)."""
+    """Evaluates the identification performance by comparing the predicted spans of borrowings against the true spans of borrowings, regardless of their specific labels."""
     true_keys = set(true_spans.keys())
     pred_keys = set(pred_spans.keys())
     all_keys = true_keys.union(pred_keys)
 
     y_true_id, y_pred_id = [], []
-    
     for key in all_keys:
         y_true_id.append("Borrowing" if key in true_keys else "Native")
         y_pred_id.append("Borrowing" if key in pred_keys else "Native")
@@ -53,21 +58,17 @@ def eval_step1_id(true_spans: dict, pred_spans: dict, out_dir: str, experiment: 
     )
 
 def eval_step2_clf(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str):
-    """Evaluates morphological classification ONLY on spans where the boundary was correctly detected."""
+    """Evaluates the classification performance by comparing the predicted labels of the identified borrowings against the true labels for those borrowings."""
     intersection_keys = set(true_spans.keys()).intersection(set(pred_spans.keys()))
-
     y_true_clf, y_pred_clf = [], []
 
     for key in intersection_keys:
         t_lbl = true_spans.get(key)
         p_lbl = pred_spans.get(key)
 
-        # if the gold label is 'Invalid_NE' or 'Invalid_FalsePos', it's not a real borrowing.
-        # it's a False Positive from the identification step
         if t_lbl not in LABELS:
             continue
 
-        # fallback: hallucinated tags
         if p_lbl not in LABELS: 
             p_lbl = "Raw"
 
@@ -75,17 +76,9 @@ def eval_step2_clf(true_spans: dict, pred_spans: dict, out_dir: str, experiment:
         y_pred_clf.append(p_lbl)
 
     if len(y_true_clf) == 0:
-        print(">>> Skipping classification CM: No valid tagset borrowings intersected")
+        print(">>> Skipping classification CM: no valid tagset borrowings intersected")
         return
-
-    get_metrics(
-        ground_truth=y_true_clf, 
-        predictions=y_pred_clf, 
-        labels=LABELS, 
-        average="macro", 
-        task="CLASSIFICATION"
-    )
-
+    get_metrics(y_true_clf, y_pred_clf, labels=LABELS, average="macro", task="CLASSIFICATION")
     _plot_cm(
         y_true=y_true_clf, y_pred=y_pred_clf, labels=LABELS,
         title=f"Borrowing classification (Exact matches)\n[{experiment.upper()}]",
@@ -93,33 +86,24 @@ def eval_step2_clf(true_spans: dict, pred_spans: dict, out_dir: str, experiment:
     )
 
 def eval_joint(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str):
-    """Evaluates joint identification and classification."""
+    """Evaluates the joint performance of borrowing identification and classification by comparing the predicted spans and their labels against the true spans and labels."""
     all_keys = set(true_spans.keys()).union(set(pred_spans.keys()))
-
     y_true_joint, y_pred_joint = [], []
 
     for key in all_keys:
         t_lbl = true_spans.get(key, "Native")
         p_lbl = pred_spans.get(key, "Native")
 
-        # gold label is an Invalid_NE/FalsePos noise tag, map it back to Native
         if t_lbl not in LABELS and t_lbl != "Native": 
             t_lbl = "Native" 
 
-        # fallback:hallucinated borrowing tags
         if p_lbl not in LABELS and p_lbl != "Native": 
-            p_lbl = "Raw"
+            p_lbl = "Native" if "Invalid" in str(p_lbl) else "Raw"
 
         y_true_joint.append(t_lbl)
         y_pred_joint.append(p_lbl)
 
-    get_metrics(
-        ground_truth=y_true_joint, 
-        predictions=y_pred_joint, 
-        labels=LABELS, 
-        average="macro", 
-        task="JOINT (Macro, ex. Native)"
-    )
+    get_metrics(y_true_joint, y_pred_joint, labels=LABELS, average="macro", task="JOINT (Macro, ex. Native)")
 
     labels_with_native = ["Native"] + LABELS
     _plot_cm(
@@ -129,66 +113,70 @@ def eval_joint(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str
     )
                 
 def get_metrics(ground_truth: List[str], predictions: List[str], labels: list, average: str = "binary", out_file: str = None, task: str = "IDENTIFICATION"):
+    """Calculates and prints accuracy, precision, recall, and F1-score for the given ground truth and predictions.
+        - For identification, the positive class is "Borrowing". 
+        - For classification, it calculates macro-averaged metrics across all classes. 
+        - For the joint evaluation (id+clf), it also calculates macro-averaged metrics."""
     acc = accuracy_score(ground_truth, predictions)
     p, r, f1, _ = precision_recall_fscore_support(
-        ground_truth, 
-        predictions, 
-        labels=labels, 
-        average=average, 
-        pos_label="Borrowing" if average == "binary" else None,
-        zero_division=0
+        ground_truth, predictions, labels=labels, average=average, 
+        pos_label="Borrowing" if average == "binary" else None, zero_division=0
     )
     
     output_str = f"[{task}] -> Precision: {p:.4f} | Recall: {r:.4f} | F1: {f1:.4f}\n"
     print(output_str)
-    
     if out_file:
         with open(out_file, "a", encoding="utf-8") as f:
             f.write(output_str)
 
     return {"accuracy": acc, "precision": p, "recall": r, "f1": f1}
 
+# --- data loaders / normalizers
+
 def _load_spans(pred_path: str, gold_path: str) -> Tuple[Dict, Dict]:
+    # preds
     with open(pred_path, "r", encoding="utf-8") as f:
         predictions = json.load(f)
+
+    # gold
     with open(gold_path, "r", encoding="utf-8") as f:
         ground_truth = json.load(f)
-
     gt_map = {}
+
     for item in ground_truth:
         text = item["data"]["text"]
         stable_id = hashlib.md5(text.encode('utf-8')).hexdigest()
         case_id = str(item.get("id", stable_id))
         gt_map[case_id] = item.get("annotations", [])
 
-    true_spans_dict = {} 
-    pred_spans_dict = {} 
+    true_spans_dict = {}
+    pred_spans_dict = {}
 
     for record in predictions:
         case_id = str(record["id"])
         if case_id not in gt_map: continue
-
         pred_items = _parse_llm_output(record.get("prediction", "[]"))
+
         if isinstance(pred_items, list):
             for p in pred_items:
                 if isinstance(p, dict) and p.get("span") and p.get("label"):
                     txt = _normalize_text(p["span"])
-                    lbl = _normalize_label(p["label"]) 
-                    if lbl != "O": 
+                    lbl = _normalize_label(p["label"])
+                    if lbl != "O":
                         pred_spans_dict[(case_id, txt)] = lbl
-                        
+
         true_items = []
         for ann in gt_map[case_id]:
             if isinstance(ann, dict):
                 true_items.extend(ann.get("result", []))
-                
+
         for t in true_items:
             val = t.get("value", {})
             if "text" in val and "labels" in val:
                 txt = _normalize_text(val["text"])
                 lbl = _normalize_label(val["labels"])
                 true_spans_dict[(case_id, txt)] = lbl
-                
+
     return true_spans_dict, pred_spans_dict
 
 def _plot_cm(y_true, y_pred, labels, title, out_path):
@@ -213,6 +201,8 @@ def _normalize_label(lbl):
     lbl_str = re.sub(r"[\[\]\'\"]", "", lbl_str)
     return lbl_str.strip() or "O"
 
+
+
 def _parse_llm_output(prediction_str: str) -> List[Dict]:
     try:
         prediction_str = re.sub(r"<think>.*?</think>", "", str(prediction_str), flags=re.DOTALL).strip()
@@ -221,5 +211,7 @@ def _parse_llm_output(prediction_str: str) -> List[Dict]:
             return json.loads(match.group())
         data = json.loads(prediction_str)
         return data if isinstance(data, list) else []
+
     except Exception:
         return []
+

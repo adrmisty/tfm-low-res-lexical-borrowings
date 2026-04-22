@@ -1,122 +1,123 @@
 # baseline.py
 # ----------------------------------------------------------------
-# baseline runs for [(step 1) LEXICAL BORROWING IDENTIFICATION]
+# baseline orchestrator for lexical borrowing models
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
 # apr-2026
 
+import os
+import json
+from datetime import datetime
+import logging
+
+from .prompt import load_gold_data
 from .llm import BorrowingLLM
 from .langid import BorrowingLangId
-from .xlmr import BorrowingXLM
+from .encoder import BorrowingEncoder
 
-import os
-from datetime import datetime
-import json
+OUT_DIR = "results/model"
 
-OUT_DIR = "data/model"
-
-def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen3.5-9B"):
-    """Few-shot prompting on LLM for lexical borrowing identification and classification."""
-    llm = BorrowingLLM(model_id, gt)
-
-    all_predictions = []
-
+def run_llm_baseline(langs: list, model_id: str, gt: str, pipeline: str = "2step", k: int = 0):
+    logging.info(f"\n--- Running LLM Baseline ({model_id}) | Pipeline: {pipeline} | k: {k} ---")
+    
+    test_data = load_gold_data(gt, target_langs=langs)
+    if not test_data:
+        logging.error("\t> (!) No test data found for the specified languages.")
+        return
+        
+    llm = BorrowingLLM(model_id=model_id)
+    all_results = []
+    
+    # ** inference per-language **
     for lang in langs:
-        print(f"\n>>> Running [few-shot LEXICAL BORROWING IDENTIFICATION and CLASSIFICATION (2-step inference) / ({model_id})] baseline for [{lang.upper()}]...")
+        logging.info(f"\t> Processing [{lang.upper()}]...")
+        # filter data for current language loop
+        lang_data = [item for item in test_data if item["lang"] == lang]
+        
+        if pipeline == "2step":
+            res = llm.get_borrowings_2step(test_data=lang_data, language=lang, k=k)
+        else:
+            res = llm.get_borrowings_1step(test_data=lang_data, language=lang, k=k)
+            
+        all_results.extend(res)
+        
+    model_short_name = model_id.split("/")[-1]
+    out_dir = os.path.join(OUT_DIR, model_short_name, pipeline)
+    _save_preds(all_results, out_dir, f"{model_short_name}_{pipeline}_{k}shot")
 
-        few_shot_items, test_items = llm.data_splits[lang]
-        shots = [
-            {"text": ex["text"], "output": ex["gold_output"]} 
-            for ex in few_shot_items
-        ]
+def run_langid_baseline(langs: list, gt: str):
+    logging.info("\n--- Running FastText LangID Baseline ---")
+    
+    test_data = load_gold_data(gt, target_langs=langs)
+    if not test_data:
+        logging.error("\t> (!) No test data found for the specified languages.")
+        return
+        
+    langid_model = BorrowingLangId()
+    all_results = []
+    
+    for lang in langs:
+        logging.info(f"\t> Processing [{lang.upper()}]...")
+        lang_data = [item for item in test_data if item["lang"] == lang]
+        res = langid_model.get_borrowings(test_data=lang_data, target_lang=lang)
+        all_results.extend(res)
+        
+    _save_preds(all_results, os.path.join(OUT_DIR, "FastText", "1step"), "langid")
 
-        predictions = llm.get_borrowings_2step(
-            test_data=test_items, 
-            language=lang, 
-            examples=shots
-        )
-        all_predictions.extend(predictions)
+def run_xlmr_baseline(langs: list, silver_data: str, gt: str, pipeline: str = "2step", model_id: str = "xlm-roberta-base"):
+    logging.info(f"\n--- Running Encoder Baseline ({model_id}) | Pipeline: {pipeline} ---")
+    
+    test_data = load_gold_data(gt, target_langs=langs)
+    if not test_data:
+        logging.error("\t> (!) No test data found for the specified languages.")
+        return
+        
+    # checkpoints
+    out_dir_bin = os.path.join(OUT_DIR, model_id, "step1_binary")
+    out_dir_mul = os.path.join(OUT_DIR, model_id, "step2_multi")
+    
+    encoder = BorrowingEncoder(gt=gt, model_id=model_id)
+    
+    # ** train if they don't exist **
+    if not os.path.exists(out_dir_bin):
+        encoder.output_dir = out_dir_bin
+        encoder.train(train_json=silver_data, task="binary")
+        
+    if pipeline == "2step" and not os.path.exists(out_dir_mul):
+        encoder.output_dir = out_dir_mul
+        encoder.train(train_json=silver_data, task="multi")
+        
+    # ** inference **
+    all_results = []
+    for lang in langs:
+        logging.info(f"\t> Processing [{lang.upper()}]...")
+        lang_data = [item for item in test_data if item["lang"] == lang]
+        
+        if pipeline == "2step":
+            res = encoder.get_borrowings_2step(
+                test_data=lang_data, 
+                language=lang, 
+                path_binary=out_dir_bin, 
+                path_multi=out_dir_mul
+            )
+        else:
+            logging.error("\t>> (!) 1-step not natively supported in the updated encoder sequence classification pipeline (default is 2-step)")
+            return
+            
+        all_results.extend(res)
+        
+    model_short_name = model_id.split("/")[-1]
+    out_dir = os.path.join(OUT_DIR, model_short_name, pipeline)
+    _save_preds(all_results, out_dir, f"{model_short_name}_{pipeline}")
+    
+# --- util
 
-    out_dir = f"{OUT_DIR}/{model_id}"
+def _save_preds(results: list, out_dir: str, prefix: str):
     os.makedirs(out_dir, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S") #timestamped json
+    out_file = os.path.join(out_dir, f"predictions_{prefix}_{timestamp}.json")
     
-    clean_model_name = model_id.replace("/", "-")
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    with open(out_file, "w", encoding="utf-8") as f:
+        json.dump(results, f, indent=4, ensure_ascii=False)
     
-    pred_path = os.path.join(out_dir, f"predictions_{clean_model_name}_{timestamp}.json")
-    with open(pred_path, "w", encoding="utf-8") as f:
-        json.dump(all_predictions, f, indent=4, ensure_ascii=False)
-        
-    print("\n" + "="*50)
-    print(f">>> INFERENCE COMPLETE. Predictions saved to: {pred_path}")
-    print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title {clean_model_name}")
-    print("="*50)
-
-def run_langid_baseline(langs: list[str], gt: str):
-    """Language identification at the word level for lexical borrowing identification and classification
-    >>> purely for identification, cannot classify."""
-    print(">>> Initializing [word-level LANGUAGE IDENTIFICATION] baseline...")
-    langid_model = BorrowingLangId(gt)
-    
-    all_predictions = []
-
-    for lang in langs:
-        print(f"\n>>> Running [LangID LEXICAL BORROWING IDENTIFICATION] for [{lang.upper()}]...")
-        _, test_items = langid_model.data_splits[lang]
-        predictions = langid_model.get_borrowings(test_items, lang)
-        all_predictions.extend(predictions)
-
-    out_dir = f"{OUT_DIR}/FastText"
-    os.makedirs(out_dir, exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    
-    pred_path = os.path.join(out_dir, f"predictions_langid_{timestamp}.json")
-    with open(pred_path, "w", encoding="utf-8") as f:
-        json.dump(all_predictions, f, indent=4, ensure_ascii=False)
-        
-    print("\n" + "="*50)
-    print(f">>> INFERENCE COMPLETE. Predictions saved to: {pred_path}")
-    print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title LANGID")
-    print("="*50)
-
-def run_xlmr_baseline(langs: list[str], silver_data: str, gt: str = "data/annotation/final/test_gold_annotations.json"):
-    """Trains and runs the 2-step XLM-RoBERTa pipeline using dynamic dataset loading."""
-    
-    path_binary = f"{OUT_DIR}/XLM-RoBERTa/xlmr_binary"
-    path_multi = f"{OUT_DIR}/XLM-RoBERTa/xlmr_multi"
-    
-    xlm = BorrowingXLM(gt)
-
-    print("\t>>> [XLMR-1]: Training binary classifier (Native vs. Borrowing)...")
-    xlm.output_dir = path_binary
-    xlm.train(train_json=silver_data, task="binary") 
-    
-    print("\t>>> [XLMR-2]: Training multi-class classifier (LS tagset)...")
-    xlm.output_dir = path_multi
-    xlm.train(train_json=silver_data, task="multi")
-    
-    # 2-step inference
-    all_predictions = []
-    for lang in langs:
-        print(f"\n>>> Running [XLM-RoBERTa 2-step inference] for [{lang.upper()}]...")
-        _, test_items = xlm.data_splits[lang]
-        
-        predictions = xlm.get_borrowings_2step(
-            test_data=test_items, 
-            language=lang,
-            path_binary=path_binary,
-            path_multi=path_multi
-        )
-        all_predictions.extend(predictions)
-    
-    os.makedirs(f"{OUT_DIR}/XLM-RoBERTa", exist_ok=True)
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    pred_path = os.path.join(f"{OUT_DIR}/XLM-RoBERTa", f"predictions_xlmr_2step_{timestamp}.json")
-    
-    with open(pred_path, "w", encoding="utf-8") as f:
-        json.dump(all_predictions, f, indent=4, ensure_ascii=False)
-        
-    print("\n" + "="*50)
-    print(f">>> INFERENCE COMPLETE. Predictions saved to: {pred_path}")
-    print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title XLMR-2STEP")
-    print("="*50)
+    logging.info(f"\t> Predictions saved successfully to: {out_file}")
