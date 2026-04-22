@@ -1,12 +1,23 @@
-python==3.11
-wikipedia-api
-seaborn
-openpyxl
+# Python >= 3.11
+
+# --- deepl ---
+torch>=2.1.2
 vllm
-huggingface_hub
 transformers
-tqdm
-datasets
-scikit-learn
-accelerate 
+accelerate
 bitsandbytes
+
+# --- NLP  ---
+fasttext-wheel 
+huggingface_hub
+datasets
+wikipedia-api
+
+# --- eval and plotting ---
+scikit-learn
+seaborn
+matplotlib
+
+# --- utils ---
+openpyxl
+tqdm
