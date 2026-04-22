@@ -1,7 +1,0 @@
-$ python main.py --action eval --pred_file data/model/XLM-RoBERTa/predictions_xlmr_20260408_130551.json --title XLMR-SILVER
-============================================================
-Evaluating pipeline: XLMR-SILVER
-data/model/XLM-RoBERTa/predictions_xlmr_20260408_130551.json
-============================================================
-[LEXICAL BORROWING IDENTIFICATION.] -> Precision: 0.1145 | Recall: 0.2471 | F1: 0.1565
-[LEXICAL BORROWING CLASSIFICATION.] -> Precision: 0.4534 | Recall: 0.6333 | F1: 0.4721

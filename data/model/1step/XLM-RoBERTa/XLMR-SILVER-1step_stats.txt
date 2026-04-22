@@ -1,0 +1,18 @@
+$ python main.py --action eval --pred_file data/model/1step/XLM-RoBERTa/predictions_xlmr_20260408_130551.json --title XLMR-SILV
+ER
+
+============================================================
+Evaluating pipeline: XLMR-SILVER
+data/model/1step/XLM-RoBERTa/predictions_xlmr_20260408_130551.json
+============================================================
+
+*** [LW 1]: Borrowing detection ***
+[IDENTIFICATION] -> Precision: 0.1145 | Recall: 0.2471 | F1: 0.1565
+
+
+*** [LW 2]: Borrowing classification ***
+[CLASSIFICATION] -> Precision: 0.4476 | Recall: 0.6512 | F1: 0.4829
+
+
+*** [LW 1+2]: JOINT PIPELINE: ID + CLASSIFICATION ***
+[JOINT (Macro, ex. Native)] -> Precision: 0.1715 | Recall: 0.3981 | F1: 0.2026

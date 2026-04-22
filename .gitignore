@@ -5,10 +5,27 @@ __pycache__/
 .env
 *.pyc
 .DS_Store
+
+lid.176.bindata/deprec/
+*.safetensors
+*.pt
+*.pth
+*.bin
+
+
+# ** results **
+!data/model/**/*.json
+!data/model/**/*.png
+!data/model/**/*.jpg
+
+# too large
+data/deprec/
+*.safetensors
+*.pt
+*.bin
+*.pth
+
 data/external/
-data/model/FastText/lid.176.bin
-data/model/XLM-RoBERTa/unhashed/masked_loss/xlmr/
-data/model/XLM-RoBERTa/unhashed/weighted_loss/xlmr/
-data/model/XLM-RoBERTa/weighted_loss_hashed/xlmr/
-data/model/XLM-RoBERTa/xlmr/
-lid.176.bin
+data/model/1step/XLM-RoBERTa/xlmr/
+data/model/2step/XLM-RoBERTa/xlmr_binary/
+data/model/2step/XLM-RoBERTa/xlmr_multi/
