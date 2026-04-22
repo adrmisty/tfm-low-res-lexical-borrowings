@@ -1,0 +1,145 @@
+{
+  "ast": [
+    {
+      "text": "El Mac ta ensin conexón, asina que resetiamos el router.",
+      "output_1step": "[{\"span\": \"Mac\", \"label\": \"Invalid_NE\"}, {\"span\": \"conexón\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"resetiamos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"router\", \"label\": \"Raw\"}]",
+      "output_id": "[\"Mac\", \"conexón\", \"resetiamos\", \"router\"]",
+      "spans": [
+        {"span": "Mac", "label": "Invalid_NE"},
+        {"span": "conexón", "label": "Adapted_Orthogra"},
+        {"span": "resetiamos", "label": "Adapted_Morph"},
+        {"span": "router", "label": "Raw"}
+      ]
+    },
+    {
+      "text": "El téunicu fizo un backup de los archivos y depués fizo clik nel programa.",
+      "output_1step": "[{\"span\": \"téunicu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fizo un backup\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"archivos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"fizo clik\", \"label\": \"LightVerb_Integrated\"}, {\"span\": \"programa\", \"label\": \"Adapted_Orthogra\"}]",
+      "output_id": "[\"téunicu\", \"fizo un backup\", \"archivos\", \"fizo clik\", \"programa\"]",
+      "spans": [
+        {"span": "téunicu", "label": "Adapted_Morph"},
+        {"span": "fizo un backup", "label": "LightVerb_Unintegrated"},
+        {"span": "archivos", "label": "Adapted_Morph"},
+        {"span": "fizo clik", "label": "LightVerb_Integrated"},
+        {"span": "programa", "label": "Adapted_Orthogra"}
+      ]
+    },
+    {
+      "text": "Na clase d'informática, deprendimos que'l términu 'software', o 'mouse', son estranxerismos.",
+      "output_1step": "[{\"span\": \"clase\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"informática\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"software\", \"label\": \"Invalid_FalsePos\"}, {\"span\": \"mouse\", \"label\": \"Invalid_FalsePos\"}, {\"span\": \"estranxerismos\", \"label\": \"Adapted_Orthogra\"}]",
+      "output_id": "[\"clase\", \"informática\", \"software\", \"mouse\", \"estranxerismos\"]",
+      "spans": [
+        {"span": "clase", "label": "Adapted_Orthogra"},
+        {"span": "informática", "label": "Adapted_Orthogra"},
+        {"span": "software", "label": "Invalid_FalsePos"},
+        {"span": "mouse", "label": "Invalid_FalsePos"},
+        {"span": "estranxerismos", "label": "Adapted_Orthogra"}
+      ]
+    },
+    {
+      "text": "Los usuarios hackiaron el servidor principal de Google dende un smartphone nuevu.",
+      "output_1step": "[{\"span\": \"hackiaron\", \"label\": \"Adapted_Morph\"}, {\"span\": \"Google\", \"label\": \"Invalid_NE\"}, {\"span\": \"smartphone\", \"label\": \"Raw\"}]",
+      "output_id": "[\"hackiaron\", \"Google\", \"smartphone\"]",
+      "spans": [
+        {"span": "hackiaron", "label": "Adapted_Morph"},
+        {"span": "Google", "label": "Invalid_NE"},
+        {"span": "smartphone", "label": "Raw"}
+      ]
+    },
+    {
+      "text": "El presidente escribió un tuit y depués fizo click nel enllaz p'amosar el documentu.",
+      "output_1step": "[{\"span\": \"tuit\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"fizo click\", \"label\": \"LightVerb_Unintegrated\"}]",
+      "output_id": "[\"tuit\", \"fizo click\"]",
+      "spans": [
+        {"span": "tuit", "label": "Adapted_Orthogra"},
+        {"span": "fizo click", "label": "LightVerb_Unintegrated"}
+      ]
+    },
+    {
+      "text": "Tamos faciendo test de les apps nueves pa ver si tienen dalgún bug.",
+      "output_1step": "[{\"span\": \"faciendo test\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"apps\", \"label\": \"Adapted_Morph\"}, {\"span\": \"bug\", \"label\": \"Raw\"}]",
+      "output_id": "[\"faciendo test\", \"apps\", \"bug\"]",
+      "spans": [
+        {"span": "faciendo test", "label": "LightVerb_Unintegrated"},
+        {"span": "apps", "label": "Adapted_Morph"},
+        {"span": "bug", "label": "Raw"}
+      ]
+    }
+  ],  
+  "eu": [
+    {
+      "text": "Bulegoko pantaila berrian Microsoft sistema bat instalatu dugu, eta orain router bat behar dugu.",
+      "output_1step": "[{\"span\": \"pantaila\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"Microsoft\", \"label\": \"Invalid_NE\"}, {\"span\": \"instalatu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"router\", \"label\": \"Raw\"}]",
+      "output_id": "[\"pantaila\", \"Microsoft\", \"instalatu\", \"router\"]",
+      "spans": [
+        {"span": "pantaila", "label": "Adapted_Orthogra"},
+        {"span": "Microsoft", "label": "Invalid_NE"},
+        {"span": "instalatu", "label": "Adapted_Morph"},
+        {"span": "router", "label": "Raw"}
+      ]
+    },
+    {
+      "text": "Arazoa konpontzeko sistemari reset egin aurretik, kablea konektatu eta botoian klik egin behar duzu.",
+      "output_1step": "[{\"span\": \"reset egin\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"kablea\", \"label\": \"Adapted_Morph\"}, {\"span\": \"konektatu\", \"label\": \"Adapted_Morph\"}, {\"span\": \"botoian\", \"label\": \"Adapted_Morph\"}, {\"span\": \"klik egin\", \"label\": \"LightVerb_Integrated\"}]",
+      "output_id": "[\"reset egin\", \"kablea\", \"konektatu\", \"botoian\", \"klik egin\"]",
+      "spans": [
+        {"span": "reset egin", "label": "LightVerb_Unintegrated"},
+        {"span": "kablea", "label": "Adapted_Morph"},
+        {"span": "konektatu", "label": "Adapted_Morph"},
+        {"span": "botoian", "label": "Adapted_Morph"},
+        {"span": "klik egin", "label": "LightVerb_Integrated"}
+      ]
+    },
+    {
+      "text": "Informatika klasean ikasi genuen 'software' hitza mailegua dela, eta gero ezezagun batek gure kontuak hackeatu zituen.",
+      "output_1step": "[{\"span\": \"Informatika\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"klasean\", \"label\": \"Adapted_Morph\"}, {\"span\": \"software\", \"label\": \"Invalid_FalsePos\"}, {\"span\": \"kontuak\", \"label\": \"Adapted_Morph\"}, {\"span\": \"hackeatu\", \"label\": \"Adapted_Morph\"}]",
+      "output_id": "[\"Informatika\", \"klasean\", \"software\", \"kontuak\", \"hackeatu\"]",
+      "spans": [
+        {"span": "Informatika", "label": "Adapted_Orthogra"},
+        {"span": "klasean", "label": "Adapted_Morph"},
+        {"span": "software", "label": "Invalid_FalsePos"},
+        {"span": "kontuak", "label": "Adapted_Morph"},
+        {"span": "hackeatu", "label": "Adapted_Morph"}
+      ]
+    }
+  ],
+  "el": [
+    {
+      "text": "Αφού συνδέσαμε το καλώδιο στον νέο server της Microsoft, το σύστημα μπλόκαρε.",
+      "output_1step": "[{\"span\": \"server\", \"label\": \"Raw\"}, {\"span\": \"Microsoft\", \"label\": \"Invalid_NE\"}, {\"span\": \"μπλόκαρε\", \"label\": \"Adapted_Morph\"}]",
+      "output_id": "[\"server\", \"Microsoft\", \"μπλόκαρε\"]",
+      "spans": [
+        {"span": "server", "label": "Raw"},
+        {"span": "Microsoft", "label": "Invalid_NE"},
+        {"span": "μπλόκαρε", "label": "Adapted_Morph"}
+      ]
+    },
+    {
+      "text": "Για να κάνεις reset στο router, πρέπει να κάνεις κλικ στο μενού.",
+      "output_1step": "[{\"span\": \"κάνεις reset\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"router\", \"label\": \"Raw\"}, {\"span\": \"κάνεις κλικ\", \"label\": \"LightVerb_Integrated\"}, {\"span\": \"μενού\", \"label\": \"Adapted_Translit\"}]",
+      "output_id": "[\"κάνεις reset\", \"router\", \"κάνεις κλικ\", \"μενού\"]",
+      "spans": [
+        {"span": "κάνεις reset", "label": "LightVerb_Unintegrated"},
+        {"span": "router", "label": "Raw"},
+        {"span": "κάνεις κλικ", "label": "LightVerb_Integrated"},
+        {"span": "μενού", "label": "Adapted_Translit"}
+      ]
+    },
+    {
+      "text": "Στο πανεπιστήμιο μάθαμε ότι ο όρος 'hardware' δεν κλίνεται στα ελληνικά.",
+      "output_1step": "[{\"span\": \"hardware\", \"label\": \"Invalid_FalsePos\"}]",
+      "output_id": "[\"hardware\"]",
+      "spans": [
+        {"span": "hardware", "label": "Invalid_FalsePos"}
+      ]
+    },
+    {
+      "text": "Τα κλικ να κανείς στον υπολογιστή με τον ποντίκι είναι απαραίτητα για να λειτουργήσει το πρόγραμμα.",
+      "output_1step": "[{\"span\": \"κλικ\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"πρόγραμμα\", \"label\": \"Adapted_Translit\"}]",
+      "output_id": "[\"κλικ\", \"πρόγραμμα\"]",
+      "spans": [
+        {"span": "κλικ", "label": "Adapted_Orthogra"},
+        {"span": "πρόγραμμα", "label": "Adapted_Translit"}
+      ]
+    }
+  ]
+}
