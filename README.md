@@ -2,11 +2,11 @@
 
 This repository contains the codebase for a Master's Thesis focused on the automated extraction and morphological classification of lexical borrowings. The project evaluates multiple NLP architectures on three morphologically diverse, lower-resource European languages: **Asturian (ast)**, **Basque (eu)**, and **Greek (el)**.
 
-This Master's Thesis is for the Erasmus Mundus+ Master's degree in Language and Communication Technologies, supervised by Mgr. Magda Ševčíková, Ph.D (Charles University, CZ) and Mgr. Jeremy Barnes, Ph.D (University of the Basque Country, ES).
+This Master's Thesis is for the Erasmus Mundus+ Master's degree in Language and Communication Technologies, supervised by Mgr. Magda Ševčíková, Ph.D (Charles University, CZ) and Mgr. Jeremy Barnes, Ph.D (University of the Basque Country, ES). The thesis document (_in progress_) can be found on [Overleaf](https://www.overleaf.com/project/692da51703e8fd24ec17d2e9).
 
 ***
 
-## 📚 Introduction
+## Introduction
 
 Lexical borrowing is a primary mechanism of language contact and evolution. When a target language (recipient) adopts a word from a source language (donor), the loanword typically undergoes varying degrees of phonological, orthographic, and morphological adaptation to fit the recipient's grammatical rules (Haspelmath, 2009). 
 
@@ -74,7 +74,7 @@ python src/data/main.py --action clean --input data/corpus/mined/ --output data/
 
 ---
 
-## 🧠 (Baseline) Modeling Pipeline (`src/model/baseline`)
+## (Baseline) Modeling Pipeline (`src/model/baseline`)
 
 This module orchestrates the inference and training logic for three distinct AI methodologies, allowing for a comprehensive comparative analysis of in-context learning approaches across different baselines. 
 
