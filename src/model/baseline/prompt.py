@@ -12,11 +12,11 @@ from typing import List, Dict
 
 FEW_SHOT_PATH = "data/icl/few_shot_examples.json"
 
-TAGSET = [ # eliminated "Internationalism" // excl. Invalid_*
+TAGSET = [ # eliminated "Internationalism" // "Adapted_Translit" merged onto "Adapted_Orthogra" // excl. Invalid_*
     "Raw", 
     "Adapted_Orthogra", 
     "Adapted_Morph", 
-    "Adapted_Translit", 
+    #"Adapted_Translit", 
     "LightVerb_Unintegrated", 
     "LightVerb_Integrated",
     #"Internationalism",

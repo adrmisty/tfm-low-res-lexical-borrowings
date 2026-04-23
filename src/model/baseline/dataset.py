@@ -39,7 +39,7 @@ TYPE_TO_TAG = {
     "verb_light_greek": "LightVerb_Integrated",
 
     # --- orthography / morphology ---
-    "noun_transliterated": "Adapted_Translit", #TODO: eliminate > Adapted_Orthogra
+    "noun_transliterated": "Adapted_Orthogra", 
     "noun_plural_native": "Adapted_Morph",
     "noun_integrated_sg": "Adapted_Morph",
     "noun_integrated_pl": "Adapted_Morph",
