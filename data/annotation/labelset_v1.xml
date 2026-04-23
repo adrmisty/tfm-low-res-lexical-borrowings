@@ -1,0 +1,20 @@
+<View>
+    <Labels name="label" toName="text">
+    <Header value="Noise / Adversarial" size="5"/>
+    <Label value="Invalid_NE" background="#b1584e"/>
+    <Label value="Invalid_FalsePositive" background="#e26660"/>
+
+    <Header value="Adaptation" size="5"/>
+    <Label value="Raw" background="#e3f02d"/>
+    <Label value="Adapted_Morph" background="#95DE64"/>
+    <Label value="Adapted_Orthogra" background="#65e692"/>
+
+    <Header value="Light Verbs" size="5"/>
+    <Label value="LightVerb_Unintegrated" background="#13C2C2"/>
+    <Label value="LightVerb_Integrated" background="#006D75"/>
+
+    </Labels>
+
+    <Text name="text" value="$text"/>
+    <Header value="Lang: $lang | Source: $source" size="4"/>
+</View>
