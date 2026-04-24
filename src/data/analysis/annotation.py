@@ -14,7 +14,7 @@ import os
 
 # --- PATH CONFIGURATION ---
 INPUT_FILE = "data/processed/mined_sentences.clean.jsonl"
-OUTPUT_DIR = "data/annotation/final"
+OUTPUT_DIR = "data/annotation"
 OUTPUT_FILE_LABEL = os.path.join(OUTPUT_DIR, "sample_final.json")
 
 WIKTEXTRACT_FILES = {
@@ -39,7 +39,7 @@ PATH_COGNET = "data/external/cognet.tsv"
 PATH_UNIMORPH = "data/external/unimorph_eus.tsv"
 PATH_CONLOAN = "data/external/conloan_ell.tsv"
 
-ANNOTATIONS_LS = os.path.join(OUTPUT_DIR, "test_gold_annotations.json")
+ANNOTATIONS_LS = os.path.join(OUTPUT_DIR, "test_gold_annotations_{version}.json")
 ANNOTATIONS_FLS = os.path.join(OUTPUT_DIR, "fixed-test_gold_annotations.json")
 
 TARGET_TOTAL = 200
@@ -62,9 +62,9 @@ def sample_for_annotation():
     print("> Exporting to label studio...")
     _export_to_label_studio(validated_data)
 
-def get_annotation_stats():
+def get_annotation_stats(version: str = "v1"):
     """Calculates and prints annotation statistics from the Label Studio JSON."""
-    with open(ANNOTATIONS_LS, "r", encoding="utf-8") as f:
+    with open(ANNOTATIONS_LS.format(version=version), "r", encoding="utf-8") as f:
         content = f.read().strip()
 
     try:
