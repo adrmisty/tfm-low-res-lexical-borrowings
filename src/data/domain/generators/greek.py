@@ -6,7 +6,7 @@
 # jan-2026
 
 from typing import Dict, List
-from .seeds import BorrowingGenerator
+from .seeds import SeedSynthesizer
 
 GREEK_TRANSLITERATION = {
     "click": "κλικ", 
@@ -44,9 +44,11 @@ GREEK_TRANSLITERATION = {
     "troll": "τρολ"
 }
 
-class GreekGenerator(BorrowingGenerator):
-    def __init__(self):
-        super().__init__("el")
+class Greek(SeedSynthesizer):
+    def __init__(self, roots: List[str] = None):
+        # we accept roots here to match the signature of Asturian/Basque, 
+        # but Greek primarily uses the transliteration map for generation
+        super().__init__("el", roots if roots else [])
         self.trans_map = GREEK_TRANSLITERATION
 
     def generate_for_root(self, root: str) -> List[Dict]:

@@ -6,12 +6,11 @@
 # jan-2026
 
 from typing import Dict, List
-from .seeds import BorrowingGenerator
-from src.words import N_ROOTS
+from .seeds import SeedSynthesizer
 
-class BasqueGenerator(BorrowingGenerator):
-    def __init__(self, roots: list[str]):
-        super().__init__("eu")
+class Basque(SeedSynthesizer):
+    def __init__(self, roots: List[str]):
+        super().__init__("eu", roots)
         self.n_roots = roots
 
     def generate_for_root(self, root: str) -> List[Dict]:
@@ -21,7 +20,7 @@ class BasqueGenerator(BorrowingGenerator):
         # phonetic adaptations
         phonetic_stem = root.lower().replace("ch", "tx").replace("sh", "x").replace("ck", "k").replace("c", "k").replace("q", "k")
         if "tweet" in phonetic_stem: phonetic_stem = phonetic_stem.replace("tweet", "tuit")
-        if phonetic_stem.startswith("s") and len(phonetic_stem) > 1 and phonetic_stem[1] not in "aeiou": 
+        if phonetic_stem.startswith("s") and len(phonetic_stem) > 1 and phonetic_stem not in "aeiou": 
             phonetic_stem = "e" + phonetic_stem
 
         # NOUNS

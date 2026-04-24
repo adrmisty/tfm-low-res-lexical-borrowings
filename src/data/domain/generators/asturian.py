@@ -6,11 +6,10 @@
 # jan-2026
 
 from typing import Dict, List
-from .seeds import BorrowingGenerator
-from src.words import N_ROOTS
+from .seeds import SeedSynthesizer
 
-class AsturianGenerator(BorrowingGenerator):
-    def __init__(self, roots: list[str]):
+class Asturian(SeedSynthesizer):
+    def __init__(self, roots: List[str]):
         super().__init__("ast", roots)
 
     def generate_for_root(self, root: str) -> List[Dict]:
@@ -19,7 +18,7 @@ class AsturianGenerator(BorrowingGenerator):
         
         # Base stem logic
         stem = root
-        if root.startswith("s") and len(root) > 1 and root[1] not in "aeiou":
+        if root.startswith("s") and len(root) > 1 and root not in "aeiou":
             stem = "e" + stem # escan
         if "tweet" in stem: stem = stem.replace("tweet", "tuit")
 
@@ -41,7 +40,7 @@ class AsturianGenerator(BorrowingGenerator):
                 # allow for 'facer (un) click/scan/post'
                 H.append(self._make_seed(f"{aux} un {stem}", root, "verb_light_construction", "VERB"))
         
-        if root in N_ROOTS: return H
+        if root in self.roots: return H
 
         # VERBS (prescriptive) -> PoS: VERB
         def adapt_spelling(base, suffix):

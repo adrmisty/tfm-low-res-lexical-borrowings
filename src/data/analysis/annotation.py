@@ -5,66 +5,71 @@
 # adriana r.f. (@adrmisty)
 # feb-2026
 
-from collections import Counter, defaultdict
-
-import pandas as pd
+import os
 import json
 import uuid
-import os
+import logging
+import pandas as pd
+from collections import Counter, defaultdict
+from typing import List, Dict
 
-# --- PATH CONFIGURATION ---
-INPUT_FILE = "data/processed/mined_sentences.clean.jsonl"
-OUTPUT_DIR = "data/annotation"
+# --- path config ---
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(CURRENT_DIR)))
+
+INPUT_FILE = os.path.join(PROJECT_ROOT, "data", "corpus", "processed", "mined_sentences.clean.jsonl")
+OUTPUT_DIR = os.path.join(PROJECT_ROOT, "data", "annotation")
 OUTPUT_FILE_LABEL = os.path.join(OUTPUT_DIR, "sample_final.json")
 
 WIKTEXTRACT_FILES = {
-    "ast": "data/external/kaikki.org-dictionary-Asturian.jsonl",
-    "eu": "data/external/kaikki.org-dictionary-Basque.jsonl",
-    "el": "data/external/kaikki.org-dictionary-Greek.jsonl"
+    "ast": os.path.join(PROJECT_ROOT, "data", "external", "kaikki.org-dictionary-Asturian.jsonl"),
+    "eu": os.path.join(PROJECT_ROOT, "data", "external", "kaikki.org-dictionary-Basque.jsonl"),
+    "el": os.path.join(PROJECT_ROOT, "data", "external", "kaikki.org-dictionary-Greek.jsonl")
 }
 
-LABEL_MAP = {
-    # label-studio format fixes
-    "Internationalism_Cognate": "Internationalism",
-    "Adapted_Spelling": "Adapted_Orthogra",
-    
-    # hierarchy (2nd level) fixes
-    "LightVerb_Translit": "LightVerb_Integrated",
-    "LightVerb_Adapted": "LightVerb_Integrated",
-    "LightVerb_Raw": "LightVerb_Unintegrated"
-}
+PATH_COGNET = os.path.join(PROJECT_ROOT, "data", "external", "cognet.tsv")
+PATH_UNIMORPH = os.path.join(PROJECT_ROOT, "data", "external", "unimorph_eus.tsv")
+PATH_CONLOAN = os.path.join(PROJECT_ROOT, "data", "external", "conloan_ell.tsv")
 
-
-PATH_COGNET = "data/external/cognet.tsv"
-PATH_UNIMORPH = "data/external/unimorph_eus.tsv"
-PATH_CONLOAN = "data/external/conloan_ell.tsv"
-
-ANNOTATIONS_LS = os.path.join(OUTPUT_DIR, "test_gold_annotations_{version}.json")
+ANNOTATIONS_LS = os.path.join(OUTPUT_DIR, "test_gold_annotations.json") # Final V1 taxonomy version
 ANNOTATIONS_FLS = os.path.join(OUTPUT_DIR, "fixed-test_gold_annotations.json")
 
 TARGET_TOTAL = 200
 TARGET_ESTABLISHED = 100
 
+LABEL_MAP = {
+    "Internationalism_Cognate": "Internationalism",
+    "Adapted_Spelling": "Adapted_Orthogra",
+    "Adapted_Translit": "Adapted_Orthogra", 
+    "LightVerb_Translit": "LightVerb_Integrated",
+    "LightVerb_Adapted": "LightVerb_Integrated",
+    "LightVerb_Raw": "LightVerb_Unintegrated"
+}
+
 def sample_for_annotation():
-    """Samples data, enriches with etymology/corpus info off of Cognet/Wiktionary, and exports to Label Studio."""
-    print("> Sampling data for annotation...")
+    """Samples data, enriches with etymology/corpus info, and exports to Label Studio."""
+    logging.info("\t> Sampling data for annotation...")
     sampled_data = _sample_sentences()
     
     if not sampled_data:
         return
 
-    print("> Enriching with etymological data...")
+    logging.info("\t> Enriching with etymological data...")
     enriched_data = _add_etymology_data(sampled_data)
 
-    print("> Checking cognates...")
-    validated_data = _validate_corpus(enriched_data)
+    logging.info("\t> Checking cognates...")
+    validated_data = _outside_sources(enriched_data)
 
-    print("> Exporting to label studio...")
+    logging.info("\t> Exporting to label studio...")
     _export_to_label_studio(validated_data)
 
-def get_annotation_stats(version: str = "v1"):
+def get_annotation_stats():
     """Calculates and prints annotation statistics from the Label Studio JSON."""
-    with open(ANNOTATIONS_LS.format(version=version), "r", encoding="utf-8") as f:
+    if not os.path.exists(ANNOTATIONS_LS):
+        logging.error(f"\t> (!) Could not find annotation file at: {ANNOTATIONS_LS}")
+        return
+
+    with open(ANNOTATIONS_LS, "r", encoding="utf-8") as f:
         content = f.read().strip()
 
     try:
@@ -79,10 +84,8 @@ def get_annotation_stats(version: str = "v1"):
     stats = defaultdict(Counter)
 
     for entry in data:
-        # after format fix the language should be in the root 'data' field
         lang = entry.get("data", {}).get("lang") or entry.get("lang", "unknown")
         
-        # label studio native format or json-min
         if "annotations" in entry:
             for a in entry["annotations"]:
                 if a.get("was_cancelled"): continue
@@ -95,22 +98,24 @@ def get_annotation_stats(version: str = "v1"):
                 for label in label_block.get("labels", []):
                     _label(stats, lang, label)
                     
-    print("=== GOLD STANDARD test set annotations ===")
+    lines = ["\n=== GOLD STANDARD test set annotations ==="]
     for lang_key, counts in stats.items():
-        print(f"\nLang: [{lang_key.upper()}]")
+        lines.append(f"\nLang: [{lang_key.upper()}]")
         total_tags = sum(counts.values())
-        for tag, count in sorted(counts.items(), key=lambda x: x[1], reverse=True):
-            print(f"  - {tag}: {count}")
-        print(f"  > Total annotations: {total_tags}")
+        for tag, count in sorted(counts.items(), key=lambda x: x, reverse=True):
+            lines.append(f"  - {tag}: {count}")
+        lines.append(f"  > Total annotations: {total_tags}")
+        
+    logging.info("\n".join(lines))
 
-def _label(stats, lang, label):
-    """Renaming label studio labels to match the final tagset."""
+# --- aux functions for sampling, enrichment, and export ---
+
+def _label(stats: Dict, lang: str, label: str):
     stats[lang][LABEL_MAP.get(label, label)] += 1
 
-def _sample_sentences(N=TARGET_TOTAL, E=TARGET_ESTABLISHED):
-    """Generates a sample of max N sentences per lang (scaling synthetic if established loans are not enough)."""
+def _sample_sentences(N: int = TARGET_TOTAL, E: int = TARGET_ESTABLISHED) -> List[Dict]:
     if not os.path.exists(INPUT_FILE):
-        print(f"(!) > Error: Cleaned mined sentences file not found at {INPUT_FILE}")
+        logging.error(f"\t> (!) Error: Cleaned mined sentences file not found at {INPUT_FILE}")
         return []
 
     data = []
@@ -126,18 +131,16 @@ def _sample_sentences(N=TARGET_TOTAL, E=TARGET_ESTABLISHED):
     final_samples = []
 
     for lang in ['ast', 'eu', 'el']:
-        print(f"\nProcessing [{lang}]...")
         subset = df[df['lang'] == lang].copy()
 
         if subset.empty:
-            print(f"(!) > Warning: No lexical borrowing data found for {lang}")
+            logging.warning(f"\t> (!) Warning: No lexical borrowing data found for {lang}")
             continue
 
         mask_wikt = subset['type'].str.contains('wiktionary', case=False, na=False)
         wiktionary = subset[mask_wikt].drop_duplicates(subset=['term'])
         synthetic = subset[~mask_wikt].drop_duplicates(subset=['term'])
 
-        # must ensure the target total per lang
         n_wikt_actual = min(E, len(wiktionary))
         n_syn_target = N - n_wikt_actual
         n_syn_actual = min(n_syn_target, len(synthetic))
@@ -149,14 +152,11 @@ def _sample_sentences(N=TARGET_TOTAL, E=TARGET_ESTABLISHED):
         sample_syn['category'] = 'synthetic'
 
         final_samples.extend((sample_wikt, sample_syn))
-        print(f"    > Established LWs sampled: {n_wikt_actual}")
-        print(f"    > Synthetic LWs sampled:   {n_syn_actual}")
-        print(f"    > Total for {lang}:        {n_wikt_actual + n_syn_actual}")
+        logging.info(f"\t\t> [{lang.upper()}] Sampled -> Established: {n_wikt_actual} | Synthetic: {n_syn_actual}")
 
     if not final_samples:
         return []
 
-    # df > jsonl structure for LS
     df_sample = pd.concat(final_samples)
     structured_data = []
     
@@ -178,9 +178,8 @@ def _sample_sentences(N=TARGET_TOTAL, E=TARGET_ESTABLISHED):
 
     return structured_data
 
-
-def _add_etymology_data(data):
-    """Enriches data with Wiktextract etymology."""
+def _add_etymology_data(data: List[Dict]) -> List[Dict]:
+    """Checks the etymology templates in Wiktionary dumps for each term and adds source language info if available."""
     term_map = {}
     for entry in data:
         for loan in entry['loans']:
@@ -207,7 +206,7 @@ def _add_etymology_data(data):
                                     "source_lang": t.get("args", {}).get("2", "unknown")
                                 }
                                 break
-                except Exception as e: continue
+                except Exception: continue
 
     for entry in data:
         for loan in entry['loans']:
@@ -215,49 +214,42 @@ def _add_etymology_data(data):
             
     return data
 
-
-def _validate_corpus(data):
-    """Validates terms against CogNet, Unimorph, and ConLoan."""
+def _outside_sources(data: List[Dict]) -> List[Dict]:
+    """Extra: checks for cognates, integrated forms, and historical attestations in external datasets."""
     sources = {'ast_cognates': set(), 'eu_forms': set(), 'el_loans': set()}
     
-    # > CogNet (Asturian cognates)
     if os.path.exists(PATH_COGNET):
         with open(PATH_COGNET, 'r', encoding='utf-8') as f:
             for line in f:
                 parts = line.strip().split('\t')
-                if len(parts) >= 5 and parts[1] == 'ast' and parts[3] in ['spa', 'lat', 'xib']:
-                    sources['ast_cognates'].add(parts[2].lower())
+                if len(parts) >= 5 and parts == 'ast' and parts in ['spa', 'lat', 'xib']:
+                    sources['ast_cognates'].add(parts.lower())
                     
-    # > Unimorph (Basque morphological forms)
     if os.path.exists(PATH_UNIMORPH):
         with open(PATH_UNIMORPH, 'r', encoding='utf-8') as f:
             for line in f:
                 parts = line.strip().split('\t')
                 if len(parts) >= 2:
-                    sources['eu_forms'].add(parts[1].lower())
+                    sources['eu_forms'].add(parts.lower())
 
-    # > ConLoan (Greek historical loans)
     if os.path.exists(PATH_CONLOAN):
         with open(PATH_CONLOAN, 'r', encoding='utf-8') as f:
             for line in f:
                 parts = line.strip().split('\t')
                 if len(parts) >= 1:
-                    sources['el_loans'].add(parts[0].lower())
+                    sources['el_loans'].add(parts.lower())
 
-    # Attach flags
     for entry in data:
         lang = entry['lang']
         for loan in entry['loans']:
             term_lower = loan['term'].lower()
-            
             loan['is_cognate'] = (lang == 'ast' and term_lower in sources['ast_cognates'])
             loan['is_integrated'] = (lang == 'eu' and term_lower in sources['eu_forms'])
             loan['is_historical'] = (lang == 'el' and term_lower in sources['el_loans'])
 
     return data
 
-def _export_to_label_studio(data):
-    """Formats the enriched data into Label Studio JSON with pre-populated predictions for annotation."""
+def _export_to_label_studio(data: List[Dict]):
     os.makedirs(OUTPUT_DIR, exist_ok=True)
     ls_tasks = []
 
@@ -280,28 +272,20 @@ def _export_to_label_studio(data):
             type_str = str(loan.get('type', '')).lower()
             notes = str(loan.get('notes', '')).lower()
             lang = entry['lang']
-            
             label = "Raw"
 
-            # established or cognates
             if loan.get('is_cognate') or loan.get('etymology', {}).get('source_lang') in ['es', 'lat', 'fr'] or loan.get('is_historical'):
-                label = "Internationalism_Cognate"
-            
-            # light verbs
+                label = "Internationalism"
             elif 'light_greek' in type_str:
-                label = "LightVerb_Translit"
+                label = "LightVerb_Integrated"
             elif 'light_latin' in type_str or ('light_construction' in type_str and lang == 'ast'):
-                label = "LightVerb_Raw"
+                label = "LightVerb_Unintegrated"
             elif 'light_construction' in type_str and lang == 'eu':
-                label = "LightVerb_Adapted"
-            
-            # morphology and spelling integration
+                label = "LightVerb_Integrated"
             elif 'transliteration' in notes or (lang == 'el' and 'noun_transliterated' in type_str):
-                label = "Adapted_Translit"
+                label = "Adapted_Orthogra"
             elif 'phonological' in notes or 'morph' in type_str or 'integrated' in type_str:
                 label = "Adapted_Morph"
-            
-            # code switch
             elif 'raw' in type_str or 'cs_latin' in type_str:
                 label = "Raw"
 
@@ -316,20 +300,19 @@ def _export_to_label_studio(data):
                     "labels": [label]
                 }
             }
-            task['predictions'][0]['result'].append(region)
+            task['predictions']['result'].append(region)
 
         ls_tasks.append(task)
 
     with open(OUTPUT_FILE_LABEL, 'w', encoding='utf-8') as f:
         json.dump(ls_tasks, f, indent=4, ensure_ascii=False)
     
-    print(f">>> Exported {len(ls_tasks)} tasks to {OUTPUT_FILE_LABEL}")
+    logging.info(f"\t> Exported {len(ls_tasks)} tasks to {OUTPUT_FILE_LABEL}")
 
 
 def fix_labels(input_path: str = ANNOTATIONS_LS, output_path: str = ANNOTATIONS_FLS):
-    """Fixes label names in the Label Studio annotations to match the final tagset so that they can be (re-)imported."""
     if not os.path.exists(input_path):
-        print(f"(!) Error: Could not find the input file at:\n{input_path}")
+        logging.error(f"\t> (!) Error: Could not find the input file at: {input_path}")
         return
 
     with open(input_path, 'r', encoding='utf-8') as f:
@@ -339,37 +322,42 @@ def fix_labels(input_path: str = ANNOTATIONS_LS, output_path: str = ANNOTATIONS_
 
     for item in data:
         new_item = {
-            # Removed the root 'id' to prevent database collisions during import
             "data": {
-                "text": item.get("text", ""),
-                "lang": item.get("lang", ""),
-                "source": item.get("source", "")
+                "text": item.get("text", "") if "text" in item else item.get("data", {}).get("text", ""),
+                "lang": item.get("lang", "") if "lang" in item else item.get("data", {}).get("lang", ""),
+                "source": item.get("source", "") if "source" in item else item.get("data", {}).get("source", "")
             },
             "annotations": [{"result": []}]
         }
 
-        if "label" in item:
-            for span in item["label"]:
-                old_labels = span.get("labels", [])
+        # ** different potential Label Studio export formats **
+        annotations_source = item.get("annotations", [])
+        if not annotations_source and "label" in item:
+            annotations_source = [{"result": item["label"]}]
+
+        for ann in annotations_source:
+            for span in ann.get("result", []):
+                val = span.get("value", span) 
+                old_labels = val.get("labels", [])
                 new_labels = [LABEL_MAP.get(l, l) for l in old_labels]
 
                 region = {
-                    "id": str(uuid.uuid4())[:8], # <-- THE MAGIC FIX: Unique UI ID
+                    "id": str(uuid.uuid4())[:8],
                     "from_name": "label",  
                     "to_name": "text",     
                     "type": "labels",
                     "value": {
-                        "start": span["start"],
-                        "end": span["end"],
-                        "text": span["text"],
+                        "start": val.get("start", 0),
+                        "end": val.get("end", 0),
+                        "text": val.get("text", ""),
                         "labels": new_labels
                     }
                 }
-                new_item["annotations"][0]["result"].append(region)
+                new_item["annotations"]["result"].append(region)
 
         formatted_data.append(new_item)
 
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(formatted_data, f, indent=2, ensure_ascii=False)
         
-    print(f">>> Processed {len(formatted_data)} tasks with their unique IDs and labels, saved to {output_path}")
+    logging.info(f"\t> Processed {len(formatted_data)} tasks with their unique IDs and labels, saved to {output_path}")

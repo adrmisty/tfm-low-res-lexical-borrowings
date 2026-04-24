@@ -5,12 +5,15 @@
 # adriana r.f. (@adrmisty)
 # jan-2026
 
-import wikipediaapi
-import time
-import pandas as pd
-from typing import List, Dict
-import requests
+import os
 import re
+import time
+import json
+import logging
+import requests
+import pandas as pd
+import wikipediaapi
+from typing import List, Dict
 
 FALSE_POSITIVES = {
     "scan": ["Scania", "Skåne", "VABIS", "Saab", "Volkswagen"], 
@@ -43,7 +46,6 @@ class WikipediaMiner:
         results = []
         total_seeds = len(seeds_df)
                 
-        # for every seed...
         for idx, row in seeds_df.iterrows():
             term = row['term']
             lang = row['lang']
@@ -65,7 +67,7 @@ class WikipediaMiner:
                         matches = self._get_sentences(page.text, term)
                         
                         for sentence in matches:
-                            # FILTER: check for identified false positives (Scania, Bugs Bunny...)
+                            # FILTER: check for identified false positives
                             if not self._is_semantic_false_positive(lemma, term, sentence):
                                 results.append({
                                     "term": term,
@@ -76,19 +78,16 @@ class WikipediaMiner:
                                     "sentence": sentence,
                                     "source_page": title
                                 })
-                except Exception as e:
+                except Exception:
                     continue
             
-            if idx % 1 == 0:
-                print(f"\rProcessed {idx+1}/{total_seeds} | Found: {len(results)} | Current: {term} ({lang})   ", end="", flush=True)    
+            if (idx + 1) % 50 == 0 or idx == total_seeds - 1:
+                logging.info(f"\t\t> Processed {idx+1}/{total_seeds} | Found: {len(results)} sentences (Currently checking: '{term}')")    
                     
         return results
 
     def _search_wiki_titles(self, term: str, lang: str, limit: int = 3) -> List[str]:
-        """
-        Uses standard requests to query the Wikipedia Search API.
-        This finds pages *mentioning* the term, not just exact titles.
-        """
+        """Uses standard requests to query the Wikipedia Search API."""
         url = f"https://{lang}.wikipedia.org/w/api.php"
         params = {
             "action": "query",
@@ -112,24 +111,19 @@ class WikipediaMiner:
 
     def _get_sentences(self, text: str, term: str) -> List[str]:
         """Splits text into sentences and returns those containing the term."""
-        
         sentences = []
         raw_sentences = re.split(r'(?<=[.!?]) +', text.replace('\n', ' '))
-        
         pattern = r'\b' + re.escape(term) + r'\b'
         
         for sent in raw_sentences:
             if re.search(pattern, sent, re.IGNORECASE):
-                # cleanup
                 clean_sent = sent.strip()
                 if 10 < len(clean_sent) < 500:
                     sentences.append(clean_sent)
-        
         return sentences
 
     def _is_semantic_false_positive(self, lemma: str, term: str, sentence: str) -> bool:
         """Checks for pre-identified false positives."""
-        
         if lemma == "bot" and term == "bot" and "Bot." in sentence:
             return True
 
@@ -138,5 +132,30 @@ class WikipediaMiner:
             for trigger in triggers:
                 if trigger in sentence:
                     return True
-        
         return False
+
+# --- extend: into pipeline.py ---
+
+def mine_corpora(lang: str, corpus_dir: str, output_dir: str):
+    seed_file = os.path.join(corpus_dir, "synthetic_borrowings.csv")
+    out_file = os.path.join(output_dir, f"mined_sentences_{lang}.jsonl")
+    
+    if not os.path.exists(seed_file):
+        logging.error(f"\t> (!) Seed file not found at {seed_file}: run generation first.")
+        return
+
+    df = pd.read_csv(seed_file)
+    lang_df = df[df['lang'] == lang]
+    
+    if lang_df.empty:
+        logging.info(f"\t> No seeds found for [{lang.upper()}]. Skipping.")
+        return
+        
+    miner = WikipediaMiner(user_agent="LoanwordThesisBot/1.0")
+    results = miner.search_and_extract(lang_df)
+    
+    with open(out_file, 'w', encoding='utf-8') as f:
+        for r in results:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+            
+    logging.info(f"\t> Mining complete for [{lang.upper()}], saved {len(results)} sentences to {out_file}")

@@ -1,14 +1,16 @@
 # cleaner.py
 # ----------------------------------------------------------------
-# cleans mined data from English insertions and Semantic False Positives
+# cleans mined data from English insertions and semantic FPs
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
 # jan-2026
 
 import re
 import json
+import logging
+from typing import Dict, Tuple
 
-# TO AVOID MINING ENGLISH TEXTS
+# ** ENGLISH TEXTS **
 ENGLISH_STOPWORDS = {
     "the", "be", "to", "of", "and", "a", "in", "that", "have", "i", "it", "for", "not", "on", "with", "he", "as", "you", "do", "at",
     "this", "but", "his", "by", "from", "they", "we", "say", "her", "she", "or", "an", "will", "my", "one", "all", "would", "there",
@@ -22,7 +24,7 @@ ENGLISH_STOPWORDS = {
 }
 
 class EnglishFilter:
-    def __init__(self, threshold=0.25):
+    def __init__(self, threshold: float = 0.25):
         self.threshold = threshold
 
     def is_english(self, sentence: str) -> bool:
@@ -46,6 +48,7 @@ class EnglishFilter:
 
 class SemanticFilter:
     """Filters contexts that lead to false positives, and native homonyms that clash with lexical borrowings."""
+    
     def __init__(self):
         self.false_contexts = {
             "post": ["rugbi", "tenis", "fútbol", "gol", "meta", "washington", "huffington", "diariu", "periódicu", "oficina"],
@@ -63,11 +66,11 @@ class SemanticFilter:
         self.homonym_terms = {
             "postes", "poste",      # poste -> 'pole'
             "postiar", "postiáu",   # postiar -> 'to place something'
-            "bana", "banatu", "banatzen", "banak" # bana -> 'each?', banatu -> 'to distribute',
+            "bana", "banatu", "banatzen", "banak", # bana -> 'each?', banatu -> 'to distribute',
             "απ", # truncated 'από' preposition 'from' 
         }
 
-    def is_false_positive(self, entry: dict) -> bool:
+    def is_false_positive(self, entry: Dict) -> bool:
         term = entry.get('term', '').lower()
         lemma = entry.get('lemma', '').lower()
         sentence = entry.get('sentence', '').lower()
@@ -99,7 +102,7 @@ class MiningCleaner:
         self.eng_filter = EnglishFilter()
         self.sem_filter = SemanticFilter()
     
-    def clean_file(self, input_path, output_path):
+    def clean_file(self, input_path: str, output_path: str) -> Tuple[int, int, int]:
         kept = []
         dropped_eng = 0
         dropped_sem = 0
@@ -110,12 +113,10 @@ class MiningCleaner:
                 try:
                     obj = json.loads(line)
                     
-                    # avoid English sentences
                     if self.eng_filter.is_english(obj['sentence']):
                         dropped_eng += 1
                         continue
                     
-                    # potential false contexts + homonym clashes
                     if self.sem_filter.is_false_positive(obj):
                         dropped_sem += 1
                         continue
@@ -130,3 +131,13 @@ class MiningCleaner:
                 f.write(json.dumps(k, ensure_ascii=False) + "\n")
                 
         return len(kept), dropped_eng, dropped_sem
+
+# --- extend: into pipeline.py ---
+
+def clean_sentences(input_path: str, output_path: str):
+    cleaner = MiningCleaner()
+    kept, dropped_eng, dropped_sem = cleaner.clean_file(input_path, output_path)
+    
+    logging.info(f"\t> Cleaning complete, final sentences: {kept}")
+    logging.info(f"\t> Dropped (English density): {dropped_eng}")
+    logging.info(f"\t> Dropped (Semantic noise): {dropped_sem}")

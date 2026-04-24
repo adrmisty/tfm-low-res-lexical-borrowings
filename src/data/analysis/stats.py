@@ -5,30 +5,31 @@
 # adriana r.f. (@adrmisty)
 # jan-2026
 
-import pandas as pd
-import json
 import os
+import json
+import logging
+import pandas as pd
+from typing import Dict, Any
 
 class BorrowingStats:
     """Computation of statistics of lexical borrowing data, and their distributions per language."""
 
-    def __init__(self, seeds_path, mined_path, clean_path):
+    def __init__(self, seeds_path: str, mined_path: str, clean_path: str):
         self.paths = {
             "seeds": seeds_path,
             "mined": mined_path,
             "clean": clean_path
         }
-        self.data = {}
+        self.data: Dict[str, pd.DataFrame] = {}
         self._load_data()
 
-    def report(self, output_dir):
+    def report(self, output_dir: str):
         """Statistics table, for each language, saved to file."""
         langs = ['ast', 'eu', 'el']
         all_stats = {lang: self._get_language_stats(lang) for lang in langs}
         
         os.makedirs(output_dir, exist_ok=True)
         
-        # cutesy text
         lines = []
         lines.append("="*80)
         lines.append(f"{'LEXICAL BORROWING STATS':^80}")
@@ -54,7 +55,8 @@ class BorrowingStats:
         lines.append("="*80)
         
         report_str = "\n".join(lines)
-        print(report_str) # print cutesy text n save it
+        logging.info("\n" + report_str) 
+        
         txt_path = os.path.join(output_dir, "stats_summary.txt")
         with open(txt_path, "w", encoding="utf-8") as f:
             f.write(report_str)
@@ -64,13 +66,10 @@ class BorrowingStats:
         csv_path = os.path.join(output_dir, "stats_summary.csv")
         df_stats.to_csv(csv_path, index=True)
         
-        print(f">>> Stats saved to: {output_dir}.txt and .csv")
+        logging.info(f"\t> Stats saved to: {output_dir}")
         
-    # -----------------------------------------------------------------------------------------
-
-    def _get_language_stats(self, lang):
+    def _get_language_stats(self, lang: str) -> Dict[str, Any]:
         """Computes statistics for a specific language."""
-    
         # seed
         seeds = self.data['seeds'][self.data['seeds']['lang'] == lang]
         total_seeds = len(seeds)
@@ -78,29 +77,21 @@ class BorrowingStats:
         wiki_seeds = len(seeds[seeds['source_cat'] == 'Wiktionary'])
 
         # raw mined
-        if not self.data['mined'].empty:
-            mined = self.data['mined'][self.data['mined']['lang'] == lang]
-        else:
-            mined = pd.DataFrame(columns=['term'])
+        mined = self.data['mined'][self.data['mined']['lang'] == lang] if not self.data['mined'].empty else pd.DataFrame(columns=['term'])
         raw_sentences = len(mined)
         found_terms_raw = [] if mined.empty else mined['term'].unique()
         seeds_found_count = len(found_terms_raw)
 
         # processed mined
-        if not self.data['clean'].empty:
-            clean = self.data['clean'][self.data['clean']['lang'] == lang]
-        else:
-            clean = pd.DataFrame(columns=['term'])
+        clean = self.data['clean'][self.data['clean']['lang'] == lang] if not self.data['clean'].empty else pd.DataFrame(columns=['term'])
         valid_sentences = len(clean)
         found_terms_clean = [] if clean.empty else clean['term'].unique()
         seeds_valid_count = len(found_terms_clean)
-
 
         # ratios
         yield_per_seed = round(raw_sentences / seeds_found_count, 1) if seeds_found_count > 0 else 0
         retention_rate = round((valid_sentences / raw_sentences) * 100, 1) if raw_sentences > 0 else 0
         
-        # actually valid mined sentences
         dropped = raw_sentences - valid_sentences
         
         return {
@@ -117,29 +108,20 @@ class BorrowingStats:
             "Yield (sentence/seed)": yield_per_seed
         }
 
-    # -----------------------------------------------------------------------------------------
-
     def _load_data(self):        
-        # seed data, classified according to source /synthetic or wiktionary/
         if os.path.exists(self.paths['seeds']):
             self.data['seeds'] = pd.read_csv(self.paths['seeds'])
-            
-            # classify source based on 'type' column
             self.data['seeds']['source_cat'] = self.data['seeds']['type'].apply(
                 lambda x: 'Wiktionary' if 'wiktionary' in str(x).lower() else 'Synthetic'
             )
         else:
-            print(f"(!) > Seeds file missing: {self.paths['seeds']}")
+            logging.warning(f"\t> (!) Seeds file missing: {self.paths['seeds']}")
             self.data['seeds'] = pd.DataFrame(columns=['term', 'lang', 'type', 'source_cat'])
 
-        # raw mined data
         self.data['mined'] = self._load_jsonl(self.paths['mined'])
-
-        # clean mined data
         self.data['clean'] = self._load_jsonl(self.paths['clean'])
 
-    def _load_jsonl(self, filepath):
-        # jsonl data        
+    def _load_jsonl(self, filepath: str) -> pd.DataFrame:
         if not os.path.exists(filepath):
             return pd.DataFrame()
         
@@ -152,3 +134,12 @@ class BorrowingStats:
                     except json.JSONDecodeError:
                         continue
         return pd.DataFrame(data)
+
+# --- extend: into pipeline.py ---
+
+def generate_dataset_stats(seeds_path: str = "data/corpus/raw/synthetic_borrowings.csv",
+                           mined_path: str = "data/corpus/mined/mined_sentences.jsonl",
+                           clean_path: str = "data/corpus/processed/mined_sentences.clean.jsonl",
+                           output_dir: str = "results/plots"):
+    stats = BorrowingStats(seeds_path, mined_path, clean_path)
+    stats.report(output_dir)

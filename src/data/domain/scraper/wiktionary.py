@@ -5,15 +5,17 @@
 # adriana r.f. (@adrmisty)
 # jan-2026
 
-import pandas as pd
 import os
 import time
-from typing import List, Dict
+import logging
 import requests
+import pandas as pd
+from typing import List, Dict, Optional
 
 class WiktionaryScraper:
-    """Extractor for lexical borrowings in Wiktionary pages, for target languages from a given source languages.."""
-    def __init__(self, csv_path):
+    """Extractor for lexical borrowings in Wiktionary pages, for target languages from given source languages."""
+    
+    def __init__(self, csv_path: str):
         self.csv_path = csv_path
         self.base_url = "https://en.wiktionary.org/w/api.php"
         self.headers = {"User-Agent": "LoanwordThesisBot/1.0 (academic_research)"}
@@ -32,15 +34,17 @@ class WiktionaryScraper:
             ("el",  "fr", "Category:Greek_terms_borrowed_from_French"),
         ]
         
-    def scrape(self):
+    def scrape(self, target_langs: Optional[List[str]] = None):
         """Scrapes and extracts lexical borrowings for the specified categories."""
-        
         all_data = []
         
         for target, origin, category in self.categories:
-            print(f"\tFetching: {category} ({target} <- {origin})...")
+            if target_langs and target not in target_langs:
+                continue
+                
+            logging.info(f"\t\t> Fetching: {category} ({target} <- {origin})...")
             terms = self._get_category_members(category)
-            print(f"\t\tFound {len(terms)} terms.")
+            logging.info(f"\t\t> Found {len(terms)} terms.")
             
             for term in terms:
                 all_data.append({
@@ -50,14 +54,22 @@ class WiktionaryScraper:
                     "source_category": category
                 })
                 
+        if not all_data:
+            logging.info("\t\t> No data scraped for the specified languages.")
+            return
+
         df = pd.DataFrame(all_data)
         os.makedirs(os.path.dirname(self.csv_path), exist_ok=True)
-        df.to_csv(self.csv_path, index=False)
         
+        if os.path.exists(self.csv_path):
+            existing_df = pd.read_csv(self.csv_path)
+            combined_df = pd.concat([existing_df, df]).drop_duplicates(subset=['term', 'target_lang'])
+            combined_df.to_csv(self.csv_path, index=False)
+        else:
+            df.to_csv(self.csv_path, index=False)
 
-    def _get_category_members(self, category_title):
-        """Get all members of a category."""
-        
+    def _get_category_members(self, category_title: str) -> List[str]:
+        """Get all members of a category via the MediaWiki API."""
         members = []
         params = {
             "action": "query",
@@ -73,28 +85,27 @@ class WiktionaryScraper:
             
             if "query" in data:
                 for member in data["query"]["categorymembers"]:
-                    if member['ns'] == 0:
+                    if member['ns'] == 0: # namespace 0 is standard articles (words)
                         members.append(member['title'])
             
             if "continue" in data:
                 params["cmcontinue"] = data["continue"]["cmcontinue"]
-                time.sleep(0.1)
+                time.sleep(0.1) # ** delay **
             else:
                 break
                 
         return members
         
-    def load_seeds(self, target_langs: List[str] = None) -> List[Dict]:
+    def load_seeds(self, target_langs: Optional[List[str]] = None) -> List[Dict]:
         """Reads the Wiktionary CSV and converts it into standard Seed format."""
-        
         if not os.path.exists(self.csv_path):
-            print(f"(!) > Wiktionary file not found at {self.csv_path}")
+            logging.error(f"\t> (!) Wiktionary file not found at {self.csv_path}")
             return []
 
         # columns: term, target_lang, origin_lang, source_category
         df = pd.read_csv(self.csv_path)
-        
         seeds = []
+        
         for _, row in df.iterrows():
             t_lang = row['target_lang']
             
@@ -102,7 +113,6 @@ class WiktionaryScraper:
                 continue
 
             origin = row['origin_lang']
-            
             seed_type = f"wiktionary_{origin}"
             
             seed = {
@@ -115,3 +125,9 @@ class WiktionaryScraper:
             seeds.append(seed)
             
         return seeds
+
+# --- extend: into pipeline ---
+
+def scrape_wiktionary(lang: str, csv_path: str = "data/corpus/raw/wiktionary_borrowings.csv"):
+    scraper = WiktionaryScraper(csv_path=csv_path)
+    scraper.scrape(target_langs=[lang])
