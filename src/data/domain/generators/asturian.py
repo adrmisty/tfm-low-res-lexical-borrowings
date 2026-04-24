@@ -6,7 +6,7 @@
 # jan-2026
 
 from typing import Dict, List
-from .seeds import SeedSynthesizer
+from seeds import SeedSynthesizer
 
 class Asturian(SeedSynthesizer):
     def __init__(self, roots: List[str]):

@@ -6,7 +6,7 @@
 # jan-2026
 
 from typing import Dict, List
-from .seeds import SeedSynthesizer
+from seeds import SeedSynthesizer
 
 GREEK_TRANSLITERATION = {
     "click": "κλικ", 
