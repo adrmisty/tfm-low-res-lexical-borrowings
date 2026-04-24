@@ -1,0 +1,29 @@
+=== GOLD STANDARD test set annotations ===
+
+Lang: [AST]
+  - Invalid_NE: 99
+  - Adapted_Orthogra: 91
+  - Raw: 79
+  - Invalid_FalsePositive: 56
+  - Adapted_Morph: 45
+  - LightVerb_Unintegrated: 1
+  > Total annotations: 371
+
+Lang: [EU]
+  - Adapted_Morph: 287
+  - Adapted_Orthogra: 236
+  - Invalid_NE: 76
+  - Raw: 55
+  - Invalid_FalsePositive: 37
+  - LightVerb_Integrated: 2
+  > Total annotations: 693
+
+Lang: [EL]
+  - Adapted_Orthogra: 147
+  - Invalid_NE: 125
+  - Adapted_Morph: 64
+  - Invalid_FalsePositive: 58
+  - Raw: 33
+  - LightVerb_Unintegrated: 10
+  - LightVerb_Integrated: 6
+  > Total annotations: 443
