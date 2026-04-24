@@ -346,7 +346,7 @@
               "end": 80,
               "text": "microscópicos",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -360,7 +360,7 @@
               "end": 93,
               "text": "unicelulares",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -374,7 +374,7 @@
               "end": 161,
               "text": "hidratos de carbonu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           }
@@ -768,7 +768,7 @@
               "end": 11,
               "text": "automóvil",
               "labels": [
-                "Adapted_Orthogra", #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -1027,7 +1027,7 @@
               "end": 86,
               "text": "ortoédrica",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -1162,7 +1162,7 @@
               "end": 32,
               "text": "conciencia",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -1312,7 +1312,7 @@
               "end": 88,
               "text": "líder",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -1434,7 +1434,7 @@
               "end": 10,
               "text": "Etimoloxía",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -1570,7 +1570,7 @@
               "end": 214,
               "text": "terraza",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -1708,7 +1708,7 @@
               "end": 144,
               "text": "episcopal",
               "labels": [
-                "Raw" #TODO
+                "Raw"
               ]
             }
           },
@@ -1722,7 +1722,7 @@
               "end": 154,
               "text": "cristianu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -1736,7 +1736,7 @@
               "end": 260,
               "text": "diócesis",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -1750,7 +1750,7 @@
               "end": 338,
               "text": "histórica",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -1764,7 +1764,7 @@
               "end": 374,
               "text": "archidiócesis",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -2241,7 +2241,7 @@
               "end": 164,
               "text": "música",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -2255,7 +2255,7 @@
               "end": 178,
               "text": "teatru",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -2269,7 +2269,7 @@
               "end": 170,
               "text": "cine",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -2283,7 +2283,7 @@
               "end": 199,
               "text": " fotografía",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -2310,7 +2310,7 @@
               "end": 159,
               "text": "biblioteca",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -2818,7 +2818,7 @@
               "end": 227,
               "text": "nación",
               "labels": [
-                "Adapted_Orthogra" #RAW
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -2969,7 +2969,7 @@
               "end": 112,
               "text": "xenéticu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -2983,7 +2983,7 @@
               "end": 76,
               "text": "xenetistes",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -2997,7 +2997,7 @@
               "end": 88,
               "text": "moleculares",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           }
@@ -3271,7 +3271,7 @@
               "end": 265,
               "text": "biblioteques",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -3299,7 +3299,7 @@
               "end": 149,
               "text": "biblioteques nacionales",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           }
@@ -3535,7 +3535,7 @@
               "end": 30,
               "text": "programa",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -3714,7 +3714,7 @@
               "end": 445,
               "text": "antropónimu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           }
@@ -3951,7 +3951,7 @@
               "end": 171,
               "text": "electrónicu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -3965,7 +3965,7 @@
               "end": 202,
               "text": "electrónicos",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -4048,7 +4048,7 @@
               "end": 183,
               "text": "teléfonu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -4062,7 +4062,7 @@
               "end": 90,
               "text": "telefónica",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -4296,7 +4296,7 @@
               "end": 68,
               "text": "sintétiques",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -4310,7 +4310,7 @@
               "end": 92,
               "text": "síntesis",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -4324,7 +4324,7 @@
               "end": 19,
               "text": "teunoloxíes",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -4997,7 +4997,7 @@
               "end": 92,
               "text": "troposfériques",
               "labels": [
-                "AdaptedMorph" #TODO
+                "AdaptedMorph"
               ]
             }
           },
@@ -5011,7 +5011,7 @@
               "end": 51,
               "text": "troposfériques",
               "labels": [
-                "AdaptedMorph" #TODO
+                "AdaptedMorph"
               ]
             }
           },
@@ -5039,7 +5039,7 @@
               "end": 178,
               "text": "Meteorolóxica",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -5273,7 +5273,7 @@
               "end": 81,
               "text": "computacionales",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -5287,7 +5287,7 @@
               "end": 65,
               "text": "químicos",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -5301,7 +5301,7 @@
               "end": 18,
               "text": "químicos",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -5384,7 +5384,7 @@
               "end": 71,
               "text": "troyanos",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -5645,7 +5645,7 @@
               "end": 222,
               "text": "microprocesadores",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -5659,7 +5659,7 @@
               "end": 154,
               "text": "arquitectures",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -5687,7 +5687,7 @@
               "end": 304,
               "text": "retrocompatibles",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -5701,7 +5701,7 @@
               "end": 80,
               "text": "programes",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           }
@@ -5920,7 +5920,7 @@
               "end": 94,
               "text": "exiptólogu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -6002,7 +6002,7 @@
               "end": 56,
               "text": "formatu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -6030,7 +6030,7 @@
               "end": 94,
               "text": "formatu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -6100,7 +6100,7 @@
               "end": 135,
               "text": "dixitales",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           }
@@ -6474,7 +6474,7 @@
               "end": 127,
               "text": "Xenéticos",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -6502,7 +6502,7 @@
               "end": 249,
               "text": "microbios",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -6830,11 +6830,11 @@
             "to_name": "text",
             "type": "labels",
             "value": {
-              "start": 410,
+              "start": 411,
               "end": 418,
-              "text": " formatu",
+              "text": "formatu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -6848,7 +6848,7 @@
               "end": 441,
               "text": "formatu",
               "labels": [
-                "Adapted_Morph" #TODO
+                "Adapted_Morph"
               ]
             }
           },
@@ -6986,7 +6986,7 @@
               "end": 31,
               "text": "aerodromo",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
@@ -7453,7 +7453,7 @@
               "end": 68,
               "text": "Radio",
               "labels": [
-                "Raw" #TODO
+                "Raw"
               ]
             }
           },
@@ -7467,7 +7467,7 @@
               "end": 121,
               "text": "opera",
               "labels": [
-                "Raw" #TODO
+                "Raw"
               ]
             }
           },
@@ -10856,7 +10856,7 @@
               "end": 110,
               "text": "polinomio",
               "labels": [
-                "Adapted_Orthogra" #TODO
+                "Adapted_Orthogra"
               ]
             }
           },
