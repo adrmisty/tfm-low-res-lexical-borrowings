@@ -10,8 +10,8 @@ from typing import List, Dict, Any
 import torch
 from torch import nn
 from transformers import (
-    XLMRobertaForTokenClassification, 
-    XLMRobertaForSequenceClassification,
+    AutoModelForTokenClassification, 
+    AutoModelForSequenceClassification,
     TrainingArguments, 
     Trainer,
     pipeline
@@ -63,8 +63,11 @@ class BorrowingEncoder:
     - https://huggingface.co/blog/mmbert
     """
     
-    def __init__(self, gt: str, model_id: str = "xlm-roberta-base", output_dir: str = "data/model/encoder"):
-        self.model_id = model_id
+    def __init__(self,  model_id: str, output_dir: str = "data/model/encoder"):
+        if "mmbert" in model_id.lower():
+            self.model_id = "jhu-clsp/mmBERT-base"
+        else:
+            self.model_id = "FacebookAI/xlm-roberta-base"
         self.output_dir = output_dir
 
     def train(self, train_json: str, mask_prob: float = 0.8, task: str = "multi"):

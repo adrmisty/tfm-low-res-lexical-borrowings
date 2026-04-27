@@ -1,0 +1,4 @@
+=== EVALUATION STATS: LANGID_JOINT ===
+[IDENTIFICATION] -> Precision: 0.1611 | Recall: 0.3721 | F1: 0.2249
+[CLASSIFICATION] -> Precision: 0.0711 | Recall: 0.2000 | F1: 0.1049
+[JOINT (Macro, ex. Native)] -> Precision: 0.0076 | Recall: 0.1632 | F1: 0.0145

@@ -1,6 +1,6 @@
 # baseline.py
 # ----------------------------------------------------------------
-# baseline runs for [(step 1) LEXICAL BORROWING IDENTIFICATION]
+# baselines for lexical borrowing detection and classification
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
 # apr-2026
@@ -17,21 +17,21 @@ OUT_DIR = "results/model"
 
 def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen3.5-9B"):
     """Few-shot prompting on LLM for lexical borrowing identification and classification."""
-    llm = BorrowingLLM(model_id, gt)
-    #vlm = BorrowingVLLM(model_id, gt)
+    #llm = BorrowingLLM(model_id, gt)
+    vlm = BorrowingVLLM(model_id, gt)
 
     all_predictions = []
 
     for lang in langs:
         print(f"\n>>> Running [few-shot LEXICAL BORROWING IDENTIFICATION and CLASSIFICATION (2-step inference) / ({model_id})] baseline for [{lang.upper()}]...")
 
-        few_shot_items, test_items = llm.data_splits[lang]
+        few_shot_items, test_items = vlm.data_splits[lang]
         shots = [
             {"text": ex["text"], "output": ex["gold_output"]} 
             for ex in few_shot_items
         ]
 
-        predictions = llm.get_borrowings_2step(
+        predictions = vlm.get_borrowings_2step(
             test_data=test_items, 
             language=lang, 
             examples=shots
@@ -57,13 +57,13 @@ def run_langid_baseline(langs: list[str], gt: str):
     """Language identification at the word level for lexical borrowing identification and classification
     >>> purely for identification, cannot classify."""
     print(">>> Initializing [word-level LANGUAGE IDENTIFICATION] baseline...")
-    langid_model = BorrowingLangId(gt)
+    langid_model = BorrowingLangId(langs, gt)
     
     all_predictions = []
 
     for lang in langs:
         print(f"\n>>> Running [LangID LEXICAL BORROWING IDENTIFICATION] for [{lang.upper()}]...")
-        _, test_items = langid_model.data_splits[lang]
+        test_items = langid_model.data_splits[lang]
         predictions = langid_model.get_borrowings(test_items, lang)
         all_predictions.extend(predictions)
 
@@ -80,13 +80,13 @@ def run_langid_baseline(langs: list[str], gt: str):
     print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title LANGID")
     print("="*50)
 
-def run_encoder_baseline(langs: list[str], silver_data: str, gt: str = "data/annotation/final/test_gold_annotations.json"):
-    """Trains and runs the 2-step XLM-RoBERTa pipeline using dynamic dataset loading."""
-    
-    path_binary = f"{OUT_DIR}/XLM-RoBERTa/xlmr_binary"
-    path_multi = f"{OUT_DIR}/XLM-RoBERTa/xlmr_multi"
-    
-    xlm = BorrowingEncoder(gt)
+def run_encoder_baseline(model: str, langs: list[str], silver_data: str):
+    """Trains and runs the 2-step {model} pipeline using dynamic dataset loading."""
+
+    path_binary = f"{OUT_DIR}/{model}/{model}_binary"
+    path_multi = f"{OUT_DIR}/{model}/{model}_multi"
+
+    xlm = BorrowingEncoder(model_id=model)
 
     print("\t>>> [XLMR-1]: Training binary classifier (Native vs. Borrowing)...")
     xlm.output_dir = path_binary

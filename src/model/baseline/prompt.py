@@ -28,11 +28,10 @@ TAGSET_DEF = """--- TAGSET ---
 1. "Raw": Unassimilated borrowings that retain their exact original foreign spelling and morphology without any adaptation.
 2. "Adapted_Orthogra": Borrowings adapted to the target language's spelling or phonological rules, but without native morphological inflection.
 3. "Adapted_Morph": Borrowings that have been fully integrated by taking on native suffixes, prefixes, plural markers, or grammatical gender.
-4. "Adapted_Translit": Borrowings that have been transliterated into a different alphabet to match the target language's script.
-5. "LightVerb_Unintegrated": A multi-word construction pairing a native verb with a completely raw, unassimilated foreign loanword.
-6. "LightVerb_Integrated": A multi-word construction pairing a native verb with a foreign loanword that has undergone orthographic or morphological adaptation.
-7. "Invalid_NE": Proper nouns, corporate brands, geographical names, or specific entities that are not general lexical borrowings.
-8. "Invalid_FalsePos": Native homonyms, metalinguistic explanations, or raw English strings that are not actually functioning as borrowings in the sentence."""
+4. "LightVerb_Unintegrated": A multi-word construction pairing a native verb with a completely raw, unassimilated foreign loanword.
+5. "LightVerb_Integrated": A multi-word construction pairing a native verb with a foreign loanword that has undergone orthographic or morphological adaptation.
+6. "Invalid_NE": Proper nouns, corporate brands, geographical names, or specific entities that are not general lexical borrowings.
+7. "Invalid_FalsePos": Native homonyms, metalinguistic explanations, or raw English strings that are not actually functioning as borrowings in the sentence."""
 
 
 def load_gold_data(filepath: str, target_langs: list = None) -> List[Dict]:

@@ -13,26 +13,32 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score, confusion_matrix, precision_recall_fscore_support
 import os
 import hashlib
-from .prompt import LABELS
+from .prompt import TAGSET
 
-def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: str):
+def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: str, target_langs: List[str] = None):
     """Evaluation pipeline generating 3 views."""
     print(f"\n{'='*60}\nEvaluating pipeline: {experiment}\n{pred_path}\n{'='*60}")
     os.makedirs(out_dir, exist_ok=True)
     
-    true_spans, pred_spans = _load_spans(pred_path, gold_path)
+    # init statistics
+    stat_file = os.path.join(out_dir, f"{experiment}_stats.txt")
+    with open(stat_file, "w", encoding="utf-8") as f:
+        f.write(f"=== EVALUATION STATS: {experiment} ===\n")
+    
+    # Load and filter spans by language
+    true_spans, pred_spans = _load_spans(pred_path, gold_path, target_langs)
     
     print("\n*** [LW 1]: Borrowing detection ***")
-    eval_step1_id(true_spans, pred_spans, out_dir, experiment)
+    eval_step1_id(true_spans, pred_spans, out_dir, experiment, stat_file)
     
     print("\n*** [LW 2]: Borrowing classification ***")
-    eval_step2_clf(true_spans, pred_spans, out_dir, experiment)
+    eval_step2_clf(true_spans, pred_spans, out_dir, experiment, stat_file)
     
     print("\n*** [LW 1+2]: JOINT PIPELINE: ID + CLASSIFICATION ***")
-    eval_joint(true_spans, pred_spans, out_dir, experiment)
+    eval_joint(true_spans, pred_spans, out_dir, experiment, stat_file)
 
 
-def eval_step1_id(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str):
+def eval_step1_id(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str, stat_file: str):
     """Evaluates the binary detection task (native vs. borrowing)."""
     true_keys = set(true_spans.keys())
     pred_keys = set(pred_spans.keys())
@@ -44,7 +50,7 @@ def eval_step1_id(true_spans: dict, pred_spans: dict, out_dir: str, experiment: 
         y_true_id.append("Borrowing" if key in true_keys else "Native")
         y_pred_id.append("Borrowing" if key in pred_keys else "Native")
 
-    get_metrics(y_true_id, y_pred_id, labels=["Borrowing"], average="binary", task="IDENTIFICATION")
+    get_metrics(y_true_id, y_pred_id, labels=["Borrowing"], average="binary", out_file=stat_file, task="IDENTIFICATION")
     
     _plot_cm(
         y_true=y_true_id, y_pred=y_pred_id, labels=["Native", "Borrowing"],
@@ -52,7 +58,7 @@ def eval_step1_id(true_spans: dict, pred_spans: dict, out_dir: str, experiment: 
         out_path=os.path.join(out_dir, f"{experiment}_step1_cm.png")
     )
 
-def eval_step2_clf(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str):
+def eval_step2_clf(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str, stat_file: str):
     """Evaluates morphological classification ONLY on spans where the boundary was correctly detected."""
     intersection_keys = set(true_spans.keys()).intersection(set(pred_spans.keys()))
 
@@ -64,11 +70,11 @@ def eval_step2_clf(true_spans: dict, pred_spans: dict, out_dir: str, experiment:
 
         # if the gold label is 'Invalid_NE' or 'Invalid_FalsePos', it's not a real borrowing.
         # it's a False Positive from the identification step
-        if t_lbl not in LABELS:
+        if t_lbl not in TAGSET:
             continue
 
         # fallback: hallucinated tags
-        if p_lbl not in LABELS: 
+        if p_lbl not in TAGSET: 
             p_lbl = "Raw"
 
         y_true_clf.append(t_lbl)
@@ -81,18 +87,19 @@ def eval_step2_clf(true_spans: dict, pred_spans: dict, out_dir: str, experiment:
     get_metrics(
         ground_truth=y_true_clf, 
         predictions=y_pred_clf, 
-        labels=LABELS, 
+        labels=TAGSET, 
         average="macro", 
+        out_file=stat_file,
         task="CLASSIFICATION"
     )
 
     _plot_cm(
-        y_true=y_true_clf, y_pred=y_pred_clf, labels=LABELS,
+        y_true=y_true_clf, y_pred=y_pred_clf, labels=TAGSET,
         title=f"Borrowing classification (Exact matches)\n[{experiment.upper()}]",
         out_path=os.path.join(out_dir, f"{experiment}_step2_cm.png")
     )
 
-def eval_joint(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str):
+def eval_joint(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str, stat_file: str):
     """Evaluates joint identification and classification."""
     all_keys = set(true_spans.keys()).union(set(pred_spans.keys()))
 
@@ -103,11 +110,11 @@ def eval_joint(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str
         p_lbl = pred_spans.get(key, "Native")
 
         # gold label is an Invalid_NE/FalsePos noise tag, map it back to Native
-        if t_lbl not in LABELS and t_lbl != "Native": 
+        if t_lbl not in TAGSET and t_lbl != "Native": 
             t_lbl = "Native" 
 
         # fallback:hallucinated borrowing tags
-        if p_lbl not in LABELS and p_lbl != "Native": 
+        if p_lbl not in TAGSET and p_lbl != "Native": 
             p_lbl = "Raw"
 
         y_true_joint.append(t_lbl)
@@ -116,12 +123,13 @@ def eval_joint(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str
     get_metrics(
         ground_truth=y_true_joint, 
         predictions=y_pred_joint, 
-        labels=LABELS, 
+        labels=TAGSET, 
         average="macro", 
+        out_file=stat_file,
         task="JOINT (Macro, ex. Native)"
     )
 
-    labels_with_native = ["Native"] + LABELS
+    labels_with_native = ["Native"] + TAGSET
     _plot_cm(
         y_true=y_true_joint, y_pred=y_pred_joint, labels=labels_with_native,
         title=f"Joint borrowing identification & classification\n[{experiment.upper()}]",
@@ -148,7 +156,7 @@ def get_metrics(ground_truth: List[str], predictions: List[str], labels: list, a
 
     return {"accuracy": acc, "precision": p, "recall": r, "f1": f1}
 
-def _load_spans(pred_path: str, gold_path: str) -> Tuple[Dict, Dict]:
+def _load_spans(pred_path: str, gold_path: str, target_langs: List[str] = None) -> Tuple[Dict, Dict]:
     with open(pred_path, "r", encoding="utf-8") as f:
         predictions = json.load(f)
     with open(gold_path, "r", encoding="utf-8") as f:
@@ -156,7 +164,13 @@ def _load_spans(pred_path: str, gold_path: str) -> Tuple[Dict, Dict]:
 
     gt_map = {}
     for item in ground_truth:
-        text = item["data"]["text"]
+        lang = item.get("lang", "") if "lang" in item else item.get("data", {}).get("lang", "")
+        
+        # filter by language if specified
+        if target_langs and lang not in target_langs:
+            continue
+            
+        text = item.get("text", "") if "text" in item else item.get("data", {}).get("text", "")
         stable_id = hashlib.md5(text.encode('utf-8')).hexdigest()
         case_id = str(item.get("id", stable_id))
         gt_map[case_id] = item.get("annotations", [])
@@ -166,6 +180,8 @@ def _load_spans(pred_path: str, gold_path: str) -> Tuple[Dict, Dict]:
 
     for record in predictions:
         case_id = str(record["id"])
+        
+        # ** if the case_id isn't in gt_map, it was filtered out by the language check above **
         if case_id not in gt_map: continue
 
         pred_items = _parse_llm_output(record.get("prediction", "[]"))

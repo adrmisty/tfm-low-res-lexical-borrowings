@@ -1,30 +1,48 @@
 # langid.py
 # ----------------------------------------------------------------
-# word-level language identification modeling for [(step 1) LEXICAL BORROWING IDENTIFICATION]
+# word-level language id baseline  for loanword identification
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# mar-2026
+# apr-2026
 
-import os
 import re
 import json
-import urllib.request
 import fasttext
+from huggingface_hub import hf_hub_download
 from typing import List, Dict, Any
 
-from .prompt import load_gold
+from .prompt import load_gold_data
 
 class BorrowingLangId:
-    def __init__(self, gt: str, model_path: str = "lid.176.bin"):
-        """Language identification at the word level for borrowings using FastText,
-        (https://fasttext.cc/docs/en/language-identification.html), which supports:
-        Asturian, Greek and Euskera."""
-        self._load_model(model_path)
-        self.data_splits = load_gold(gt, verbose=False)
+    def __init__(self, langs: List[str], gt: str):
+        """Language identification at the word level for borrowings using FastText
+        (facebook/fasttext-language-identification), which supports:
+        Asturian, Greek and Euskera via 3-letter ISO + script codes."""
+        self._load_model()
+        
+        splits = load_gold_data(gt, target_langs=langs)
+        self.data_splits = {}
+        for item in splits:
+            lang = item["lang"]
+            if langs and lang not in langs:
+                continue
+
+            if lang not in self.data_splits:
+                self.data_splits[lang] = []
+            self.data_splits[lang].append(item)    
+                             
+        self.lang_map = {
+            "ast": "ast_Latn",
+            "eu": "eus_Latn",
+            "el": "ell_Grek"
+        }
 
     def get_borrowings(self, test_data: List[Dict[str, Any]], target_lang: str):
         """Extracts borrowings with regards to language identification at the word level."""
         results = []
+        
+        fasttext_target = self.lang_map.get(target_lang, target_lang)
+        
         for case in test_data:
             text = case["text"]
             predictions = []
@@ -35,17 +53,22 @@ class BorrowingLangId:
                 if word.isnumeric() or len(word) < 2:
                     continue
 
-                # predict language
+                # predict lang & flag if not the target language
                 labels, _ = self.model.predict(word, k=1)
-                lang_pred = labels[0].split('__label__')[-1]                
-                if lang_pred != target_lang:
+                #print(labels) #debug
+                if not labels:
+                    continue 
+                lang_pred = labels[0].replace('__label__', '')
+                
+                if lang_pred != fasttext_target:
                     predictions.append({
                         "span": word,
-                        "label": "Raw" # no adaptation type for langid
+                        "label": "Raw" # ** cannot be used for classification **
                     })
             
             results.append({
                 "id": case.get("id"),
+                "text": text,
                 "lang": target_lang,
                 "prediction": json.dumps(predictions, ensure_ascii=False)
             })
@@ -54,12 +77,9 @@ class BorrowingLangId:
 
     # --- response generation -------------------------------------------------------------------------
 
-    def _load_model(self, model_path: str = "lid.176.bin"):
-
-        FASTTEXT_URL = "https://dl.fbaipublicfiles.com/fasttext/supervised-models/lid.176.bin"
-        if not os.path.exists(model_path):
-            print(f"> Loading FastText lang-id. language model to {model_path} (126MB)...")
-            urllib.request.urlretrieve(FASTTEXT_URL, model_path)
-
+    def _load_model(self):
+        print("\t> Loading facebook/fasttext-language-identification model from Hugging Face Hub...")
+        model_path = hf_hub_download(repo_id="facebook/fasttext-language-identification", filename="model.bin")
+        
         fasttext.FastText.eprint = lambda x: None
         self.model = fasttext.load_model(model_path)

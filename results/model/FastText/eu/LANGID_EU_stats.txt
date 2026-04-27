@@ -1,0 +1,4 @@
+=== EVALUATION STATS: LANGID_EU ===
+[IDENTIFICATION] -> Precision: 0.2966 | Recall: 0.3282 | F1: 0.3116
+[CLASSIFICATION] -> Precision: 0.0483 | Recall: 0.2000 | F1: 0.0778
+[JOINT (Macro, ex. Native)] -> Precision: 0.0116 | Recall: 0.1647 | F1: 0.0216

@@ -1,0 +1,4 @@
+=== EVALUATION STATS: LANGID_EL ===
+[IDENTIFICATION] -> Precision: 0.1551 | Recall: 0.2560 | F1: 0.1931
+[CLASSIFICATION] -> Precision: 0.0818 | Recall: 0.2000 | F1: 0.1161
+[JOINT (Macro, ex. Native)] -> Precision: 0.0052 | Recall: 0.1286 | F1: 0.0100

@@ -14,7 +14,7 @@ import re
 import random
 from torch.utils.data import Dataset
 from transformers import XLMRobertaTokenizerFast
-from .prompt import LABELS
+from .prompt import TAGSET
 
 # ** 1. binary tags **
 TAG_TO_ID_BINARY = {
@@ -23,7 +23,7 @@ TAG_TO_ID_BINARY = {
 }
 
 # ** 2. multi tags **
-TAG_TO_ID_MULTI = {label: idx for idx, label in enumerate(LABELS)}
+TAG_TO_ID_MULTI = {label: idx for idx, label in enumerate(TAGSET)}
 
 
 # ** mined synth. corpus tags **
