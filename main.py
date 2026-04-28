@@ -13,13 +13,13 @@ from src.model.baseline.eval import evaluate_pipeline
 
 logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 
-GOLD_STD_PATH = "data/corpus/test_gold_annotations.json"
+GOLD_STD_PATH = "data/annotation/test_gold_annotations.json"
 SILVER_STD_PATH = "data/corpus/processed/mined_sentences.clean.jsonl"
 
 def main():
     parser = argparse.ArgumentParser(description="[TFM] Lexical borrowing detection pipeline")
     parser.add_argument("--action", type=str, choices=["run", "eval"], default="run", help="Choose to run a model or evaluate predictions")
-    parser.add_argument("--type", type=str, choices=["llm", "langid", "encoder"], default="llm")
+    parser.add_argument("--type", type=str, choices=["llm", "langid", "xlmr", "mmbert"], default="llm")
     
     # ** extend experiments: run 1step/2step, k-shots, different languages **
     parser.add_argument("--pipeline", type=str, choices=["1step", "2step"], default="2step", help="Architecture to run")
@@ -50,7 +50,7 @@ def main():
                 gold_path=GOLD_STD_PATH, 
                 out_dir=out_dir, 
                 experiment=f"{args.title}_JOINT",
-                target_langs=args.langs # Pass the filter!
+                target_langs=args.langs
             )
         
         # single language evaluation
@@ -70,11 +70,9 @@ def main():
         run_langid_baseline(langs=args.langs, gt=GOLD_STD_PATH)
             
     elif args.type == "llm":
-        """python main.py --action run --type llm --pipeline 2step --k 2 --langs ast eu el --model Qwen/Qwen3.5-9B
-        python main.py --action eval --pred_file results/model/Qwen/Qwen3.5-9B/predictions_Qwen-Qwen3.5-9B_{date}.json --title QWEN3.5_2SH"""
         run_llm_baseline(
             langs=args.langs, 
-            model_id=args.model, 
+            model_id=args.type, 
             gt=GOLD_STD_PATH, 
             pipeline=args.pipeline, 
             k=args.k
@@ -85,11 +83,23 @@ def main():
             logging.error(f"\t> (!) Silver data file for multilingual encoder not found at: {SILVER_STD_PATH}")
             return
         run_encoder_baseline(
+            model=args.type,
             langs=args.langs, 
             silver_data=SILVER_STD_PATH, 
-            gt=GOLD_STD_PATH,
-            pipeline=args.pipeline
+            gt=GOLD_STD_PATH
         )
+
+    elif args.type == "mmbert":
+        if not os.path.exists(SILVER_STD_PATH):
+            logging.error(f"\t> (!) Silver data file for multilingual encoder not found at: {SILVER_STD_PATH}")
+            return
+        run_encoder_baseline(
+            model=args.type,
+            langs=args.langs, 
+            silver_data=SILVER_STD_PATH, 
+            gt=GOLD_STD_PATH
+        )
+
 
 if __name__ == "__main__":
     main()

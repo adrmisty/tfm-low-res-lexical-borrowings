@@ -125,7 +125,7 @@ python main.py --action eval --pred_file results/model/Qwen3.5-9B/2step/predicti
 #### Output Artifacts
 The evaluation script generates the following assets in the `results/model/<model_name>/<pipeline>/` directory:
 * **`predictions_*.json`**: The raw inference output containing the sentence `id`, `lang`, the executed prompt, and the extracted spans/labels.
-* **Confusion Matrices (`.png`)**: Heatmaps generated via Seaborn for visual error analysis.
+* **Confusion Matrices (`.png`)**: Heatmaps generated via Seaborn for visual error analysis. These are generated for all languages at once (`_JOINT`) and per-language, identified with each one of the language codes.
     * `*_step1_cm.png`: Binary span detection performance (`Native` vs. `Borrowing`).
     * `*_step2_cm.png`: Sequence classification performance across the 5-tag morphological taxonomy.
     * `*_joint_cm.png`: Cross-lingual, end-to-end pipeline evaluation.

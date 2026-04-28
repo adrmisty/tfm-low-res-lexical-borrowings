@@ -6,6 +6,7 @@ vllm
 transformers
 accelerate
 bitsandbytes
+numpy<2.0
 
 # --- NLP  ---
 fasttext-wheel 
