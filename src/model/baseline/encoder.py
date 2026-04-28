@@ -22,6 +22,7 @@ from .dataset import (
     TAG_TO_ID_MULTI, 
     TAG_TO_ID_BINARY
 )
+from .prompt import load_gold_data
 
 # ** extension: weighted cross-entropy Loss **
 class WeightedTrainer(Trainer):
@@ -63,13 +64,25 @@ class BorrowingEncoder:
     - https://huggingface.co/blog/mmbert
     """
     
-    def __init__(self,  model_id: str, output_dir: str = "data/model/encoder"):
+    def __init__(self,  model_id: str, langs: List[str], gt: str, output_dir: str = "data/model/encoder"):
         if "mmbert" in model_id.lower():
             self.model_id = "jhu-clsp/mmBERT-base"
         else:
             self.model_id = "FacebookAI/xlm-roberta-base"
         self.output_dir = output_dir
 
+        splits = load_gold_data(gt, target_langs=langs)
+        self.data_splits = {}
+        for item in splits:
+            lang = item["lang"]
+            if langs and lang not in langs:
+                continue
+
+            if lang not in self.data_splits:
+                self.data_splits[lang] = []
+            self.data_splits[lang].append(item)    
+            
+        
     def train(self, train_json: str, mask_prob: float = 0.8, task: str = "multi"):
         print(f">>> Initializing {self.model_id} for {task.upper()} task...")
         

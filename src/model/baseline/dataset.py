@@ -13,7 +13,7 @@ import torch
 import re
 import random
 from torch.utils.data import Dataset
-from transformers import XLMRobertaTokenizerFast
+from transformers import AutoTokenizer
 from .prompt import TAGSET
 
 # ** 1. binary tags **
@@ -57,7 +57,7 @@ class IdDataset(Dataset):
     """Silver standard dataset for binary token classification (borrowing span identification)."""
 
     def __init__(self, json_path: str, tokenizer_name: str = "xlm-roberta-base", mask_prob: float = 0.6):
-        self.tokenizer = XLMRobertaTokenizerFast.from_pretrained(tokenizer_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, use_fast=True)
         self.mask_prob = mask_prob
         self.data = self._load_silver_data(json_path)
 
@@ -120,7 +120,7 @@ class ClfDataset(Dataset):
     """Silver standard dataset for multi-class sequence classification (borrowing morph. classification)."""
 
     def __init__(self, json_path: str, tokenizer_name: str = "xlm-roberta-base", max_length: int = 256):
-        self.tokenizer = XLMRobertaTokenizerFast.from_pretrained(tokenizer_name)
+        self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name)
         self.max_length = max_length
         self.data = self._load_silver_data(json_path)
 

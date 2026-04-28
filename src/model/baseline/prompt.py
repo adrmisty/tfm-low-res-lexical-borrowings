@@ -34,7 +34,7 @@ TAGSET_DEF = """--- TAGSET ---
 7. "Invalid_FalsePos": Native homonyms, metalinguistic explanations, or raw English strings that are not actually functioning as borrowings in the sentence."""
 
 
-def load_gold_data(filepath: str, target_langs: list = None) -> List[Dict]:
+def load_gold_data(filepath: str, target_langs: list = None, few_shot=False) -> List[Dict]:
     """Loads the gold standard data as a test set."""
     with open(filepath, 'r', encoding='utf-8') as f:
         raw_data = json.load(f)
@@ -54,6 +54,9 @@ def load_gold_data(filepath: str, target_langs: list = None) -> List[Dict]:
             "lang": lang,
             "raw_annotations": item.get("annotations", [])
         })
+    
+    if few_shot:
+        return _get_few_shots
     return test_set
 
 

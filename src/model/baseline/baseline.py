@@ -15,30 +15,36 @@ import json
 
 OUT_DIR = "results/model"
 
-def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen3.5-9B"):
+def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen3.5-9B", pipeline: str = "2step", k: int = 2):
     """Few-shot prompting on LLM for lexical borrowing identification and classification."""
-    #llm = BorrowingLLM(model_id, gt)
-    vlm = BorrowingVLLM(model_id, gt)
+    llm = BorrowingLLM(model_id, langs=langs, gt=gt)
+    #vlm = BorrowingVLLM(model_id, langs=langs, gt=gt)
 
     all_predictions = []
 
     for lang in langs:
-        print(f"\n>>> Running [few-shot LEXICAL BORROWING IDENTIFICATION and CLASSIFICATION (2-step inference) / ({model_id})] baseline for [{lang.upper()}]...")
+        print(f"\n>>> Running [{k}-shot LEXICAL BORROWING IDENTIFICATION and CLASSIFICATION ({pipeline} inference) / ({model_id})] baseline for [{lang.upper()}]...")
 
-        few_shot_items, test_items = vlm.data_splits[lang]
-        shots = [
-            {"text": ex["text"], "output": ex["gold_output"]} 
-            for ex in few_shot_items
-        ]
-
-        predictions = vlm.get_borrowings_2step(
-            test_data=test_items, 
-            language=lang, 
-            examples=shots
-        )
+        test_items = llm.data_splits[lang]
+        
+        if pipeline == "2step":
+            predictions = llm.get_borrowings_2step(
+                test_data=test_items, 
+                language=lang, 
+                k=k
+            )
+        elif pipeline == "1step":
+            predictions = llm.get_borrowings_1step(
+                test_data=test_items, 
+                language=lang, 
+                k=k
+            )
+        else:
+            raise ValueError(f"\t> (!) Invalid pipeline argument: {pipeline}: '1step' or '2step'.")
+            
         all_predictions.extend(predictions)
-
-    out_dir = f"{OUT_DIR}/{model_id}"
+        
+    out_dir = f"{OUT_DIR}/{model_id}/{pipeline}"
     os.makedirs(out_dir, exist_ok=True)
     
     clean_model_name = model_id.replace("/", "-")
@@ -80,27 +86,33 @@ def run_langid_baseline(langs: list[str], gt: str):
     print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title LANGID")
     print("="*50)
 
-def run_encoder_baseline(model: str, langs: list[str], silver_data: str):
+def run_encoder_baseline(model: str, langs: list[str], silver_data: str, gt: str):
     """Trains and runs the 2-step {model} pipeline using dynamic dataset loading."""
 
     path_binary = f"{OUT_DIR}/{model}/{model}_binary"
     path_multi = f"{OUT_DIR}/{model}/{model}_multi"
 
-    xlm = BorrowingEncoder(model_id=model)
+    xlm = BorrowingEncoder(model_id=model, langs=langs, gt=gt)
 
-    print("\t>>> [XLMR-1]: Training binary classifier (Native vs. Borrowing)...")
     xlm.output_dir = path_binary
-    xlm.train(train_json=silver_data, task="binary") 
-    
-    print("\t>>> [XLMR-2]: Training multi-class classifier (LS tagset)...")
+    if not os.path.exists(path_binary):
+        print("\t>>> [XLMR-1]: Training binary classifier (Native vs. Borrowing)...")
+        xlm.train(train_json=silver_data, task="binary")
+    else:
+        print(f">>> [XLMR-1]: Found existing binary model at {path_binary}; skipping training!")    
+
     xlm.output_dir = path_multi
-    xlm.train(train_json=silver_data, task="multi")
+    if not os.path.exists(path_multi):
+        print("\t>>> [XLMR-2]: Training multi-class classifier (5-tagset)...")
+        xlm.train(train_json=silver_data, task="multi")
+    else:
+        print(f">>> [XLMR-2]: Found existing multi-class model at {path_multi}; skipping training!")    
     
     # 2-step inference
     all_predictions = []
     for lang in langs:
         print(f"\n>>> Running [XLM-RoBERTa 2-step inference] for [{lang.upper()}]...")
-        _, test_items = xlm.data_splits[lang]
+        test_items = xlm.data_splits[lang]
         
         predictions = xlm.get_borrowings_2step(
             test_data=test_items, 

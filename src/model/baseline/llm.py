@@ -19,10 +19,23 @@ logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 class BorrowingVLLM:
     """vLLM wrapper class for lexical borrowing identification with fast batched inference."""
     
-    def __init__(self, model_id: str):
-        self.model_id = model_id
+    def __init__(self, model_id: str, langs: List[str], gt: str):
+        if "llm" in model_id:
+            self.model_id = "Qwen/Qwen3-14B"
         self._load_model()
 
+        splits = load_gold_data(gt, target_langs=langs, few_shot=True)
+        self.data_splits = {}
+        for item in splits:
+            lang = item["lang"]
+            if langs and lang not in langs:
+                continue
+
+            if lang not in self.data_splits:
+                self.data_splits[lang] = []
+            self.data_splits[lang].append(item)    
+
+        
     def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, k: int = 0, fallback: str = "Native"):
         """Extracts and classifies borrowings using massive batching for vLLM optimization."""
         results = []
@@ -140,12 +153,24 @@ class BorrowingVLLM:
 
 
 class BorrowingLLM:
-    """LLM wrapper class for lexical borrowing identification."""
+    """LLM wrapper class for lexical borrowing detection and classification."""
     
-    def __init__(self, model_id: str, gt: str = None):
+    def __init__(self, model_id: str, langs: List[str], gt: str):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        self.model_id = model_id
+        if "llm" in model_id:
+            self.model_id = "Qwen/Qwen3.5-9B"
         self._load_model()
+
+        splits = load_gold_data(gt, target_langs=langs)
+        self.data_splits = {}
+        for item in splits:
+            lang = item["lang"]
+            if langs and lang not in langs:
+                continue
+
+            if lang not in self.data_splits:
+                self.data_splits[lang] = []
+            self.data_splits[lang].append(item)    
 
     def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, k: int = 0, fallback: str = "Native"):
         """Extracts borrowings and classifies them based on dynamically built chained prompts."""
