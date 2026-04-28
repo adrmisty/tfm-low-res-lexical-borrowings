@@ -1,0 +1,4 @@
+=== EVALUATION STATS: XLMR-2STEP_JOINT ===
+[IDENTIFICATION] -> Precision: 0.5113 | Recall: 0.1283 | F1: 0.2051
+[CLASSIFICATION] -> Precision: 0.4086 | Recall: 0.4821 | F1: 0.4388
+[JOINT (Macro, ex. Native)] -> Precision: 0.1589 | Recall: 0.0951 | F1: 0.1007

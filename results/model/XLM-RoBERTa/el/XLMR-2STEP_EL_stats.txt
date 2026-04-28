@@ -1,0 +1,4 @@
+=== EVALUATION STATS: XLMR-2STEP_EL ===
+[IDENTIFICATION] -> Precision: 0.5662 | Recall: 0.1842 | F1: 0.2780
+[CLASSIFICATION] -> Precision: 0.3089 | Recall: 0.3647 | F1: 0.3267
+[JOINT (Macro, ex. Native)] -> Precision: 0.1098 | Recall: 0.1321 | F1: 0.1144
