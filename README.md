@@ -97,21 +97,22 @@ This methodology fine-tunes masked language models (**XLM-RoBERTa** and **mmBERT
 
 ```bash
 # XLM-RoBERTa
-python main.py --action run --type encoder --model xlm-roberta-base --pipeline 2step --langs ast eu el
+python main.py --action run --type xlmr --langs ast eu el
 
 # mmBERT
-python main.py --action run --type encoder --model jhu-clsp/mmBERT-base --pipeline 2step --langs ast eu el
+python main.py --action run --type mmber --langs ast eu el
 ```
 
 ### 3. Large Language Models (`llm.py`)
 This evaluates the efficacy of generative LLMs (specifically the **Qwen** architecture) utilizing few-shot in-context learning. The few-shot examples have been manually crafted per-language and can be found in `data/icl/few_shot_examples.json`. This baseline features:
-* **vLLM Integration:** Inference is highly optimized using `vLLM` to process thousands of prompts simultaneously on the GPU.
+* **vLLM Integration:** Using `vLLM` with supported architectures allows to process thousands of prompts simultaneously on the GPU. However, for unsupported architectures, using the `Transformers` library for loading models is used.
 * **Dynamic Prompting (`prompt.py`):** Supports both **1-step** (joint extraction and classification) and **2-step** (prompt chaining) pipelines.
 * **$K$-Shot Scaling:** Allows for dynamic injection of $k$ few-shot examples per taxonomy class to evaluate how empirical prompting scales in low-resource linguistic environments. Evaluated predictions are parsed natively from LLM-generated JSON strings.
 
 ```bash
 # 1-step (one prompt) or 2-step (prompt chain) pipeline with dynamic k-shot injection
-python main.py --action run --type vllm --model Qwen/Qwen3.5-9B --pipeline 2step --k 2 --langs ast eu el
+python main.py --action run --type llm --pipeline 2step --k 3 --langs ast eu el
+python main.py --action run --type llm --pipeline 1step --k 3 --langs ast eu el
 ```
 
 ### 4. Evaluation (`eval.py`)

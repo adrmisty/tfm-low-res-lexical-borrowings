@@ -18,7 +18,7 @@ OUT_DIR = "results/model"
 def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen3.5-9B", pipeline: str = "2step", k: int = 2):
     """Few-shot prompting on LLM for lexical borrowing identification and classification."""
     llm = BorrowingLLM(model_id, langs=langs, gt=gt)
-    #vlm = BorrowingVLLM(model_id, langs=langs, gt=gt)
+    #llm = BorrowingVLLM(model_id, langs=langs, gt=gt)
 
     all_predictions = []
 

@@ -20,8 +20,9 @@ class BorrowingVLLM:
     """vLLM wrapper class for lexical borrowing identification with fast batched inference."""
     
     def __init__(self, model_id: str, langs: List[str], gt: str):
+        #TODO: failed to inspect [any architecture I give it]
         if "llm" in model_id:
-            self.model_id = "Qwen/Qwen3-14B"
+            self.model_id = "Qwen/Qwen2.5-7B" # Qwen2forCasualLM https://huggingface.co/Qwen/Qwen2.5-7B
         self._load_model()
 
         splits = load_gold_data(gt, target_langs=langs, few_shot=True)
@@ -243,7 +244,8 @@ class BorrowingLLM:
             self.model_id,
             device_map="auto",
             torch_dtype=torch.float16 if self.device == "cuda" else torch.float32,
-            trust_remote_code=True
+            trust_remote_code=True,
+            
         ).eval()
 
     def _generate(self, system: str, user: str, prefill: str = "[\n") -> str:
@@ -264,7 +266,7 @@ class BorrowingLLM:
             )
         
         out_text = self.tokenizer.decode(
-            outputs[inputs.input_ids.shape:],
+            outputs[0][inputs.input_ids.shape:],
             skip_special_tokens=True)        
         
         return prefill + out_text
