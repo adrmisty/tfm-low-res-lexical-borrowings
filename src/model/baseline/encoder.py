@@ -113,7 +113,9 @@ class BorrowingEncoder:
             logging_steps=50,
             save_strategy="epoch",
             fp16=True,
-            report_to="none"
+            report_to="none",
+            use_cpu=False,                
+            dataloader_pin_memory=False
         )
 
         trainer = WeightedTrainer(
