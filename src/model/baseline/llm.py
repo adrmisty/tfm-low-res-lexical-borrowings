@@ -184,7 +184,7 @@ class BorrowingLLM:
             sys_id = get_system_prompt_id(language)
             prompt_id = get_fewshot_prompt_id(sys_id, text, language, k)
             # prefill -> string list #TODO fix
-            raw_id_output = self._generate(sys_id, prompt_id, prefill="[\"")           
+            raw_id_output = self._generate(sys_id, prompt_id, prefill="[")           
             # >> identification: parse resulting spans from json
             try:
                 clean_out = re.sub(r"<think>.*?</think>", "", str(raw_id_output), flags=re.DOTALL).strip()

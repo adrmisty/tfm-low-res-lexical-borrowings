@@ -79,15 +79,18 @@ def _get_few_shots(lang: str, k: int, examples_path: str = FEW_SHOT_PATH) -> lis
 def get_system_prompt_1step(language: str) -> str:
     """Returns the system prompt for the 1-step pipeline, which combines identification and classification in a single prompt."""
     
-    SYSTEM_PROMPT = f"""You are an expert computational linguist analyzing text in {language.upper()}. 
+    SYSTEM_PROMPT = """You are an expert computational linguist analyzing text in {language}. 
     Your task is to identify lexical borrowings (loanwords) in the provided text and classify their morphological adaptation into the target language.
     You must evaluate the text and extract ALL loanwords, as well as any tricky entities or false candidates. 
     For every span you extract, you must classify it using STRICTLY one of the following tags:
     {TAGSET_DEF}
     
     You must output a raw JSON list of dictionaries. 
-    Each dictionary must contain exactly two keys: "span" (the exact text) and "label" (one of the 8 taxonomy tags above). 
-    Do not wrap the JSON in markdown blocks. Do not explain your reasoning."""
+    Each dictionary must contain exactly three keys: "span" (the exact text), "reasoning" (your step-by-step analysis), and "label" (STRICTLY one of the 8 taxonomy tags above). 
+    Example: [{{"span": "click", "reasoning": "Borrowed from English...", "label": "Raw"}}]
+    
+    Note: Even if the examples below omit the 'reasoning' key, YOUR final output MUST include it.
+    Do not wrap the JSON in markdown blocks."""
     return SYSTEM_PROMPT.format(language=language, TAGSET_DEF=TAGSET_DEF)
 
 def get_fewshot_prompt_1step(system_prompt: str, text: str, lang: str, k: int) -> str:
@@ -109,15 +112,16 @@ def get_fewshot_prompt_1step(system_prompt: str, text: str, lang: str, k: int) -
 def get_system_prompt_id(language: str) -> str:
     """Returns the system prompt for the 2-step pipeline, which focuses only on identification in the first step."""
     
-    SYSTEM_PROMPT_ID = f"""You are an expert computational linguist analyzing text in {language.upper()}. 
+    SYSTEM_PROMPT_ID = """You are an expert computational linguist analyzing text in {language}. 
     Your task is exclusively to IDENTIFY lexical borrowings (loanwords) in the provided text.
     You must evaluate the text and extract ALL loanwords. You should also extract tricky proper nouns or brand names so they can be filtered later. Native vocabulary MUST NOT be extracted. 
     
     You must output a raw JSON list of strings, where each string is the exact text span of a borrowing or entity. 
     Example: ["click", "software", "Microsoft"]
-    f there are no borrowings in the text, output an empty list: []
-    Do not wrap the JSON in markdown blocks. Do not explain your reasoning."""
-    return SYSTEM_PROMPT_ID.format(language=language)
+    If there are no borrowings in the text, output an empty list: []
+    Do not output thinking processes, explanations, or markdown blocks. Output ONLY the raw JSON list."""
+    
+    return SYSTEM_PROMPT_ID.format(language=language.upper())
 
 def get_fewshot_prompt_id(system_prompt: str, text: str, lang: str, k: int) -> str:
     """Builds the few-shot prompt for the identification step of the 2-step pipeline, which includes k examples of identification only."""
@@ -135,13 +139,15 @@ def get_fewshot_prompt_id(system_prompt: str, text: str, lang: str, k: int) -> s
 
 def get_system_prompt_clf(language: str) -> str:
     """Returns the system prompt for the classification step of the 2-step pipeline, which focuses only on classification of a given target span."""
-    SYSTEM_PROMPT_CLF = f"""You are an expert computational linguist analyzing text in {language.upper()}. 
+    SYSTEM_PROMPT_CLF = """You are an expert computational linguist analyzing text in {language}. 
     Your task is to classify the morphological adaptation of a specific target loanword found within a context sentence.
     You must classify the target word using STRICTLY one of the following tags:
     {TAGSET_DEF}
     
-    Output ONLY the exact tag name from the list above. Do not output anything else. Do not explain your reasoning."""
-    return SYSTEM_PROMPT_CLF.format(language=language, TAGSET_DEF=TAGSET_DEF)
+    You must output a raw JSON dictionary with exactly two keys: "reasoning" (your step-by-step analysis) and "label" (STRICTLY the exact tag name from the list above).
+    Example: {{"reasoning": "The word takes the native plural suffix...", "label": "Adapted_Morph"}}
+    Do not wrap the JSON in markdown blocks."""
+    return SYSTEM_PROMPT_CLF.format(language=language.upper(), TAGSET_DEF=TAGSET_DEF)
 
 def get_fewshot_prompt_clf(system_prompt: str, text: str, target_span: str, lang: str, k: int) -> str:
     """Builds the few-shot prompt for the classification step of the 2-step pipeline, which includes k examples of classification only."""
@@ -150,9 +156,8 @@ def get_fewshot_prompt_clf(system_prompt: str, text: str, target_span: str, lang
     if examples:
         prompt += "--- EXAMPLES start ---\n"
         for ex in examples:
-            # ** one example per extracted span, not just one example per sentence **
             for span_data in ex['spans']:
-                prompt += f"Context:\n{ex['text']}\nTarget word:\n{span_data['span']}\nOutput:\n{span_data['label']}\n\n"
+                prompt += f"Context:\n{ex['text']}\nTarget word:\n{span_data['span']}\nOutput:\n{{\"reasoning\": \"Matches the {span_data['label']} criteria.\", \"label\": \"{span_data['label']}\"}}\n\n"
         prompt += "--- EXAMPLES end ---\n\n"
     
     prompt += f"Context:\n{text}\nTarget word:\n{target_span}\n\nOutput:\n"
