@@ -19,7 +19,7 @@ export OMP_NUM_THREADS=1
 echo "================================================================"
 echo " [TFM] LEXICAL BORROWING EXPERIMENTS"
 echo " Languages: $LANGUAGES"
-echo " GPU Device: $GPU_ID"
+echo " GPU Device: $0"
 echo "================================================================"
 
 evaluate_latest() {
@@ -28,7 +28,6 @@ evaluate_latest() {
     local TITLE=$2
     
     echo " > Looking for latest predictions in: $DIR"
-    # Grab the most recently modified JSON file in the directory
     LATEST_FILE=$(ls -t "$DIR"/predictions_*.json 2>/dev/null | head -n 1)
     
     if [ -z "$LATEST_FILE" ]; then
@@ -51,7 +50,7 @@ evaluate_latest "results/model/FastText" "FASTTEXT"
 # 2.1 XLM-RoBERTa (Contextual Encoder)
 # ----------------------------------------------------------------
 echo ">>> [2.1/3] Running XLM-RoBERTa (2-step)..."
-python main.py --action run --type xlmr --langs ast eu el --langs $LANGUAGES
+python main.py --action run --type xlmr --langs $LANGUAGES
 evaluate_latest "results/model/xlmr" "XLM-RoBERTa"
 
 # ----------------------------------------------------------------

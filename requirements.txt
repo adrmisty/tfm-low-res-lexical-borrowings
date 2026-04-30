@@ -1,4 +1,5 @@
 # Python >= 3.11
+# conda activate tfm_gpu
 
 # --- deepl ---
 torch>=2.1.2
