@@ -1,0 +1,4 @@
+=== EVALUATION STATS: MMBERT-2STEP_EL ===
+[IDENTIFICATION] -> Precision: 0.3554 | Recall: 0.1029 | F1: 0.1596
+[CLASSIFICATION] -> Precision: 0.9833 | Recall: 0.9800 | F1: 0.9808
+[JOINT (Macro, ex. Native)] -> Precision: 0.3663 | Recall: 0.3235 | F1: 0.3063
