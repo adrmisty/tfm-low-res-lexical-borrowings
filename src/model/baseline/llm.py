@@ -16,8 +16,139 @@ from .prompt import *
 
 logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 
+class BorrowingLLM:
+    """LLM wrapper class for lexical borrowing detection and classification."""
+    
+    def __init__(self, model_id: str, k: int, langs: List[str], gt: str):
+        self.device = "cuda" if torch.cuda.is_available() else "cpu"
+        if "llm" in model_id:
+            self.model_id = "Qwen/Qwen2.5-7B-Instruct"
+        self._load_model()
+
+        splits = load_gold_data(gt, k=k, target_langs=langs)
+        self.data_splits = {}
+        for item in splits:
+            lang = item["lang"]
+            if langs and lang not in langs:
+                continue
+
+            if lang not in self.data_splits:
+                self.data_splits[lang] = []
+            self.data_splits[lang].append(item)    
+
+    def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, k: int = 0, fallback: str = "Native"):
+        """Extracts borrowings and classifies them based on dynamically built chained prompts."""
+        results = []
+        
+        for case in test_data:
+            text = case["text"]
+            
+            # ** 1. identification **
+            sys_id = get_system_prompt_id(language)
+            prompt_id = get_fewshot_prompt_id(sys_id, text, language, k)
+            
+            raw_id_output = self._generate(sys_id, prompt_id)          
+            
+            try:
+                clean_out = re.sub(r"<think>.*?</think>", "", str(raw_id_output), flags=re.DOTALL).strip()
+                match = re.search(r"\[\s*\".*\"\s*\]|\[.*?\]", clean_out, re.DOTALL)
+                candidate_spans = json.loads(match.group()) if match else []
+                if not isinstance(candidate_spans, list): candidate_spans = []
+            except Exception:
+                candidate_spans = []
+
+            # ** 2. classification **
+            predictions = []
+            sys_clf = get_system_prompt_clf(language)
+            
+            for span in candidate_spans:
+                if not isinstance(span, str): continue
+                
+                prompt_clf = get_fewshot_prompt_clf(sys_clf, text, span, language, k)
+                raw_label_output = self._generate(sys_clf, prompt_clf).strip() 
+                
+                # {"label": "..."}
+                try:
+                    # markdown cleanse
+                    clean_label = raw_label_output.replace("```json", "").replace("```", "").strip()
+                    parsed_json = json.loads(clean_label)
+                    label = parsed_json.get("label", fallback)
+                except Exception:
+                    label = fallback
+                
+                valid_label = label if (label in TAGSET or "Invalid" in label) else fallback
+                predictions.append({"span": span, "label": valid_label})
+            
+            results.append({
+                "id": case.get("id"),
+                #"prompt": prompt,
+                "lang": language,
+                "prediction": json.dumps(predictions, ensure_ascii=False)
+            })
+            
+        return results
+    
+    def get_borrowings_1step(self, test_data: List[Dict[str, Any]], language: str, k: int = 0):
+        """Extracts borrowings from test and classifies them based on a built prompt."""
+        system_prompt = get_system_prompt_1step(language)
+        results = []
+        
+        for case in test_data:
+            user_prompt = get_fewshot_prompt_1step(system_prompt, case["text"], language, k)
+            
+            prediction = self._generate(system_prompt, user_prompt)
+            
+            results.append({
+                "id": case.get("id"),
+                #"prompt": prompt,
+                "lang": language,
+                "prediction": prediction
+            })
+            
+        return results
+        
+    # --- response generation -------------------------------------------------------------------------
+
+    def _load_model(self):
+        logging.info(f"\t> Loading {self.model_id}...")
+        self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
+        self.model = AutoModelForCausalLM.from_pretrained(
+            self.model_id,
+            torch_dtype=torch.float16,
+            trust_remote_code=True,
+        ).to("cuda").eval()
+        
+    def _generate(self, system: str, user: str) -> str:
+        """Generates LLM model's response to few-shot prompt."""
+        
+        messages = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": user}
+        ]
+        text = self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
+        inputs = self.tokenizer([text], return_tensors="pt").to(self.device)
+        
+        with torch.no_grad():
+            outputs = self.model.generate(
+                **inputs,
+                max_new_tokens=512, # 256 / 512 / 2048
+                do_sample=False,
+                pad_token_id=self.tokenizer.eos_token_id
+            )
+        
+        input_length = inputs.input_ids.shape[1]        
+        generated_ids = outputs[0][input_length:]
+        out_text = self.tokenizer.decode(
+            generated_ids,
+            skip_special_tokens=True
+        )        
+        
+        return out_text
+
+    
+"""
 class BorrowingVLLM:
-    """vLLM wrapper class for lexical borrowing identification with fast batched inference."""
+    #TO-BE-DEVELOPED: vLLM wrapper class for lexical borrowing identification with fast batched inference
     
     def __init__(self, model_id: str, langs: List[str], gt: str):
         #TODO: failed to inspect [any architecture I give it]
@@ -38,7 +169,7 @@ class BorrowingVLLM:
 
         
     def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, k: int = 0, fallback: str = "Native"):
-        """Extracts and classifies borrowings using massive batching for vLLM optimization."""
+        # Extracts and classifies borrowings using massive batching for vLLM optimization.
         results = []
         
         # ** 1. identification **
@@ -56,7 +187,7 @@ class BorrowingVLLM:
             
             try:
                 clean_out = re.sub(r"<think>.*?</think>", "", raw_text, flags=re.DOTALL).strip()
-                match = re.search(r"\[\s*\".*\"\s*\]|\[.*?\]", clean_out, re.DOTALL)
+                match = re.search(r"[s*\".*\"s*]|[.*?]", clean_out, re.DOTALL)
                 candidate_spans = json.loads(match.group()) if match else []
                 if not isinstance(candidate_spans, list): candidate_spans = []
             except Exception:
@@ -98,7 +229,7 @@ class BorrowingVLLM:
         return results
 
     def get_borrowings_1step(self, test_data: List[Dict[str, Any]], language: str, k: int = 0):
-        """Batched inference for 1-step pipeline."""
+        # Batched inference for 1-step pipeline.
         system_prompt = get_system_prompt_1step(language)
         
         user_prompts = [get_fewshot_prompt_1step(system_prompt, case["text"], language, k) for case in test_data]
@@ -126,7 +257,7 @@ class BorrowingVLLM:
         # greedy decoding (do_sample=False equivalent)
         self.sampling_params = SamplingParams(
             temperature=0.0, 
-            max_tokens=256
+            max_tokens=2048
         )
 
         # ** vLLM engine **
@@ -141,7 +272,7 @@ class BorrowingVLLM:
         self.tokenizer = self.model.get_tokenizer()
 
     def _format_prompts(self, system: str, users: List[str], prefill: str = "") -> List[str]:
-        """Applies the chat template to a batch of prompts."""
+        Applies the chat template to a batch of prompts.
         formatted = []
         for user in users:
             messages = [
@@ -151,128 +282,4 @@ class BorrowingVLLM:
             text = self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True) + prefill
             formatted.append(text)
         return formatted
-
-
-class BorrowingLLM:
-    """LLM wrapper class for lexical borrowing detection and classification."""
-    
-    def __init__(self, model_id: str, langs: List[str], gt: str):
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-        if "llm" in model_id:
-            self.model_id = "Qwen/Qwen3.5-9B"
-        self._load_model()
-
-        splits = load_gold_data(gt, target_langs=langs)
-        self.data_splits = {}
-        for item in splits:
-            lang = item["lang"]
-            if langs and lang not in langs:
-                continue
-
-            if lang not in self.data_splits:
-                self.data_splits[lang] = []
-            self.data_splits[lang].append(item)    
-
-    def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, k: int = 0, fallback: str = "Native"):
-        """Extracts borrowings and classifies them based on dynamically built chained prompts."""
-        results = []
-        
-        for case in test_data:
-            text = case["text"]
-            
-            # ** 1. identification **
-            sys_id = get_system_prompt_id(language)
-            prompt_id = get_fewshot_prompt_id(sys_id, text, language, k)
-            # prefill -> string list #TODO fix
-            raw_id_output = self._generate(sys_id, prompt_id, prefill="[")           
-            # >> identification: parse resulting spans from json
-            try:
-                clean_out = re.sub(r"<think>.*?</think>", "", str(raw_id_output), flags=re.DOTALL).strip()
-                match = re.search(r"\[\s*\".*\"\s*\]|\[.*?\]", clean_out, re.DOTALL)
-                candidate_spans = json.loads(match.group()) if match else []
-                if not isinstance(candidate_spans, list): candidate_spans = []
-            except Exception:
-                candidate_spans = []
-
-            # ** 2. classification **
-            predictions = []
-            sys_clf = get_system_prompt_clf(language)
-            
-            for span in candidate_spans:
-                if not isinstance(span, str): continue
-                
-                prompt_clf = get_fewshot_prompt_clf(sys_clf, text, span, language, k)
-                # prefill -> empty, label
-                label = self._generate(sys_clf, prompt_clf, prefill="").strip() 
-                # preserve 'Invalid' tags for eval, otherwise enforce TAGSET or fallback
-                valid_label = label if (label in TAGSET or "Invalid" in label) else fallback
-                predictions.append({"span": span, "label": valid_label})
-            
-            results.append({
-                "id": case.get("id"),
-                "lang": language,
-                #"prompt": prompt_id, prompt for debugging
-                "prediction": json.dumps(predictions, ensure_ascii=False)
-            })
-            
-        return results
-
-    def get_borrowings_1step(self, test_data: List[Dict[str, Any]], language: str, k: int = 0):
-        """Extracts borrowings from test and classifies them based on a built prompt."""
-        system_prompt = get_system_prompt_1step(language)
-        results = []
-        
-        for case in test_data:
-            user_prompt = get_fewshot_prompt_1step(system_prompt, case["text"], language, k)
-            prediction = self._generate(system_prompt, user_prompt)
-            
-            results.append({
-                "id": case.get("id"),
-                "lang": language,
-                "prompt": user_prompt,
-                "prediction": prediction
-            })
-            
-        return results
-    
-    # --- response generation -------------------------------------------------------------------------
-
-    def _load_model(self):
-        logging.info(f"\t> Loading {self.model_id}...")
-        self.tokenizer = AutoTokenizer.from_pretrained(self.model_id)
-        self.model = AutoModelForCausalLM.from_pretrained(
-            self.model_id,
-            torch_dtype=torch.float16,
-            trust_remote_code=True,
-        ).to("cuda").eval()
-        
-    def _generate(self, system: str, user: str, prefill: str = "[\n") -> str:
-        """Generates LLM model's response to few-shot prompt."""
-        
-        messages = [
-            {"role": "system", "content": system},
-            {"role": "user", "content": user}
-        ]
-        text = self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True) + prefill
-        inputs = self.tokenizer([text], return_tensors="pt").to("cuda")
-        
-        #print("[DEBUG-LLM] Model device:", next(self.model.parameters()).device)
-        #print("[DEBUG-LLM] Input device:", inputs.input_ids.device)
-
-        
-        with torch.no_grad():
-            outputs = self.model.generate(
-                **inputs,
-                max_new_tokens=256,
-                do_sample=False,
-                pad_token_id=self.tokenizer.eos_token_id
-            )
-        
-        input_length = inputs.input_ids.shape[1]        
-        generated_ids = outputs[0][input_length:]
-        out_text = self.tokenizer.decode(
-            generated_ids,
-            skip_special_tokens=True
-        )        
-        
-        return prefill + out_text
+"""

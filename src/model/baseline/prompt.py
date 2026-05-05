@@ -34,7 +34,7 @@ TAGSET_DEF = """--- TAGSET ---
 7. "Invalid_FalsePos": Native homonyms, metalinguistic explanations, or raw English strings that are not actually functioning as borrowings in the sentence."""
 
 
-def load_gold_data(filepath: str, target_langs: list = None, few_shot=False) -> List[Dict]:
+def load_gold_data(filepath: str, k: int = 0, target_langs: list = None) -> List[Dict]:
     """Loads the gold standard data as a test set."""
     with open(filepath, 'r', encoding='utf-8') as f:
         raw_data = json.load(f)
@@ -55,8 +55,8 @@ def load_gold_data(filepath: str, target_langs: list = None, few_shot=False) -> 
             "raw_annotations": item.get("annotations", [])
         })
     
-    if few_shot:
-        return _get_few_shots
+    if k>0:
+        return _get_few_shots(lang, k)
     return test_set
 
 
@@ -77,50 +77,57 @@ def _get_few_shots(lang: str, k: int, examples_path: str = FEW_SHOT_PATH) -> lis
 # --- 1-step pipeline (identification + classification in one prompt) ---
 
 def get_system_prompt_1step(language: str) -> str:
-    """Returns the system prompt for the 1-step pipeline, which combines identification and classification in a single prompt."""
-    
     SYSTEM_PROMPT = """You are an expert computational linguist analyzing text in {language}. 
-    Your task is to identify lexical borrowings (loanwords) in the provided text and classify their morphological adaptation into the target language.
-    You must evaluate the text and extract ALL loanwords, as well as any tricky entities or false candidates. 
-    For every span you extract, you must classify it using STRICTLY one of the following tags:
-    {TAGSET_DEF}
+    Your task is to identify lexical borrowings (loanwords) in the provided text and classify their morphological adaptation.
+    STRICT INSTRUCTIONS:
+    1. Extract ONLY spans that are clearly non-native in origin, derived from a foreign lexical base, or explicit foreign words.
+    2. DO NOT extract native vocabulary.
+    3. If unsure whether a word is a borrowing, DO NOT include it.
+    4. Spans may be multi-word expressions (e.g., light verb constructions). Prefer the full expression.
     
-    You must output a raw JSON list of dictionaries. 
-    Each dictionary must contain exactly three keys: "span" (the exact text), "reasoning" (your step-by-step analysis), and "label" (STRICTLY one of the 8 taxonomy tags above). 
-    Example: [{{"span": "click", "reasoning": "Borrowed from English...", "label": "Raw"}}]
+    OUTPUT FORMAT:
+    - Output a valid JSON list.
+    - Each item must be a dictionary with EXACTLY two keys: "span" and "label".
     
-    Note: Even if the examples below omit the 'reasoning' key, YOUR final output MUST include it.
-    Do not wrap the JSON in markdown blocks."""
-    return SYSTEM_PROMPT.format(language=language, TAGSET_DEF=TAGSET_DEF)
+    Allowed labels: {TAGSET_DEF}
+    If no borrowings are found, output: []
+    
+    Do NOT include explanations. Do NOT include any text outside the JSON. The output MUST end with "]"."""
+    return SYSTEM_PROMPT.format(language=language.upper(), TAGSET_DEF=TAGSET_DEF)
 
 def get_fewshot_prompt_1step(system_prompt: str, text: str, lang: str, k: int) -> str:
-    """Builds the few-shot prompt for the 1-step pipeline, which includes k examples of combined identification and classification."""
     prompt = system_prompt + "\n\n"
     examples = _get_few_shots(lang, k)
     if examples:
         prompt += "--- EXAMPLES start:\n"
         for ex in examples:
-            prompt += f"Text:\n{ex['text']}\nOutput:\n{ex['output_1step']}\n\n"
+            formatted_output = []
+            for span_data in ex['spans']:
+                formatted_output.append({
+                    "span": span_data['span'],
+                    "label": span_data['label']
+                })
+            prompt += f"Text:\n{ex['text']}\nOutput:\n{json.dumps(formatted_output, ensure_ascii=False)}\n\n"
         prompt += "EXAMPLES end ---\n\n"
     
-    prompt += f"Text to analyze:\n{text}\n\nOutput:"
+    prompt += f"Text to analyze:\n{text}\n\nOutput:\n"
     return prompt
-
 
 # --- 2-step pipeline (identification + classification in 2 prompts) ---
 
 def get_system_prompt_id(language: str) -> str:
-    """Returns the system prompt for the 2-step pipeline, which focuses only on identification in the first step."""
+    SYSTEM_PROMPT_ID = """You are an expert computational linguist analyzing text in {language}.
+    Your task is to identify lexical borrowings.
     
-    SYSTEM_PROMPT_ID = """You are an expert computational linguist analyzing text in {language}. 
-    Your task is exclusively to IDENTIFY lexical borrowings (loanwords) in the provided text.
-    You must evaluate the text and extract ALL loanwords. You should also extract tricky proper nouns or brand names so they can be filtered later. Native vocabulary MUST NOT be extracted. 
-    
-    You must output a raw JSON list of strings, where each string is the exact text span of a borrowing or entity. 
+    STRICT INSTRUCTIONS:
+    1. Extract ONLY spans that are likely borrowings or foreign-origin expressions.
+    2. DO NOT extract native words.
+    3. If unsure, do NOT include the span.
+    4. Typical number of spans: 0-5.
+    Output a valid JSON list of strings.
     Example: ["click", "software", "Microsoft"]
-    If there are no borrowings in the text, output an empty list: []
-    Do not output thinking processes, explanations, or markdown blocks. Output ONLY the raw JSON list."""
-    
+    If no borrowings are found, output: []
+    Output ONLY the JSON list. The output MUST end with "]"."""
     return SYSTEM_PROMPT_ID.format(language=language.upper())
 
 def get_fewshot_prompt_id(system_prompt: str, text: str, lang: str, k: int) -> str:
@@ -138,27 +145,26 @@ def get_fewshot_prompt_id(system_prompt: str, text: str, lang: str, k: int) -> s
 
 
 def get_system_prompt_clf(language: str) -> str:
-    """Returns the system prompt for the classification step of the 2-step pipeline, which focuses only on classification of a given target span."""
-    SYSTEM_PROMPT_CLF = """You are an expert computational linguist analyzing text in {language}. 
-    Your task is to classify the morphological adaptation of a specific target loanword found within a context sentence.
-    You must classify the target word using STRICTLY one of the following tags:
-    {TAGSET_DEF}
+    SYSTEM_PROMPT_CLF = """You are an expert computational linguist analyzing text in {language}.
+    Your task is to classify the morphological adaptation of a target borrowing.
+    Return a JSON object with EXACTLY one key: "label".
     
-    You must output a raw JSON dictionary with exactly two keys: "reasoning" (your step-by-step analysis) and "label" (STRICTLY the exact tag name from the list above).
-    Example: {{"reasoning": "The word takes the native plural suffix...", "label": "Adapted_Morph"}}
-    Do not wrap the JSON in markdown blocks."""
+    Allowed labels: {TAGSET_DEF}
+    Example: {{"label": "Adapted_Morph"}}
+    
+    Output ONLY the JSON object. No explanations. Do not output anything else."""
     return SYSTEM_PROMPT_CLF.format(language=language.upper(), TAGSET_DEF=TAGSET_DEF)
 
 def get_fewshot_prompt_clf(system_prompt: str, text: str, target_span: str, lang: str, k: int) -> str:
-    """Builds the few-shot prompt for the classification step of the 2-step pipeline, which includes k examples of classification only."""
     prompt = system_prompt + "\n\n"
     examples = _get_few_shots(lang, k)
     if examples:
         prompt += "--- EXAMPLES start ---\n"
         for ex in examples:
             for span_data in ex['spans']:
-                prompt += f"Context:\n{ex['text']}\nTarget word:\n{span_data['span']}\nOutput:\n{{\"reasoning\": \"Matches the {span_data['label']} criteria.\", \"label\": \"{span_data['label']}\"}}\n\n"
+                prompt += f"Context:\n{ex['text']}\nTarget word:\n{span_data['span']}\nOutput:\n{{\"label\": \"{span_data['label']}\"}}\n\n"
         prompt += "--- EXAMPLES end ---\n\n"
     
     prompt += f"Context:\n{text}\nTarget word:\n{target_span}\n\nOutput:\n"
     return prompt
+
