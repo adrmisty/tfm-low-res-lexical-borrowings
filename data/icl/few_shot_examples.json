@@ -5,7 +5,7 @@
       "output_1step": "[{\"span\": \"Mac\", \"label\": \"Invalid_NE\"}, {\"span\": \"conexón\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"resetiamos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"router\", \"label\": \"Raw\"}]",
       "output_id": "[\"Mac\", \"conexón\", \"resetiamos\", \"router\"]",
       "spans": [
-        {"span": "Mac", "label": "Invalid_NE"},
+        {"span": "Mac",  "reasoning": "Brand name", "label": "Invalid_NE"},
         {"span": "conexón", "label": "Adapted_Orthogra"},
         {"span": "resetiamos", "label": "Adapted_Morph"},
         {"span": "router", "label": "Raw"}
@@ -115,13 +115,13 @@
     },
     {
       "text": "Για να κάνεις reset στο router, πρέπει να κάνεις κλικ στο μενού.",
-      "output_1step": "[{\"span\": \"κάνεις reset\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"router\", \"label\": \"Raw\"}, {\"span\": \"κάνεις κλικ\", \"label\": \"LightVerb_Integrated\"}, {\"span\": \"μενού\", \"label\": \"Adapted_Translit\"}]",
+      "output_1step": "[{\"span\": \"κάνεις reset\", \"label\": \"LightVerb_Unintegrated\"}, {\"span\": \"router\", \"label\": \"Raw\"}, {\"span\": \"κάνεις κλικ\", \"label\": \"LightVerb_Integrated\"}, {\"span\": \"μενού\", \"label\": \"Adapted_Orthogra\"}]",
       "output_id": "[\"κάνεις reset\", \"router\", \"κάνεις κλικ\", \"μενού\"]",
       "spans": [
         {"span": "κάνεις reset", "label": "LightVerb_Unintegrated"},
         {"span": "router", "label": "Raw"},
         {"span": "κάνεις κλικ", "label": "LightVerb_Integrated"},
-        {"span": "μενού", "label": "Adapted_Translit"}
+        {"span": "μενού", "label": "Adapted_Orthogra"}
       ]
     },
     {
@@ -134,11 +134,11 @@
     },
     {
       "text": "Τα κλικ να κανείς στον υπολογιστή με τον ποντίκι είναι απαραίτητα για να λειτουργήσει το πρόγραμμα.",
-      "output_1step": "[{\"span\": \"κλικ\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"πρόγραμμα\", \"label\": \"Adapted_Translit\"}]",
+      "output_1step": "[{\"span\": \"κλικ\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"πρόγραμμα\", \"label\": \"Adapted_Orthogra\"}]",
       "output_id": "[\"κλικ\", \"πρόγραμμα\"]",
       "spans": [
         {"span": "κλικ", "label": "Adapted_Orthogra"},
-        {"span": "πρόγραμμα", "label": "Adapted_Translit"}
+        {"span": "πρόγραμμα", "label": "Adapted_Orthogra"}
       ]
     }
   ]
