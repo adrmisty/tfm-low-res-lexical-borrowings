@@ -10,6 +10,7 @@ import argparse
 import logging
 from src.model.baseline.baseline import run_llm_baseline, run_langid_baseline, run_encoder_baseline
 from src.model.baseline.eval import evaluate_pipeline
+import src.model.baseline.hf as hf
 
 logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 
@@ -18,7 +19,7 @@ SILVER_STD_PATH = "data/corpus/processed/mined_sentences.clean.jsonl"
 
 def main():
     parser = argparse.ArgumentParser(description="[TFM] Lexical borrowing detection pipeline")
-    parser.add_argument("--action", type=str, choices=["run", "eval"], default="run", help="Choose to run a model or evaluate predictions")
+    parser.add_argument("--action", type=str, choices=["run", "eval", "push"], default="run", help="Choose to run a model, evaluate predictions, or push models")
     parser.add_argument("--type", type=str, choices=["llm", "langid", "xlmr", "mmbert"], default="llm")
     
     # ** extend experiments: run 1step/2step, k-shots, different languages **
@@ -32,6 +33,12 @@ def main():
 
     if not os.path.exists(GOLD_STD_PATH):
         logging.error(f"(!) Gold standard file not found at: {GOLD_STD_PATH}")
+        return
+
+    # ** push models to huggingface **
+    if args.action == "push":
+        logging.info(">> Pushing trained models to Hugging Face Hub")
+        hf.push_models() 
         return
 
     # ** evaluation: joint + split steps & language, confusion matrices, metrics **

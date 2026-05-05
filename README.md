@@ -35,7 +35,7 @@ cd tfm-low-res-lexical-borrowings
 pip install -r requirements.txt
 ```
 
-*Hardware Note: For LLM inference (e.g., Qwen 27B), a multi-GPU setup is recommended. Adjust `tensor_parallel_size` in `src/model/baseline/llm.py` accordingly. Smaller models and encoders can run on a single standard GPU.*
+*Hardware Note: For LLM inference (e.g., Qwen 9B), a multi-GPU setup is recommended. Adjust `tensor_parallel_size` in `src/model/baseline/llm.py` accordingly. Smaller models and encoders can run on a single standard GPU.*
 
 ---
 
@@ -95,19 +95,28 @@ This methodology fine-tunes masked language models (**XLM-RoBERTa** and **mmBERT
 * **Step 1 (Borrowing Span Detection):** A token classification head (`AutoModelForTokenClassification`) predicts binary `[Native, Borrowing]` boundaries at the sub-word level, utilizing a custom dynamically-weighted cross-entropy loss function to penalize missed loanwords.
 * **Step 2 (Morphological Classification):** A sequence classification head (`AutoModelForSequenceClassification`). By passing both the isolated borrowing and the full surrounding sentence separated by the `</s></s>` token (`[SPAN] </s></s> [CONTEXT]`), the encoder learns how the target word interacts morphologically with its context.
 
+**Checkpoints:**
+The fully fine-tuned models from this pipeline have been open-sourced and are available for direct use via the Hugging Face Hub. They can be loaded without needing to retrain:
+* `arodriguezf/xlmr-binary-borrowings`
+* `arodriguezf/xlmr-multi-borrowings`
+* `arodriguezf/mmbert-binary-borrowings`
+* `arodriguezf/mmbert-multi-borrowings`
+
 ```bash
+# To run local training/inference:
+
 # XLM-RoBERTa
 python main.py --action run --type xlmr --langs ast eu el
 
 # mmBERT
-python main.py --action run --type mmber --langs ast eu el
+python main.py --action run --type mmbert --langs ast eu el
 ```
 
 ### 3. Large Language Models (`llm.py`)
 This evaluates the efficacy of generative LLMs (specifically the **Qwen** architecture) utilizing few-shot in-context learning. The few-shot examples have been manually crafted per-language and can be found in `data/icl/few_shot_examples.json`. This baseline features:
-* **vLLM Integration:** Using `vLLM` with supported architectures allows to process thousands of prompts simultaneously on the GPU. However, for unsupported architectures, using the `Transformers` library for loading models is used.
+* **vLLM Integration:** *(on hold)*. The implementation of `vLLM` is currently pending due to underlying architectural incompatibilities between the specific LLM selected for this task (Qwen) and the models natively supported by the vLLM engine. For now, generation relies strictly on the standard Hugging Face `transformers` library natively executed on GPUs.
 * **Dynamic Prompting (`prompt.py`):** Supports both **1-step** (joint extraction and classification) and **2-step** (prompt chaining) pipelines.
-* **$K$-Shot Scaling:** Allows for dynamic injection of $k$ few-shot examples per taxonomy class to evaluate how empirical prompting scales in low-resource linguistic environments. Evaluated predictions are parsed natively from LLM-generated JSON strings.
+* **$K$-Shot Scaling:** Allows for dynamic injection of $k$ few-shot examples per taxonomy class to evaluate how empirical prompting scales in low-resource linguistic environments. Evaluated predictions are parsed natively from LLM-generated JSON strings containing embedded chain-of-thought logic.
 
 ```bash
 # 1-step (one prompt) or 2-step (prompt chain) pipeline with dynamic k-shot injection
