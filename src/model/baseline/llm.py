@@ -143,17 +143,54 @@ class BorrowingLLM:
         
         for case in test_data:
             user_prompt = get_fewshot_prompt_1step(system_prompt, case["text"], language, k)
-            prediction = self._generate(system_prompt, user_prompt, max_new_tokens=128, prefill='[{"span":"')
             
-            results.append({
+            raw_prediction = self._generate(
+                system_prompt, 
+                user_prompt, 
+                max_new_tokens=128, 
+                prefill='[{"span":"'
+            )
+            
+            # same cleanse/parsing needed bc it repeats the output with thinking
+            # {'id': 'd4dd5a5f612404677c35f21486c8a853', 'lang': 'ast', 'prediction': '[{"span":"Gwenn-ha-du","label":"Raw"}]\n</think>\n\n[{"span": "Gwenn-ha-du", "label": "Raw"}]'}
+
+            try:
+                clean_out = str(raw_prediction).strip()
+                clean_out = re.sub(r"</?think>", "", clean_out, flags=re.IGNORECASE)
+                
+                json_str = self._extract_first_json_list(clean_out)
+                
+                if json_str:
+                    parsed_spans = json.loads(json_str)
+                else:
+                    raise ValueError("> (!) Fallback: JSON list extraction failed")
+                    
+            except Exception:
+                parsed_spans = []
+
+            # validate
+            if not isinstance(parsed_spans, list):
+                parsed_spans = []
+                
+            prediction = []
+            for item in parsed_spans:
+                if isinstance(item, dict) and "span" in item and "label" in item:
+                    # invalid and fallback for eval
+                    label = item["label"]
+                    valid_label = label if (label in TAGSET or "Invalid" in label) else "Native"
+                    prediction.append({"span": item["span"], "label": valid_label})
+            
+            res = {
                 "id": case.get("id"),
-                #"prompt": prompt,
                 "lang": language,
                 "prediction": prediction
-            })
+            }
             
-        return results
-        
+            print(res)
+            results.append(res)
+
+        return results        
+    
     # --- response generation -------------------------------------------------------------------------
 
     def _load_model(self):
