@@ -5,7 +5,7 @@
       "output_1step": "[{\"span\": \"Mac\", \"label\": \"Invalid_NE\"}, {\"span\": \"conexón\", \"label\": \"Adapted_Orthogra\"}, {\"span\": \"resetiamos\", \"label\": \"Adapted_Morph\"}, {\"span\": \"router\", \"label\": \"Raw\"}]",
       "output_id": "[\"Mac\", \"conexón\", \"resetiamos\", \"router\"]",
       "spans": [
-        {"span": "Mac",  "reasoning": "Brand name", "label": "Invalid_NE"},
+        {"span": "Mac", "label": "Invalid_NE"},
         {"span": "conexón", "label": "Adapted_Orthogra"},
         {"span": "resetiamos", "label": "Adapted_Morph"},
         {"span": "router", "label": "Raw"}
@@ -63,6 +63,12 @@
         {"span": "apps", "label": "Adapted_Morph"},
         {"span": "bug", "label": "Raw"}
       ]
+    },
+    {
+      "text": "Mientres la neña lleía'l llibru, el so hermanu xugaba nel prau coles vaques.",
+      "output_1step": "[]",
+      "output_id": "[]",
+      "spans": []
     }
   ],  
   "eu": [
@@ -100,6 +106,12 @@
         {"span": "kontuak", "label": "Adapted_Morph"},
         {"span": "hackeatu", "label": "Adapted_Morph"}
       ]
+    },
+    {
+      "text": "Mendi altuenean elurra mara-mara ari zuen, eta guk etxean goxo-goxo egoteko erabakia hartu genuen.",
+      "output_1step": "[]",
+      "output_id": "[]",
+      "spans": []
     }
   ],
   "el": [
@@ -140,6 +152,12 @@
         {"span": "κλικ", "label": "Adapted_Orthogra"},
         {"span": "πρόγραμμα", "label": "Adapted_Orthogra"}
       ]
+    },
+    {
+      "text": "Το νερό στο ποτάμι ήταν πολύ κρύο εκείνη την ημέρα, αλλά τα παιδιά συνέχισαν να τρέχουν.",
+      "output_1step": "[]",
+      "output_id": "[]",
+      "spans": []
     }
   ]
 }
