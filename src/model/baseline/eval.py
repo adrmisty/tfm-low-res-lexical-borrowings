@@ -15,6 +15,9 @@ import os
 import hashlib
 from .prompt import TAGSET
 
+#TODO: fix 1step evaluation for LLM
+#TODO: extend 2step evaluation for encoders (split id+cm, not just joint)
+
 def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: str, target_langs: List[str] = None):
     """Evaluation pipeline generating 3 views."""
     print(f"\n{'='*60}\nEvaluating pipeline: {experiment}\n{pred_path}\n{'='*60}")
