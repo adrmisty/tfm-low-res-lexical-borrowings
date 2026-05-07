@@ -3,7 +3,7 @@
 # configurations for loanword identification & classification
 # ----------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# apr-2026
+# may-2026
 
 import json
 import os
@@ -12,16 +12,12 @@ from typing import List, Dict
 
 FEW_SHOT_PATH = "data/icl/few_shot_examples.json"
 
-TAGSET = [ # eliminated "Internationalism" // "Adapted_Translit" merged onto "Adapted_Orthogra" // excl. Invalid_*
+TAGSET = [ 
     "Raw", 
     "Adapted_Orthogra", 
     "Adapted_Morph", 
-    #"Adapted_Translit", 
     "LightVerb_Unintegrated", 
-    "LightVerb_Integrated",
-    #"Internationalism",
-    #"Invalid_NE",
-    #"Invalid_FalsePos"
+    "LightVerb_Integrated"
 ]
 
 TAGSET_DEF = """--- TAGSET ---
@@ -29,12 +25,9 @@ TAGSET_DEF = """--- TAGSET ---
 2. "Adapted_Orthogra": Borrowings adapted to the target language's spelling or phonological rules, but without native morphological inflection.
 3. "Adapted_Morph": Borrowings that have been fully integrated by taking on native suffixes, prefixes, plural markers, or grammatical gender.
 4. "LightVerb_Unintegrated": A multi-word construction pairing a native verb with a completely raw, unassimilated foreign loanword.
-5. "LightVerb_Integrated": A multi-word construction pairing a native verb with a foreign loanword that has undergone orthographic or morphological adaptation.
-6. "Invalid_NE": Proper nouns, corporate brands, geographical names, or specific entities that are not general lexical borrowings.
-7. "Invalid_FalsePos": Native homonyms, metalinguistic explanations, or raw English strings that are not actually functioning as borrowings in the sentence."""
+5. "LightVerb_Integrated": A multi-word construction pairing a native verb with a foreign loanword that has undergone orthographic or morphological adaptation."""
 
-
-def load_gold_data(filepath: str, k: int = 0, target_langs: list = None) -> List[Dict]:
+def load_gold_data(filepath: str, target_langs: list = None) -> List[Dict]:
     """Loads the gold standard data as a test set."""
     with open(filepath, 'r', encoding='utf-8') as f:
         raw_data = json.load(f)
@@ -55,15 +48,7 @@ def load_gold_data(filepath: str, k: int = 0, target_langs: list = None) -> List
             "raw_annotations": item.get("annotations", [])
         })
     
-    if k>0:
-        return _get_few_shots(lang, k)
     return test_set
-
-
-# --- in-context-learning: k few-shot examples ---
-# stored in external .json
-# test with different k to see how it affects performance
-
 
 def _get_few_shots(lang: str, k: int, examples_path: str = FEW_SHOT_PATH) -> list:
     """Loads k examples for a specific language from the external JSON."""
@@ -77,26 +62,39 @@ def _get_few_shots(lang: str, k: int, examples_path: str = FEW_SHOT_PATH) -> lis
 # --- 1-step pipeline (identification + classification in one prompt) ---
 
 def get_system_prompt_1step(language: str) -> str:
-    SYSTEM_PROMPT = """You are an expert computational linguist analyzing text in {language}. 
-    Your task is to identify lexical borrowings (loanwords) in the provided text and classify their morphological adaptation.
+    SYSTEM_PROMPT = """You are an expert computational linguist analyzing text in {language}.
+    Your task is to identify lexical borrowings and classify their adaptation.
+    
+    CRITICAL RULE: It is a FATAL ERROR to extract standard native {language} vocabulary.
+    
     STRICT INSTRUCTIONS:
-    1. Extract ONLY spans that are clearly non-native in origin, derived from a foreign lexical base, or explicit foreign words.
-    2. DO NOT extract native vocabulary.
-    3. If unsure whether a word is a borrowing, DO NOT include it.
-    4. Spans may be multi-word expressions (e.g., light verb constructions). Prefer the full expression.
+    1. Extract ONLY lexical borrowings, technical loanwords, or foreign-origin lexical items.
+    2. DO NOT extract native {language} verbs, adjectives, prepositions, or basic nouns.
+    3. DO NOT extract named entities, brands, organizations, or locations.
+    4. If unsure if a word is a loanword, DO NOT include the span.
+    5. Spans may contain multiple words for light verb constructions.
     
     OUTPUT FORMAT:
-    - Output a valid JSON list.
-    - Each item must be a dictionary with EXACTLY two keys: "span" and "label".
+    - Output ONLY a valid JSON list.
+    - Each item must contain EXACTLY:
+        - "span" 
+        - "label"
+        
+        Allowed labels:
+        {TAGSET_DEF}
+        
+        Example output: [{{"span": "router", "label": "Raw"}}]
+        If no borrowings are found, output EXACTLY: []
+        
+        DO NOT explain. DO NOT output reasoning. DO NOT output "Thinking/Output Process". DO NOT use markdown."""
     
-    Allowed labels: {TAGSET_DEF}
-    If no borrowings are found, output: []
-    
-    Do NOT include explanations. Do NOT include any text outside the JSON. The output MUST end with "]"."""
-    return SYSTEM_PROMPT.format(language=language.upper(), TAGSET_DEF=TAGSET_DEF)
+    return SYSTEM_PROMPT.format(
+        language=language.upper(),
+        TAGSET_DEF=TAGSET_DEF
+    )
 
 def get_fewshot_prompt_1step(system_prompt: str, text: str, lang: str, k: int) -> str:
-    prompt = system_prompt + "\n\n"
+    prompt = "" 
     examples = _get_few_shots(lang, k)
     if examples:
         prompt += "--- EXAMPLES start:\n"
@@ -117,22 +115,29 @@ def get_fewshot_prompt_1step(system_prompt: str, text: str, lang: str, k: int) -
 
 def get_system_prompt_id(language: str) -> str:
     SYSTEM_PROMPT_ID = """You are an expert computational linguist analyzing text in {language}.
-    Your task is to identify lexical borrowings.
+    Your task is to identify lexical borrowings ONLY.
+    
+    CRITICAL RULE: It is a FATAL ERROR to extract standard native {language} vocabulary.
     
     STRICT INSTRUCTIONS:
-    1. Extract ONLY spans that are likely borrowings or foreign-origin expressions.
-    2. DO NOT extract native words.
-    3. If unsure, do NOT include the span.
-    4. Typical number of spans: 0-5.
-    Output a valid JSON list of strings.
-    Example: ["click", "software", "Microsoft"]
-    If no borrowings are found, output: []
-    Output ONLY the JSON list. The output MUST end with "]"."""
+    1. Extract ONLY lexical borrowings, technical loanwords, or foreign-origin items.
+    2. DO NOT extract native {language} words (e.g., standard verbs, prepositions, numbers).
+    3. DO NOT extract named entities, person names, locations, organizations, or brands.
+    4. DO NOT extract metalinguistic mentions or quoted foreign text.
+    5. If unsure if a word is foreign, do NOT include the span.
+    6. Typical number of spans: 0-5.
+    
+    OUTPUT FORMAT:
+    - Output ONLY a valid JSON list of strings.
+    - Example: ["software", "router"]
+    - If no borrowings are found, output EXACTLY: []
+    
+    DO NOT explain. DO NOT output reasoning. DO NOT output "Thinking Process". DO NOT use markdown. The output MUST end with "]"."""
+    
     return SYSTEM_PROMPT_ID.format(language=language.upper())
 
 def get_fewshot_prompt_id(system_prompt: str, text: str, lang: str, k: int) -> str:
-    """Builds the few-shot prompt for the identification step of the 2-step pipeline, which includes k examples of identification only."""
-    prompt = system_prompt + "\n\n"
+    prompt = "" 
     examples = _get_few_shots(lang, k)
     if examples:
         prompt += "--- EXAMPLES start ---\n"
@@ -146,17 +151,27 @@ def get_fewshot_prompt_id(system_prompt: str, text: str, lang: str, k: int) -> s
 
 def get_system_prompt_clf(language: str) -> str:
     SYSTEM_PROMPT_CLF = """You are an expert computational linguist analyzing text in {language}.
-    Your task is to classify the morphological adaptation of a target borrowing.
-    Return a JSON object with EXACTLY one key: "label".
+    Your task is to classify the morphological adaptation of ONE borrowing.
     
-    Allowed labels: {TAGSET_DEF}
-    Example: {{"label": "Adapted_Morph"}}
+    LABEL DEFINITIONS:
+    {TAGSET_DEF}
     
-    Output ONLY the JSON object. No explanations. Do not output anything else."""
-    return SYSTEM_PROMPT_CLF.format(language=language.upper(), TAGSET_DEF=TAGSET_DEF)
-
+    STRICT INSTRUCTIONS:
+    1. Choose EXACTLY ONE label.
+    2. Output ONLY a valid JSON object. Use EXACTLY this schema: {{"label": "Raw"}}
+    
+    DO NOT explain.
+    DO NOT output reasoning.
+    DO NOT output "Thinking Process".
+    DO NOT use markdown."""
+    
+    return SYSTEM_PROMPT_CLF.format(
+        language=language.upper(),
+        TAGSET_DEF=TAGSET_DEF
+    )
+    
 def get_fewshot_prompt_clf(system_prompt: str, text: str, target_span: str, lang: str, k: int) -> str:
-    prompt = system_prompt + "\n\n"
+    prompt = "" 
     examples = _get_few_shots(lang, k)
     if examples:
         prompt += "--- EXAMPLES start ---\n"
@@ -167,4 +182,3 @@ def get_fewshot_prompt_clf(system_prompt: str, text: str, target_span: str, lang
     
     prompt += f"Context:\n{text}\nTarget word:\n{target_span}\n\nOutput:\n"
     return prompt
-
