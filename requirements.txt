@@ -2,12 +2,13 @@
 # conda activate tfm_gpu
 
 # --- deepl ---
-torch>=2.1.2
-vllm
+torch>=2.1.2 # CUDA: --index-url https://download.pytorch.org/whl/cu121 OR CPU: --extra-index-url https://download.pytorch.org/whl/cpu
+numpy<2.0
+pandas
+#vllm
 transformers
 accelerate
-bitsandbytes
-numpy<2.0
+#bitsandbytes
 
 # --- NLP  ---
 fasttext-wheel 

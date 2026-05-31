@@ -1,15 +1,20 @@
 # stats.py
 # ----------------------------------------------------------------
 # statistics for retrieved raw, mined and processed borrowing data
+# and tokenization statistics
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# jan-2026
+# jan/may-2026
 
 import os
 import json
 import logging
 import pandas as pd
 from typing import Dict, Any
+from transformers import AutoTokenizer
+from sklearn.metrics import classification_report
+from src.model.baseline.eval import _load_spans
+from src.model.baseline.prompt import TAGSET
 
 class BorrowingStats:
     """Computation of statistics of lexical borrowing data, and their distributions per language."""
@@ -143,3 +148,81 @@ def generate_dataset_stats(seeds_path: str = "data/corpus/raw/synthetic_borrowin
                            output_dir: str = "results/plots"):
     stats = BorrowingStats(seeds_path, mined_path, clean_path)
     stats.report(output_dir)
+
+def generate_token_stats(tokenizer_id: str, target_langs: list, output_dir: str,
+                         gold_path: str = "data/annotation/test_gold_annotations.json", 
+                         pred_path: str = "results/model/mmBert/predictions_mmbert_2step_20260429_162250.json"):
+    analyzer = TokenAnalysis(gold_path, pred_path, target_langs)
+    tok_csv = analyzer.analyze_tokenization_fragmentation(tokenizer_id, output_dir)
+    clf_csv = analyzer.analyze_per_class_performance(output_dir)
+    return tok_csv, clf_csv
+
+class TokenAnalysis:
+    """Computes advanced diagnostics for lexical borrowing extraction."""
+    
+    def __init__(self, gold_path: str, pred_path: str, target_langs: list = None):
+        self.target_langs = target_langs
+        self.true_spans, self.pred_spans = _load_spans(pred_path, gold_path, target_langs)
+
+    def analyze_tokenization_fragmentation(self, tokenizer_id: str, output_dir: str) -> str:
+        logging.info(f"\t> Calculating Sub-word Fertility using [{tokenizer_id}]...")
+        try:
+            tokenizer = AutoTokenizer.from_pretrained(tokenizer_id)
+        except Exception as e:
+            logging.error(f"(!) Could not load tokenizer {tokenizer_id}: {e}")
+            return None
+        
+        stats = {
+            "correct": {"1 sub-word": 0, "2 sub-words": 0, "3 sub-words": 0, "4+ sub-words": 0},
+            "missed":  {"1 sub-word": 0, "2 sub-words": 0, "3 sub-words": 0, "4+ sub-words": 0}
+        }
+
+        for (case_id, text), true_label in self.true_spans.items():
+            if true_label not in TAGSET: continue
+                
+            fertility = len(tokenizer.tokenize(text))
+            
+            if fertility == 1: bin_key = "1 sub-word"
+            elif fertility == 2: bin_key = "2 sub-words"
+            elif fertility == 3: bin_key = "3 sub-words"
+            else: bin_key = "4+ sub-words"
+                
+            pred_label = self.pred_spans.get((case_id, text), "Native")
+            status = "correct" if pred_label != "Native" else "missed"
+            stats[status][bin_key] += 1
+
+        df = pd.DataFrame(stats)
+        df.index.name = 'fertility'
+        df = df.reset_index()
+        df["total"] = df["correct"] + df["missed"]
+        df["success_rate"] = (df["correct"] / df["total"]).fillna(0)
+        
+        os.makedirs(output_dir, exist_ok=True)
+        out_file = os.path.join(output_dir, "tokenization_fragmentation_stats.csv")
+        df.to_csv(out_file, index=False)
+        return out_file
+
+    def analyze_per_class_performance(self, output_dir: str) -> str:
+        logging.info("\t> Calculating per-class performance breakdown...")
+        intersection_keys = set(self.true_spans.keys()).intersection(set(self.pred_spans.keys()))
+        y_true, y_pred = [], []
+        
+        for key in intersection_keys:
+            t_lbl = self.true_spans.get(key)
+            p_lbl = self.pred_spans.get(key)
+            if t_lbl not in TAGSET: continue
+            if p_lbl not in TAGSET: p_lbl = "Raw"
+            y_true.append(t_lbl)
+            y_pred.append(p_lbl)
+            
+        if not y_true: return None
+
+        report_dict = classification_report(y_true, y_pred, labels=TAGSET, zero_division=0, output_dict=True)
+        df_report = pd.DataFrame(report_dict).transpose()
+        df_report.index.name = 'taxonomy_class'
+        df_report = df_report.reset_index()
+        
+        os.makedirs(output_dir, exist_ok=True)
+        out_file = os.path.join(output_dir, "per_class_performance_stats.csv")
+        df_report.to_csv(out_file, index=False)
+        return out_file

@@ -171,3 +171,49 @@ def generate_plots(clean_path: str = "data/corpus/processed/mined_sentences.clea
     plots.plot_spelling_adaptation(os.path.join(output_dir, "3_spelling_retained.png"))
     plots.plot_data_amounts(os.path.join(output_dir, "4_dataset_sizes.png"))
     plots.plot_origin_languages(os.path.join(output_dir, "5_origin_langs.png"))
+
+# --- tokenization analysis plots ---
+
+def plot_token_analysis(tok_csv: str, clf_csv: str, output_dir: str):
+    logging.info(f"\t> Generating Granular Analysis plots in {output_dir}/...")
+    _plot_token_fragmentation(tok_csv, os.path.join(output_dir, "analysis_token_fragmentation.png"))
+    _plot_per_class_f1(clf_csv, os.path.join(output_dir, "analysis_per_class_f1.png"))
+
+def _plot_token_fragmentation(csv_path: str, output_path: str):
+        sns.set_theme(style="whitegrid")
+        df = pd.read_csv(csv_path)
+        if df.empty: return
+        
+        df['Success rate (%)'] = df['success_rate'] * 100
+        
+        plt.figure(figsize=(9, 6))
+        ax = sns.barplot(data=df, x="fertility", y="Success rate (%)", palette="flare")
+        
+        for i, row in df.iterrows():
+            ax.text(i, row['Success rate (%)'] + 2, f"n={row['total']}", 
+                    color='black', ha="center", fontsize=10)
+
+        plt.title("Impact of Sub-Word fragmentation on identification", pad=15, fontweight='bold')
+        plt.ylabel("Identification success rate (%)")
+        plt.xlabel("Sub-Word fertility (tokenizer Splits)")
+        plt.ylim(0, 110)
+        plt.tight_layout()
+        plt.savefig(output_path, dpi=300)
+        plt.close()
+
+def _plot_per_class_f1(csv_path: str, output_path: str):
+    df = pd.read_csv(csv_path)
+    if df.empty: return
+        
+    df_classes = df[df['taxonomy_class'].isin(TAGSET_ORDER)].copy()
+        
+    plt.figure(figsize=(10, 6))
+    sns.barplot(data=df_classes, x="f1-score", y="taxonomy_class", palette="viridis", order=TAGSET_ORDER)
+        
+    plt.title("Morphological classification performance (Exact-Match F1)", pad=15, fontweight='bold')
+    plt.xlabel("Macro F1-Score")
+    plt.ylabel("")
+    plt.xlim(0, 1.0)
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300)
+    plt.close()

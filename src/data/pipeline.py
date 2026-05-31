@@ -9,12 +9,13 @@ import os
 import logging
 from typing import List
 
-from domain.scraper.wiktionary import scrape_wiktionary
-from domain.generators.seeds import generate_seeds
-from mining.miner import mine_corpora
-from mining.cleaner import clean_sentences
-from analysis.annotation import get_annotation_stats
-from analysis.plot import generate_plots
+from .domain.scraper.wiktionary import scrape_wiktionary
+from .domain.generators.seeds import generate_seeds
+from .mining.miner import mine_corpora
+from .mining.cleaner import clean_sentences
+from .analysis.annotation import get_annotation_stats
+from .analysis.plot import generate_plots, plot_token_analysis
+from .analysis.stats import generate_token_stats
 
 def run_scraping(langs: List[str]):
     logging.info("\n--- Wikipedia loanword scraping ---")
@@ -55,3 +56,26 @@ def run_analysis():
     logging.info("\n--- Corpus statistics ---")
     get_annotation_stats()
     generate_plots()
+
+def run_token_analysis(gold_path: str, pred_path: str,tokenizer_id: str, target_langs: List[str], output_dir: str):
+    """Orchestrates the granular error analysis for tokenization and taxonomy classification."""
+    logging.info("\n--- Granular Tokenization & Taxonomy Analysis ---")
+    if not os.path.exists(pred_path):
+        logging.error(f"\t> (!) Prediction file not found: {pred_path}")
+        return
+        
+    logging.info(f"\t> Running analysis on predictions: {pred_path}")
+    
+    tok_csv, clf_csv = generate_token_stats(
+        gold_path=gold_path,
+        pred_path=pred_path,
+        tokenizer_id=tokenizer_id,
+        target_langs=target_langs,
+        output_dir=output_dir
+    )
+
+    if tok_csv and clf_csv:
+        plot_token_analysis(tok_csv, clf_csv, output_dir=output_dir)
+        logging.info(f"\t> Analysis complete. CSVs and plots saved to: {output_dir}")
+    else:
+        logging.warning("\t> (!) Granular analysis did not return expected CSVs.")

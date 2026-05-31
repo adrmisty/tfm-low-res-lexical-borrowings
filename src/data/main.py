@@ -7,27 +7,33 @@
 
 import argparse
 import logging
+import os
 
-from pipeline import (
+from .pipeline import (
     run_scraping, 
     run_generation, 
     run_mining, 
     run_cleaning, 
-    run_analysis
+    run_analysis,
+    run_token_analysis
 )
+
+GOLD_STD_PATH = "data/annotation/test_gold_annotations.json"
 
 logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 
 def main():
     parser = argparse.ArgumentParser(description="[TFM] Lexical Borrowing Data Pipeline")
     
-    parser.add_argument("--action", type=str, choices=["scrape", "generate", "mine", "clean", "stats"], required=True, help="The data pipeline step to execute")
+    parser.add_argument("--action", type=str, choices=["run", "eval", "push", "analyze"], default="run", help="Choose action to perform")
+    parser.add_argument("--tokenizer", type=str, default="jhu-clsp/mmBERT-base", help="HuggingFace tokenizer ID for fragmentation analysis")    
     parser.add_argument("--langs", nargs="+", default=["ast", "eu", "el"], help="List of languages to process")
     
     parser.add_argument("--corpus", type=str, default="data/corpus/raw/", help="Path to raw corpus directory")
     parser.add_argument("--input", type=str, help="Input directory or file for cleaning step")
     parser.add_argument("--output", type=str, help="Output directory or file")
-    
+    parser.add_argument("--pred_file", type=str, help="Path to prediction JSON (required if --action=analyze)")
+
     args = parser.parse_args()
 
     if args.action == "scrape":
@@ -51,5 +57,16 @@ def main():
         # python src/data/main.py --action stats [for plots and statistics]
         run_analysis()
 
+    elif args.action == "analyze":
+        out_dir = os.path.dirname(args.pred_file)
+        # python -m src.data.main --action analyze --pred_file results\model\mmBert\predictions_mmbert_2step_20260429_162250.json --langs ast eu el 
+        run_token_analysis(
+            gold_path=GOLD_STD_PATH,
+            pred_path=args.pred_file,
+            tokenizer_id=args.tokenizer,
+            target_langs=args.langs,
+            output_dir=out_dir
+        )
+        
 if __name__ == "__main__":
     main()
