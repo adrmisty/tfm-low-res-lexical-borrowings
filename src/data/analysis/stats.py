@@ -149,15 +149,16 @@ def generate_dataset_stats(seeds_path: str = "data/corpus/raw/synthetic_borrowin
     stats = BorrowingStats(seeds_path, mined_path, clean_path)
     stats.report(output_dir)
 
-def generate_token_stats(tokenizer_id: str, target_langs: list, output_dir: str,
+def generate_granular_stats(tokenizer_id: str, target_langs: list, output_dir: str,
                          gold_path: str = "data/annotation/test_gold_annotations.json", 
                          pred_path: str = "results/model/mmBert/predictions_mmbert_2step_20260429_162250.json"):
-    analyzer = TokenAnalysis(gold_path, pred_path, target_langs)
+    analyzer = GranularAnalysis(gold_path, pred_path, target_langs)
     tok_csv = analyzer.analyze_tokenization_fragmentation(tokenizer_id, output_dir)
     clf_csv = analyzer.analyze_per_class_performance(output_dir)
-    return tok_csv, clf_csv
+    fp_csv = analyzer.analyze_false_positives(output_dir)
+    return None, None, fp_csv
 
-class TokenAnalysis:
+class GranularAnalysis:
     """Computes advanced diagnostics for lexical borrowing extraction."""
     
     def __init__(self, gold_path: str, pred_path: str, target_langs: list = None):
@@ -225,4 +226,34 @@ class TokenAnalysis:
         os.makedirs(output_dir, exist_ok=True)
         out_file = os.path.join(output_dir, "per_class_performance_stats.csv")
         df_report.to_csv(out_file, index=False)
+        return out_file
+
+    def analyze_false_positives(self, output_dir: str, top_n: int = 50) -> str:
+        """Extracts the most frequent False Positives to diagnose hallucination/shadow adaptation."""
+        logging.info("\t> Extracting top FPs for linguistic analysis...")
+        fp_counts = {}
+
+        for (case_id, text), pred_label in self.pred_spans.items():
+            # skip if the model predicted Native (not an extraction)
+            if pred_label == "Native":
+                continue
+                
+            true_label = self.true_spans.get((case_id, text))
+            
+            # if the span is missing from gold OR is an Invalid tag, it's a False Positive
+            if true_label not in TAGSET:
+                fp_counts[text] = fp_counts.get(text, 0) + 1
+
+        if not fp_counts:
+            logging.warning("\t> No False Positives found!")
+            return None
+
+        df_fp = pd.DataFrame(list(fp_counts.items()), columns=["false_positive_span", "frequency"])
+        df_fp = df_fp.sort_values(by="frequency", ascending=False).head(top_n)
+        
+        os.makedirs(output_dir, exist_ok=True)
+        out_file = os.path.join(output_dir, f"llm_false_positives_{'_'.join(self.target_langs) if self.target_langs else 'ALL'}.csv")
+        df_fp.to_csv(out_file, index=False)
+        
+        logging.info(f"\n{df_fp.head(10).to_string(index=False)}")
         return out_file

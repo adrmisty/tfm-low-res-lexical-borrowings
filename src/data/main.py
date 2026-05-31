@@ -15,7 +15,7 @@ from .pipeline import (
     run_mining, 
     run_cleaning, 
     run_analysis,
-    run_token_analysis
+    run_granular_analysis
 )
 
 GOLD_STD_PATH = "data/annotation/test_gold_annotations.json"
@@ -60,7 +60,7 @@ def main():
     elif args.action == "analyze":
         out_dir = os.path.dirname(args.pred_file)
         # python -m src.data.main --action analyze --pred_file results\model\mmBert\predictions_mmbert_2step_20260429_162250.json --langs ast eu el 
-        run_token_analysis(
+        run_granular_analysis(
             gold_path=GOLD_STD_PATH,
             pred_path=args.pred_file,
             tokenizer_id=args.tokenizer,

@@ -15,7 +15,7 @@ from .mining.miner import mine_corpora
 from .mining.cleaner import clean_sentences
 from .analysis.annotation import get_annotation_stats
 from .analysis.plot import generate_plots, plot_token_analysis
-from .analysis.stats import generate_token_stats
+from .analysis.stats import generate_granular_stats
 
 def run_scraping(langs: List[str]):
     logging.info("\n--- Wikipedia loanword scraping ---")
@@ -57,16 +57,16 @@ def run_analysis():
     get_annotation_stats()
     generate_plots()
 
-def run_token_analysis(gold_path: str, pred_path: str,tokenizer_id: str, target_langs: List[str], output_dir: str):
-    """Orchestrates the granular error analysis for tokenization and taxonomy classification."""
-    logging.info("\n--- Granular Tokenization & Taxonomy Analysis ---")
+def run_granular_analysis(gold_path: str, pred_path: str,tokenizer_id: str, target_langs: List[str], output_dir: str):
+    """Orchestrates the granular error analysis and stats computations."""
+    logging.info("\n--- Granular tokenization, FPs & taxonomy analysis ---")
     if not os.path.exists(pred_path):
         logging.error(f"\t> (!) Prediction file not found: {pred_path}")
         return
         
     logging.info(f"\t> Running analysis on predictions: {pred_path}")
     
-    tok_csv, clf_csv = generate_token_stats(
+    tok_csv, clf_csv, fp_csv = generate_granular_stats(
         gold_path=gold_path,
         pred_path=pred_path,
         tokenizer_id=tokenizer_id,
@@ -78,4 +78,4 @@ def run_token_analysis(gold_path: str, pred_path: str,tokenizer_id: str, target_
         plot_token_analysis(tok_csv, clf_csv, output_dir=output_dir)
         logging.info(f"\t> Analysis complete. CSVs and plots saved to: {output_dir}")
     else:
-        logging.warning("\t> (!) Granular analysis did not return expected CSVs.")
+        logging.warning("\t> (!) Granular analysis on tokenizerdid not return expected CSVs.")
