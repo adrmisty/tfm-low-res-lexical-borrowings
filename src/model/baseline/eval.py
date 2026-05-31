@@ -25,7 +25,6 @@ def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: 
     with open(stat_file, "w", encoding="utf-8") as f:
         f.write(f"=== EVALUATION STATS: {experiment} ===\n")
     
-    # Load and filter spans by language
     true_spans, pred_spans = _load_spans(pred_path, gold_path, target_langs)
     
     print("\n*** [LW 1]: Borrowing detection ***")
@@ -40,15 +39,18 @@ def evaluate_pipeline(pred_path: str, gold_path: str, out_dir: str, experiment: 
 
 def eval_step1_id(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str, stat_file: str):
     """Evaluates the binary detection task (native vs. borrowing)."""
-    true_keys = set(true_spans.keys())
-    pred_keys = set(pred_spans.keys())
-    all_keys = true_keys.union(pred_keys)
+    all_keys = set(true_spans.keys()).union(set(pred_spans.keys()))
 
     y_true_id, y_pred_id = [], []
     
     for key in all_keys:
-        y_true_id.append("Borrowing" if key in true_keys else "Native")
-        y_pred_id.append("Borrowing" if key in pred_keys else "Native")
+        # exact labels (or default to Native)
+        t_lbl = true_spans.get(key, "Native")
+        p_lbl = pred_spans.get(key, "Native")
+
+        # only consider it a "Borrowing" target if the label is actually in TAGSET.
+        y_true_id.append("Borrowing" if t_lbl in TAGSET else "Native")
+        y_pred_id.append("Borrowing" if p_lbl in TAGSET else "Native")
 
     get_metrics(y_true_id, y_pred_id, labels=["Borrowing"], average="binary", out_file=stat_file, task="IDENTIFICATION")
     
@@ -68,12 +70,11 @@ def eval_step2_clf(true_spans: dict, pred_spans: dict, out_dir: str, experiment:
         t_lbl = true_spans.get(key)
         p_lbl = pred_spans.get(key)
 
-        # if the gold label is 'Invalid_NE' or 'Invalid_FalsePos', it's not a real borrowing.
-        # it's a False Positive from the identification step
+        # Invalid_*
         if t_lbl not in TAGSET:
             continue
 
-        # fallback: hallucinated tags
+        # tag hallucination
         if p_lbl not in TAGSET: 
             p_lbl = "Raw"
 
@@ -109,13 +110,11 @@ def eval_joint(true_spans: dict, pred_spans: dict, out_dir: str, experiment: str
         t_lbl = true_spans.get(key, "Native")
         p_lbl = pred_spans.get(key, "Native")
 
-        # gold label is an Invalid_NE/FalsePos noise tag, map it back to Native
+        # >>> collapse to Native
         if t_lbl not in TAGSET and t_lbl != "Native": 
             t_lbl = "Native" 
-
-        # fallback:hallucinated borrowing tags
         if p_lbl not in TAGSET and p_lbl != "Native": 
-            p_lbl = "Raw"
+            p_lbl = "Native"
 
         y_true_joint.append(t_lbl)
         y_pred_joint.append(p_lbl)
@@ -156,6 +155,22 @@ def get_metrics(ground_truth: List[str], predictions: List[str], labels: list, a
 
     return {"accuracy": acc, "precision": p, "recall": r, "f1": f1}
 
+# --- plotting
+
+def _plot_cm(y_true, y_pred, labels, title, out_path):
+    cm = confusion_matrix(y_true, y_pred, labels=labels)
+    plt.figure(figsize=(11, 9))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
+    plt.title(title, pad=15)
+    plt.ylabel('True label (gold standard)', fontweight='bold')
+    plt.xlabel('Predicted label (model output)', fontweight='bold')
+    plt.xticks(rotation=45, ha='right')
+    plt.tight_layout()
+    plt.savefig(out_path, dpi=300, bbox_inches='tight')
+    plt.close()
+
+# --- aux parsing+norm utils
+
 def _load_spans(pred_path: str, gold_path: str, target_langs: List[str] = None) -> Tuple[Dict, Dict]:
     with open(pred_path, "r", encoding="utf-8") as f:
         predictions = json.load(f)
@@ -166,7 +181,6 @@ def _load_spans(pred_path: str, gold_path: str, target_langs: List[str] = None) 
     for item in ground_truth:
         lang = item.get("lang", "") if "lang" in item else item.get("data", {}).get("lang", "")
         
-        # filter by language if specified
         if target_langs and lang not in target_langs:
             continue
             
@@ -179,12 +193,12 @@ def _load_spans(pred_path: str, gold_path: str, target_langs: List[str] = None) 
     pred_spans_dict = {} 
 
     for record in predictions:
-        case_id = str(record["id"])
+        case_id = str(record.get("id"))
         
-        # ** if the case_id isn't in gt_map, it was filtered out by the language check above **
         if case_id not in gt_map: continue
 
-        pred_items = _parse_llm_output(record.get("prediction", "[]"))
+        pred_items = _parse_llm_output(record.get("prediction", []))
+        
         if isinstance(pred_items, list):
             for p in pred_items:
                 if isinstance(p, dict) and p.get("span") and p.get("label"):
@@ -207,18 +221,6 @@ def _load_spans(pred_path: str, gold_path: str, target_langs: List[str] = None) 
                 
     return true_spans_dict, pred_spans_dict
 
-def _plot_cm(y_true, y_pred, labels, title, out_path):
-    cm = confusion_matrix(y_true, y_pred, labels=labels)
-    plt.figure(figsize=(11, 9))
-    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues', xticklabels=labels, yticklabels=labels)
-    plt.title(title, pad=15)
-    plt.ylabel('True label (gold standard)', fontweight='bold')
-    plt.xlabel('Predicted label (model output)', fontweight='bold')
-    plt.xticks(rotation=45, ha='right')
-    plt.tight_layout()
-    plt.savefig(out_path, dpi=300, bbox_inches='tight')
-    plt.close()
-
 def _normalize_text(text: str) -> str:
     return re.sub(r"[^\w\s]", "", text.lower().strip())
 
@@ -229,13 +231,21 @@ def _normalize_label(lbl):
     lbl_str = re.sub(r"[\[\]\'\"]", "", lbl_str)
     return lbl_str.strip() or "O"
 
-def _parse_llm_output(prediction_str: str) -> List[Dict]:
+def _parse_llm_output(prediction_data) -> List[Dict]:
+    """Safely extracts the prediction list, whether it's already parsed JSON or a raw string."""
+    if isinstance(prediction_data, list):
+        return prediction_data
+        
     try:
-        prediction_str = re.sub(r"<think>.*?</think>", "", str(prediction_str), flags=re.DOTALL).strip()
+        prediction_str = re.sub(r"<think>.*?</think>", "", str(prediction_data), flags=re.DOTALL).strip()
+        
+        # embedded JSON in array
         match = re.search(r"\[\s*\{.*\}\s*\]", prediction_str, re.DOTALL)
         if match:
             return json.loads(match.group())
+            
         data = json.loads(prediction_str)
         return data if isinstance(data, list) else []
-    except Exception:
+    except Exception as e:
+        print(f"Failed to parse LLM output: {e}")
         return []

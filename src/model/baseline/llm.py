@@ -19,13 +19,14 @@ logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 class BorrowingLLM:
     """LLM wrapper class for lexical borrowing detection and classification."""
     
-    def __init__(self, model_id: str, k: int, langs: List[str], gt: str):
+    def __init__(self, model_id: str, langs: List[str], gt: str, k: int):
         self.device = "cuda" if torch.cuda.is_available() else "cpu"
         if "llm" in model_id:
-            self.model_id = "Qwen/Qwen2.5-7B-Instruct"
+            self.model_id = "Qwen/Qwen3.5-9B" # HF says compatible with vLLM? :/
         self._load_model()
 
-        splits = load_gold_data(gt, k=k, target_langs=langs)
+        self.k = k
+        splits = load_gold_data(gt, target_langs=langs)
         self.data_splits = {}
         for item in splits:
             lang = item["lang"]
@@ -47,16 +48,46 @@ class BorrowingLLM:
             sys_id = get_system_prompt_id(language)
             prompt_id = get_fewshot_prompt_id(sys_id, text, language, k)
             
-            raw_id_output = self._generate(sys_id, prompt_id)          
-            
+            raw_id_output = self._generate(
+                sys_id,
+                prompt_id,
+                max_new_tokens=128,
+                prefill='[\n"'
+            )                      
             try:
-                clean_out = re.sub(r"<think>.*?</think>", "", str(raw_id_output), flags=re.DOTALL).strip()
-                match = re.search(r"\[\s*\".*\"\s*\]|\[.*?\]", clean_out, re.DOTALL)
-                candidate_spans = json.loads(match.group()) if match else []
-                if not isinstance(candidate_spans, list): candidate_spans = []
+                clean_out = str(raw_id_output).strip()
+
+                # remove think tags
+                clean_out = re.sub(
+                    r"</?think>",
+                    "",
+                    clean_out,
+                    flags=re.IGNORECASE
+                )
+
+                json_str = self._extract_first_json_list(clean_out)
+
+                if json_str:
+                    candidate_spans = json.loads(json_str)
+                else:
+                    raise ValueError("> (!) Fallback: JSON list extraction failed")
+
             except Exception:
+                # *** truncated list ***
+                # json.loads fails
+                candidate_spans = re.findall(r'"([^"]+)"', str(raw_id_output))
+                
+            # validate
+            if not isinstance(candidate_spans, list):
                 candidate_spans = []
 
+            candidate_spans = [
+                s.strip()
+                for s in candidate_spans
+                if isinstance(s, str) and s.strip()
+            ]
+            
+            
             # ** 2. classification **
             predictions = []
             sys_clf = get_system_prompt_clf(language)
@@ -65,26 +96,43 @@ class BorrowingLLM:
                 if not isinstance(span, str): continue
                 
                 prompt_clf = get_fewshot_prompt_clf(sys_clf, text, span, language, k)
-                raw_label_output = self._generate(sys_clf, prompt_clf).strip() 
+                raw_label_output = self._generate(
+                    sys_clf,
+                    prompt_clf,
+                    max_new_tokens=48,
+                    prefill='{"label":"'
+                ).strip() 
                 
-                # {"label": "..."}
+                label = fallback
                 try:
-                    # markdown cleanse
-                    clean_label = raw_label_output.replace("```json", "").replace("```", "").strip()
-                    parsed_json = json.loads(clean_label)
-                    label = parsed_json.get("label", fallback)
+                    clean_label = str(raw_label_output).strip()
+                    clean_label = re.sub(r"</?think>", "", clean_label, flags=re.IGNORECASE)
+                    
+                    json_str = self._extract_first_json_dict(clean_label)
+                    
+                    if json_str:
+                        parsed_json = json.loads(json_str)
+                        label = parsed_json.get("label", fallback)
+                    else:
+                        raise ValueError("> (!) Fallback: JSON dict extraction failed")
+
                 except Exception:
-                    label = fallback
+                    # *** truncated labeling ***
+                    match = re.search(r'"label"\s*:\s*"([^"]+)"', '{"label":"' + str(raw_label_output))
+                    if match:
+                        label = match.group(1)
                 
+                # > Invalid/Native for evaluation
                 valid_label = label if (label in TAGSET or "Invalid" in label) else fallback
                 predictions.append({"span": span, "label": valid_label})
-            
-            results.append({
+
+            res = {
                 "id": case.get("id"),
-                #"prompt": prompt,
                 "lang": language,
-                "prediction": json.dumps(predictions, ensure_ascii=False)
-            })
+                "prediction": predictions
+            }
+            print(res)
+            results.append(res)
             
         return results
     
@@ -96,17 +144,53 @@ class BorrowingLLM:
         for case in test_data:
             user_prompt = get_fewshot_prompt_1step(system_prompt, case["text"], language, k)
             
-            prediction = self._generate(system_prompt, user_prompt)
+            raw_prediction = self._generate(
+                system_prompt, 
+                user_prompt, 
+                max_new_tokens=128, 
+                prefill='[{"span":"'
+            )
             
-            results.append({
+            # same cleanse/parsing needed bc it repeats the output with thinking
+            # {'id': 'd4dd5a5f612404677c35f21486c8a853', 'lang': 'ast', 'prediction': '[{"span":"Gwenn-ha-du","label":"Raw"}]\n</think>\n\n[{"span": "Gwenn-ha-du", "label": "Raw"}]'}
+
+            try:
+                clean_out = str(raw_prediction).strip()
+                clean_out = re.sub(r"</?think>", "", clean_out, flags=re.IGNORECASE)
+                
+                json_str = self._extract_first_json_list(clean_out)
+                
+                if json_str:
+                    parsed_spans = json.loads(json_str)
+                else:
+                    raise ValueError("> (!) Fallback: JSON list extraction failed")
+                    
+            except Exception:
+                parsed_spans = []
+
+            # validate
+            if not isinstance(parsed_spans, list):
+                parsed_spans = []
+                
+            prediction = []
+            for item in parsed_spans:
+                if isinstance(item, dict) and "span" in item and "label" in item:
+                    # invalid and fallback for eval
+                    label = item["label"]
+                    valid_label = label if (label in TAGSET or "Invalid" in label) else "Native"
+                    prediction.append({"span": item["span"], "label": valid_label})
+            
+            res = {
                 "id": case.get("id"),
-                #"prompt": prompt,
                 "lang": language,
                 "prediction": prediction
-            })
+            }
             
-        return results
-        
+            print(res)
+            results.append(res)
+
+        return results        
+    
     # --- response generation -------------------------------------------------------------------------
 
     def _load_model(self):
@@ -118,34 +202,107 @@ class BorrowingLLM:
             trust_remote_code=True,
         ).to("cuda").eval()
         
-    def _generate(self, system: str, user: str) -> str:
-        """Generates LLM model's response to few-shot prompt."""
-        
+    def _generate(self, system: str, user: str, max_new_tokens: int = 64, prefill: str = "") -> str:
+        """Generates LLM response."""
+
         messages = [
             {"role": "system", "content": system},
             {"role": "user", "content": user}
         ]
-        text = self.tokenizer.apply_chat_template(messages, tokenize=False, add_generation_prompt=True)
-        inputs = self.tokenizer([text], return_tensors="pt").to(self.device)
-        
+
+        text = self.tokenizer.apply_chat_template(
+            messages,
+            tokenize=False,
+            add_generation_prompt=True
+        )
+
+        # --- force structured continuation ---
+        if prefill:
+            text += prefill
+
+        inputs = self.tokenizer(
+            [text],
+            return_tensors="pt"
+        ).to(self.device)
+
         with torch.no_grad():
+
             outputs = self.model.generate(
                 **inputs,
-                max_new_tokens=512, # 256 / 512 / 2048
+
+                max_new_tokens=max_new_tokens,
+                # 1step: 128 (change if truncation happens)
+                # 2step: 64(id) + 16(clf)
+
+                # extraction task -> deterministic
                 do_sample=False,
+                repetition_penalty=1.05,
+                eos_token_id=self.tokenizer.eos_token_id,
                 pad_token_id=self.tokenizer.eos_token_id
             )
-        
-        input_length = inputs.input_ids.shape[1]        
+
+        input_length = inputs.input_ids.shape[1]
         generated_ids = outputs[0][input_length:]
+
         out_text = self.tokenizer.decode(
             generated_ids,
             skip_special_tokens=True
-        )        
-        
-        return out_text
+        ).strip()
 
+        # remove reasoning remnants
+        out_text = re.sub(
+            r"(?i)(thinking process|thought process).*",
+            "",
+            out_text,
+            flags=re.DOTALL
+        ).strip()
+
+        # avoid duplicate prefill
+        if prefill and out_text.startswith(prefill):
+            return out_text
+
+        return prefill + out_text    
     
+
+    # ----------------- output parsing util
+
+    def _extract_first_json_list(self, text: str):
+        start = text.find("[")
+
+        if start == -1:
+            return None
+
+        depth = 0
+        for i in range(start, len(text)):
+            char = text[i]
+            if char == "[":
+                depth += 1
+
+            elif char == "]":
+                depth -= 1
+                if depth == 0:
+                    return text[start:i+1]
+
+        return None
+
+    def _extract_first_json_dict(self, text: str):
+        start = text.find("{")
+
+        if start == -1:
+            return None
+
+        depth = 0
+        for i in range(start, len(text)):
+            char = text[i]
+            if char == "{":
+                depth += 1
+            elif char == "}":
+                depth -= 1
+                if depth == 0:
+                    return text[start:i+1]
+
+        return None
+
 """
 class BorrowingVLLM:
     #TO-BE-DEVELOPED: vLLM wrapper class for lexical borrowing identification with fast batched inference
@@ -175,7 +332,7 @@ class BorrowingVLLM:
         # ** 1. identification **
         sys_id = get_system_prompt_id(language)
         id_prompts = [get_fewshot_prompt_id(sys_id, case["text"], language, k) for case in test_data]
-        formatted_id_prompts = self._format_prompts(sys_id, id_prompts, prefill="[\"")
+        formatted_id_prompts = self._format_prompts(sys_id, id_prompts, prefill="[\n\"")
         id_outputs = self.model.generate(formatted_id_prompts, self.sampling_params)
         
         # _ build clf batch _
@@ -233,7 +390,7 @@ class BorrowingVLLM:
         system_prompt = get_system_prompt_1step(language)
         
         user_prompts = [get_fewshot_prompt_1step(system_prompt, case["text"], language, k) for case in test_data]
-        formatted_prompts = self._format_prompts(system_prompt, user_prompts, prefill="[\n")
+        formatted_prompts = self._format_prompts(system_prompt, user_prompts, prefill="[\n\n")
         
         outputs = self.model.generate(formatted_prompts, self.sampling_params)
         

@@ -5,7 +5,7 @@
 # evaluation for the Lexical Borrowing NLP pipeline.
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# apr-2026
+# may-2026
 # ================================================================
 
 # Exit immediately if any command fails
@@ -19,7 +19,7 @@ export OMP_NUM_THREADS=1
 echo "================================================================"
 echo " [TFM] LEXICAL BORROWING EXPERIMENTS"
 echo " Languages: $LANGUAGES"
-echo " GPU Device: $0"
+echo " GPU Device: $GPU_ID"
 echo "================================================================"
 
 evaluate_latest() {
@@ -61,20 +61,32 @@ python main.py --action run --type mmbert --langs $LANGUAGES
 evaluate_latest "results/model/mmbert" "MMBERT"
 
 # ----------------------------------------------------------------
-# 4. Qwen3.5-9B (LLM with vLLM - 2-Step Pipeline)
+# 4. Qwen3.5-9B (LLM - 2-Step Pipeline)
 # ----------------------------------------------------------------
-echo ">>> [3.1/3] Running Qwen3.5-9B (2-step, 3-shot)..."
+echo ">>> [3.1/3] Running LLM (Qwen3.5-9B) (2-step, 3/4-shot)..."
 CUDA_VISIBLE_DEVICES=$GPU_ID python main.py --action run --type llm --pipeline 2step --k 3 --langs $LANGUAGES
-evaluate_latest "results/model/Qwen3.5-9B/2step" "QWEN-2STEP-2SHOT"
+evaluate_latest "results/model/Qwen3.5-9B/2step" "LLM-2STEP-3SHOT"
+
+CUDA_VISIBLE_DEVICES=$GPU_ID python main.py --action run --type llm --pipeline 2step --k 4 --langs $LANGUAGES
+evaluate_latest "results/model/Qwen3.5-9B/2step" "LLM-2STEP-4SHOT"
 
 # ----------------------------------------------------------------
-# 5. Qwen3.5-9B (LLM with vLLM - 1-Step Pipeline)
+# 5. Qwen3.5-9B (LLM - 1-Step Pipeline)
 # ----------------------------------------------------------------
-echo ">>> [3.2/3] Running Qwen3.5-9B (1-step, 3-shot)..."
+echo ">>> [3.2/3] Running LLM (Qwen3.5-9B) (1-step, 3/4/0-shot)..."
 CUDA_VISIBLE_DEVICES=$GPU_ID python main.py --action run --type llm --pipeline 1step --k 3 --langs $LANGUAGES
-evaluate_latest "results/model/Qwen3.5-9B/1step" "QWEN-1STEP-2SHOT"
+evaluate_latest "results/model/llm/1step/3shot" "LLM-1STEP-2SHOT"
+
+CUDA_VISIBLE_DEVICES=$GPU_ID python main.py --action run --type llm --pipeline 1step --k 4 --langs $LANGUAGES
+evaluate_latest "results/model/llm/1step/4shot" "LLM-1STEP-2SHOT"
+
+CUDA_VISIBLE_DEVICES=$GPU_ID python main.py --action run --type llm --pipeline 1step --k 0 --langs $LANGUAGES
+evaluate_latest "results/model/llm/1step/0shot" "LLM-1STEP-0SHOT"
+
 
 echo "================================================================"
 echo " ALL EXPERIMENTS COMPLETED SUCCESSFULLY!"
 echo " >>> Check results/model/ for output JSONs and evaluation plots!"
 echo "================================================================"
+
+# --> next-up (once LLM is fixed: try with k=2 and k=5 to try and see diff param n)

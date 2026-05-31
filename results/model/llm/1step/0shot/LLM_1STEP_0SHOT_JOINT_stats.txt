@@ -1,0 +1,4 @@
+=== EVALUATION STATS: LLM_1STEP_0SHOT_JOINT ===
+[IDENTIFICATION] -> Precision: 0.2536 | Recall: 0.3543 | F1: 0.2956
+[CLASSIFICATION] -> Precision: 0.3452 | Recall: 0.3487 | F1: 0.3448
+[JOINT (Macro, ex. Native)] -> Precision: 0.1022 | Recall: 0.1398 | F1: 0.1056

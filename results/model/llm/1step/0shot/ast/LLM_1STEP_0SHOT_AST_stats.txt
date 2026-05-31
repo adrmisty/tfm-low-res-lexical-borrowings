@@ -1,0 +1,4 @@
+=== EVALUATION STATS: LLM_1STEP_0SHOT_AST ===
+[IDENTIFICATION] -> Precision: 0.1691 | Recall: 0.4121 | F1: 0.2398
+[CLASSIFICATION] -> Precision: 0.3693 | Recall: 0.3000 | F1: 0.2958
+[JOINT (Macro, ex. Native)] -> Precision: 0.0664 | Recall: 0.1255 | F1: 0.0763
