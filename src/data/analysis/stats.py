@@ -156,7 +156,7 @@ def generate_granular_stats(tokenizer_id: str, target_langs: list, output_dir: s
     tok_csv = analyzer.analyze_tokenization_fragmentation(tokenizer_id, output_dir)
     clf_csv = analyzer.analyze_per_class_performance(output_dir)
     fp_csv = analyzer.analyze_false_positives(output_dir)
-    return None, None, fp_csv
+    return tok_csv, clf_csv, fp_csv
 
 class GranularAnalysis:
     """Computes advanced diagnostics for lexical borrowing extraction."""

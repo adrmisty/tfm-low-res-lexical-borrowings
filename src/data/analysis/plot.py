@@ -1,9 +1,10 @@
 # plot.py
 # ----------------------------------------------------------------
-# analyzes and plots lexical borrowing data
+# analyzes and plots lexical borrowing data 
+# (standardized coloring, bigger font size)
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# jan-2026
+# jun-2026
 
 import os
 import json
@@ -13,6 +14,9 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
+
+# Set global theme for larger fonts and standard color palette
+sns.set_theme(style="whitegrid", font_scale=1.3, palette="viridis")
 
 # Official Taxonomy Mapping
 TAGSET_MAP = {
@@ -48,7 +52,6 @@ class BorrowingPlots:
     """Plots for lexical borrowing statistics, depending on source, language, degree of integration..."""
     def __init__(self, df: pd.DataFrame):
         self.df = df.copy()
-        sns.set_theme(style="whitegrid")
         
         self.df['data_source'] = self.df['type'].apply(
             lambda t: "Established" if "wiktionary" in str(t) else "Synthetic"
@@ -60,8 +63,8 @@ class BorrowingPlots:
             logging.warning("\t> (!) Warning: No synthetic data for PoS plot.")
             return
 
-        plt.figure(figsize=(8, 6))
-        sns.countplot(data=df_synth, x="lang", hue="pos", palette="viridis")
+        plt.figure(figsize=(10, 8))
+        sns.countplot(data=df_synth, x="lang", hue="pos")
         plt.title("Part-of-Speech distribution [tech neologisms]")
         plt.ylabel("Sentences found")
         plt.tight_layout()
@@ -76,12 +79,11 @@ class BorrowingPlots:
         # Filter out "Other" just in case any weird types slipped through
         df_synth = df_synth[df_synth['taxonomy_tag'] != "Other"]
         
-        plt.figure(figsize=(12, 6))
+        plt.figure(figsize=(14, 8))
         ax = sns.countplot(
             data=df_synth, 
             x="lang", 
             hue="taxonomy_tag", 
-            palette="Spectral",
             hue_order=TAGSET_ORDER
         )
         ax.set_yscale("log")
@@ -97,12 +99,11 @@ class BorrowingPlots:
         df_synth = self.df[self.df['data_source'] == "Synthetic"].copy()
         df_synth['spelling'] = df_synth['type'].apply(self._map_spelling)
         
-        plt.figure(figsize=(8, 6))
+        plt.figure(figsize=(10, 8))
         sns.countplot(
             data=df_synth, 
             x="lang", 
             hue="spelling", 
-            palette="Set2",
             hue_order=["Retained (foreignization)", "Modified (nativization)"]
         )
         plt.title("Spelling adaptation strategies [tech neologisms]")
@@ -112,8 +113,8 @@ class BorrowingPlots:
         plt.close()
 
     def plot_data_amounts(self, output_path: str):
-        plt.figure(figsize=(8, 6))
-        sns.countplot(data=self.df, x="lang", hue="data_source", palette="mako")
+        plt.figure(figsize=(10, 8))
+        sns.countplot(data=self.df, x="lang", hue="data_source")
         plt.title("Dataset size comparison")
         plt.ylabel("Sentences found")
         plt.tight_layout()
@@ -126,8 +127,8 @@ class BorrowingPlots:
 
         df_wik['origin'] = df_wik['type'].apply(lambda t: t.split('_')[-1] if '_' in t else "unknown")
         
-        plt.figure(figsize=(8, 6))
-        sns.countplot(data=df_wik, x="lang", hue="origin", palette="magma")
+        plt.figure(figsize=(10, 8))
+        sns.countplot(data=df_wik, x="lang", hue="origin")
         plt.title("Origin of established loans")
         plt.ylabel("Sentences found")
         plt.tight_layout()
@@ -140,7 +141,6 @@ class BorrowingPlots:
             return "Retained (foreignization)"
         return "Modified (nativization)"
 
-# --- Integration with pipeline.py ---
 
 def generate_plots(clean_path: str = "data/corpus/processed/mined_sentences.clean.jsonl", 
                    output_dir: str = "results/plots/v1"):
@@ -180,18 +180,17 @@ def plot_token_analysis(tok_csv: str, clf_csv: str, output_dir: str):
     _plot_per_class_f1(clf_csv, os.path.join(output_dir, "analysis_per_class_f1.png"))
 
 def _plot_token_fragmentation(csv_path: str, output_path: str):
-        sns.set_theme(style="whitegrid")
         df = pd.read_csv(csv_path)
         if df.empty: return
         
         df['Success rate (%)'] = df['success_rate'] * 100
         
-        plt.figure(figsize=(9, 6))
-        ax = sns.barplot(data=df, x="fertility", y="Success rate (%)", palette="flare")
+        plt.figure(figsize=(10, 8))
+        ax = sns.barplot(data=df, x="fertility", y="Success rate (%)")
         
         for i, row in df.iterrows():
             ax.text(i, row['Success rate (%)'] + 2, f"n={row['total']}", 
-                    color='black', ha="center", fontsize=10)
+                    color='black', ha="center", fontsize=12)
 
         plt.title("Impact of Sub-Word fragmentation on identification", pad=15, fontweight='bold')
         plt.ylabel("Identification success rate (%)")
@@ -207,8 +206,8 @@ def _plot_per_class_f1(csv_path: str, output_path: str):
         
     df_classes = df[df['taxonomy_class'].isin(TAGSET_ORDER)].copy()
         
-    plt.figure(figsize=(10, 6))
-    sns.barplot(data=df_classes, x="f1-score", y="taxonomy_class", palette="viridis", order=TAGSET_ORDER)
+    plt.figure(figsize=(12, 8))
+    sns.barplot(data=df_classes, x="f1-score", y="taxonomy_class", order=TAGSET_ORDER)
         
     plt.title("Morphological classification performance (Exact-Match F1)", pad=15, fontweight='bold')
     plt.xlabel("Macro F1-Score")

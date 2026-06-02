@@ -54,7 +54,7 @@ def run_cleaning(input_path: str, output_path: str):
 
 def run_analysis():
     logging.info("\n--- Corpus statistics ---")
-    get_annotation_stats()
+    #get_annotation_stats()
     generate_plots()
 
 def run_granular_analysis(gold_path: str, pred_path: str,tokenizer_id: str, target_langs: List[str], output_dir: str):
