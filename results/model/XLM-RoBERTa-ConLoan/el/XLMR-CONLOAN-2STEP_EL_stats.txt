@@ -1,0 +1,4 @@
+=== EVALUATION STATS: XLMR-CONLOAN-2STEP_EL ===
+[IDENTIFICATION] -> Precision: 0.1312 | Recall: 0.4672 | F1: 0.2049
+[CLASSIFICATION] -> Precision: 0.3600 | Recall: 0.3655 | F1: 0.3623
+[JOINT (Macro, ex. Native)] -> Precision: 0.0468 | Recall: 0.2470 | F1: 0.0787

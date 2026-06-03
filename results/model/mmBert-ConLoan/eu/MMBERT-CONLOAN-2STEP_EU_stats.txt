@@ -1,0 +1,4 @@
+=== EVALUATION STATS: MMBERT-CONLOAN-2STEP_EU ===
+[IDENTIFICATION] -> Precision: 0.1216 | Recall: 0.0972 | F1: 0.1081
+[CLASSIFICATION] -> Precision: 0.1830 | Recall: 0.3619 | F1: 0.2197
+[JOINT (Macro, ex. Native)] -> Precision: 0.0230 | Recall: 0.0710 | F1: 0.0330
