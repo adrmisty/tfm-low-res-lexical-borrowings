@@ -3,7 +3,7 @@
 # lexical borrowing identification + classification pipeline
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# apr-2026
+# jun-2026
 
 import os
 import argparse
@@ -83,10 +83,7 @@ def main():
         )
         
     elif args.type in ["xlmr", "mmbert"]:
-        if args.use_conloan:
-            if not os.path.exists(CONLOAN_STD_PATH):
-                logging.error(f"\t> (!) ConLoan data file not found at: {CONLOAN_STD_PATH}")
-                return
+        if args.conloan:
             logging.info(f">> HYBRID TRAINING: Using ConLoan for Identification training, silver data for Classification training")
             
             run_encoder_baseline(

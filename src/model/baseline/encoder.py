@@ -3,9 +3,10 @@
 # multilingual encoder wrapper for 2-step lexical borrowing pipeline
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# apr-2026
+# jun-2026
 
 import json
+import os
 from typing import List, Dict, Any
 import torch
 from torch import nn
@@ -20,7 +21,8 @@ from .dataset import (
     IdDataset, 
     ClfDataset, 
     TAG_TO_ID_MULTI, 
-    TAG_TO_ID_BINARY
+    TAG_TO_ID_BINARY,
+    conloan_to_jsonl
 )
 from .prompt import load_gold_data
 
@@ -89,6 +91,10 @@ class BorrowingEncoder:
         if task == "binary":
             tag_dict = TAG_TO_ID_BINARY
             id_to_tag = {v: k for k, v in tag_dict.items()}
+            # for hybrid training, convert conloan format
+            if not os.path.exists(train_json):
+                print("\t> Converting ConLoan files to annotation format")
+                conloan_to_jsonl()
             train_dataset = IdDataset(train_json, tokenizer_name=self.model_id, mask_prob=mask_prob)
             
             # adapted automatically to either model

@@ -55,7 +55,7 @@ TYPE_TO_TAG = {
 
 class IdDataset(Dataset):
     """Silver standard dataset for binary token classification (borrowing span identification)."""
-
+    
     def __init__(self, json_path: str, tokenizer_name: str = "xlm-roberta-base", mask_prob: float = 0.6):
         self.tokenizer = AutoTokenizer.from_pretrained(tokenizer_name, use_fast=True)
         self.mask_prob = mask_prob
@@ -165,10 +165,7 @@ class ClfDataset(Dataset):
             "labels": torch.tensor(TAG_TO_ID_MULTI[item["label"]], dtype=torch.long)
         }
 
-import json
-import argparse
-
-def conloan_to_jsonl(spanish_path: str, greek_path: str, output_path: str):
+def conloan_to_jsonl(spanish_path: str = "data/annotation/conloan_es.json", greek_path: str = "data/annotation/conloan_el.json", output_path: str = "data/corpus/processed/conloan.clean.jsonl"):
     input_files = {
         "ast": spanish_path,  # Spanish >>> Asturian :_)
         "el": greek_path      # Greek
@@ -191,7 +188,7 @@ def conloan_to_jsonl(spanish_path: str, greek_path: str, output_path: str):
             for key, word in l_tags.items():
                 borrowings.append({
                     "span": word,
-                    "label": "Raw" # default fallback
+                    "label": "Raw" # default fallback [will only be used for identification training]
                 })
             
             converted_data.append({
@@ -200,16 +197,7 @@ def conloan_to_jsonl(spanish_path: str, greek_path: str, output_path: str):
                 "text": text,
                 "spans": borrowings 
             })
-            
+    
     with open(output_path, 'w', encoding='utf-8') as out_f:
         for entry in converted_data:
             out_f.write(json.dumps(entry, ensure_ascii=False) + '\n')
-            
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--es_in", default="data/annotation/conloan_es.json", help="Path to ConLoan Spanish.json")
-    parser.add_argument("--el_in", default="data/annotation/conloan_el.json", help="Path to ConLoan Greek.json")
-    parser.add_argument("--out", default="data/corpus/processed/conloan.clean.jsonl", help="Output JSONL path")
-    args = parser.parse_args()
-    
-    conloan_to_jsonl(args.es_in, args.el_in, args.out)

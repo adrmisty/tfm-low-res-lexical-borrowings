@@ -59,9 +59,11 @@ def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen3.5-9B", pipe
     print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title {clean_model_name}")
     print("="*50)
 
+
 def run_langid_baseline(langs: list[str], gt: str):
     """Language identification at the word level for lexical borrowing identification and classification
     >>> purely for identification, cannot classify."""
+    
     print(">>> Initializing [word-level LANGUAGE IDENTIFICATION] baseline...")
     langid_model = BorrowingLangId(langs, gt)
     
@@ -85,7 +87,7 @@ def run_langid_baseline(langs: list[str], gt: str):
     print(f">>> INFERENCE COMPLETE. Predictions saved to: {pred_path}")
     print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title LANGID")
     print("="*50)
-
+"""
 def run_encoder_baseline(model: str, langs: list[str], binary_train_data: str, multi_train_data, gt: str):
     """Trains and runs the 2-step {model} pipeline using dynamic dataset loading."""
 
