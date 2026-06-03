@@ -1,12 +1,12 @@
 # dataset.py
 # ------------------------------------------------------------------------
-# lexical borrowing datasets (silver std.) for XLM-RoBERTa
+# lexical borrowing datasets (silver std.) for encoders
 # separated by architecture
 # 1. token classification
 # 2. sequence classification
 # ------------------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# apr-2026
+# jun-2026
 
 import json
 import torch
@@ -164,3 +164,52 @@ class ClfDataset(Dataset):
             "attention_mask": torch.tensor(encoding["attention_mask"], dtype=torch.long),
             "labels": torch.tensor(TAG_TO_ID_MULTI[item["label"]], dtype=torch.long)
         }
+
+import json
+import argparse
+
+def conloan_to_jsonl(spanish_path: str, greek_path: str, output_path: str):
+    input_files = {
+        "ast": spanish_path,  # Spanish >>> Asturian :_)
+        "el": greek_path      # Greek
+    }                         # no Euskera
+    
+    converted_data = []
+    for lang, path in input_files.items():
+        with open(path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            
+        # ** conloan format to silver annotation format **
+        for idx, item in enumerate(data):
+            text = item.get("source_plain", "")
+            if not text:
+                continue
+                
+            borrowings = []
+            l_tags = item.get("words_in_L_tags", {})
+            
+            for key, word in l_tags.items():
+                borrowings.append({
+                    "span": word,
+                    "label": "Raw" # default fallback
+                })
+            
+            converted_data.append({
+                "id": f"conloan_{lang}_{idx}",
+                "lang": lang,
+                "text": text,
+                "spans": borrowings 
+            })
+            
+    with open(output_path, 'w', encoding='utf-8') as out_f:
+        for entry in converted_data:
+            out_f.write(json.dumps(entry, ensure_ascii=False) + '\n')
+            
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--es_in", default="data/annotation/conloan_es.json", help="Path to ConLoan Spanish.json")
+    parser.add_argument("--el_in", default="data/annotation/conloan_el.json", help="Path to ConLoan Greek.json")
+    parser.add_argument("--out", default="data/corpus/processed/conloan.clean.jsonl", help="Output JSONL path")
+    args = parser.parse_args()
+    
+    conloan_to_jsonl(args.es_in, args.el_in, args.out)

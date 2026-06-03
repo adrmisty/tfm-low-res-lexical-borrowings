@@ -3,7 +3,7 @@
 # baselines for lexical borrowing detection and classification
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# apr-2026
+# jun-2026
 
 from .llm import BorrowingLLM
 from .langid import BorrowingLangId
@@ -86,35 +86,35 @@ def run_langid_baseline(langs: list[str], gt: str):
     print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title LANGID")
     print("="*50)
 
-def run_encoder_baseline(model: str, langs: list[str], silver_data: str, gt: str):
+def run_encoder_baseline(model: str, langs: list[str], binary_train_data: str, multi_train_data, gt: str):
     """Trains and runs the 2-step {model} pipeline using dynamic dataset loading."""
 
     path_binary = f"{OUT_DIR}/{model}/{model}_binary"
     path_multi = f"{OUT_DIR}/{model}/{model}_multi"
 
-    xlm = BorrowingEncoder(model_id=model, langs=langs, gt=gt)
+    encoder = BorrowingEncoder(model_id=model, langs=langs, gt=gt)
 
-    xlm.output_dir = path_binary
+    encoder.output_dir = path_binary
     if not os.path.exists(path_binary):
-        print("\t>>> [XLMR-1]: Training binary classifier (Native vs. Borrowing)...")
-        xlm.train(train_json=silver_data, task="binary")
+        print("\t>>> [Encoder-1]: Training binary classifier (Native vs. Borrowing)...")
+        encoder.train(train_json=binary_train_data, task="binary")
     else:
-        print(f">>> [XLMR-1]: Found existing binary model at {path_binary}; skipping training!")    
+        print(f">>> [Encoder-1]: Found existing binary model at {path_binary}; skipping training!")    
 
-    xlm.output_dir = path_multi
+    encoder.output_dir = path_multi
     if not os.path.exists(path_multi):
-        print("\t>>> [XLMR-2]: Training multi-class classifier (5-tagset)...")
-        xlm.train(train_json=silver_data, task="multi")
+        print("\t>>> [Encoder-2]: Training multi-class classifier (5-tagset)...")
+        encoder.train(train_json=multi_train_data, task="multi")
     else:
-        print(f">>> [XLMR-2]: Found existing multi-class model at {path_multi}; skipping training!")    
+        print(f">>> [Encoder-2]: Found existing multi-class model at {path_multi}; skipping training!")    
     
     # 2-step inference
     all_predictions = []
     for lang in langs:
-        print(f"\n>>> Running [XLM-RoBERTa 2-step inference] for [{lang.upper()}]...")
-        test_items = xlm.data_splits[lang]
+        print(f"\n>>> Running [Encoder 2-step inference] for [{lang.upper()}]...")
+        test_items = encoder.data_splits[lang]
         
-        predictions = xlm.get_borrowings_2step(
+        predictions = encoder.get_borrowings_2step(
             test_data=test_items, 
             language=lang,
             path_binary=path_binary,
@@ -122,14 +122,14 @@ def run_encoder_baseline(model: str, langs: list[str], silver_data: str, gt: str
         )
         all_predictions.extend(predictions)
     
-    os.makedirs(f"{OUT_DIR}/XLM-RoBERTa", exist_ok=True)
+    os.makedirs(f"{OUT_DIR}/encoder", exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    pred_path = os.path.join(f"{OUT_DIR}/XLM-RoBERTa", f"predictions_xlmr_2step_{timestamp}.json")
+    pred_path = os.path.join(f"{OUT_DIR}/encoder", f"predictions_encoder_2step_{timestamp}.json")
     
     with open(pred_path, "w", encoding="utf-8") as f:
         json.dump(all_predictions, f, indent=4, ensure_ascii=False)
         
     print("\n" + "="*50)
     print(f">>> INFERENCE COMPLETE. Predictions saved to: {pred_path}")
-    print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title XLMR-2STEP")
+    print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title ENCODER-2STEP")
     print("="*50)
