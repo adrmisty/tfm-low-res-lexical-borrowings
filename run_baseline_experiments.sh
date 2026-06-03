@@ -89,4 +89,10 @@ echo " ALL EXPERIMENTS COMPLETED SUCCESSFULLY!"
 echo " >>> Check results/model/ for output JSONs and evaluation plots!"
 echo "================================================================"
 
-# --> next-up (once LLM is fixed: try with k=2 and k=5 to try and see diff param n)
+echo "================================================================"
+echo " [TFM] LEXICAL BORROWING EXPERIMENTS (ConLoan on Encoders)"
+echo "================================================================"
+
+CUDA_VISIBLE_DEVICES=$GPU_ID python main.py --action run --type mmbert --pipeline 2step --conloan --langs ast eu el 
+CUDA_VISIBLE_DEVICES=$GPU_ID python main.py --action run --type xlmr --pipeline 2step --conloan --langs ast eu el  
+

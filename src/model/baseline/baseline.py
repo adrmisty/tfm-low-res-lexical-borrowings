@@ -87,7 +87,8 @@ def run_langid_baseline(langs: list[str], gt: str):
     print(f">>> INFERENCE COMPLETE. Predictions saved to: {pred_path}")
     print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title LANGID")
     print("="*50)
-"""
+
+
 def run_encoder_baseline(model: str, langs: list[str], binary_train_data: str, multi_train_data, gt: str):
     """Trains and runs the 2-step {model} pipeline using dynamic dataset loading."""
 
