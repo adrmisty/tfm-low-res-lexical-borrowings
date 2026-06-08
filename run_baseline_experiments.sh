@@ -60,6 +60,11 @@ echo ">>> [2.2/5] Running mmBERT (2-step)..."
 python main.py --action run --type mmbert --langs $LANGUAGES
 evaluate_latest "results/model/mmbert" "MMBERT"
 
+echo ">>> [2.2/5] Running Greek mmBERT (2-step)..."
+echo ">> Just to make sure..."
+python main.py --action run --type mmbert --langs el
+evaluate_latest "results/model/mmbert" "MMBERT"
+
 # ----------------------------------------------------------------
 # 4. Qwen3.5-9B (LLM - 2-Step Pipeline)
 # ----------------------------------------------------------------
