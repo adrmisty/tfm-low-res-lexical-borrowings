@@ -1,0 +1,21 @@
+=== EVALUATION STATS: mmBERT ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.3569 | Recall: 0.0972 | F1: 0.1527
+[CLF ALL] -> Precision: 0.8824 | Recall: 0.8199 | F1: 0.8359
+[JOINT ALL] -> Precision: 0.3672 | Recall: 0.2728 | F1: 0.2804
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.4133 | Recall: 0.1558 | F1: 0.2263
+[CLF ast] -> Precision: 0.2810 | Recall: 0.3727 | F1: 0.3101
+[JOINT ast] -> Precision: 0.1221 | Recall: 0.0764 | F1: 0.0933
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.2645 | Recall: 0.1311 | F1: 0.1753
+[CLF el] -> Precision: 0.9833 | Recall: 0.9800 | F1: 0.9808
+[JOINT el] -> Precision: 0.3663 | Recall: 0.3235 | F1: 0.3063
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.4521 | Recall: 0.0606 | F1: 0.1068
+[CLF eu] -> Precision: 0.3739 | Recall: 0.3857 | F1: 0.3797
+[JOINT eu] -> Precision: 0.1667 | Recall: 0.0624 | F1: 0.0842

@@ -1,0 +1,21 @@
+=== EVALUATION STATS: FastText ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.1071 | Recall: 0.3532 | F1: 0.1644
+[CLF ALL] -> Precision: 0.0711 | Recall: 0.2000 | F1: 0.1049
+[JOINT ALL] -> Precision: 0.0076 | Recall: 0.1632 | F1: 0.0145
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.0711 | Recall: 0.6583 | F1: 0.1283
+[CLF ast] -> Precision: 0.0977 | Recall: 0.2000 | F1: 0.1313
+[JOINT ast] -> Precision: 0.0069 | Recall: 0.1753 | F1: 0.0134
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.0638 | Recall: 0.1803 | F1: 0.0942
+[CLF el] -> Precision: 0.0818 | Recall: 0.2000 | F1: 0.1161
+[JOINT el] -> Precision: 0.0052 | Recall: 0.1286 | F1: 0.0100
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.2400 | Recall: 0.3193 | F1: 0.2740
+[CLF eu] -> Precision: 0.0483 | Recall: 0.2000 | F1: 0.0778
+[JOINT eu] -> Precision: 0.0116 | Recall: 0.1647 | F1: 0.0216

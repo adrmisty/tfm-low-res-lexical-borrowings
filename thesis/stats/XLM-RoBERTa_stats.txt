@@ -1,0 +1,21 @@
+=== EVALUATION STATS: XLM-RoBERTa ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.3842 | Recall: 0.1377 | F1: 0.2027
+[CLF ALL] -> Precision: 0.4086 | Recall: 0.4821 | F1: 0.4388
+[JOINT ALL] -> Precision: 0.1589 | Recall: 0.0951 | F1: 0.1007
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.3158 | Recall: 0.1809 | F1: 0.2300
+[CLF ast] -> Precision: 0.2536 | Recall: 0.3224 | F1: 0.2754
+[JOINT ast] -> Precision: 0.0796 | Recall: 0.0831 | F1: 0.0808
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.3750 | Recall: 0.2090 | F1: 0.2684
+[CLF el] -> Precision: 0.3089 | Recall: 0.3647 | F1: 0.3267
+[JOINT el] -> Precision: 0.1098 | Recall: 0.1321 | F1: 0.1144
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.4712 | Recall: 0.0899 | F1: 0.1510
+[CLF eu] -> Precision: 0.2773 | Recall: 0.3777 | F1: 0.3197
+[JOINT eu] -> Precision: 0.1312 | Recall: 0.0820 | F1: 0.0862

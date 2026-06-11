@@ -1,0 +1,21 @@
+=== EVALUATION STATS: Qwen3.5-9B_3shot_1step ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.3020 | Recall: 0.3775 | F1: 0.3356
+[CLF ALL] -> Precision: 0.4497 | Recall: 0.5772 | F1: 0.4760
+[JOINT ALL] -> Precision: 0.1690 | Recall: 0.1828 | F1: 0.1652
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.2344 | Recall: 0.4925 | F1: 0.3177
+[CLF ast] -> Precision: 0.3586 | Recall: 0.3382 | F1: 0.3387
+[JOINT ast] -> Precision: 0.0878 | Recall: 0.1657 | F1: 0.1119
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.2700 | Recall: 0.3320 | F1: 0.2978
+[CLF el] -> Precision: 0.4119 | Recall: 0.5454 | F1: 0.4405
+[JOINT el] -> Precision: 0.1710 | Recall: 0.2159 | F1: 0.1620
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.3752 | Recall: 0.3560 | F1: 0.3653
+[CLF eu] -> Precision: 0.3914 | Recall: 0.3648 | F1: 0.3664
+[JOINT eu] -> Precision: 0.1556 | Recall: 0.1324 | F1: 0.1320

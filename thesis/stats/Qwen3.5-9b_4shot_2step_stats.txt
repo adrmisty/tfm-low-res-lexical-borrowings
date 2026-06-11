@@ -1,0 +1,21 @@
+=== EVALUATION STATS: Qwen3.5-9b_4shot_2step ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.2334 | Recall: 0.5445 | F1: 0.3268
+[CLF ALL] -> Precision: 0.4417 | Recall: 0.3953 | F1: 0.4047
+[JOINT ALL] -> Precision: 0.0914 | Recall: 0.2161 | F1: 0.1275
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.1852 | Recall: 0.6533 | F1: 0.2886
+[CLF ast] -> Precision: 0.3645 | Recall: 0.3158 | F1: 0.3213
+[JOINT ast] -> Precision: 0.0695 | Recall: 0.2012 | F1: 0.0966
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.1499 | Recall: 0.3975 | F1: 0.2177
+[CLF el] -> Precision: 0.4895 | Recall: 0.4910 | F1: 0.4808
+[JOINT el] -> Precision: 0.0713 | Recall: 0.2206 | F1: 0.1015
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.3253 | Recall: 0.5706 | F1: 0.4144
+[CLF eu] -> Precision: 0.4352 | Recall: 0.3614 | F1: 0.3714
+[JOINT eu] -> Precision: 0.1331 | Recall: 0.2036 | F1: 0.1508
