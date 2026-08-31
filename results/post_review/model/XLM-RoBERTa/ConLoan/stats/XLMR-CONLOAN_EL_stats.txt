@@ -1,0 +1,21 @@
+=== EVALUATION STATS: XLMR-CONLOAN_EL ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.1089 | Recall: 0.2846 | F1: 0.1575
+[CLF ALL] -> Precision: 0.7718 | Recall: 0.7718 | F1: 0.7718
+[JOINT ALL] -> Precision: 0.0841 | Recall: 0.2197 | F1: 0.1216
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.0740 | Recall: 0.3009 | F1: 0.1188
+[CLF ast] -> Precision: 0.4615 | Recall: 0.4615 | F1: 0.4615
+[JOINT ast] -> Precision: 0.0342 | Recall: 0.1389 | F1: 0.0548
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.1353 | Recall: 0.1948 | F1: 0.1597
+[CLF eu] -> Precision: 0.8053 | Recall: 0.8053 | F1: 0.8053
+[JOINT eu] -> Precision: 0.1090 | Recall: 0.1569 | F1: 0.1286
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.1173 | Recall: 0.4781 | F1: 0.1884
+[CLF el] -> Precision: 0.9083 | Recall: 0.9083 | F1: 0.9083
+[JOINT el] -> Precision: 0.1065 | Recall: 0.4343 | F1: 0.1711

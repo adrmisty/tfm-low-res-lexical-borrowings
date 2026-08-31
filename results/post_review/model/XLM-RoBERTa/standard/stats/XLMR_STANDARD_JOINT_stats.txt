@@ -1,0 +1,21 @@
+=== EVALUATION STATS: XLMR_STANDARD_JOINT ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.3953 | Recall: 0.3553 | F1: 0.3742
+[CLF ALL] -> Precision: 0.7366 | Recall: 0.7366 | F1: 0.7366
+[JOINT ALL] -> Precision: 0.2912 | Recall: 0.2617 | F1: 0.2757
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.3259 | Recall: 0.4722 | F1: 0.3856
+[CLF ast] -> Precision: 0.5294 | Recall: 0.5294 | F1: 0.5294
+[JOINT ast] -> Precision: 0.1725 | Recall: 0.2500 | F1: 0.2042
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.4554 | Recall: 0.2552 | F1: 0.3271
+[CLF eu] -> Precision: 0.7905 | Recall: 0.7905 | F1: 0.7905
+[JOINT eu] -> Precision: 0.3600 | Recall: 0.2017 | F1: 0.2586
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.4026 | Recall: 0.4861 | F1: 0.4404
+[CLF el] -> Precision: 0.8443 | Recall: 0.8443 | F1: 0.8443
+[JOINT el] -> Precision: 0.3399 | Recall: 0.4104 | F1: 0.3718

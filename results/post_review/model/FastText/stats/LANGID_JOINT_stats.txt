@@ -1,0 +1,21 @@
+=== EVALUATION STATS: LANGID_JOINT ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.0985 | Recall: 0.3524 | F1: 0.1540
+[CLF ALL] -> Precision: 0.3577 | Recall: 0.3577 | F1: 0.3577
+[JOINT ALL] -> Precision: 0.0352 | Recall: 0.1261 | F1: 0.0551
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.0631 | Recall: 0.6481 | F1: 0.1149
+[CLF ast] -> Precision: 0.5000 | Recall: 0.5000 | F1: 0.5000
+[JOINT ast] -> Precision: 0.0315 | Recall: 0.3241 | F1: 0.0575
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.2341 | Recall: 0.3172 | F1: 0.2694
+[CLF eu] -> Precision: 0.2337 | Recall: 0.2337 | F1: 0.2337
+[JOINT eu] -> Precision: 0.0547 | Recall: 0.0741 | F1: 0.0630
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.0609 | Recall: 0.1793 | F1: 0.0909
+[CLF el] -> Precision: 0.4222 | Recall: 0.4222 | F1: 0.4222
+[JOINT el] -> Precision: 0.0257 | Recall: 0.0757 | F1: 0.0384
