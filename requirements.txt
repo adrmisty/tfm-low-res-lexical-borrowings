@@ -15,6 +15,7 @@ fasttext-wheel
 huggingface_hub
 datasets
 wikipedia-api
+#truecase
 
 # --- eval and plotting ---
 scikit-learn

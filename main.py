@@ -8,7 +8,7 @@
 import os
 import argparse
 import logging
-from src.model.baseline.baseline import run_llm_baseline, run_langid_baseline, run_encoder_baseline
+from src.model.baseline.baseline import run_llm_baseline, run_encoder_baseline, run_encoder_baseline
 from src.model.baseline.eval import evaluate_pipeline
 import src.model.baseline.hf as hf
 

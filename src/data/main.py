@@ -3,7 +3,7 @@
 # loanword data generation and mining pipeline
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# apr-2026
+# aug-2026
 
 import argparse
 import logging
@@ -14,6 +14,7 @@ from .pipeline import (
     run_generation, 
     run_mining, 
     run_cleaning, 
+    run_truecase,
     run_analysis,
     run_granular_analysis
 )
@@ -25,7 +26,7 @@ logging.basicConfig(level=logging.INFO, format="INFO: %(message)s")
 def main():
     parser = argparse.ArgumentParser(description="[TFM] Lexical Borrowing Data Pipeline")
     
-    parser.add_argument("--action", type=str, choices=["run", "eval", "push", "analyze"], default="run", help="Choose action to perform")
+    parser.add_argument("--action", type=str, choices=["run", "eval", "push", "analyze", "scrape", "generate", "mine", "clean", "stats"], default="run", help="Choose action to perform")
     parser.add_argument("--tokenizer", type=str, default="jhu-clsp/mmBERT-base", help="HuggingFace tokenizer ID for fragmentation analysis")    
     parser.add_argument("--langs", nargs="+", default=["ast", "eu", "el"], help="List of languages to process")
     
@@ -48,11 +49,13 @@ def main():
         run_mining(args.langs, args.corpus, args.output)
         
     elif args.action == "clean":
+        # python -m src.data.main --action clean --input data/corpus/mined/mined_sentences.jsonl --output data/corpus/processed/mined_sentences.clean_2.jsonl
         if not args.input or not args.output:
             logging.error("(!) The 'clean' action requires both --input and --output arguments")
             return
-        run_cleaning(args.input, args.output)
-        
+        run_cleaning(args.input, args.output, gold=GOLD_STD_PATH)
+        #run_truecase(GOLD_STD_PATH)  
+                
     elif args.action == "stats":
         # python src/data/main.py --action stats [for plots and statistics]
         run_analysis()

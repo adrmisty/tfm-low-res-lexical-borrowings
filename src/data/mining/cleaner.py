@@ -3,7 +3,7 @@
 # cleans mined data from English insertions and semantic FPs
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# jan-2026
+# # aug-2026
 
 import re
 import json
@@ -95,25 +95,40 @@ class SemanticFilter:
                     
         return False
 
+import json
+#import truecase
+from typing import Tuple, Set
+
 class MiningCleaner:
-    """Applies pre-defined cleaning filters to mined data in a file."""
+    """Applies pre-defined cleaning + exclusion filters to mined data in a file."""
     
     def __init__(self):
         self.eng_filter = EnglishFilter()
         self.sem_filter = SemanticFilter()
     
-    def clean_file(self, input_path: str, output_path: str) -> Tuple[int, int, int]:
+    def clean_file(self, input_path: str, output_path: str, exclude_set: Set[str] = None) -> Tuple[int, int, int, int]:
+        if exclude_set is None:
+            exclude_set = set()
+            
         kept = []
         dropped_eng = 0
         dropped_sem = 0
+        dropped_leakage = 0
         
         with open(input_path, 'r', encoding='utf-8') as f:
             for line in f:
                 if not line.strip(): continue
                 try:
                     obj = json.loads(line)
+                    original_sentence = obj['sentence']
                     
-                    if self.eng_filter.is_english(obj['sentence']):
+                    # 1. ** TRAIN/TEST split filter **
+                    if original_sentence.strip() in exclude_set:
+                        dropped_leakage += 1
+                        continue
+                    
+                    # 2. English and semantic filter
+                    if self.eng_filter.is_english(original_sentence):
                         dropped_eng += 1
                         continue
                     
@@ -121,6 +136,11 @@ class MiningCleaner:
                         dropped_sem += 1
                         continue
                         
+                    # 3. Truecasing
+                    # ** NOTE: only works for English, capitalizes everything for Ast, Eu and El **
+                    # normalizes lowercase capitalization but preserves proper nouns and sentence-initial capitalization
+                    #obj['sentence'] = truecase.get_true_case(original_sentence)
+                    
                     kept.append(obj)
                     
                 except json.JSONDecodeError:
@@ -130,14 +150,15 @@ class MiningCleaner:
             for k in kept:
                 f.write(json.dumps(k, ensure_ascii=False) + "\n")
                 
-        return len(kept), dropped_eng, dropped_sem
-
+        return len(kept), dropped_eng, dropped_sem, dropped_leakage
+    
 # --- extend: into pipeline.py ---
 
-def clean_sentences(input_path: str, output_path: str):
+def clean_sentences(input_path: str, output_path: str, exclude_set: Set[str] = None):
     cleaner = MiningCleaner()
-    kept, dropped_eng, dropped_sem = cleaner.clean_file(input_path, output_path)
+    kept, dropped_eng, dropped_sem, dropped_leakage = cleaner.clean_file(input_path, output_path, exclude_set)
     
     logging.info(f"\t> Cleaning complete, final sentences: {kept}")
+    logging.info(f"\t> Dropped (Test set leakage): {dropped_leakage}")
     logging.info(f"\t> Dropped (English density): {dropped_eng}")
     logging.info(f"\t> Dropped (Semantic noise): {dropped_sem}")

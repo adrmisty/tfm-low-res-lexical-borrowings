@@ -87,9 +87,9 @@ class BorrowingPlots:
             hue_order=TAGSET_ORDER
         )
         ax.set_yscale("log")
-        plt.title("Taxonomy Tag Distribution [Synthetic Silver Standard]")
+        plt.title("Tag distribution [synthetic silver standard]")
         plt.ylabel("Sentences found (log scale)")
-        plt.legend(title="Integration Strategy", bbox_to_anchor=(1.05, 1), loc='upper left')
+        plt.legend(title="Integration strategy", bbox_to_anchor=(1.05, 1), loc='upper left')
         plt.tight_layout()
         plt.savefig(output_path)
         plt.close()
@@ -143,7 +143,7 @@ class BorrowingPlots:
 
 
 def generate_plots(clean_path: str = "data/corpus/processed/mined_sentences.clean.jsonl", 
-                   output_dir: str = "results/plots/v1"):
+                   output_dir: str = "results/plots/post_review"):
     if not os.path.exists(clean_path):
         logging.error(f"\t> (!) Cannot plot, missing file: {clean_path}")
         return

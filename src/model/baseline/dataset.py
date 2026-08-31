@@ -192,10 +192,11 @@ def conloan_to_jsonl(spanish_path: str = "data/annotation/conloan_es.json", gree
                 })
             
             converted_data.append({
-                "id": f"conloan_{lang}_{idx}",
+                "id": f"conloan_{lang}_{idx}_{key}",
                 "lang": lang,
-                "text": text,
-                "spans": borrowings 
+                "sentence": text,        
+                "term": word,            
+                "type": "noun_raw"
             })
     
     with open(output_path, 'w', encoding='utf-8') as out_f:

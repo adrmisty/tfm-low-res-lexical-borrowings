@@ -145,7 +145,7 @@ class BorrowingStats:
 def generate_dataset_stats(seeds_path: str = "data/corpus/raw/synthetic_borrowings.csv",
                            mined_path: str = "data/corpus/mined/mined_sentences.jsonl",
                            clean_path: str = "data/corpus/processed/mined_sentences.clean.jsonl",
-                           output_dir: str = "results/plots"):
+                           output_dir: str = "results/plots/post_review"):
     stats = BorrowingStats(seeds_path, mined_path, clean_path)
     stats.report(output_dir)
 

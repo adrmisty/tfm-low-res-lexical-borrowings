@@ -1,0 +1,12 @@
+,ast,eu,el
+Language,AST,EU,EL
+Total seeds,534,845,1121
+  - Synthetic,459,253,286
+  - Wiktionary,75,592,835
+Seeds mined (Raw),134,644,827
+Seeds mined (Clean),109,629,802
+Raw sentences,1662,11367,13990
+Clean sentences,1446,11081,13318
+Sentences dropped,216,286,672
+Retained sentences,87.0%,97.5%,95.2%
+Yield (sentence/seed),12.4,17.7,16.9
