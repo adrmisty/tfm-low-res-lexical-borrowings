@@ -42,13 +42,14 @@ def main():
         hf.push_models() 
         return
 
-    if args.action == "eval":
-        if not args.pred_file or not os.path.exists(args.pred_file):
-            logging.error("\t> (!) Warning: provide a valid path to a JSON file using --pred_file")
-            return
-            
+    elif args.action == "eval":
         out_dir = os.path.dirname(args.pred_file)
+        img_dir = os.path.join(out_dir, "img")
+        stats_dir = os.path.join(out_dir, "stats")
         
+        os.makedirs(img_dir, exist_ok=True)
+        os.makedirs(stats_dir, exist_ok=True)
+
         if len(args.langs) > 1:
             logging.info(f">> Evaluation for: {args.langs}")
             evaluate_pipeline(
