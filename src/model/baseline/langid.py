@@ -37,7 +37,7 @@ class BorrowingLangId:
             "el": "ell_Grek"
         }
 
-def get_borrowings(self, test_data: List[Dict[str, Any]], target_lang: str):
+    def get_borrowings(self, test_data: List[Dict[str, Any]], target_lang: str):
         """Extracts borrowings with regards to language identification at the word level."""
         results = []
         
