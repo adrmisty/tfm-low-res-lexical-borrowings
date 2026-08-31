@@ -1,0 +1,21 @@
+=== EVALUATION STATS: MMBERT-CONLOAN_AST ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.0269 | Recall: 0.0516 | F1: 0.0354
+[CLF ALL] -> Precision: 0.7593 | Recall: 0.7593 | F1: 0.7593
+[JOINT ALL] -> Precision: 0.0204 | Recall: 0.0392 | F1: 0.0268
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.0234 | Recall: 0.0648 | F1: 0.0344
+[CLF ast] -> Precision: 0.7143 | Recall: 0.7143 | F1: 0.7143
+[JOINT ast] -> Precision: 0.0167 | Recall: 0.0463 | F1: 0.0245
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.0251 | Recall: 0.0328 | F1: 0.0284
+[CLF eu] -> Precision: 0.5789 | Recall: 0.5789 | F1: 0.5789
+[JOINT eu] -> Precision: 0.0145 | Recall: 0.0190 | F1: 0.0165
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.0322 | Recall: 0.0837 | F1: 0.0465
+[CLF el] -> Precision: 0.9524 | Recall: 0.9524 | F1: 0.9524
+[JOINT el] -> Precision: 0.0307 | Recall: 0.0797 | F1: 0.0443
