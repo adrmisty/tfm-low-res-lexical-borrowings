@@ -6,7 +6,6 @@
 # apr-2026
 
 import re
-import json
 import fasttext
 from huggingface_hub import hf_hub_download
 from typing import List, Dict, Any

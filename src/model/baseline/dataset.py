@@ -76,47 +76,47 @@ class IdDataset(Dataset):
     def __len__(self):
         return len(self.data)
 
-def __getitem__(self, idx):
-        item = self.data[idx]
-        text = item["sentence"]
-        seed = item["term"]
+    def __getitem__(self, idx):
+            item = self.data[idx]
+            text = item["sentence"]
+            seed = item["term"]
 
-        encoding = self.tokenizer(
-            text, 
-            truncation=True, 
-            max_length=256, 
-            padding="max_length",
-            return_offsets_mapping=True
-        )
+            encoding = self.tokenizer(
+                text, 
+                truncation=True, 
+                max_length=256, 
+                padding="max_length",
+                return_offsets_mapping=True
+            )
 
-        offsets = encoding.pop("offset_mapping") 
-        labels = []
+            offsets = encoding.pop("offset_mapping") 
+            labels = []
 
-        # ** CASE-SENSITIVE SEARCH: to avoid missing data due to uppercase **
-        match = re.search(re.escape(seed), text, re.IGNORECASE)
-        if match:
-            seed_start_char, seed_end_char = match.span()
-        else:
-            seed_start_char, seed_end_char = -1, -1
-
-        for i, (start, end) in enumerate(offsets):
-            if start == end: # special tokens
-                labels.append(-100)
-                continue
-
-            if seed_start_char != -1 and not (end <= seed_start_char or start >= seed_end_char):
-                labels.append(TAG_TO_ID_BINARY["Borrowing"])
+            # ** CASE-SENSITIVE SEARCH: to avoid missing data due to uppercase **
+            match = re.search(re.escape(seed), text, re.IGNORECASE)
+            if match:
+                seed_start_char, seed_end_char = match.span()
             else:
-                if random.random() < self.mask_prob:
-                    labels.append(-100)
-                else:
-                    labels.append(TAG_TO_ID_BINARY["Native"])
+                seed_start_char, seed_end_char = -1, -1
 
-        return {
-            "input_ids": torch.tensor(encoding["input_ids"]),
-            "attention_mask": torch.tensor(encoding["attention_mask"]),
-            "labels": torch.tensor(labels)
-        }
+            for i, (start, end) in enumerate(offsets):
+                if start == end: # special tokens
+                    labels.append(-100)
+                    continue
+
+                if seed_start_char != -1 and not (end <= seed_start_char or start >= seed_end_char):
+                    labels.append(TAG_TO_ID_BINARY["Borrowing"])
+                else:
+                    if random.random() < self.mask_prob:
+                        labels.append(-100)
+                    else:
+                        labels.append(TAG_TO_ID_BINARY["Native"])
+
+            return {
+                "input_ids": torch.tensor(encoding["input_ids"]),
+                "attention_mask": torch.tensor(encoding["attention_mask"]),
+                "labels": torch.tensor(labels)
+            }
 
 class ClfDataset(Dataset):
     """Silver standard dataset for multi-class sequence classification (borrowing morph. classification)."""

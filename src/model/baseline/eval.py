@@ -210,7 +210,7 @@ def plot_per_class_f1(y_true, y_pred, labels: list, title: str, output_path: str
     df = pd.DataFrame({'Taxonomy Class': labels, 'F1-Score': f1})
     
     plt.figure(figsize=(14, 10))
-    ax = sns.barplot(data=df, x="F1-Score", y="Taxonomy Class", order=labels, palette=list(reversed(BLUE_PALETTE)))
+    ax = sns.barplot(data=df, x="F1-Score", y="Taxonomy Class", order=labels, palette=list(reversed(BLUE_PALETTE)), hue="Taxonomy Class", legend=False)    
     
     for i, row in df.iterrows():
         ax.text(row['F1-Score'] + 0.02, i, f"{row['F1-Score']:.2f}", 
@@ -254,9 +254,9 @@ def plot_token_fragmentation(csv_path: str, output_path: str, title_prefix: str)
 
 def export_and_plot_false_positives(true_spans: dict, pred_spans: dict, tagset: list, title: str, img_dir: str, stats_dir: str, experiment: str):
     fp_counts = {}
-    for (case_id, txt), p_lbl in pred_spans.items():
+    for (case_id, start, end, txt), p_lbl in pred_spans.items():
         if p_lbl in tagset:
-            t_lbl = true_spans.get((case_id, txt), "Native")
+            t_lbl = true_spans.get((case_id, start, end, txt), "Native")
             if t_lbl not in tagset: 
                 fp_counts[txt] = fp_counts.get(txt, 0) + 1
                 
@@ -269,7 +269,7 @@ def export_and_plot_false_positives(true_spans: dict, pred_spans: dict, tagset: 
     
     df_top10 = df_fp.head(10)
     plt.figure(figsize=(14, 10))
-    sns.barplot(data=df_top10, x="False positives", y="Word/Span", palette="Blues_r")
+    sns.barplot(data=df_top10, x="False positives", y="Word/Span", palette="Blues_r", hue="Word/Span", legend=False)    
     
     plt.title(f"Top 10 false positives \n [{title}]", pad=20, fontweight='bold', fontsize=FONT_TITLE)
     plt.xlabel("Frequency", fontsize=FONT_LABEL)
@@ -279,7 +279,7 @@ def export_and_plot_false_positives(true_spans: dict, pred_spans: dict, tagset: 
     plt.tight_layout()
     plt.savefig(os.path.join(img_dir, f"{experiment}_top_FPs_plot.png"), dpi=300)
     plt.close()
-
+    
 # ==========================================
 # 5. EVALUATION LOGIC
 # ==========================================
@@ -303,9 +303,9 @@ def evaluate_pipeline(pred_path: str, gold_path: str, img_dir: str, stats_dir: s
         if subset_name == "ALL":
             subset_keys = all_keys
         else:
-            # lang_map keys are case_ids (strings), k is a tuple (case_id, txt)
-            subset_keys = {k for k in all_keys if lang_map.get(k) == subset_name}
-
+            # index k[0] to grab the case_id from the tuple
+            subset_keys = {k for k in all_keys if lang_map.get(k[0]) == subset_name}
+            
         if not subset_keys:
             logging.info(f"  > Skipping subset {subset_name.upper()} (No data matched)")
             continue
@@ -392,12 +392,13 @@ def _load_spans(pred_path: str, gold_path: str) -> Tuple[Dict, Dict, Dict]:
         if isinstance(pred_items, list):
             for p in pred_items:
                 if isinstance(p, dict) and p.get("span") and p.get("label"):
+                    # FIX: Restore txt extraction
+                    txt = _normalize_text(p["span"])
                     start = p.get("start", -1)
                     end = p.get("end", -1)
                     lbl = _normalize_label(p["label"]) 
                     if lbl != "O": 
-                         # incl. start/end boundaries for span matching to avoid overwriting matches
-                        pred_spans_dict[(case_id, start, end)] = lbl
+                        pred_spans_dict[(case_id, start, end, txt)] = lbl
                         
         true_items = []
         for ann in gt_map[case_id]:
@@ -406,11 +407,11 @@ def _load_spans(pred_path: str, gold_path: str) -> Tuple[Dict, Dict, Dict]:
         for t in true_items:
             val = t.get("value", {})
             if "text" in val and "labels" in val:
+                txt = _normalize_text(val["text"])
                 start = val.get("start", -1)
                 end = val.get("end", -1)
                 lbl = _normalize_label(val["labels"])
-                # Use start/end boundaries as the key
-                true_spans_dict[(case_id, start, end)] = lbl
+                true_spans_dict[(case_id, start, end, txt)] = lbl
                                 
     return true_spans_dict, pred_spans_dict, lang_map
 
@@ -430,51 +431,3 @@ def _parse_llm_output(prediction_data) -> List[Dict]:
         data = json.loads(prediction_str)
         return data if isinstance(data, list) else []
     except Exception: return []
-
-# ==========================================
-# 6. MAIN EXECUTION PIPELINE
-# ==========================================
-def main():
-    data_dir = "data"
-    img_dir = "img"
-    stats_dir = "stats"
-    
-    os.makedirs(img_dir, exist_ok=True)
-    os.makedirs(stats_dir, exist_ok=True)
-    
-    logging.info("--- THESIS PLOT & EVALUATION GENERATOR ---")
-    
-    # 1. Dataset Statistics
-    silver_file = os.path.join(data_dir, "silver_standard_set.jsonl") 
-    if os.path.exists(silver_file):
-        data = [json.loads(line) for line in open(silver_file, 'r', encoding='utf-8') if line.strip()]
-        df = pd.DataFrame(data)
-        if not df.empty:
-            logging.info("\t> Generating dataset statistics plots...")
-            plotter = DatasetPlots(df, img_dir)
-            plotter.plot_dataset_sizes()
-            plotter.plot_pos_distribution()
-            plotter.plot_spelling_adaptation()
-            plotter.plot_integration_strategies()
-
-    # 2. Pipeline Evaluation & Confusion Matrices
-    gold_file = os.path.join(data_dir, "gold_standard_set.json")
-    if os.path.exists(gold_file):
-        pred_files = glob.glob(os.path.join(data_dir, "predictions_*.json"))
-        for pred_file in pred_files:
-            experiment_name = os.path.basename(pred_file).replace("predictions_", "").replace(".json", "")
-            evaluate_pipeline(pred_file, gold_file, img_dir, stats_dir, experiment_name)
-    else:
-        logging.warning(f"\t> (!) Missing gold standard: {gold_file}. Skipping evaluations.")
-
-    # 3. Token Fragmentation Plots
-    frag_files = glob.glob(os.path.join(data_dir, "*fragmentation*.csv"))
-    for f in frag_files:
-        model_name = os.path.basename(f).replace("_fragmentation", "").replace(".csv", "").upper()
-        out_name = os.path.join(img_dir, f"{model_name}_token_fragmentation.png")
-        plot_token_fragmentation(f, out_name, model_name)
-
-    logging.info("--- GENERATION COMPLETE. Check 'img/' and 'stats/' folders. ---")
-
-if __name__ == "__main__":
-    main()
