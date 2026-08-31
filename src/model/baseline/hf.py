@@ -16,8 +16,8 @@ ROOT_DIR: Path = Path(__file__).resolve().parent.parent.parent.parent
 login(token="REPLACE_WITH_TOKEN")
 
 models_to_push = {
-    #"results/post_review/model/mmbert/standard_binary": "adrirflorez/mmbert-binary-borrowings",
-    #"results/post_review/model/mmbert/standard_multi":  "adrirflorez/mmbert-multi-borrowings",
+    "results/post_review/model/mmbert/standard_binary": "adrirflorez/mmbert-binary-borrowings",
+    "results/post_review/model/mmbert/standard_multi":  "adrirflorez/mmbert-multi-borrowings",
     "results/post_review/model/xlmr/standard_binary":   "adrirflorez/xlmr-binary-borrowings",
     "results/post_review/model/xlmr/standard_multi":    "adrirflorez/xlmr-multi-borrowings",
     "results/post_review/model/xlmr/conloan_binary":   "adrirflorez/xlmr-conloan-binary-borrowings",
