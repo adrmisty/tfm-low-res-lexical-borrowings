@@ -25,6 +25,7 @@ from .dataset import (
     conloan_to_jsonl
 )
 from .prompt import load_gold_data
+from .hf import push_models
 
 # ** extension: weighted cross-entropy Loss **
 class WeightedTrainer(Trainer):
@@ -66,12 +67,18 @@ class BorrowingEncoder:
     - https://huggingface.co/blog/mmbert
     """
     
-    def __init__(self,  model_id: str, langs: List[str], gt: str, output_dir: str = "data/model/encoder"):
-        if "mmbert" in model_id.lower():
+    def __init__(self, model_id: str, langs: List[str], gt: str, run_name: str = "standard", task: str = "multi"):
+        self.task = task
+        self.run_name = run_name
+        self.model_type = "mmbert" if "mmbert" in model_id.lower() else "xlmr"
+        
+        if self.model_type == "mmbert":
             self.model_id = "jhu-clsp/mmBERT-base"
         else:
             self.model_id = "FacebookAI/xlm-roberta-base"
-        self.output_dir = output_dir
+            
+        # Dynamically matches Hugging Face sync paths
+        self.output_dir = f"results/post_review/model/{self.model_type}/{self.run_name}_{self.task}"
 
         splits = load_gold_data(gt, target_langs=langs)
         self.data_splits = {}
@@ -83,7 +90,6 @@ class BorrowingEncoder:
             if lang not in self.data_splits:
                 self.data_splits[lang] = []
             self.data_splits[lang].append(item)    
-            
         
     def train(self, train_json: str, mask_prob: float = 0.8, task: str = "multi"):
         print(f">>> Initializing {self.model_id} for {task.upper()} task...")
@@ -91,13 +97,23 @@ class BorrowingEncoder:
         if task == "binary":
             tag_dict = TAG_TO_ID_BINARY
             id_to_tag = {v: k for k, v in tag_dict.items()}
-            # for hybrid training, convert conloan format
+            
+            # Prevent silent overwrites and safely handle missing silver data
             if not os.path.exists(train_json):
-                print("\t> Converting ConLoan files to annotation format")
-                conloan_to_jsonl()
+                if self.run_name == "conloan":
+                    print(f"\t> ConLoan data not found at {train_json}. Converting raw ConLoan files...")
+                    try:
+                        conloan_to_jsonl(output_path=train_json)
+                    except TypeError:
+                        conloan_to_jsonl()
+                else:
+                    raise FileNotFoundError(
+                        f"(!) Training data not found at {train_json}. "
+                        "Please run the data mining and cleaning pipeline first to generate the silver standard."
+                    )
+                    
             train_dataset = IdDataset(train_json, tokenizer_name=self.model_id, mask_prob=mask_prob)
             
-            # adapted automatically to either model
             model = AutoModelForTokenClassification.from_pretrained(
                 self.model_id, num_labels=len(tag_dict), id2label=id_to_tag, label2id=tag_dict
             )
@@ -137,6 +153,13 @@ class BorrowingEncoder:
         trainer.save_model(self.output_dir)
         train_dataset.tokenizer.save_pretrained(self.output_dir)
 
+        # --- AUTO-PUSH TO HUGGING FACE HUB ---
+        try:
+            print(f">>> Automatically pushing {task} model to Hugging Face Hub...")
+            push_models(specific_path=self.output_dir.replace("\\", "/"))
+        except Exception as e:
+            print(f"> (!) Auto-push failed: {e}")
+
     def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, path_binary: str, path_multi: str, fallback: str = "Raw") -> List[Dict[str, Any]]:
         """Extracts borrowings and classifies them using sequence cross-encoding context."""
         
@@ -162,8 +185,7 @@ class BorrowingEncoder:
                 # span + context
                 try:
                     clf_pred = classifier({"text": span_text, "text_pair": text})
-                    # FIX: pipeline returns a list, so we index before grabbing the label
-                    assigned_label = clf_pred["label"]
+                    assigned_label = clf_pred[0]["label"] 
                 except Exception as e:
                     print(f"Classification failed for span '{span_text}': {e}")
                     assigned_label = fallback

@@ -8,7 +8,6 @@
 import json
 import os
 import logging
-import truecase
 from typing import List
 
 from .domain.scraper.wiktionary import scrape_wiktionary
