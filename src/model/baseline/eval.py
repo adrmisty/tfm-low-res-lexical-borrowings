@@ -1,11 +1,11 @@
-# plot.py
+# eval.py
 # ----------------------------------------------------------------------------
-# standardized plotting (for thesis doc): 
+# standardized plotting and statistics generation
 # evaluates predictions and corpus data, and generates all thesis figures with 
 # standardized aesthetics (Large fonts, blues)
 # -----------------------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# jun-2026
+# aug-2026
 
 import os
 import re
@@ -293,10 +293,10 @@ def evaluate_pipeline(pred_path: str, gold_path: str, img_dir: str, stats_dir: s
     true_spans, pred_spans, lang_map = _load_spans(pred_path, gold_path)
     all_keys = set(true_spans.keys()).union(set(pred_spans.keys()))
     
-    # Export False Positives globally
+    # export FPs globally
     export_and_plot_false_positives(true_spans, pred_spans, TAGSET, experiment.upper(), img_dir, stats_dir, experiment)
 
-    # Explicitly iterate over ALL plus the three languages
+    # over ALL plus the three languages
     target_subsets = ["ALL", "ast", "eu", "el"]
 
     for subset_name in target_subsets:
@@ -355,7 +355,7 @@ def evaluate_pipeline(pred_path: str, gold_path: str, img_dir: str, stats_dir: s
                               title=f"Joint ID & classification{title_suffix}\n[{experiment.upper()}]",
                               output_path=os.path.join(img_dir, f"{prefix}_joint_cm.png"))
 
-# --- Helper Metrics & Parsing ---
+# --- helper metrics & parsing ---
 def get_metrics(ground_truth, predictions, labels, average="binary", out_file=None, task="IDENTIFICATION"):
     p, r, f1, _ = precision_recall_fscore_support(ground_truth, predictions, labels=labels, 
                                                   average=average, pos_label="Borrowing" if average == "binary" else None, zero_division=0)

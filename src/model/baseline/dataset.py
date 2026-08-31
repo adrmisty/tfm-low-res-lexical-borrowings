@@ -51,7 +51,7 @@ TYPE_TO_TAG = {
     "verb_habitual": "Adapted_Morph",
     "verb_morph_aro": "Adapted_Morph",
     "verb_participle": "Adapted_Morph"
-}
+} # --- wiktionary mapping done per-language 
 
 class IdDataset(Dataset):
     """Silver standard dataset for binary token classification (borrowing span identification)."""
@@ -67,14 +67,16 @@ class IdDataset(Dataset):
             for line in f:
                 if not line.strip(): continue
                 item = json.loads(line)
-                if item.get("type") in TYPE_TO_TAG:
+                heuristic_type = item.get("type", "")
+                
+                if heuristic_type in TYPE_TO_TAG or heuristic_type.startswith("wiktionary"):
                     valid_data.append(item)
         return valid_data
-
+    
     def __len__(self):
         return len(self.data)
 
-    def __getitem__(self, idx):
+def __getitem__(self, idx):
         item = self.data[idx]
         text = item["sentence"]
         seed = item["term"]
@@ -90,7 +92,8 @@ class IdDataset(Dataset):
         offsets = encoding.pop("offset_mapping") 
         labels = []
 
-        match = re.search(re.escape(seed), text)
+        # ** CASE-SENSITIVE SEARCH: to avoid missing data due to uppercase **
+        match = re.search(re.escape(seed), text, re.IGNORECASE)
         if match:
             seed_start_char, seed_end_char = match.span()
         else:
@@ -115,7 +118,6 @@ class IdDataset(Dataset):
             "labels": torch.tensor(labels)
         }
 
-
 class ClfDataset(Dataset):
     """Silver standard dataset for multi-class sequence classification (borrowing morph. classification)."""
 
@@ -130,19 +132,30 @@ class ClfDataset(Dataset):
             for line in f:
                 if not line.strip(): continue
                 item = json.loads(line)
-                heuristic_type = item.get("type")
+                heuristic_type = item.get("type", "")
+                lang = item.get("lang", "")
                 
-                # only keep items with types that can be mapped to our target taxonomy
+                gold_label = None
+                
                 if heuristic_type in TYPE_TO_TAG:
                     gold_label = TYPE_TO_TAG[heuristic_type]
-                    if gold_label in TAG_TO_ID_MULTI:
-                        valid_data.append({
-                            "span": item["term"],
-                            "context": item["sentence"],
-                            "label": gold_label
-                        })
+                elif heuristic_type.startswith("wiktionary"):
+                    if lang == "el":
+                        gold_label = "Adapted_Orthogra"
+                    elif lang == "eu" and "es" in heuristic_type:
+                        gold_label = "Adapted_Orthogra"
+                    else:
+                        # fallback: for Basque 'en', all Asturian wiktionary (ambiguous for En/Es, but mostly orthographic) 
+                        gold_label = "Raw"
+                
+                if gold_label and gold_label in TAG_TO_ID_MULTI:
+                    valid_data.append({
+                        "span": item["term"],
+                        "context": item["sentence"],
+                        "label": gold_label
+                    })
         return valid_data
-
+    
     def __len__(self):
         return len(self.data)
 

@@ -6,14 +6,14 @@
 # jun-2026
 
 from .llm import BorrowingLLM
-#from .langid import BorrowingLangId
+from .langid import BorrowingLangId
 from .encoder import BorrowingEncoder
 
 import os
 from datetime import datetime
 import json
 
-OUT_DIR = "results/model"
+OUT_DIR = "results/post_review/model"
 
 def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen3.5-9B", pipeline: str = "1step", k: int = 2):
     """Few-shot prompting on LLM for lexical borrowing identification and classification."""
@@ -59,8 +59,33 @@ def run_llm_baseline(langs: list[str], gt: str, model_id="Qwen/Qwen3.5-9B", pipe
     print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title {clean_model_name}")
     print("="*50)
 
+def run_langid_baseline(langs: list[str], gt: str):
+    """Language identification at the word level for lexical borrowing identification and classification
+    >>> purely for identification, cannot classify."""
 
+    print(">>> Initializing [word-level LANGUAGE IDENTIFICATION] baseline...")
+    langid_model = BorrowingLangId(langs, gt)
 
+    all_predictions = []
+
+    for lang in langs:
+        print(f"\n>>> Running [LangID LEXICAL BORROWING IDENTIFICATION] for [{lang.upper()}]...")
+        test_items = langid_model.data_splits[lang]
+        predictions = langid_model.get_borrowings(test_items, lang)
+        all_predictions.extend(predictions)
+
+    out_dir = f"{OUT_DIR}/FastText"
+    os.makedirs(out_dir, exist_ok=True)
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+    pred_path = os.path.join(out_dir, f"predictions_langid_{timestamp}.json")
+    with open(pred_path, "w", encoding="utf-8") as f:
+        json.dump(all_predictions, f, indent=4, ensure_ascii=False)
+
+    print("\n" + "="*50)
+    print(f">>> INFERENCE COMPLETE. Predictions saved to: {pred_path}")
+    print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title LANGID")
+    print("="*50)
 
 def run_encoder_baseline(model: str, langs: list[str], binary_train_data: str, multi_train_data, gt: str):
     """Trains and runs the 2-step {model} pipeline using dynamic dataset loading."""

@@ -1,6 +1,6 @@
 # prompt.py
 # ----------------------------------------------------------
-# configurations for loanword identification & classification
+# prompting loading
 # ----------------------------------------------------------
 # adriana r.f. (@adrmisty)
 # may-2026

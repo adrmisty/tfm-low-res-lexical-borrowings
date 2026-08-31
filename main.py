@@ -8,7 +8,7 @@
 import os
 import argparse
 import logging
-from src.model.baseline.baseline import run_llm_baseline, run_encoder_baseline, run_encoder_baseline
+from src.model.baseline.baseline import run_llm_baseline, run_langid_baseline, run_encoder_baseline
 from src.model.baseline.eval import evaluate_pipeline
 import src.model.baseline.hf as hf
 
@@ -54,9 +54,8 @@ def main():
             evaluate_pipeline(
                 pred_path=args.pred_file, 
                 gold_path=GOLD_STD_PATH, 
-                out_dir=out_dir, 
-                experiment=f"{args.title}_JOINT",
-                target_langs=args.langs
+                img_dir=os.path.join(out_dir, "img"), stats_dir=os.path.join(out_dir, "stats"),
+                experiment=f"{args.title}_JOINT"
             )
         
         for lang in args.langs:
@@ -64,12 +63,11 @@ def main():
             evaluate_pipeline(
                 pred_path=args.pred_file, 
                 gold_path=GOLD_STD_PATH, 
-                out_dir=out_dir, 
-                experiment=f"{args.title}_{lang.upper()}",
-                target_langs=[lang]
+                img_dir=os.path.join(out_dir, "img"), stats_dir=os.path.join(out_dir, "stats"),
+                experiment=f"{args.title}_{lang.upper()}"
             )
         return
-
+    
     if args.type == "langid":
         run_langid_baseline(langs=args.langs, gt=GOLD_STD_PATH)
             

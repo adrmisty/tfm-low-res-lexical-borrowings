@@ -1,4 +1,0 @@
-=== EVALUATION STATS: LLM-2STEP_K2_JOINT ===
-[IDENTIFICATION] -> Precision: 0.1875 | Recall: 0.2466 | F1: 0.2130
-[CLASSIFICATION] -> Precision: 0.0200 | Recall: 0.2000 | F1: 0.0364
-[JOINT (Macro, ex. Native)] -> Precision: 0.0033 | Recall: 0.0289 | F1: 0.0059
