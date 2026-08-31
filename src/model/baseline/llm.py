@@ -1,6 +1,6 @@
 # llm.py
 # ----------------------------------------------------------------------------------------
-# LLM/vLLM wrapper for lexical borrowing 1) identification and 2) joint id + classification
+# LLM wrapper for lexical borrowing 1) identification and 2) joint id + classification
 # ----------------------------------------------------------------------------------------
 # adriana r.f. (@adrmisty)
 # apr-2026
@@ -124,7 +124,17 @@ class BorrowingLLM:
                 
                 # > Invalid/Native for evaluation
                 valid_label = label if (label in TAGSET or "Invalid" in label) else fallback
-                predictions.append({"span": span, "label": valid_label})
+                
+                # Find the offset of the predicted span in the original text
+                match = re.search(re.escape(span), text, re.IGNORECASE)
+                start, end = match.span() if match else (-1, -1)
+                
+                predictions.append({
+                    "span": span, 
+                    "start": start,
+                    "end": end,
+                    "label": valid_label
+                })
 
             res = {
                 "id": case.get("id"),
@@ -178,7 +188,17 @@ class BorrowingLLM:
                     # invalid and fallback for eval
                     label = item["label"]
                     valid_label = label if (label in TAGSET or "Invalid" in label) else "Native"
-                    prediction.append({"span": item["span"], "label": valid_label})
+                    
+                    # Find the offset of the predicted span in the original text
+                    match = re.search(re.escape(item["span"]), case["text"], re.IGNORECASE)
+                    start, end = match.span() if match else (-1, -1)
+                    
+                    prediction.append({
+                        "span": item["span"], 
+                        "start": start,
+                        "end": end,
+                        "label": valid_label
+                    })
             
             res = {
                 "id": case.get("id"),
@@ -189,8 +209,8 @@ class BorrowingLLM:
             print(res)
             results.append(res)
 
-        return results        
-    
+        return results
+        
     # --- response generation -------------------------------------------------------------------------
 
     def _load_model(self):

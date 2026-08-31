@@ -49,13 +49,12 @@ class BorrowingLangId:
             
             for match in re.finditer(r'\b[a-zA-ZáéíóúüñΑ-Ωα-ωάέίόύήώϊϋ]+(?:-[a-zA-ZáéíóúüñΑ-Ωα-ωάέίόύήώϊϋ]+)*\b', text):
                 word = match.group()
+                start, end = match.span() 
                 
                 if word.isnumeric() or len(word) < 2:
                     continue
 
-                # predict lang & flag if not the target language
                 labels, _ = self.model.predict(word, k=1)
-                #print(labels) #debug
                 if not labels:
                     continue 
                 lang_pred = labels[0].replace('__label__', '')
@@ -63,15 +62,10 @@ class BorrowingLangId:
                 if lang_pred != fasttext_target:
                     predictions.append({
                         "span": word,
-                        "label": "Raw" # ** cannot be used for classification **
+                        "start": start,
+                        "end": end,     
+                        "label": "Raw" 
                     })
-            
-            results.append({
-                "id": case.get("id"),
-                "text": text,
-                "lang": target_lang,
-                "prediction": json.dumps(predictions, ensure_ascii=False)
-            })
             
         return results
 

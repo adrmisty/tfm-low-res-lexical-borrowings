@@ -170,6 +170,8 @@ class BorrowingEncoder:
                     
                 formatted_preds.append({
                     "span": span_text,
+                    "start": cand["start"],
+                    "end": cand["end"],
                     "label": assigned_label
                 })
             

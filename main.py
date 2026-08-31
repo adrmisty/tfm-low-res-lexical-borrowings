@@ -89,7 +89,8 @@ def main():
                 langs=args.langs, 
                 binary_train_data=CONLOAN_STD_PATH, # ** token > ConLoan (binary, LW or not) **
                 multi_train_data=SILVER_STD_PATH,   # ** sequence > silver (5-tag classif) **
-                gt=GOLD_STD_PATH
+                gt=GOLD_STD_PATH,
+                run_name="conloan"
             )
         else:
             logging.info(f">> Using training data from: {SILVER_STD_PATH}")

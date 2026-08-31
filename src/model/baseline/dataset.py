@@ -6,7 +6,7 @@
 # 2. sequence classification
 # ------------------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# jun-2026
+# aug-2026
 
 import json
 import torch

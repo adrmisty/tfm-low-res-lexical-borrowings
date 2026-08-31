@@ -217,7 +217,7 @@ def plot_per_class_f1(y_true, y_pred, labels: list, title: str, output_path: str
                 color='black', va="center", fontsize=20, fontweight='bold')
 
     plt.title(title, pad=20, fontweight='bold', fontsize=FONT_TITLE)
-    plt.xlabel("Macro F1-Score", fontsize=FONT_LABEL)
+    plt.xlabel("F1-Score", fontsize=FONT_LABEL)
     plt.ylabel("", fontsize=FONT_LABEL)
     plt.xlim(0, 1.1)
     
@@ -337,7 +337,8 @@ def evaluate_pipeline(pred_path: str, gold_path: str, img_dir: str, stats_dir: s
             y_pred_clf.append(p_lbl)
 
         if y_true_clf:
-            get_metrics(y_true_clf, y_pred_clf, labels=TAGSET, average="macro", out_file=stat_file, task=f"CLF {subset_name}")
+            # average="macro" >>> to average="micro"
+            get_metrics(y_true_clf, y_pred_clf, labels=TAGSET, average="micro", out_file=stat_file, task=f"CLF {subset_name}")
             plot_confusion_matrix(y_true_clf, y_pred_clf, labels=TAGSET,
                                   title=f"Classification (exact matches){title_suffix}\n[{experiment.upper()}]",
                                   output_path=os.path.join(img_dir, f"{prefix}_step2_cm.png"))
@@ -345,16 +346,17 @@ def evaluate_pipeline(pred_path: str, gold_path: str, img_dir: str, stats_dir: s
             plot_per_class_f1(y_true_clf, y_pred_clf, labels=TAGSET,
                               title=f"Per-class classification F1{title_suffix}\n[{experiment.upper()}]",
                               output_path=os.path.join(img_dir, f"{prefix}_per_class_f1.png"))
-
+            
         # 3. JOINT
         y_true_joint = [true_spans.get(k, "Native") if true_spans.get(k, "Native") in TAGSET else "Native" for k in subset_keys]
         y_pred_joint = [pred_spans.get(k, "Native") if pred_spans.get(k, "Native") in TAGSET else "Native" for k in subset_keys]
 
-        get_metrics(y_true_joint, y_pred_joint, labels=TAGSET, average="macro", out_file=stat_file, task=f"JOINT {subset_name}")
+        # average="macro" >>> to average="micro"
+        get_metrics(y_true_joint, y_pred_joint, labels=TAGSET, average="micro", out_file=stat_file, task=f"JOINT {subset_name}")
         plot_confusion_matrix(y_true_joint, y_pred_joint, labels=["Native"] + TAGSET,
                               title=f"Joint ID & classification{title_suffix}\n[{experiment.upper()}]",
                               output_path=os.path.join(img_dir, f"{prefix}_joint_cm.png"))
-
+        
 # --- helper metrics & parsing ---
 def get_metrics(ground_truth, predictions, labels, average="binary", out_file=None, task="IDENTIFICATION"):
     p, r, f1, _ = precision_recall_fscore_support(ground_truth, predictions, labels=labels, 
@@ -390,9 +392,12 @@ def _load_spans(pred_path: str, gold_path: str) -> Tuple[Dict, Dict, Dict]:
         if isinstance(pred_items, list):
             for p in pred_items:
                 if isinstance(p, dict) and p.get("span") and p.get("label"):
-                    txt = _normalize_text(p["span"])
+                    start = p.get("start", -1)
+                    end = p.get("end", -1)
                     lbl = _normalize_label(p["label"]) 
-                    if lbl != "O": pred_spans_dict[(case_id, txt)] = lbl
+                    if lbl != "O": 
+                         # incl. start/end boundaries for span matching to avoid overwriting matches
+                        pred_spans_dict[(case_id, start, end)] = lbl
                         
         true_items = []
         for ann in gt_map[case_id]:
@@ -401,10 +406,12 @@ def _load_spans(pred_path: str, gold_path: str) -> Tuple[Dict, Dict, Dict]:
         for t in true_items:
             val = t.get("value", {})
             if "text" in val and "labels" in val:
-                txt = _normalize_text(val["text"])
+                start = val.get("start", -1)
+                end = val.get("end", -1)
                 lbl = _normalize_label(val["labels"])
-                true_spans_dict[(case_id, txt)] = lbl
-                
+                # Use start/end boundaries as the key
+                true_spans_dict[(case_id, start, end)] = lbl
+                                
     return true_spans_dict, pred_spans_dict, lang_map
 
 def _normalize_text(text: str) -> str:

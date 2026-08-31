@@ -87,28 +87,29 @@ def run_langid_baseline(langs: list[str], gt: str):
     print(f">>> To evaluate, run: python main.py --action eval --pred_file {pred_path} --title LANGID")
     print("="*50)
 
-def run_encoder_baseline(model: str, langs: list[str], binary_train_data: str, multi_train_data, gt: str):
+def run_encoder_baseline(model: str, langs: list[str], binary_train_data: str, multi_train_data: str, gt: str, run_name: str = "standard"):
     """Trains and runs the 2-step {model} pipeline using dynamic dataset loading."""
 
-    path_binary = f"{OUT_DIR}/{model}/{model}_binary"
-    path_multi = f"{OUT_DIR}/{model}/{model}_multi"
+    # separate std. models from 'conloan' experiment models
+    path_binary = f"{OUT_DIR}/{model}/{run_name}_binary"
+    path_multi = f"{OUT_DIR}/{model}/{run_name}_multi"
 
     encoder = BorrowingEncoder(model_id=model, langs=langs, gt=gt)
 
     encoder.output_dir = path_binary
     if not os.path.exists(path_binary):
-        print("\t>>> [Encoder-1]: Training binary classifier (Native vs. Borrowing)...")
+        print(f"\t>>> [Encoder-1]: Training binary classifier ({run_name})...")
         encoder.train(train_json=binary_train_data, task="binary")
     else:
-        print(f">>> [Encoder-1]: Found existing binary model at {path_binary}; skipping training!")    
+        print(f">>> [Encoder-1]: Found existing model at {path_binary}; skipping training!")    
 
     encoder.output_dir = path_multi
     if not os.path.exists(path_multi):
-        print("\t>>> [Encoder-2]: Training multi-class classifier (5-tagset)...")
+        print(f"\t>>> [Encoder-2]: Training multi-class classifier ({run_name})...")
         encoder.train(train_json=multi_train_data, task="multi")
     else:
-        print(f">>> [Encoder-2]: Found existing multi-class model at {path_multi}; skipping training!")    
-    
+        print(f">>> [Encoder-2]: Found existing model at {path_multi}; skipping training!")  
+          
     # 2-step inference
     all_predictions = []
     for lang in langs:
