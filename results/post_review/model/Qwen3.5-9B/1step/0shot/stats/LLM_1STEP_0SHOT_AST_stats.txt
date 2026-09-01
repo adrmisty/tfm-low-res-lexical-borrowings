@@ -1,0 +1,21 @@
+=== EVALUATION STATS: LLM_1STEP_0SHOT_AST ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.2479 | Recall: 0.3305 | F1: 0.2833
+[CLF ALL] -> Precision: 0.5927 | Recall: 0.5927 | F1: 0.5927
+[JOINT ALL] -> Precision: 0.1511 | Recall: 0.2015 | F1: 0.1727
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.1694 | Recall: 0.3843 | F1: 0.2351
+[CLF ast] -> Precision: 0.5882 | Recall: 0.5882 | F1: 0.5882
+[JOINT ast] -> Precision: 0.1020 | Recall: 0.2315 | F1: 0.1416
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.3634 | Recall: 0.2914 | F1: 0.3234
+[CLF eu] -> Precision: 0.5819 | Recall: 0.5819 | F1: 0.5819
+[JOINT eu] -> Precision: 0.2215 | Recall: 0.1776 | F1: 0.1971
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.2132 | Recall: 0.3745 | F1: 0.2717
+[CLF el] -> Precision: 0.6170 | Recall: 0.6170 | F1: 0.6170
+[JOINT el] -> Precision: 0.1315 | Recall: 0.2311 | F1: 0.1676
