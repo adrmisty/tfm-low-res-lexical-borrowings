@@ -4,17 +4,18 @@
 # and tokenization statistics
 # ----------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# jan/may-2026
+# jan/aug-2026
 
 import os
 import json
 import logging
 import pandas as pd
-from typing import Dict, Any
+from typing import Dict, Any, List
 from transformers import AutoTokenizer
 from sklearn.metrics import classification_report
 from src.model.baseline.eval import _load_spans
 from src.model.baseline.prompt import TAGSET
+from src.data.analysis.plot import plot_token_analysis
 
 class BorrowingStats:
     """Computation of statistics of lexical borrowing data, and their distributions per language."""
@@ -149,24 +150,59 @@ def generate_dataset_stats(seeds_path: str = "data/corpus/raw/synthetic_borrowin
     stats = BorrowingStats(seeds_path, mined_path, clean_path)
     stats.report(output_dir)
 
-def generate_granular_stats(tokenizer_id: str, target_langs: list, output_dir: str,
-                         gold_path: str = "data/annotation/test_gold_annotations.json", 
-                         pred_path: str = "results/model/mmBert/predictions_mmbert_2step_20260429_162250.json"):
+def generate_granular_stats(tokenizer_id: str, target_langs: list, output_dir: str, pred_path: str,
+                            gold_path: str = "data/annotation/test_gold_annotations.json", prefix: str = ""):
+    """Generates the CSVs with granular stats."""
     analyzer = GranularAnalysis(gold_path, pred_path, target_langs)
-    tok_csv = analyzer.analyze_tokenization_fragmentation(tokenizer_id, output_dir)
-    clf_csv = analyzer.analyze_per_class_performance(output_dir)
-    fp_csv = analyzer.analyze_false_positives(output_dir)
+    
+    tok_csv = analyzer.analyze_tokenization_fragmentation(tokenizer_id, output_dir, prefix)
+    clf_csv = analyzer.analyze_per_class_performance(output_dir, prefix)
+    fp_csv = analyzer.analyze_false_positives(output_dir, 50, prefix)
+    
     return tok_csv, clf_csv, fp_csv
+
+def run_granular_analysis(gold_path: str, pred_path: str, tokenizer_id: str, target_langs: List[str], output_dir: str, prefix: str = ""):
+    """Orchestrates the granular error analysis, generating CSVs and Plots."""
+    logging.info("\n--- Granular tokenization, FPs & taxonomy analysis ---")
+    if not os.path.exists(pred_path):
+        logging.error(f"\t> (!) Prediction file not found: {pred_path}")
+        return
+        
+    logging.info(f"\t> Running analysis on predictions: {pred_path}")
+    
+    # Clean the prefix formatting (ensures it ends with an underscore)
+    if prefix and not prefix.endswith("_"):
+        prefix += "_"
+        
+    # Centralize the 'stats' folder creation so it isn't repeated in every method
+    stats_dir = os.path.join(output_dir, "stats")
+    os.makedirs(stats_dir, exist_ok=True)
+    
+    tok_csv, clf_csv, fp_csv = generate_granular_stats(
+        gold_path=gold_path,
+        pred_path=pred_path,
+        tokenizer_id=tokenizer_id,
+        target_langs=target_langs,
+        output_dir=stats_dir, # Pass the direct stats folder
+        prefix=prefix
+    )
+        
+    if tok_csv and clf_csv:
+        plot_token_analysis(tok_csv, clf_csv, output_dir=stats_dir, prefix=prefix)
+        logging.info(f"\t> Analysis complete. CSVs and plots saved to: {stats_dir}")
+    else:
+        logging.warning("\t> (!) Granular analysis on tokenizer did not return expected CSVs.")
 
 class GranularAnalysis:
     """Computes advanced diagnostics for lexical borrowing extraction."""
     
     def __init__(self, gold_path: str, pred_path: str, target_langs: list = None):
         self.target_langs = target_langs
-        self.true_spans, self.pred_spans = _load_spans(pred_path, gold_path, target_langs)
+        self.true_spans, self.pred_spans, self.lang_map = _load_spans(pred_path, gold_path)
 
-    def analyze_tokenization_fragmentation(self, tokenizer_id: str, output_dir: str) -> str:
+    def analyze_tokenization_fragmentation(self, tokenizer_id: str, output_dir: str, prefix: str = "") -> str:
         logging.info(f"\t> Calculating Sub-word Fertility using [{tokenizer_id}]...")
+        
         try:
             tokenizer = AutoTokenizer.from_pretrained(tokenizer_id)
         except Exception as e:
@@ -178,17 +214,18 @@ class GranularAnalysis:
             "missed":  {"1 sub-word": 0, "2 sub-words": 0, "3 sub-words": 0, "4+ sub-words": 0}
         }
 
-        for (case_id, text), true_label in self.true_spans.items():
+        for (case_id, start, end, text), true_label in self.true_spans.items():
             if true_label not in TAGSET: continue
+            if not text: continue
                 
-            fertility = len(tokenizer.tokenize(text))
+            fertility = len(tokenizer.tokenize(str(text)))
             
             if fertility == 1: bin_key = "1 sub-word"
             elif fertility == 2: bin_key = "2 sub-words"
             elif fertility == 3: bin_key = "3 sub-words"
             else: bin_key = "4+ sub-words"
                 
-            pred_label = self.pred_spans.get((case_id, text), "Native")
+            pred_label = self.pred_spans.get((case_id, start, end, text), "Native")
             status = "correct" if pred_label != "Native" else "missed"
             stats[status][bin_key] += 1
 
@@ -198,12 +235,11 @@ class GranularAnalysis:
         df["total"] = df["correct"] + df["missed"]
         df["success_rate"] = (df["correct"] / df["total"]).fillna(0)
         
-        os.makedirs(output_dir, exist_ok=True)
-        out_file = os.path.join(output_dir, "tokenization_fragmentation_stats.csv")
+        out_file = os.path.join(output_dir, f"{prefix}_tokenization_fragmentation_stats.csv")
         df.to_csv(out_file, index=False)
         return out_file
 
-    def analyze_per_class_performance(self, output_dir: str) -> str:
+    def analyze_per_class_performance(self, output_dir: str, prefix: str = "") -> str:
         logging.info("\t> Calculating per-class performance breakdown...")
         intersection_keys = set(self.true_spans.keys()).intersection(set(self.pred_spans.keys()))
         y_true, y_pred = [], []
@@ -223,24 +259,20 @@ class GranularAnalysis:
         df_report.index.name = 'taxonomy_class'
         df_report = df_report.reset_index()
         
-        os.makedirs(output_dir, exist_ok=True)
-        out_file = os.path.join(output_dir, "per_class_performance_stats.csv")
+        out_file = os.path.join(output_dir, f"{prefix}_per_class_performance_stats.csv")
         df_report.to_csv(out_file, index=False)
         return out_file
 
-    def analyze_false_positives(self, output_dir: str, top_n: int = 50) -> str:
+    def analyze_false_positives(self, output_dir: str, top_n: int = 50, prefix: str = "") -> str:
         """Extracts the most frequent False Positives to diagnose hallucination/shadow adaptation."""
         logging.info("\t> Extracting top FPs for linguistic analysis...")
         fp_counts = {}
 
-        for (case_id, text), pred_label in self.pred_spans.items():
-            # skip if the model predicted Native (not an extraction)
+        for (case_id, start, end, text), pred_label in self.pred_spans.items():
             if pred_label == "Native":
                 continue
-                
-            true_label = self.true_spans.get((case_id, text))
+            true_label = self.true_spans.get((case_id, start, end, text))
             
-            # if the span is missing from gold OR is an Invalid tag, it's a False Positive
             if true_label not in TAGSET:
                 fp_counts[text] = fp_counts.get(text, 0) + 1
 
@@ -251,9 +283,7 @@ class GranularAnalysis:
         df_fp = pd.DataFrame(list(fp_counts.items()), columns=["false_positive_span", "frequency"])
         df_fp = df_fp.sort_values(by="frequency", ascending=False).head(top_n)
         
-        os.makedirs(output_dir, exist_ok=True)
-        out_file = os.path.join(output_dir, f"llm_false_positives_{'_'.join(self.target_langs) if self.target_langs else 'ALL'}.csv")
+        lang_str = '_'.join(self.target_langs) if self.target_langs else 'ALL'
+        out_file = os.path.join(output_dir, f"{prefix}_false_positives_{lang_str}.csv")
         df_fp.to_csv(out_file, index=False)
-        
-        logging.info(f"\n{df_fp.head(10).to_string(index=False)}")
         return out_file

@@ -14,7 +14,7 @@ from .pipeline import (
     run_generation, 
     run_mining, 
     run_cleaning, 
-    run_truecase,
+    #run_truecase,
     run_analysis,
     run_granular_analysis
 )
@@ -34,6 +34,7 @@ def main():
     parser.add_argument("--input", type=str, help="Input directory or file for cleaning step")
     parser.add_argument("--output", type=str, help="Output directory or file")
     parser.add_argument("--pred_file", type=str, help="Path to prediction JSON (required if --action=analyze)")
+    parser.add_argument("--run_name", type=str, help="Name for the model/experiment (used in analysis)")
 
     args = parser.parse_args()
 
@@ -62,13 +63,15 @@ def main():
 
     elif args.action == "analyze":
         out_dir = os.path.dirname(args.pred_file)
-        # python -m src.data.main --action analyze --pred_file results\model\mmBert\predictions_mmbert_2step_20260429_162250.json --langs ast eu el 
+        # python -m src.data.main --action analyze --pred_file results/post_review/model/mmBert/standard/predictions_encoder_2step_20260831_204043.json --run_name MMBERT-STANDARD 
+        print(out_dir)
         run_granular_analysis(
             gold_path=GOLD_STD_PATH,
             pred_path=args.pred_file,
             tokenizer_id=args.tokenizer,
             target_langs=args.langs,
-            output_dir=out_dir
+            output_dir=out_dir,
+            prefix=args.run_name
         )
         
 if __name__ == "__main__":

@@ -174,45 +174,61 @@ def generate_plots(clean_path: str = "data/corpus/processed/mined_sentences.clea
 
 # --- tokenization analysis plots ---
 
-def plot_token_analysis(tok_csv: str, clf_csv: str, output_dir: str):
+def plot_token_analysis(tok_csv: str, clf_csv: str, output_dir: str, prefix: str = ""):
     logging.info(f"\t> Generating Granular Analysis plots in {output_dir}/...")
-    _plot_token_fragmentation(tok_csv, os.path.join(output_dir, "analysis_token_fragmentation.png"))
-    _plot_per_class_f1(clf_csv, os.path.join(output_dir, "analysis_per_class_f1.png"))
+    
+    # model name for the chart titles
+    model_name = prefix.replace("_", " ").strip() if prefix else "Model"
+    
+    tok_out = os.path.join(output_dir, f"{prefix}_analysis_token_fragmentation.png")
+    clf_out = os.path.join(output_dir, f"{prefix}_analysis_per_class_f1.png")
+    
+    _plot_token_fragmentation(tok_csv, tok_out, model_name)
+    _plot_per_class_f1(clf_csv, clf_out, model_name)
 
-def _plot_token_fragmentation(csv_path: str, output_path: str):
-        df = pd.read_csv(csv_path)
-        if df.empty: return
-        
-        df['Success rate (%)'] = df['success_rate'] * 100
-        
-        plt.figure(figsize=(10, 8))
-        ax = sns.barplot(data=df, x="fertility", y="Success rate (%)")
-        
-        for i, row in df.iterrows():
-            ax.text(i, row['Success rate (%)'] + 2, f"n={row['total']}", 
-                    color='black', ha="center", fontsize=12)
+def _plot_token_fragmentation(csv_path: str, output_path: str, model_name: str = ""):
+    df = pd.read_csv(csv_path)
+    if df.empty: return
+    
+    df['Success rate (%)'] = df['success_rate'] * 100
+    
+    plt.figure(figsize=(10, 8))
+    ax = sns.barplot(data=df, x="fertility", y="Success rate (%)")
+    
+    for i, row in df.iterrows():
+        ax.text(i, row['Success rate (%)'] + 2, f"n={row['total']}", 
+                color='black', ha="center", fontsize=12)
 
-        plt.title("Impact of Sub-Word fragmentation on identification", pad=15, fontweight='bold')
-        plt.ylabel("Identification success rate (%)")
-        plt.xlabel("Sub-Word fertility (tokenizer Splits)")
-        plt.ylim(0, 110)
-        plt.tight_layout()
-        plt.savefig(output_path, dpi=300)
-        plt.close()
+    title = f"Impact of sub-word fragmentation on Identification\n[{model_name}]" if model_name else "Impact of sub-word fragmentation on Identification"
+    plt.title(title, pad=15, fontweight='bold')
+    plt.ylabel("Identification success rate (%)")
+    plt.xlabel("Sub-Word fertility (Tokenizer splits)")
+    plt.ylim(0, 110)
+    plt.tight_layout()
+    plt.savefig(output_path, dpi=300)
+    plt.close()
 
-def _plot_per_class_f1(csv_path: str, output_path: str):
+def _plot_per_class_f1(csv_path: str, output_path: str, model_name: str = ""):
     df = pd.read_csv(csv_path)
     if df.empty: return
         
     df_classes = df[df['taxonomy_class'].isin(TAGSET_ORDER)].copy()
         
     plt.figure(figsize=(12, 8))
-    sns.barplot(data=df_classes, x="f1-score", y="taxonomy_class", order=TAGSET_ORDER)
-        
-    plt.title("Morphological classification performance (Exact-Match F1)", pad=15, fontweight='bold')
-    plt.xlabel("Macro F1-Score")
+    ax = sns.barplot(data=df_classes, x="f1-score", y="taxonomy_class", order=TAGSET_ORDER)
+    
+    if 'support' in df_classes.columns:
+        for i, p in enumerate(ax.patches):
+            width = p.get_width()
+            support = int(df_classes.iloc[i]['support'])
+            ax.text(width + 0.015, p.get_y() + p.get_height() / 2, f"n={support}", 
+                    va='center', color='black', fontsize=11)
+            
+    title = f"Morphological classification (Exact-match F1)\n[{model_name}]" if model_name else "Morphological classification (Exact-match F1)"
+    plt.title(title, pad=15, fontweight='bold')
+    plt.xlabel("Micro F1-Score") 
     plt.ylabel("")
-    plt.xlim(0, 1.0)
+    plt.xlim(0, 1.1)
     plt.tight_layout()
     plt.savefig(output_path, dpi=300)
     plt.close()

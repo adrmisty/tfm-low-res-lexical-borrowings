@@ -1,0 +1,21 @@
+=== EVALUATION STATS: LLM_2STEP_4SHOT_JOINT ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.2216 | Recall: 0.4919 | F1: 0.3055
+[CLF ALL] -> Precision: 0.6711 | Recall: 0.6711 | F1: 0.6711
+[JOINT ALL] -> Precision: 0.1476 | Recall: 0.3276 | F1: 0.2035
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.1726 | Recall: 0.5833 | F1: 0.2664
+[CLF ast] -> Precision: 0.5846 | Recall: 0.5846 | F1: 0.5846
+[JOINT ast] -> Precision: 0.0986 | Recall: 0.3333 | F1: 0.1522
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.3138 | Recall: 0.5086 | F1: 0.3882
+[CLF eu] -> Precision: 0.6622 | Recall: 0.6622 | F1: 0.6622
+[JOINT eu] -> Precision: 0.2074 | Recall: 0.3362 | F1: 0.2566
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.1437 | Recall: 0.3745 | F1: 0.2077
+[CLF el] -> Precision: 0.8144 | Recall: 0.8144 | F1: 0.8144
+[JOINT el] -> Precision: 0.1162 | Recall: 0.3028 | F1: 0.1680

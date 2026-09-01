@@ -64,6 +64,7 @@ def run_cleaning(input_path: str, output_path: str, gold: str):
     
     clean_sentences(input_path, output_path, exclude_set=exclude_set)
     
+@DeprecationWarning
 def run_truecase(gold_path: str):
     """Applies truecasing to the gold standard dataset."""
     #import nltk
@@ -81,7 +82,7 @@ def run_truecase(gold_path: str):
     
     for item in data:
         original_text = item['data']['text']
-        truecased_text = truecase.get_true_case(original_text)
+        truecased_text = original_text #truecase.get_true_case(original_text)
         
         item['data']['text'] = truecased_text
         
@@ -102,7 +103,7 @@ def run_analysis():
     get_annotation_stats()
     generate_plots()
 
-def run_granular_analysis(gold_path: str, pred_path: str,tokenizer_id: str, target_langs: List[str], output_dir: str):
+def run_granular_analysis(gold_path: str, pred_path: str,tokenizer_id: str, target_langs: List[str], output_dir: str, prefix: str):
     """Orchestrates the granular error analysis and stats computations."""
     logging.info("\n--- Granular tokenization, FPs & taxonomy analysis ---")
     if not os.path.exists(pred_path):
@@ -116,11 +117,12 @@ def run_granular_analysis(gold_path: str, pred_path: str,tokenizer_id: str, targ
         pred_path=pred_path,
         tokenizer_id=tokenizer_id,
         target_langs=target_langs,
-        output_dir=output_dir
+        output_dir=output_dir,
+        prefix=prefix
     )
-
+        
     if tok_csv and clf_csv:
-        plot_token_analysis(tok_csv, clf_csv, output_dir=output_dir)
+        plot_token_analysis(tok_csv, clf_csv, output_dir=output_dir, prefix=prefix)
         logging.info(f"\t> Analysis complete. CSVs and plots saved to: {output_dir}")
     else:
-        logging.warning("\t> (!) Granular analysis on tokenizerdid not return expected CSVs.")
+        logging.warning("\t> (!) Granular analysis on tokenizer did not return expected CSVs.")
