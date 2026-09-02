@@ -160,7 +160,7 @@ class BorrowingEncoder:
         except Exception as e:
             print(f"> (!) Auto-push failed: {e}")
 
-    def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, path_binary: str, path_multi: str, fallback: str = "Raw") -> List[Dict[str, Any]]:
+def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, path_binary: str, path_multi: str, fallback: str = "Raw") -> List[Dict[str, Any]]:
         """Extracts borrowings and classifies them using sequence cross-encoding context."""
         
         # (1) binary span classifier for identification
@@ -180,20 +180,24 @@ class BorrowingEncoder:
             
             # ** 2. clf **
             for cand in candidate_spans:
-                span_text = cand["word"].strip()
+                # >>> take the span directly from the sentence and get its whitespace out
+                raw = text[cand["start"]:cand["end"]]
+                span_text = raw.strip()
                 
                 # span + context
                 try:
                     clf_pred = classifier({"text": span_text, "text_pair": text})
-                    assigned_label = clf_pred[0]["label"] 
+                    # >>> revert list indexing (clf_pred is a dict, not a list of dicts)
+                    assigned_label = clf_pred["label"] 
                 except Exception as e:
-                    print(f"Classification failed for span '{span_text}': {e}")
+                    print(f"(!) Classification failed for span '{span_text}': {e}")
                     assigned_label = fallback
                     
                 formatted_preds.append({
                     "span": span_text,
-                    "start": cand["start"],
-                    "end": cand["end"],
+                    # adjust offsets
+                    "start": cand["start"] + (len(raw) - len(raw.lstrip())),
+                    "end": cand["end"] - (len(raw) - len(raw.rstrip())),
                     "label": assigned_label
                 })
             

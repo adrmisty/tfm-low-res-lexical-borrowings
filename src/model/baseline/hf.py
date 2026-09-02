@@ -3,7 +3,7 @@
 # hugging face hub for saving models
 # ----------------------------------------------------------------------------------------
 # adriana r.f. (@adrmisty)
-# may-2026
+# sept-2026
 
 from transformers import AutoModelForTokenClassification, AutoModelForSequenceClassification, AutoTokenizer
 import logging
@@ -13,7 +13,7 @@ from pathlib import Path
 
 ROOT_DIR: Path = Path(__file__).resolve().parent.parent.parent.parent
 
-login(token="REPLACE_WITH_TOKEN")
+#login(token="REPLACE_WITH_TOKEN")
 
 models_to_push = {
     "results/post_review/model/mmbert/standard_binary": "adrirflorez/mmbert-binary-borrowings",
