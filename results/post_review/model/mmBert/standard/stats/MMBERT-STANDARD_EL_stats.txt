@@ -1,0 +1,21 @@
+=== EVALUATION STATS: MMBERT-STANDARD_EL ===
+
+--- Subset: ALL ---
+[ID ALL] -> Precision: 0.4685 | Recall: 0.3123 | F1: 0.3748
+[CLF ALL] -> Precision: 0.7523 | Recall: 0.7523 | F1: 0.7523
+[JOINT ALL] -> Precision: 0.3524 | Recall: 0.2350 | F1: 0.2819
+
+--- Subset: AST ---
+[ID ast] -> Precision: 0.3965 | Recall: 0.4167 | F1: 0.4063
+[CLF ast] -> Precision: 0.5556 | Recall: 0.5556 | F1: 0.5556
+[JOINT ast] -> Precision: 0.2203 | Recall: 0.2315 | F1: 0.2257
+
+--- Subset: EU ---
+[ID eu] -> Precision: 0.5547 | Recall: 0.2362 | F1: 0.3313
+[CLF eu] -> Precision: 0.7883 | Recall: 0.7883 | F1: 0.7883
+[JOINT eu] -> Precision: 0.4372 | Recall: 0.1862 | F1: 0.2612
+
+--- Subset: EL ---
+[ID el] -> Precision: 0.4464 | Recall: 0.3984 | F1: 0.4211
+[CLF el] -> Precision: 0.8800 | Recall: 0.8800 | F1: 0.8800
+[JOINT el] -> Precision: 0.3929 | Recall: 0.3506 | F1: 0.3705
