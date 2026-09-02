@@ -160,7 +160,7 @@ class BorrowingEncoder:
         except Exception as e:
             print(f"> (!) Auto-push failed: {e}")
 
-def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, path_binary: str, path_multi: str, fallback: str = "Raw") -> List[Dict[str, Any]]:
+    def get_borrowings_2step(self, test_data: List[Dict[str, Any]], language: str, path_binary: str, path_multi: str, fallback: str = "Raw") -> List[Dict[str, Any]]:
         """Extracts borrowings and classifies them using sequence cross-encoding context."""
         
         # (1) binary span classifier for identification
